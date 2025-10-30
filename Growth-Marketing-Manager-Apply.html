@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Growth Marketing Manager at Photo Flare - Develop and execute strategies to drive user acquisition, engagement, and retention across our product portfolio.">
+    <meta name="keywords" content="Photo Flare careers, growth marketing, marketing manager, digital marketing, user acquisition, retention">
+    <title>Growth Marketing Manager | Photo Flare Careers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
+        }
+
+        .hero {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-dark);
+        }
+
+        .breadcrumb span {
+            color: var(--gray);
+            margin: 0 10px;
+        }
+
+        .job-detail-section {
+            padding: 3rem 0;
+        }
+
+        .job-header {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .job-title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .job-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .job-tag.remote {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .job-tag.engineering {
+            background: rgba(114, 9, 183, 0.1);
+            color: var(--secondary);
+        }
+
+        .job-tag.design {
+            background: rgba(247, 37, 133, 0.1);
+            color: var(--accent);
+        }
+
+        .job-tag.marketing {
+            background: rgba(248, 150, 30, 0.1);
+            color: var(--warning);
+        }
+
+        .job-details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .job-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+        }
+
+        .job-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-title i {
+            color: var(--primary);
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--dark);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .job-description {
+            margin-bottom: 2rem;
+        }
+
+        .job-description p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .responsibilities-list, .requirements-list, .bonus-list {
+            margin-bottom: 2rem;
+        }
+
+        .responsibilities-list ul, .requirements-list ul, .bonus-list ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .responsibilities-list li, .requirements-list li, .bonus-list li {
+            margin-bottom: 0.8rem;
+            color: var(--gray);
+        }
+
+        .marketing-channels {
+            margin-bottom: 2rem;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .channel-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .channel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .channel-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--warning);
+        }
+
+        .channel-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .salary-info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .salary-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .salary-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .salary-note {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .apply-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .apply-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .apply-desc {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Marketing-specific styles */
+        .metrics-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .job-details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-title-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .job-header, .job-content, .apply-section {
+                padding: 1.5rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .job-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="careers.html">Careers</a>
+                <span>/</span>
+                <span>Growth Marketing Manager</span>
+            </div>
+            <h1>Growth Marketing Manager</h1>
+            <p>Develop and execute strategies to drive user acquisition, engagement, and retention across our product portfolio.</p>
+        </div>
+    </section>
+
+    <!-- Job Detail Section -->
+    <section class="job-detail-section">
+        <div class="container">
+            <div class="job-header">
+                <div class="job-title-section">
+                    <div>
+                        <h1 class="job-title">Growth Marketing Manager</h1>
+                        <div class="job-meta">
+                            <span class="job-tag marketing">Marketing</span>
+                            <span class="job-tag">Full-time</span>
+                        </div>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now</a>
+                </div>
+                <p>Join our marketing team to drive the growth of Photo Flare's user base and revenue. You'll develop and execute data-driven marketing strategies that acquire, engage, and retain users across our product portfolio. We're looking for a creative, analytical marketer who can identify growth opportunities and scale them effectively.</p>
+            </div>
+            
+            <div class="job-details-grid">
+                <div class="job-content">
+                    <div class="job-description">
+                        <h2 class="section-title">About the Role</h2>
+                        <p>As a Growth Marketing Manager at Photo Flare, you'll be responsible for developing and executing strategies to drive user acquisition, engagement, and retention. You'll work across multiple channels to identify growth opportunities, run experiments, and scale successful initiatives. Your work will directly impact our user growth and revenue targets.</p>
+                        <p>You'll collaborate with product, design, and engineering teams to create seamless user experiences that drive conversion and retention. We're looking for someone who is equally comfortable analyzing data and developing creative marketing campaigns.</p>
+                    </div>
+                    
+                    <div class="metrics-section">
+                        <h2 class="section-title">Key Performance Metrics</h2>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">50M+</div>
+                                <div class="metric-label">Monthly Active Users</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">15%</div>
+                                <div class="metric-label">MoM Growth Target</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3.2%</div>
+                                <div class="metric-label">Current Conversion Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">42%</div>
+                                <div class="metric-label">30-Day Retention</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="marketing-channels">
+                        <h2 class="section-title">Marketing Channels</h2>
+                        <div class="channels-grid">
+                            <div class="channel-card">
+                                <i class="fas fa-search channel-icon"></i>
+                                <h3 class="channel-title">SEO</h3>
+                                <p>Organic search optimization</p>
+                            </div>
+                            <div class="channel-card">
+                                <i class="fas fa-ad channel-icon"></i>
+                                <h3 class="channel-title">Paid Media</h3>
+                                <p>PPC, social, display ads</p>
+                            </div>
+                            <div class="channel-card">
+                                <i class="fas fa-envelope channel-icon"></i>
+                                <h3 class="channel-title">Email</h3>
+                                <p>Lifecycle marketing</p>
+                            </div>
+                            <div class="channel-card">
+                                <i class="fas fa-share-alt channel-icon"></i>
+                                <h3 class="channel-title">Social</h3>
+                                <p>Community building</p>
+                            </div>
+                            <div class="channel-card">
+                                <i class="fas fa-users channel-icon"></i>
+                                <h3 class="channel-title">Partnerships</h3>
+                                <p>Strategic collaborations</p>
+                            </div>
+                            <div class="channel-card">
+                                <i class="fas fa-chart-line channel-icon"></i>
+                                <h3 class="channel-title">Content</h3>
+                                <p>Blog, guides, tutorials</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="responsibilities-list">
+                        <h2 class="section-title">Key Responsibilities</h2>
+                        <ul>
+                            <li>Develop and execute growth marketing strategies across multiple channels</li>
+                            <li>Manage paid acquisition campaigns (PPC, social, display) with a focus on ROI</li>
+                            <li>Optimize conversion funnels and user onboarding experiences</li>
+                            <li>Plan and execute email marketing campaigns to drive engagement and retention</li>
+                            <li>Collaborate with content team to develop SEO-optimized content</li>
+                            <li>Analyze performance data to identify growth opportunities and optimize campaigns</li>
+                            <li>Manage marketing budget and allocate resources effectively</li>
+                            <li>Work with product team to implement growth-focused features</li>
+                            <li>Develop and track KPIs to measure campaign effectiveness</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirements-list">
+                        <h2 class="section-title">Qualifications & Requirements</h2>
+                        <ul>
+                            <li>4+ years of experience in growth marketing or performance marketing</li>
+                            <li>Proven track record of driving user acquisition and revenue growth</li>
+                            <li>Experience with paid acquisition channels (Google Ads, Facebook, etc.)</li>
+                            <li>Strong analytical skills with experience in data analysis tools</li>
+                            <li>Knowledge of SEO best practices and content marketing</li>
+                            <li>Experience with marketing automation and CRM platforms</li>
+                            <li>Familiarity with A/B testing and conversion rate optimization</li>
+                            <li>Excellent communication and project management skills</li>
+                            <li>Bachelor's degree in Marketing, Business, or related field</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bonus-list">
+                        <h2 class="section-title">Bonus Points For</h2>
+                        <ul>
+                            <li>Experience in SaaS or software products</li>
+                            <li>Knowledge of analytics tools (Google Analytics, Mixpanel, etc.)</li>
+                            <li>Experience with marketing automation platforms</li>
+                            <li>Background in content strategy or creation</li>
+                            <li>Experience with affiliate or partnership marketing</li>
+                            <li>Knowledge of international marketing strategies</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="job-sidebar">
+                    <div class="salary-info">
+                        <div class="salary-title">Estimated Salary Range</div>
+                        <div class="salary-amount">$90,000 - $130,000</div>
+                        <div class="salary-note">+ performance bonus + equity. Actual compensation will be based on experience and location.</div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <p>San Francisco, CA or Remote (US)</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-clock"></i> Job Type</h3>
+                        <p>Full-time</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-users"></i> Team</h3>
+                        <p>Growth Marketing</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-calendar-alt"></i> Posted</h3>
+                        <p>5 days ago</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-share-alt"></i> Share This Job</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-arrow-left"></i> Back to Careers</h3>
+                        <a href="careers.html" class="btn btn-outline" style="width: 100%; text-align: center; margin-top: 1rem;">View All Positions</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="apply-section" id="apply">
+                <h2 class="apply-title">Ready to Apply?</h2>
+                <p class="apply-desc">We're excited to learn how you can drive growth for Photo Flare. Click the button below to start your application.</p>
+                <a href="apply.html?position=growth-marketing-manager" class="btn btn-accent">Apply for This Position</a>
+                <p style="margin-top: 1.5rem;">Questions about this role? <a href="contact.html" class="external-link">Contact our hiring team</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#home" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply initial styles for animation
+        document.querySelectorAll('.job-header, .job-content, .sidebar-card, .apply-section, .channel-card, .metric-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

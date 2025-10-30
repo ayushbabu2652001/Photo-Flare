@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Press - Latest news, media coverage, press releases, and media resources for the leading document and image processing platform.">
+    <meta name="keywords" content="Photo Flare press, media coverage, press releases, company news, media resources, tech news">
+    <title>Press & Media - Photo Flare | Latest News & Media Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .press-releases {
+            margin: 3rem 0;
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .press-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-press-card 10s ease-in-out infinite;
+        }
+
+        .press-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .press-card:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .press-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .press-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .press-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .press-excerpt {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .press-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .press-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .media-coverage {
+            background: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .coverage-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-coverage 11s ease-in-out infinite;
+        }
+
+        .coverage-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .coverage-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .coverage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .coverage-logo {
+            height: 40px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .coverage-logo img {
+            max-height: 100%;
+            max-width: 150px;
+        }
+
+        .coverage-quote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .coverage-quote:before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary-light);
+            font-family: Georgia, serif;
+        }
+
+        .coverage-source {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .source-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .source-info h4 {
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .source-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .press-kit {
+            margin: 4rem 0;
+        }
+
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .kit-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-kit 12s ease-in-out infinite;
+        }
+
+        .kit-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .kit-card:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .kit-card:nth-child(4) {
+            animation-delay: 4.5s;
+        }
+
+        .kit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .kit-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-kit-icon 8s ease-in-out infinite;
+        }
+
+        .kit-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .kit-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .kit-details {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            animation: float-contact 9s ease-in-out infinite;
+        }
+
+        .contact-item:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .contact-item:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            animation: none;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item p {
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .timeline-section {
+            margin: 4rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-light);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+            animation: float-timeline 13s ease-in-out infinite;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .timeline-item:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .timeline-item:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .timeline-item:hover {
+            animation: none;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: calc(50% - 30px);
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: float-timeline-date 6s ease-in-out infinite;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .timeline-description {
+            color: var(--gray);
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-press-card {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-coverage {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-kit {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes float-kit-icon {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        @keyframes float-contact {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-timeline {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-3px);
+            }
+        }
+
+        @keyframes float-timeline-date {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .press-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+            
+            .coverage-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 60px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-date {
+                left: 0;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .press-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .kit-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .kit-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="press">
+        <div class="container">
+            <h1>Press & Media</h1>
+            <p>Latest news, media coverage, and resources about Photo Flare - the all-in-one document and image processing platform.</p>
+            
+            <div style="margin-top: 2rem;">
+                <a href="#contact" class="btn btn-primary" style="margin-right: 1rem;"><i class="fas fa-envelope"></i> Media Inquiries</a>
+                <a href="#press-kit" class="btn btn-outline"><i class="fas fa-download"></i> Download Press Kit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Press Releases Section -->
+    <section class="press-releases">
+        <div class="container">
+            <h2 class="section-title">Latest Press Releases</h2>
+            <p class="section-subtitle">Stay updated with the latest news and announcements from Photo Flare.</p>
+            
+            <div class="press-grid">
+                <div class="press-card">
+                    <div class="press-date"><i class="far fa-calendar"></i> October 15, 2023</div>
+                    <h3 class="press-title">Photo Flare Reaches 5 Million Users Milestone</h3>
+                    <p class="press-excerpt">The popular document and image processing platform celebrates rapid growth and user adoption since its launch in 2021.</p>
+                    <div class="press-tags">
+                        <span class="press-tag">Company News</span>
+                        <span class="press-tag">Milestone</span>
+                    </div>
+                    <a href="press-release-5m-users.html" class="btn btn-outline">Read More</a>
+                </div>
+                
+                <div class="press-card">
+                    <div class="press-date"><i class="far fa-calendar"></i> September 28, 2023</div>
+                    <h3 class="press-title">Photo Flare Introduces AI-Powered Image Enhancement Tools</h3>
+                    <p class="press-excerpt">New suite of AI tools revolutionizes image editing with automatic enhancement, background removal, and smart object recognition.</p>
+                    <div class="press-tags">
+                        <span class="press-tag">Product Update</span>
+                        <span class="press-tag">AI Technology</span>
+                    </div>
+                    <a href="press-release-ai-tools.html" class="btn btn-outline">Read More</a>
+                </div>
+                
+                <div class="press-card">
+                    <div class="press-date"><i class="far fa-calendar"></i> August 10, 2023</div>
+                    <h3 class="press-title">Photo Flare Secures $15M Series B Funding</h3>
+                    <p class="press-excerpt">Leading venture capital firms invest in the platform's expansion plans and development of enterprise features.</p>
+                    <div class="press-tags">
+                        <span class="press-tag">Funding</span>
+                        <span class="press-tag">Business</span>
+                    </div>
+                    <a href="press-release-series-b.html" class="btn btn-outline">Read More</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="all-press-releases.html" class="btn btn-primary">View All Press Releases</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Coverage Section -->
+    <section class="media-coverage">
+        <div class="container">
+            <h2 class="section-title">Media Coverage</h2>
+            <p class="section-subtitle">What industry experts and publications are saying about Photo Flare.</p>
+            
+            <div class="coverage-grid">
+                <div class="coverage-card">
+                    <div class="coverage-logo">
+                        <!-- In a real implementation, this would be an actual logo image -->
+                        <div style="font-weight: 700; color: var(--primary); font-size: 1.2rem;">TechCrunch</div>
+                    </div>
+                    <div class="coverage-quote">
+                        "Photo Flare is revolutionizing how small businesses and individuals handle document and image processing. Their all-in-one approach eliminates the need for multiple specialized tools."
+                    </div>
+                    <div class="coverage-source">
+                        <div class="source-avatar">SM</div>
+                        <div class="source-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Senior Tech Reporter</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="coverage-card">
+                    <div class="coverage-logo">
+                        <!-- In a real implementation, this would be an actual logo image -->
+                        <div style="font-weight: 700; color: var(--primary); font-size: 1.2rem;">Forbes</div>
+                    </div>
+                    <div class="coverage-quote">
+                        "With its freemium model and extensive toolset, Photo Flare has positioned itself as a formidable competitor in the online document processing space."
+                    </div>
+                    <div class="coverage-source">
+                        <div class="source-avatar">MR</div>
+                        <div class="source-info">
+                            <h4>Michael Roberts</h4>
+                            <p>Business Technology Writer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="coverage-card">
+                    <div class="coverage-logo">
+                        <!-- In a real implementation, this would be an actual logo image -->
+                        <div style="font-weight: 700; color: var(--primary); font-size: 1.2rem;">The Verge</div>
+                    </div>
+                    <div class="coverage-quote">
+                        "The user experience of Photo Flare sets a new standard for web-based tools. It's fast, intuitive, and packed with features that professionals will appreciate."
+                    </div>
+                    <div class="coverage-source">
+                        <div class="source-avatar">AD</div>
+                        <div class="source-info">
+                            <h4>Alex Davis</h4>
+                            <p>Product Reviewer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p>Want to feature Photo Flare in your publication? <a href="#contact" class="external-link">Contact our media team</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Company Timeline</h2>
+            <p class="section-subtitle">Key milestones in Photo Flare's journey from startup to industry leader.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Company Founded</h3>
+                        <p class="timeline-description">Photo Flare was founded with a vision to simplify document and image processing for everyone.</p>
+                    </div>
+                    <div class="timeline-date">2021</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Public Beta Launch</h3>
+                        <p class="timeline-description">Launched public beta with 25 essential tools for PDF and image processing.</p>
+                    </div>
+                    <div class="timeline-date">2022</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Reached 1M Users</h3>
+                        <p class="timeline-description">Celebrated milestone of 1 million registered users and expanded toolset to 75+ tools.</p>
+                    </div>
+                    <div class="timeline-date">2022</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Series A Funding</h3>
+                        <p class="timeline-description">Secured $5M in Series A funding to accelerate product development and team expansion.</p>
+                    </div>
+                    <div class="timeline-date">2023</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">100+ Tools & 5M Users</h3>
+                        <p class="timeline-description">Expanded to 100+ tools and reached 5 million users worldwide.</p>
+                    </div>
+                    <div class="timeline-date">2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Kit Section -->
+    <section class="press-kit" id="press-kit">
+        <div class="container">
+            <h2 class="section-title">Press Kit</h2>
+            <p class="section-subtitle">Download official resources for media and publications.</p>
+            
+            <div class="kit-grid">
+                <div class="kit-card">
+                    <i class="fas fa-images kit-icon"></i>
+                    <h3 class="kit-title">Brand Assets</h3>
+                    <p class="kit-description">Logos, brand guidelines, and color palette</p>
+                    <p class="kit-details">ZIP, 15.2 MB</p>
+                    <a href="download-brand-assets.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a>
+                </div>
+                
+                <div class="kit-card">
+                    <i class="fas fa-camera kit-icon"></i>
+                    <h3 class="kit-title">Product Screenshots</h3>
+                    <p class="kit-description">High-resolution screenshots of all major features</p>
+                    <p class="kit-details">ZIP, 42.7 MB</p>
+                    <a href="download-screenshots.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a>
+                </div>
+                
+                <div class="kit-card">
+                    <i class="fas fa-user-tie kit-icon"></i>
+                    <h3 class="kit-title">Executive Photos</h3>
+                    <p class="kit-description">Professional photos of leadership team members</p>
+                    <p class="kit-details">ZIP, 28.5 MB</p>
+                    <a href="download-executive-photos.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a>
+                </div>
+                
+                <div class="kit-card">
+                    <i class="fas fa-file-alt kit-icon"></i>
+                    <h3 class="kit-title">Company Fact Sheet</h3>
+                    <p class="kit-description">Key facts, statistics, and company information</p>
+                    <p class="kit-details">PDF, 2.1 MB</p>
+                    <a href="download-fact-sheet.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p>Need something specific? <a href="#contact" class="external-link">Request custom assets</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Media Contact</h2>
+                <p>Our PR team is available to answer media inquiries, arrange interviews, and provide additional information.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-user contact-icon"></i>
+                        <h3>Press Inquiries</h3>
+                        <p>Jessica Williams<br>Head of Communications</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h3>Email</h3>
+                        <p>press@photoflare.com</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="mailto:press@photoflare.com" class="btn btn-success" style="margin-right: 1rem;"><i class="fas fa-envelope"></i> Email Our Team</a>
+                    <a href="contact-form.html" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;"><i class="fas fa-edit"></i> Contact Form</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="#press">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Function to insert Google AdSense code
+        function insertAdSense(adUnitId, adContainerId) {
+            const adContainer = document.getElementById(adContainerId);
+            if (adContainer && adUnitId) {
+                adContainer.innerHTML = `
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adUnitId}" crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="${adUnitId}"
+                         data-ad-slot="1234567890"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                `;
+            }
+        }
+
+        // Example usage (replace with your actual Ad Unit IDs)
+        // insertAdSense('ca-pub-1234567890123456', 'ad-top');
+        // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Press card interactions
+        const pressCards = document.querySelectorAll('.press-card');
+        pressCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'A') {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.location.href = link.getAttribute('href');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

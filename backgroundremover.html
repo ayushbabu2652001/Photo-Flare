@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Background Remover - Remove backgrounds from images automatically with advanced AI technology. Part of Photo Flare's premium tools.">
+    <meta name="keywords" content="background remover, remove bg, transparent background, image background removal, AI background removal, photo editing">
+    <title>Background Remover - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #f3722c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .upload-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px dashed var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .upload-section.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .file-label:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .image-preview {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preview-container {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            background: var(--light);
+        }
+
+        .preview-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border-radius: var(--border-radius);
+            z-index: -1;
+        }
+
+        .controls-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .controls-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .control-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .background-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .bg-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .bg-option.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .bg-option i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .bg-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--light-gray);
+        }
+
+        .bg-transparent {
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .bg-white { background: white; }
+        .bg-black { background: black; }
+        .bg-color { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .color-picker {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+
+        .processing-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 8px solid white;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .refinement-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .refinement-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .brush-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .brush-size {
+            width: 100%;
+        }
+
+        .brush-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-top: 1rem;
+        }
+
+        #refinementCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .refinement-tools {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .tool-btn {
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .tool-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .results-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .premium-upsell h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-feature i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-preview {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .background-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem;
+            }
+            
+            .tool-content {
+                padding: 1.5rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .controls-section {
+                padding: 1.5rem;
+            }
+            
+            .background-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .refinement-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1><i class="fas fa-brain"></i> AI Background Remover</h1>
+                <p>Remove backgrounds from images automatically with advanced AI technology. Perfect for product photos, portraits, and more.</p>
+                <span class="premium-badge">PREMIUM TOOL</span>
+            </div>
+
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section" id="uploadSection">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <div class="upload-text">
+                        <h3>Upload Your Image</h3>
+                        <p>Drag & drop your image here or click to browse</p>
+                        <p>Supports JPG, PNG, WebP (Max: 10MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*">
+                    <label for="fileInput" class="file-label">
+                        <i class="fas fa-folder-open"></i> Choose Image
+                    </label>
+                </div>
+
+                <!-- Image Preview Section -->
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <div class="preview-container">
+                        <h3 class="preview-title">Original Image</h3>
+                        <div class="preview-background"></div>
+                        <img id="originalImage" class="preview-image" src="" alt="Original Image">
+                    </div>
+                    <div class="preview-container">
+                        <h3 class="preview-title">Background Removed</h3>
+                        <div class="preview-background"></div>
+                        <img id="processedImage" class="preview-image" src="" alt="Processed Image">
+                    </div>
+                </div>
+
+                <!-- Controls Section -->
+                <div class="controls-section" id="controlsSection" style="display: none;">
+                    <h2 class="controls-title">Background Removal Settings</h2>
+                    
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>AI Precision</span>
+                                <span class="control-value" id="precisionValue">High</span>
+                            </div>
+                            <input type="range" min="1" max="3" step="1" value="2" class="slider" id="precisionSlider">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray); margin-top: 5px;">
+                                <span>Fast</span>
+                                <span>Balanced</span>
+                                <span>High Quality</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Edge Smoothing</span>
+                                <span class="control-value" id="smoothingValue">70%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="70" class="slider" id="smoothingSlider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Foreground Protection</span>
+                                <span class="control-value" id="protectionValue">80%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="80" class="slider" id="protectionSlider">
+                            <p style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">Prevents accidental removal of foreground elements</p>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3 style="margin-bottom: 1rem;">New Background</h3>
+                        <div class="background-options">
+                            <div class="bg-option active" data-bg="transparent">
+                                <div class="bg-preview bg-transparent"></div>
+                                <i class="fas fa-vector-square"></i>
+                                <span>Transparent</span>
+                            </div>
+                            <div class="bg-option" data-bg="white">
+                                <div class="bg-preview bg-white"></div>
+                                <i class="fas fa-square"></i>
+                                <span>White</span>
+                            </div>
+                            <div class="bg-option" data-bg="black">
+                                <div class="bg-preview bg-black"></div>
+                                <i class="fas fa-square"></i>
+                                <span>Black</span>
+                            </div>
+                            <div class="bg-option" data-bg="color">
+                                <div class="bg-preview bg-color"></div>
+                                <i class="fas fa-fill-drip"></i>
+                                <span>Color</span>
+                            </div>
+                            <div class="bg-option" data-bg="custom">
+                                <div class="bg-preview" id="customBgPreview" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4);"></div>
+                                <i class="fas fa-image"></i>
+                                <span>Custom</span>
+                            </div>
+                        </div>
+
+                        <div class="color-picker-container" id="colorPickerContainer" style="display: none;">
+                            <label for="bgColorPicker">Choose background color:</label>
+                            <input type="color" id="bgColorPicker" class="color-picker" value="#ff9a9e">
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="removeBgBtn">
+                            <i class="fas fa-magic"></i> Remove Background
+                        </button>
+                        <button class="btn btn-outline" id="refineBtn" style="display: none;">
+                            <i class="fas fa-paint-brush"></i> Refine Edges
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Refinement Section -->
+                <div class="refinement-section" id="refinementSection">
+                    <h2 class="controls-title">Refine Your Selection</h2>
+                    <p style="text-align: center; margin-bottom: 1rem; color: var(--gray);">
+                        Use the tools below to fine-tune the background removal. Paint to add or remove areas.
+                    </p>
+                    
+                    <div class="refinement-controls">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Brush Size</span>
+                                <span class="control-value" id="brushSizeValue">20px</span>
+                            </div>
+                            <input type="range" min="5" max="100" value="20" class="slider brush-size" id="brushSizeSlider">
+                            
+                            <div class="brush-controls">
+                                <div class="brush-preview" id="brushPreview">20</div>
+                                <div style="flex: 1;">
+                                    <div class="control-label">
+                                        <span>Brush Hardness</span>
+                                        <span class="control-value" id="brushHardnessValue">50%</span>
+                                    </div>
+                                    <input type="range" min="0" max="100" value="50" class="slider" id="brushHardnessSlider">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Zoom Level</span>
+                                <span class="control-value" id="zoomValue">100%</span>
+                            </div>
+                            <input type="range" min="25" max="400" value="100" class="slider" id="zoomSlider">
+                            <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                                <button class="btn btn-outline" id="zoomInBtn"><i class="fas fa-search-plus"></i></button>
+                                <button class="btn btn-outline" id="zoomOutBtn"><i class="fas fa-search-minus"></i></button>
+                                <button class="btn btn-outline" id="zoomResetBtn"><i class="fas fa-expand-arrows-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-container">
+                        <canvas id="refinementCanvas"></canvas>
+                    </div>
+                    
+                    <div class="refinement-tools">
+                        <button class="tool-btn active" id="addTool">
+                            <i class="fas fa-plus-circle"></i> Add to Selection
+                        </button>
+                        <button class="tool-btn" id="removeTool">
+                            <i class="fas fa-minus-circle"></i> Remove from Selection
+                        </button>
+                        <button class="tool-btn" id="eraserTool">
+                            <i class="fas fa-eraser"></i> Eraser
+                        </button>
+                        <button class="btn btn-success" id="applyRefinementBtn">
+                            <i class="fas fa-check"></i> Apply Changes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection">
+                    <h2 class="controls-title">Background Removal Complete!</h2>
+                    <div class="results-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="accuracyStat">98%</div>
+                            <div class="stat-label">AI Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="timeStat">2.4s</div>
+                            <div class="stat-label">Processing Time</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="foregroundStat">100%</div>
+                            <div class="stat-label">Foreground Preserved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="backgroundStat">99.8%</div>
+                            <div class="stat-label">Background Removed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-options">
+                        <button class="btn btn-primary" id="downloadPngBtn">
+                            <i class="fas fa-download"></i> Download PNG (Transparent)
+                        </button>
+                        <button class="btn btn-success" id="downloadJpgBtn">
+                            <i class="fas fa-download"></i> Download JPG (With Background)
+                        </button>
+                        <button class="btn btn-outline" id="newImageBtn">
+                            <i class="fas fa-plus"></i> Process Another Image
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Upsell -->
+                <div class="premium-upsell">
+                    <h3>Unlock Professional Background Removal with Photo Flare Pro</h3>
+                    <p>Upgrade to access all premium features and remove limitations</p>
+                    
+                    <div class="premium-features">
+                        <div class="premium-feature">
+                            <i class="fas fa-bolt"></i>
+                            <div>
+                                <h4>Faster Processing</h4>
+                                <p>Priority AI processing with GPU acceleration</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Higher Resolution</h4>
+                                <p>Process images up to 8K resolution</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-infinity"></i>
+                            <div>
+                                <h4>Unlimited Removals</h4>
+                                <p>No daily limits on background removal</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <div>
+                                <h4>Batch Processing</h4>
+                                <p>Remove backgrounds from multiple images at once</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="pricing.html" class="btn btn-warning">
+                        <i class="fas fa-crown"></i> Upgrade to Pro - Only $4/month
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Processing Overlay -->
+    <div class="processing-overlay" id="processingOverlay" style="display: none;">
+        <div class="processing-spinner"></div>
+        <h2>Removing Background</h2>
+        <p>Our AI is analyzing your image...</p>
+        <p id="processingProgress">Processing: 0%</p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const imagePreview = document.getElementById('imagePreview');
+        const originalImage = document.getElementById('originalImage');
+        const processedImage = document.getElementById('processedImage');
+        const controlsSection = document.getElementById('controlsSection');
+        const refinementSection = document.getElementById('refinementSection');
+        const resultsSection = document.getElementById('resultsSection');
+        const processingOverlay = document.getElementById('processingOverlay');
+        const processingProgress = document.getElementById('processingProgress');
+        
+        // Control Elements
+        const precisionSlider = document.getElementById('precisionSlider');
+        const precisionValue = document.getElementById('precisionValue');
+        const smoothingSlider = document.getElementById('smoothingSlider');
+        const smoothingValue = document.getElementById('smoothingValue');
+        const protectionSlider = document.getElementById('protectionSlider');
+        const protectionValue = document.getElementById('protectionValue');
+        
+        // Background Options
+        const bgOptions = document.querySelectorAll('.bg-option');
+        const colorPickerContainer = document.getElementById('colorPickerContainer');
+        const bgColorPicker = document.getElementById('bgColorPicker');
+        const customBgPreview = document.getElementById('customBgPreview');
+        
+        // Refinement Elements
+        const refinementCanvas = document.getElementById('refinementCanvas');
+        const brushSizeSlider = document.getElementById('brushSizeSlider');
+        const brushSizeValue = document.getElementById('brushSizeValue');
+        const brushHardnessSlider = document.getElementById('brushHardnessSlider');
+        const brushHardnessValue = document.getElementById('brushHardnessValue');
+        const brushPreview = document.getElementById('brushPreview');
+        const zoomSlider = document.getElementById('zoomSlider');
+        const zoomValue = document.getElementById('zoomValue');
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+        const zoomResetBtn = document.getElementById('zoomResetBtn');
+        
+        // Tool Buttons
+        const addTool = document.getElementById('addTool');
+        const removeTool = document.getElementById('removeTool');
+        const eraserTool = document.getElementById('eraserTool');
+        
+        // Action Buttons
+        const removeBgBtn = document.getElementById('removeBgBtn');
+        const refineBtn = document.getElementById('refineBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const applyRefinementBtn = document.getElementById('applyRefinementBtn');
+        const downloadPngBtn = document.getElementById('downloadPngBtn');
+        const downloadJpgBtn = document.getElementById('downloadJpgBtn');
+        const newImageBtn = document.getElementById('newImageBtn');
+        
+        // Stats Elements
+        const accuracyStat = document.getElementById('accuracyStat');
+        const timeStat = document.getElementById('timeStat');
+        const foregroundStat = document.getElementById('foregroundStat');
+        const backgroundStat = document.getElementById('backgroundStat');
+        
+        // Global Variables
+        let originalImageData = null;
+        let processedImageData = null;
+        let isProcessing = false;
+        let currentBgOption = 'transparent';
+        let canvasContext = null;
+        let currentTool = 'add';
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let scale = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        
+        // Event Listeners
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadSection.addEventListener('dragover', handleDragOver);
+        uploadSection.addEventListener('drop', handleFileDrop);
+        
+        // Slider Event Listeners
+        precisionSlider.addEventListener('input', updatePrecisionValue);
+        smoothingSlider.addEventListener('input', updateSmoothingValue);
+        protectionSlider.addEventListener('input', updateProtectionValue);
+        brushSizeSlider.addEventListener('input', updateBrushSize);
+        brushHardnessSlider.addEventListener('input', updateBrushHardness);
+        zoomSlider.addEventListener('input', updateZoom);
+        
+        // Background Option Event Listeners
+        bgOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                bgOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                currentBgOption = this.dataset.bg;
+                
+                if (currentBgOption === 'color' || currentBgOption === 'custom') {
+                    colorPickerContainer.style.display = 'flex';
+                } else {
+                    colorPickerContainer.style.display = 'none';
+                }
+                
+                // Update custom background preview
+                if (currentBgOption === 'custom') {
+                    customBgPreview.style.background = bgColorPicker.value;
+                }
+            });
+        });
+        
+        bgColorPicker.addEventListener('input', function() {
+            customBgPreview.style.background = this.value;
+        });
+        
+        // Button Event Listeners
+        removeBgBtn.addEventListener('click', removeBackground);
+        refineBtn.addEventListener('click', showRefinement);
+        resetBtn.addEventListener('click', resetTool);
+        applyRefinementBtn.addEventListener('click', applyRefinement);
+        downloadPngBtn.addEventListener('click', downloadPng);
+        downloadJpgBtn.addEventListener('click', downloadJpg);
+        newImageBtn.addEventListener('click', resetTool);
+        
+        // Zoom Button Event Listeners
+        zoomInBtn.addEventListener('click', zoomIn);
+        zoomOutBtn.addEventListener('click', zoomOut);
+        zoomResetBtn.addEventListener('click', zoomReset);
+        
+        // Tool Button Event Listeners
+        addTool.addEventListener('click', function() {
+            setActiveTool('add');
+        });
+        
+        removeTool.addEventListener('click', function() {
+            setActiveTool('remove');
+        });
+        
+        eraserTool.addEventListener('click', function() {
+            setActiveTool('eraser');
+        });
+        
+        // Canvas Event Listeners
+        refinementCanvas.addEventListener('mousedown', startDrawing);
+        refinementCanvas.addEventListener('mousemove', draw);
+        refinementCanvas.addEventListener('mouseup', stopDrawing);
+        refinementCanvas.addEventListener('mouseout', stopDrawing);
+        
+        refinementCanvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            refinementCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        refinementCanvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            refinementCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        refinementCanvas.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            const mouseEvent = new MouseEvent('mouseup', {});
+            refinementCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        // Functions
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadSection.classList.add('active');
+        }
+        
+        function handleFileDrop(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        }
+        
+        function handleFileSelect() {
+            if (!fileInput.files.length) return;
+            
+            const file = fileInput.files[0];
+            
+            // Check file type
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPG, PNG, WebP)');
+                return;
+            }
+            
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit. Please choose a smaller image.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                originalImage.src = e.target.result;
+                originalImageData = e.target.result;
+                
+                // Show preview and controls
+                imagePreview.style.display = 'flex';
+                controlsSection.style.display = 'block';
+                
+                // Reset processed image
+                processedImage.src = '';
+                processedImageData = null;
+                refineBtn.style.display = 'none';
+                refinementSection.style.display = 'none';
+                resultsSection.style.display = 'none';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function updatePrecisionValue() {
+            const value = parseInt(precisionSlider.value);
+            const labels = ['Fast', 'Balanced', 'High Quality'];
+            precisionValue.textContent = labels[value - 1];
+        }
+        
+        function updateSmoothingValue() {
+            smoothingValue.textContent = `${smoothingSlider.value}%`;
+        }
+        
+        function updateProtectionValue() {
+            protectionValue.textContent = `${protectionSlider.value}%`;
+        }
+        
+        function updateBrushSize() {
+            const size = brushSizeSlider.value;
+            brushSizeValue.textContent = `${size}px`;
+            brushPreview.textContent = size;
+            brushPreview.style.width = `${size}px`;
+            brushPreview.style.height = `${size}px`;
+        }
+        
+        function updateBrushHardness() {
+            brushHardnessValue.textContent = `${brushHardnessSlider.value}%`;
+        }
+        
+        function updateZoom() {
+            scale = zoomSlider.value / 100;
+            zoomValue.textContent = `${zoomSlider.value}%`;
+            drawCanvas();
+        }
+        
+        function zoomIn() {
+            zoomSlider.value = Math.min(400, parseInt(zoomSlider.value) + 25);
+            updateZoom();
+        }
+        
+        function zoomOut() {
+            zoomSlider.value = Math.max(25, parseInt(zoomSlider.value) - 25);
+            updateZoom();
+        }
+        
+        function zoomReset() {
+            zoomSlider.value = 100;
+            updateZoom();
+            offsetX = 0;
+            offsetY = 0;
+            drawCanvas();
+        }
+        
+        function setActiveTool(tool) {
+            currentTool = tool;
+            
+            // Update button states
+            addTool.classList.remove('active');
+            removeTool.classList.remove('active');
+            eraserTool.classList.remove('active');
+            
+            if (tool === 'add') {
+                addTool.classList.add('active');
+            } else if (tool === 'remove') {
+                removeTool.classList.add('active');
+            } else if (tool === 'eraser') {
+                eraserTool.classList.add('active');
+            }
+        }
+        
+        function removeBackground() {
+            if (!originalImageData || isProcessing) return;
+            
+            isProcessing = true;
+            processingOverlay.style.display = 'flex';
+            
+            // Simulate AI processing with progress updates
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    finishBackgroundRemoval();
+                }
+                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+            }, 300);
+            
+            // In a real implementation, this would be an API call to an AI service
+            setTimeout(finishBackgroundRemoval, 3000);
+        }
+        
+        function finishBackgroundRemoval() {
+            isProcessing = false;
+            processingOverlay.style.display = 'none';
+            
+            // In a real implementation, this would be the processed image from the AI service
+            // For this demo, we'll create a canvas and apply a simple background removal simulation
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Draw original image
+                ctx.drawImage(img, 0, 0);
+                
+                // Simulate background removal by making a simple cutout
+                // In a real implementation, this would be done by an AI model
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Simple background removal simulation (based on color detection)
+                // This is a very basic simulation - real AI would be much more sophisticated
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    
+                    // Simple green screen simulation (detecting light backgrounds)
+                    const brightness = (r + g + b) / 3;
+                    if (brightness > 200) {
+                        // Make pixel transparent (simulate background removal)
+                        data[i + 3] = 0;
+                    }
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+                
+                // Apply selected background
+                if (currentBgOption !== 'transparent') {
+                    // Fill with background color
+                    ctx.globalCompositeOperation = 'destination-over';
+                    
+                    if (currentBgOption === 'white') {
+                        ctx.fillStyle = 'white';
+                    } else if (currentBgOption === 'black') {
+                        ctx.fillStyle = 'black';
+                    } else if (currentBgOption === 'color' || currentBgOption === 'custom') {
+                        ctx.fillStyle = bgColorPicker.value;
+                    }
+                    
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.globalCompositeOperation = 'source-over';
+                }
+                
+                // Convert to data URL and set as processed image
+                const format = currentBgOption === 'transparent' ? 'image/png' : 'image/jpeg';
+                processedImageData = canvas.toDataURL(format);
+                processedImage.src = processedImageData;
+                
+                // Show refinement button and results
+                refineBtn.style.display = 'inline-flex';
+                
+                // Calculate and display stats
+                calculateStats();
+                resultsSection.style.display = 'block';
+                
+                // Initialize refinement canvas
+                initializeRefinementCanvas(img);
+            };
+            
+            img.src = originalImageData;
+        }
+        
+        function calculateStats() {
+            // Simulated stats - in a real implementation these would come from the AI service
+            accuracyStat.textContent = `${98 + Math.floor(Math.random() * 2)}%`;
+            timeStat.textContent = `${(2 + Math.random()).toFixed(1)}s`;
+            foregroundStat.textContent = '100%';
+            backgroundStat.textContent = `${99 + Math.floor(Math.random() * 2)}%`;
+        }
+        
+        function initializeRefinementCanvas(img) {
+            refinementCanvas.width = img.width;
+            refinementCanvas.height = img.height;
+            canvasContext = refinementCanvas.getContext('2d');
+            
+            // Draw the processed image on the canvas
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                canvasContext.drawImage(tempImg, 0, 0);
+                drawCanvas();
+            };
+            tempImg.src = processedImageData;
+        }
+        
+        function drawCanvas() {
+            if (!canvasContext) return;
+            
+            const canvas = refinementCanvas;
+            const displayWidth = canvas.parentElement.clientWidth;
+            const displayHeight = canvas.parentElement.clientHeight;
+            
+            // Clear the canvas
+            canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Save the current context
+            canvasContext.save();
+            
+            // Apply transformations for zoom and pan
+            canvasContext.translate(offsetX, offsetY);
+            canvasContext.scale(scale, scale);
+            
+            // Draw the image
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                canvasContext.drawImage(tempImg, 0, 0);
+                
+                // Draw a grid for better visibility of transparent areas
+                canvasContext.globalAlpha = 0.1;
+                canvasContext.fillStyle = '#000';
+                for (let x = 0; x < canvas.width; x += 20) {
+                    for (let y = 0; y < canvas.height; y += 20) {
+                        if ((x / 20 + y / 20) % 2 === 0) {
+                            canvasContext.fillRect(x, y, 20, 20);
+                        }
+                    }
+                }
+                canvasContext.globalAlpha = 1;
+            };
+            tempImg.src = processedImageData;
+            
+            // Restore the context
+            canvasContext.restore();
+        }
+        
+        function showRefinement() {
+            refinementSection.style.display = 'block';
+            // Scroll to refinement section
+            refinementSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getMousePos(e);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const [x, y] = getMousePos(e);
+            
+            canvasContext.lineJoin = 'round';
+            canvasContext.lineCap = 'round';
+            canvasContext.lineWidth = brushSizeSlider.value / scale;
+            
+            // Set the drawing style based on the current tool
+            if (currentTool === 'add') {
+                canvasContext.globalCompositeOperation = 'source-over';
+                canvasContext.strokeStyle = 'rgba(0, 255, 0, 0.5)';
+            } else if (currentTool === 'remove') {
+                canvasContext.globalCompositeOperation = 'destination-out';
+                canvasContext.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+            } else if (currentTool === 'eraser') {
+                canvasContext.globalCompositeOperation = 'source-over';
+                canvasContext.strokeStyle = 'transparent';
+            }
+            
+            canvasContext.beginPath();
+            canvasContext.moveTo(lastX / scale - offsetX / scale, lastY / scale - offsetY / scale);
+            canvasContext.lineTo(x / scale - offsetX / scale, y / scale - offsetY / scale);
+            canvasContext.stroke();
+            
+            [lastX, lastY] = [x, y];
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+        }
+        
+        function getMousePos(e) {
+            const rect = refinementCanvas.getBoundingClientRect();
+            return [
+                e.clientX - rect.left,
+                e.clientY - rect.top
+            ];
+        }
+        
+        function applyRefinement() {
+            // Update the processed image with the refined version
+            processedImageData = refinementCanvas.toDataURL(
+                currentBgOption === 'transparent' ? 'image/png' : 'image/jpeg'
+            );
+            processedImage.src = processedImageData;
+            
+            // Hide refinement section
+            refinementSection.style.display = 'none';
+            
+            // Show success message
+            alert('Refinements applied successfully!');
+        }
+        
+        function downloadPng() {
+            if (!processedImageData) return;
+            
+            const link = document.createElement('a');
+            link.download = `background-removed-${Date.now()}.png`;
+            link.href = processedImageData;
+            link.click();
+        }
+        
+        function downloadJpg() {
+            if (!processedImageData) return;
+            
+            // Create a temporary canvas to convert to JPG
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Fill with white background for JPG
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw the image
+                ctx.drawImage(img, 0, 0);
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = `background-removed-${Date.now()}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            };
+            
+            img.src = processedImageData;
+        }
+        
+        function resetTool() {
+            fileInput.value = '';
+            originalImage.src = '';
+            processedImage.src = '';
+            imagePreview.style.display = 'none';
+            controlsSection.style.display = 'none';
+            refinementSection.style.display = 'none';
+            resultsSection.style.display = 'none';
+            refineBtn.style.display = 'none';
+            
+            // Reset background options
+            bgOptions.forEach(opt => opt.classList.remove('active'));
+            document.querySelector('.bg-option[data-bg="transparent"]').classList.add('active');
+            currentBgOption = 'transparent';
+            colorPickerContainer.style.display = 'none';
+            
+            // Reset sliders to default values
+            precisionSlider.value = 2;
+            smoothingSlider.value = 70;
+            protectionSlider.value = 80;
+            brushSizeSlider.value = 20;
+            brushHardnessSlider.value = 50;
+            zoomSlider.value = 100;
+            
+            // Update slider displays
+            updatePrecisionValue();
+            updateSmoothingValue();
+            updateProtectionValue();
+            updateBrushSize();
+            updateBrushHardness();
+            updateZoom();
+            
+            // Reset tools
+            setActiveTool('add');
+        }
+        
+        // Initialize slider values
+        updatePrecisionValue();
+        updateSmoothingValue();
+        updateProtectionValue();
+        updateBrushSize();
+        updateBrushHardness();
+        updateZoom();
+    </script>
+</body>
+</html>

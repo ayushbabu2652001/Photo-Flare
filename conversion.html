@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Tools - Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .page-header {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+
+        .quick-nav {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .quick-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-nav-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--dark);
+            border: 1px solid transparent;
+        }
+
+        .quick-nav-item:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .quick-nav-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .conversion-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .conversion-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid transparent;
+        }
+
+        .conversion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-light);
+        }
+
+        .conversion-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .conversion-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .conversion-desc {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .conversion-formats {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .format-badge {
+            background: var(--light);
+            color: var(--dark);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .converter-section {
+            margin: 3rem 0;
+        }
+
+        .converter-interface {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .converter-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .converter-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .converter-header p {
+            color: var(--gray);
+        }
+
+        .converter-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            background: rgba(248, 249, 250, 0.5);
+        }
+
+        .file-upload-area:hover, .file-upload-area.dragover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .format-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .format-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 120px;
+        }
+
+        .format-option:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .format-option.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .format-option-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .format-option-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .conversion-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 0 1rem;
+        }
+
+        .conversion-options {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: left;
+        }
+
+        .option-group {
+            margin-bottom: 1rem;
+        }
+
+        .option-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .option-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .option-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .file-info {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .file-info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .conversion-result {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .features {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .conversion-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .format-selector {
+                flex-direction: column;
+            }
+            
+            .conversion-arrow {
+                margin: 1rem 0;
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html" class="active">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>File Conversion Tools</h1>
+            <p>Convert files between different formats with our fast, secure, and easy-to-use conversion tools. Support for PDF, images, documents, and more.</p>
+        </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <div class="container">
+        <div class="quick-nav">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--dark);">Quick Access</h3>
+            <div class="quick-nav-grid">
+                <a href="#pdf-converter" class="quick-nav-item">
+                    <i class="fas fa-file-pdf quick-nav-icon"></i>
+                    <div>PDF Conversion</div>
+                </a>
+                <a href="#image-converter" class="quick-nav-item">
+                    <i class="fas fa-image quick-nav-icon"></i>
+                    <div>Image Conversion</div>
+                </a>
+                <a href="#document-converter" class="quick-nav-item">
+                    <i class="fas fa-file-word quick-nav-icon"></i>
+                    <div>Document Conversion</div>
+                </a>
+                <a href="#video-converter" class="quick-nav-item">
+                    <i class="fas fa-file-video quick-nav-icon"></i>
+                    <div>Video Conversion</div>
+                </a>
+                <a href="#audio-converter" class="quick-nav-item">
+                    <i class="fas fa-file-audio quick-nav-icon"></i>
+                    <div>Audio Conversion</div>
+                </a>
+                <a href="#ebook-converter" class="quick-nav-item">
+                    <i class="fas fa-book quick-nav-icon"></i>
+                    <div>Ebook Conversion</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conversion Tools Grid -->
+    <section class="conversion-section">
+        <div class="container">
+            <div class="conversion-tools">
+                <!-- PDF Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-file-pdf conversion-icon"></i>
+                    <h3 class="conversion-title">PDF Conversion</h3>
+                    <p class="conversion-desc">Convert PDF files to and from various formats including Word, Excel, PowerPoint, images, and more.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">PDF to Word</span>
+                        <span class="format-badge">PDF to Excel</span>
+                        <span class="format-badge">PDF to JPG</span>
+                        <span class="format-badge">Word to PDF</span>
+                    </div>
+                    <a href="#pdf-converter" class="btn btn-primary">Convert PDF</a>
+                </div>
+
+                <!-- Image Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-image conversion-icon"></i>
+                    <h3 class="conversion-title">Image Conversion</h3>
+                    <p class="conversion-desc">Convert between different image formats with high quality preservation. Support for JPG, PNG, WebP, and more.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">JPG to PNG</span>
+                        <span class="format-badge">PNG to JPG</span>
+                        <span class="format-badge">WebP Converter</span>
+                        <span class="format-badge">HEIC Converter</span>
+                    </div>
+                    <a href="#image-converter" class="btn btn-primary">Convert Images</a>
+                </div>
+
+                <!-- Document Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-file-word conversion-icon"></i>
+                    <h3 class="conversion-title">Document Conversion</h3>
+                    <p class="conversion-desc">Convert between popular document formats including Word, Excel, PowerPoint, and text files.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">Word to PDF</span>
+                        <span class="format-badge">Excel to PDF</span>
+                        <span class="format-badge">PPT to PDF</span>
+                        <span class="format-badge">TXT to PDF</span>
+                    </div>
+                    <a href="#document-converter" class="btn btn-primary">Convert Documents</a>
+                </div>
+
+                <!-- Video Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-file-video conversion-icon"></i>
+                    <h3 class="conversion-title">Video Conversion</h3>
+                    <p class="conversion-desc">Convert video files between different formats. Extract audio or create GIFs from videos.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">MP4 to GIF</span>
+                        <span class="format-badge">Video to MP3</span>
+                        <span class="format-badge">Format Converter</span>
+                        <span class="format-badge">Compress Video</span>
+                    </div>
+                    <a href="#video-converter" class="btn btn-primary">Convert Videos</a>
+                </div>
+
+                <!-- Audio Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-file-audio conversion-icon"></i>
+                    <h3 class="conversion-title">Audio Conversion</h3>
+                    <p class="conversion-desc">Convert audio files between different formats. Extract audio from video files or change audio quality.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">MP3 to WAV</span>
+                        <span class="format-badge">WAV to MP3</span>
+                        <span class="format-badge">Audio Extractor</span>
+                        <span class="format-badge">Quality Changer</span>
+                    </div>
+                    <a href="#audio-converter" class="btn btn-primary">Convert Audio</a>
+                </div>
+
+                <!-- Ebook Conversion -->
+                <div class="conversion-card">
+                    <i class="fas fa-book conversion-icon"></i>
+                    <h3 class="conversion-title">Ebook Conversion</h3>
+                    <p class="conversion-desc">Convert between popular ebook formats including EPUB, MOBI, PDF, and more for different reading devices.</p>
+                    <div class="conversion-formats">
+                        <span class="format-badge">EPUB to PDF</span>
+                        <span class="format-badge">MOBI to EPUB</span>
+                        <span class="format-badge">PDF to EPUB</span>
+                        <span class="format-badge">AZW3 Converter</span>
+                    </div>
+                    <a href="#ebook-converter" class="btn btn-primary">Convert Ebooks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Converter Interface -->
+    <section class="converter-section" id="pdf-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>PDF to Word Converter</h2>
+                    <p>Convert your PDF documents to editable Word files with perfect formatting preservation</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="pdfUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your PDF file here or click to browse</p>
+                        <button class="btn btn-primary" id="pdfUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select PDF File
+                        </button>
+                        <input type="file" id="pdfFileInput" class="file-input" accept=".pdf">
+                        <div class="progress-bar" id="pdfProgressBar">
+                            <div class="progress" id="pdfProgress"></div>
+                        </div>
+                        <div class="file-info" id="pdfFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="pdfFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="pdfFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Pages:</span>
+                                <span id="pdfPages">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="pdfConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your PDF has been successfully converted to Word!</p>
+                            <button class="btn btn-success" id="pdfDownloadBtn">
+                                <i class="fas fa-download"></i> Download Word Document
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active">
+                            <i class="fas fa-file-pdf format-option-icon"></i>
+                            <span class="format-option-name">PDF</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option">
+                            <i class="fas fa-file-word format-option-icon"></i>
+                            <span class="format-option-name">Word</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="pdfOutputFormat">
+                                <option value="docx">Word Document (.docx)</option>
+                                <option value="doc">Word 97-2003 Document (.doc)</option>
+                                <option value="odt">OpenDocument Text (.odt)</option>
+                                <option value="rtf">Rich Text Format (.rtf)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Quality Settings</label>
+                            <select class="option-select" id="pdfQualitySetting">
+                                <option value="high">High Quality (Best for editing)</option>
+                                <option value="medium">Medium Quality (Balanced)</option>
+                                <option value="low">Low Quality (Smaller file size)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="pdfPreserveFormatting" checked> 
+                                Preserve formatting and layout
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="pdfExtractImages" checked> 
+                                Extract and include images
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="pdfConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert to Word
+                        </button>
+                        <button class="btn btn-outline" id="pdfResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Converter Interface -->
+    <section class="converter-section" id="image-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>Image Format Converter</h2>
+                    <p>Convert between different image formats while maintaining high quality</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="imageUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your image file here or click to browse</p>
+                        <button class="btn btn-primary" id="imageUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select Image
+                        </button>
+                        <input type="file" id="imageFileInput" class="file-input" accept="image/*">
+                        <div class="progress-bar" id="imageProgressBar">
+                            <div class="progress" id="imageProgress"></div>
+                        </div>
+                        <div class="file-info" id="imageFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="imageFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="imageFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Dimensions:</span>
+                                <span id="imageDimensions">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="imageConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your image has been successfully converted!</p>
+                            <button class="btn btn-success" id="imageDownloadBtn">
+                                <i class="fas fa-download"></i> Download Converted Image
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active" id="imageInputOption">
+                            <i class="fas fa-file-image format-option-icon"></i>
+                            <span class="format-option-name" id="imageInputFormat">Original</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option" id="imageOutputOption">
+                            <i class="fas fa-file-image format-option-icon"></i>
+                            <span class="format-option-name">Output</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="imageOutputFormat">
+                                <option value="jpg">JPEG (.jpg)</option>
+                                <option value="png">PNG (.png)</option>
+                                <option value="webp">WebP (.webp)</option>
+                                <option value="gif">GIF (.gif)</option>
+                                <option value="bmp">BMP (.bmp)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Quality Settings</label>
+                            <select class="option-select" id="imageQualitySetting">
+                                <option value="high">High Quality (Best)</option>
+                                <option value="medium">Medium Quality (Recommended)</option>
+                                <option value="low">Low Quality (Smallest file)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Resize Image</label>
+                            <select class="option-select" id="imageResizeOption">
+                                <option value="original">Keep original size</option>
+                                <option value="custom">Custom size</option>
+                                <option value="small">Small (800px width)</option>
+                                <option value="medium">Medium (1200px width)</option>
+                                <option value="large">Large (1920px width)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="imageConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert Image
+                        </button>
+                        <button class="btn btn-outline" id="imageResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document Converter Interface -->
+    <section class="converter-section" id="document-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>Document Format Converter</h2>
+                    <p>Convert between Word, Excel, PowerPoint, and other document formats</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="documentUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your document file here or click to browse</p>
+                        <button class="btn btn-primary" id="documentUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select Document
+                        </button>
+                        <input type="file" id="documentFileInput" class="file-input" accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.odt">
+                        <div class="progress-bar" id="documentProgressBar">
+                            <div class="progress" id="documentProgress"></div>
+                        </div>
+                        <div class="file-info" id="documentFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="documentFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="documentFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Format:</span>
+                                <span id="documentFormat">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="documentConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your document has been successfully converted!</p>
+                            <button class="btn btn-success" id="documentDownloadBtn">
+                                <i class="fas fa-download"></i> Download Converted Document
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active" id="documentInputOption">
+                            <i class="fas fa-file-word format-option-icon"></i>
+                            <span class="format-option-name" id="documentInputFormat">Original</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option" id="documentOutputOption">
+                            <i class="fas fa-file-pdf format-option-icon"></i>
+                            <span class="format-option-name">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="documentOutputFormat">
+                                <option value="pdf">PDF Document (.pdf)</option>
+                                <option value="docx">Word Document (.docx)</option>
+                                <option value="xlsx">Excel Spreadsheet (.xlsx)</option>
+                                <option value="pptx">PowerPoint Presentation (.pptx)</option>
+                                <option value="txt">Plain Text (.txt)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Quality Settings</label>
+                            <select class="option-select" id="documentQualitySetting">
+                                <option value="high">High Quality (Best)</option>
+                                <option value="medium">Medium Quality (Recommended)</option>
+                                <option value="low">Low Quality (Smallest file)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="documentPreserveFormatting" checked> 
+                                Preserve formatting and layout
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="documentConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert Document
+                        </button>
+                        <button class="btn btn-outline" id="documentResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Converter Interface -->
+    <section class="converter-section" id="video-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>Video Format Converter</h2>
+                    <p>Convert between video formats, extract audio, or create GIFs from videos</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="videoUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your video file here or click to browse</p>
+                        <button class="btn btn-primary" id="videoUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select Video
+                        </button>
+                        <input type="file" id="videoFileInput" class="file-input" accept="video/*">
+                        <div class="progress-bar" id="videoProgressBar">
+                            <div class="progress" id="videoProgress"></div>
+                        </div>
+                        <div class="file-info" id="videoFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="videoFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="videoFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Duration:</span>
+                                <span id="videoDuration">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="videoConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your video has been successfully converted!</p>
+                            <button class="btn btn-success" id="videoDownloadBtn">
+                                <i class="fas fa-download"></i> Download Converted Video
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active" id="videoInputOption">
+                            <i class="fas fa-file-video format-option-icon"></i>
+                            <span class="format-option-name" id="videoInputFormat">Original</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option" id="videoOutputOption">
+                            <i class="fas fa-file-video format-option-icon"></i>
+                            <span class="format-option-name">Output</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="videoOutputFormat">
+                                <option value="mp4">MP4 Video (.mp4)</option>
+                                <option value="avi">AVI Video (.avi)</option>
+                                <option value="mov">MOV Video (.mov)</option>
+                                <option value="gif">Animated GIF (.gif)</option>
+                                <option value="mp3">MP3 Audio (.mp3)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Quality Settings</label>
+                            <select class="option-select" id="videoQualitySetting">
+                                <option value="high">High Quality (Best)</option>
+                                <option value="medium">Medium Quality (Recommended)</option>
+                                <option value="low">Low Quality (Smallest file)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Resolution</label>
+                            <select class="option-select" id="videoResolution">
+                                <option value="original">Keep original resolution</option>
+                                <option value="1080p">1080p (Full HD)</option>
+                                <option value="720p">720p (HD)</option>
+                                <option value="480p">480p (SD)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="videoConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert Video
+                        </button>
+                        <button class="btn btn-outline" id="videoResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Converter Interface -->
+    <section class="converter-section" id="audio-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>Audio Format Converter</h2>
+                    <p>Convert between audio formats or extract audio from video files</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="audioUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your audio file here or click to browse</p>
+                        <button class="btn btn-primary" id="audioUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select Audio
+                        </button>
+                        <input type="file" id="audioFileInput" class="file-input" accept="audio/*">
+                        <div class="progress-bar" id="audioProgressBar">
+                            <div class="progress" id="audioProgress"></div>
+                        </div>
+                        <div class="file-info" id="audioFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="audioFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="audioFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Duration:</span>
+                                <span id="audioDuration">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="audioConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your audio has been successfully converted!</p>
+                            <button class="btn btn-success" id="audioDownloadBtn">
+                                <i class="fas fa-download"></i> Download Converted Audio
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active" id="audioInputOption">
+                            <i class="fas fa-file-audio format-option-icon"></i>
+                            <span class="format-option-name" id="audioInputFormat">Original</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option" id="audioOutputOption">
+                            <i class="fas fa-file-audio format-option-icon"></i>
+                            <span class="format-option-name">Output</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="audioOutputFormat">
+                                <option value="mp3">MP3 Audio (.mp3)</option>
+                                <option value="wav">WAV Audio (.wav)</option>
+                                <option value="flac">FLAC Audio (.flac)</option>
+                                <option value="aac">AAC Audio (.aac)</option>
+                                <option value="ogg">OGG Audio (.ogg)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Quality Settings</label>
+                            <select class="option-select" id="audioQualitySetting">
+                                <option value="high">High Quality (320 kbps)</option>
+                                <option value="medium">Medium Quality (192 kbps)</option>
+                                <option value="low">Low Quality (128 kbps)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="audioNormalize" checked> 
+                                Normalize audio volume
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="audioConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert Audio
+                        </button>
+                        <button class="btn btn-outline" id="audioResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ebook Converter Interface -->
+    <section class="converter-section" id="ebook-converter">
+        <div class="container">
+            <div class="converter-interface">
+                <div class="converter-header">
+                    <h2>Ebook Format Converter</h2>
+                    <p>Convert between popular ebook formats for different reading devices</p>
+                </div>
+
+                <div class="converter-body">
+                    <div class="file-upload-area" id="ebookUploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag & drop your ebook file here or click to browse</p>
+                        <button class="btn btn-primary" id="ebookUploadBtn">
+                            <i class="fas fa-folder-open"></i> Select Ebook
+                        </button>
+                        <input type="file" id="ebookFileInput" class="file-input" accept=".epub,.mobi,.pdf,.azw3">
+                        <div class="progress-bar" id="ebookProgressBar">
+                            <div class="progress" id="ebookProgress"></div>
+                        </div>
+                        <div class="file-info" id="ebookFileInfo">
+                            <div class="file-info-row">
+                                <span>File name:</span>
+                                <span id="ebookFileName">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>File size:</span>
+                                <span id="ebookFileSize">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span>Format:</span>
+                                <span id="ebookFormat">-</span>
+                            </div>
+                        </div>
+                        <div class="conversion-result" id="ebookConversionResult">
+                            <i class="fas fa-check-circle result-icon"></i>
+                            <p class="result-text">Your ebook has been successfully converted!</p>
+                            <button class="btn btn-success" id="ebookDownloadBtn">
+                                <i class="fas fa-download"></i> Download Converted Ebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="format-selector">
+                        <div class="format-option active" id="ebookInputOption">
+                            <i class="fas fa-book format-option-icon"></i>
+                            <span class="format-option-name" id="ebookInputFormat">Original</span>
+                        </div>
+
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+
+                        <div class="format-option" id="ebookOutputOption">
+                            <i class="fas fa-book format-option-icon"></i>
+                            <span class="format-option-name">Output</span>
+                        </div>
+                    </div>
+
+                    <div class="conversion-options">
+                        <div class="option-group">
+                            <label class="option-label">Output Format</label>
+                            <select class="option-select" id="ebookOutputFormat">
+                                <option value="epub">EPUB (.epub)</option>
+                                <option value="mobi">MOBI (.mobi)</option>
+                                <option value="pdf">PDF (.pdf)</option>
+                                <option value="azw3">AZW3 (.azw3)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Device Compatibility</label>
+                            <select class="option-select" id="ebookDevice">
+                                <option value="universal">Universal (All devices)</option>
+                                <option value="kindle">Amazon Kindle</option>
+                                <option value="kobo">Kobo eReader</option>
+                                <option value="nook">Barnes & Noble Nook</option>
+                                <option value="tablet">Tablet/Phone</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                <input type="checkbox" id="ebookPreserveLayout" checked> 
+                                Preserve original layout
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" id="ebookConvertBtn">
+                            <i class="fas fa-sync-alt"></i> Convert Ebook
+                        </button>
+                        <button class="btn btn-outline" id="ebookResetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Use Our Conversion Tools?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3 class="feature-title">Fast Conversion</h3>
+                    <p>Our optimized algorithms ensure quick conversion even for large files and batches.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Secure & Private</h3>
+                    <p>Files are processed locally in your browser. Your data never leaves your computer.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-gem feature-icon"></i>
+                    <h3 class="feature-title">High Quality</h3>
+                    <p>Maintain excellent quality with advanced format preservation algorithms.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-infinity feature-icon"></i>
+                    <h3 class="feature-title">Multiple Formats</h3>
+                    <p>Support for hundreds of file formats with regular updates and additions.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p>Need to convert other file types? <a href="index.html" class="btn btn-outline">Browse All Tools</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="conversion.html">Conversion Tools</a>
+                    <a href="pdf-tools.html">PDF Tools</a>
+                    <a href="image-tools.html">Image Tools</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize all converter sections
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeConverter('pdf');
+            initializeConverter('image');
+            initializeConverter('document');
+            initializeConverter('video');
+            initializeConverter('audio');
+            initializeConverter('ebook');
+        });
+
+        // Generic converter initialization function
+        function initializeConverter(type) {
+            const uploadArea = document.getElementById(`${type}UploadArea`);
+            const uploadBtn = document.getElementById(`${type}UploadBtn`);
+            const fileInput = document.getElementById(`${type}FileInput`);
+            const convertBtn = document.getElementById(`${type}ConvertBtn`);
+            const resetBtn = document.getElementById(`${type}ResetBtn`);
+            const progressBar = document.getElementById(`${type}ProgressBar`);
+            const progress = document.getElementById(`${type}Progress`);
+            const fileInfo = document.getElementById(`${type}FileInfo`);
+            const fileName = document.getElementById(`${type}FileName`);
+            const fileSize = document.getElementById(`${type}FileSize`);
+            const conversionResult = document.getElementById(`${type}ConversionResult`);
+            const downloadBtn = document.getElementById(`${type}DownloadBtn`);
+            
+            // Additional elements for specific converters
+            let inputFormat, dimensions, pages, duration, format;
+            if (type === 'image') {
+                inputFormat = document.getElementById(`${type}InputFormat`);
+                dimensions = document.getElementById(`${type}Dimensions`);
+            } else if (type === 'pdf') {
+                pages = document.getElementById(`${type}Pages`);
+            } else if (type === 'video' || type === 'audio') {
+                duration = document.getElementById(`${type}Duration`);
+            } else if (type === 'document' || type === 'ebook') {
+                format = document.getElementById(`${type}Format`);
+                inputFormat = document.getElementById(`${type}InputFormat`);
+            }
+
+            // Event listeners
+            uploadBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', () => handleFileSelect(type));
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect(type);
+                }
+            });
+
+            convertBtn.addEventListener('click', () => convertFile(type));
+            resetBtn.addEventListener('click', () => resetConverter(type));
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => downloadResult(type));
+            }
+
+            // File selection handler
+            function handleFileSelect() {
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    
+                    // Set file-specific information
+                    if (type === 'image') {
+                        const fileExt = file.name.split('.').pop().toLowerCase();
+                        inputFormat.textContent = fileExt.toUpperCase();
+                        const width = Math.floor(Math.random() * 2000) + 800;
+                        const height = Math.floor(Math.random() * 2000) + 600;
+                        dimensions.textContent = `${width} × ${height} px`;
+                    } else if (type === 'pdf') {
+                        pages.textContent = Math.floor(Math.random() * 50) + 1;
+                    } else if (type === 'video' || type === 'audio') {
+                        const mins = Math.floor(Math.random() * 10) + 1;
+                        const secs = Math.floor(Math.random() * 60);
+                        duration.textContent = `${mins}:${secs < 10 ? '0' + secs : secs}`;
+                    } else if (type === 'document' || type === 'ebook') {
+                        const fileExt = file.name.split('.').pop().toLowerCase();
+                        format.textContent = fileExt.toUpperCase();
+                        if (inputFormat) {
+                            inputFormat.textContent = fileExt.toUpperCase();
+                        }
+                    }
+                    
+                    fileInfo.style.display = 'block';
+                    convertBtn.disabled = false;
+                }
+            }
+
+            // Conversion simulation
+            function convertFile() {
+                if (!fileInput.files.length) {
+                    alert(`Please select a ${type} file first.`);
+                    return;
+                }
+
+                progressBar.style.display = 'block';
+                progress.style.width = '0%';
+                convertBtn.disabled = true;
+
+                // Simulate conversion process
+                let progressValue = 0;
+                const interval = setInterval(() => {
+                    progressValue += Math.random() * 15;
+                    if (progressValue >= 100) {
+                        progressValue = 100;
+                        clearInterval(interval);
+                        
+                        // Show conversion result
+                        setTimeout(() => {
+                            conversionResult.style.display = 'block';
+                            convertBtn.disabled = false;
+                        }, 500);
+                    }
+                    progress.style.width = `${progressValue}%`;
+                }, 150);
+            }
+
+            // Reset converter
+            function resetConverter() {
+                fileInput.value = '';
+                fileInfo.style.display = 'none';
+                progressBar.style.display = 'none';
+                conversionResult.style.display = 'none';
+                convertBtn.disabled = true;
+                
+                // Reset format indicators
+                if (type === 'image' || type === 'document' || type === 'ebook') {
+                    inputFormat.textContent = 'Original';
+                }
+            }
+
+            // Download result
+            function downloadResult() {
+                alert(`In a real application, this would download the converted ${type} file.`);
+            }
+        }
+
+        // Utility Functions
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

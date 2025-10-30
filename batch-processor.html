@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Batch Processor - Process multiple images at once with AI-powered tools.">
+    <meta name="keywords" content="Photo Flare, Batch Processor, AI tools, image processing, bulk editing">
+    <title>Batch Processor - Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-success: linear-gradient(135deg, var(--success), #3a86ff);
+            --gradient-warning: linear-gradient(135deg, var(--warning), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .profile-header .user-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .profile-plan {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .profile-menu {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .profile-menu a:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .profile-menu i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .profile-action-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-switch.active::after {
+            left: 29px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .page-hero {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .batch-processor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0 4rem;
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .upload-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .upload-area {
+            border: 3px dashed var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .upload-hint {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .file-list {
+            margin-top: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem;
+            border-radius: 8px;
+            background: var(--light);
+            margin-bottom: 0.8rem;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .file-name {
+            font-weight: 500;
+        }
+
+        .file-size {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .file-remove {
+            color: var(--danger);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .file-remove:hover {
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        .options-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .options-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .option-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            background: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .option-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .checkbox-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-weight: 500;
+        }
+
+        .slider-container {
+            padding: 0.5rem 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .preview-section {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preview-title i {
+            color: var(--primary);
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .preview-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .preview-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .preview-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.8rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-item:hover .preview-overlay {
+            transform: translateY(0);
+        }
+
+        .preview-name {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .preview-action {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .preview-action:hover {
+            background: var(--primary);
+        }
+
+        .process-section {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .process-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .process-stat {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .process-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .process-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .batch-processor-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-hero p {
+                font-size: 1rem;
+            }
+            
+            .preview-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .process-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-stat {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .profile-dropdown {
+                width: 100%;
+                right: 0;
+                left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .upload-icon {
+                font-size: 3rem;
+            }
+            
+            .preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .preview-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .preview-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .process-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-large {
+                width: 100%;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="ai-tools.html">AI Tools</a></li>
+                        <li><a href="batch-processor.html" class="active">Batch Processor</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">JS</div>
+                        <div class="user-name">John Smith</div>
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown">
+                            <div class="profile-header">
+                                <div class="user-avatar">JS</div>
+                                <div class="profile-info">
+                                    <h3>John Smith</h3>
+                                    <p>john.smith@example.com</p>
+                                    <div class="profile-plan">Pro Yearly Plan</div>
+                                </div>
+                            </div>
+                            <ul class="profile-menu">
+                                <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+                                <li><a href="account-settings.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+                                <li><a href="billing-subscription.html"><i class="fas fa-credit-card"></i> Billing & Subscription</a></li>
+                                <li><a href="usage-history.html"><i class="fas fa-history"></i> Usage History</a></li>
+                                <li><a href="storage-management.html"><i class="fas fa-cloud"></i> Storage Management</a></li>
+                                <li><a href="team-members.html"><i class="fas fa-users"></i> Team Members</a></li>
+                            </ul>
+                            <div class="profile-actions">
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-bell"></i>
+                                        <span>Notifications</span>
+                                    </div>
+                                    <div class="toggle-switch active" id="notification-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-moon"></i>
+                                        <span>Dark Mode</span>
+                                    </div>
+                                    <div class="toggle-switch" id="darkmode-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-language"></i>
+                                        <span>Language: English</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="logout.html" class="btn btn-outline" style="width: 100%; margin-top: 1rem; text-align: center;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                    <a href="settings.html" class="btn btn-outline"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Batch Image Processor</h1>
+            <p>Process multiple images simultaneously with our AI-powered tools. Enhance, resize, convert, and more - all in one go!</p>
+            <div class="process-buttons">
+                <button class="btn btn-primary btn-large" id="start-processing"><i class="fas fa-play-circle"></i> Start Processing</button>
+                <button class="btn btn-outline btn-large" id="save-preset"><i class="fas fa-save"></i> Save Preset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Batch Processor Content -->
+    <div class="container">
+        <div class="batch-processor-container">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Upload Images</h2>
+                <div class="upload-area" id="upload-area">
+                    <i class="fas fa-images upload-icon"></i>
+                    <div class="upload-text">Drag & Drop your images here</div>
+                    <div class="upload-hint">or click to browse files (JPEG, PNG, WEBP supported)</div>
+                    <input type="file" id="file-input" multiple accept=".jpg,.jpeg,.png,.webp" style="display: none;">
+                </div>
+                <div class="file-list" id="file-list">
+                    <!-- Files will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Processing Options -->
+            <div class="options-section">
+                <h2 class="section-title"><i class="fas fa-sliders-h"></i> Processing Options</h2>
+                
+                <div class="option-group">
+                    <label class="option-label">Output Format</label>
+                    <select class="option-select" id="output-format">
+                        <option value="original">Keep Original Format</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="webp">WEBP</option>
+                    </select>
+                </div>
+                
+                <div class="option-group">
+                    <label class="option-label">Image Quality</label>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Quality</span>
+                            <span class="slider-value" id="quality-value">85%</span>
+                        </div>
+                        <input type="range" min="10" max="100" value="85" class="slider" id="quality-slider">
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <label class="option-label">Resize Options</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="resize-enabled">
+                            <span class="checkbox-label">Resize Images</span>
+                        </label>
+                    </div>
+                    <div id="resize-options" style="margin-top: 1rem; display: none;">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="flex: 1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Width (px)</label>
+                                <input type="number" class="option-select" id="resize-width" placeholder="Auto" min="1">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Height (px)</label>
+                                <input type="number" class="option-select" id="resize-height" placeholder="Auto" min="1">
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Maintain Aspect Ratio</label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="maintain-aspect" checked>
+                                <span class="checkbox-label">Keep original proportions</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <label class="option-label">AI Enhancements</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="enhance-colors">
+                            <span class="checkbox-label">Enhance Colors</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="remove-noise">
+                            <span class="checkbox-label">Reduce Noise</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="sharpen">
+                            <span class="checkbox-label">Sharpen Details</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="auto-crop">
+                            <span class="checkbox-label">Auto Crop & Straighten</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <label class="option-label">Watermark</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="watermark-enabled">
+                            <span class="checkbox-label">Add Watermark</span>
+                        </label>
+                    </div>
+                    <div id="watermark-options" style="margin-top: 1rem; display: none;">
+                        <input type="text" class="option-select" id="watermark-text" placeholder="Watermark text" style="margin-bottom: 1rem;">
+                        <div class="slider-container">
+                            <div class="slider-label">
+                                <span>Opacity</span>
+                                <span class="slider-value" id="opacity-value">50%</span>
+                            </div>
+                            <input type="range" min="10" max="100" value="50" class="slider" id="opacity-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 class="preview-title"><i class="fas fa-eye"></i> Preview</h2>
+                    <div class="preview-controls">
+                        <button class="btn btn-outline" id="clear-all"><i class="fas fa-trash"></i> Clear All</button>
+                        <button class="btn btn-primary" id="add-more"><i class="fas fa-plus"></i> Add More Images</button>
+                    </div>
+                </div>
+                <div class="preview-grid" id="preview-grid">
+                    <!-- Preview items will be added here dynamically -->
+                    <div class="preview-item empty-state">
+                        <div style="height: 180px; display: flex; align-items: center; justify-content: center; background: var(--light-gray); border-radius: var(--border-radius);">
+                            <div style="text-align: center; color: var(--gray);">
+                                <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <div>No images uploaded yet</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Section -->
+            <div class="process-section">
+                <div class="process-info">
+                    <div class="process-stat">
+                        <div class="process-value" id="total-files">0</div>
+                        <div class="process-label">Total Files</div>
+                    </div>
+                    <div class="process-stat">
+                        <div class="process-value" id="total-size">0 MB</div>
+                        <div class="process-label">Total Size</div>
+                    </div>
+                    <div class="process-stat">
+                        <div class="process-value" id="estimated-time">0s</div>
+                        <div class="process-label">Estimated Time</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Processing</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                </div>
+                
+                <div class="process-buttons">
+                    <button class="btn btn-primary btn-large" id="process-btn" disabled><i class="fas fa-cogs"></i> Process Images</button>
+                    <button class="btn btn-success btn-large" id="download-btn" disabled><i class="fas fa-download"></i> Download All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            const fileList = document.getElementById('file-list');
+            const previewGrid = document.getElementById('preview-grid');
+            const processBtn = document.getElementById('process-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const clearAllBtn = document.getElementById('clear-all');
+            const addMoreBtn = document.getElementById('add-more');
+            const startProcessingBtn = document.getElementById('start-processing');
+            const savePresetBtn = document.getElementById('save-preset');
+            const totalFilesEl = document.getElementById('total-files');
+            const totalSizeEl = document.getElementById('total-size');
+            const estimatedTimeEl = document.getElementById('estimated-time');
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercent = document.getElementById('progress-percent');
+            
+            // Options elements
+            const qualitySlider = document.getElementById('quality-slider');
+            const qualityValue = document.getElementById('quality-value');
+            const opacitySlider = document.getElementById('opacity-slider');
+            const opacityValue = document.getElementById('opacity-value');
+            const resizeEnabled = document.getElementById('resize-enabled');
+            const resizeOptions = document.getElementById('resize-options');
+            const watermarkEnabled = document.getElementById('watermark-enabled');
+            const watermarkOptions = document.getElementById('watermark-options');
+            
+            // Profile dropdown functionality
+            const userProfile = document.querySelector('.user-profile');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+            
+            // State
+            let uploadedFiles = [];
+            let isProcessing = false;
+            let processedFiles = [];
+            
+            // Event Listeners
+            userProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                profileDropdown.classList.remove('active');
+            });
+            
+            // Toggle switches functionality
+            const notificationToggle = document.getElementById('notification-toggle');
+            const darkmodeToggle = document.getElementById('darkmode-toggle');
+            
+            notificationToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                alert('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            });
+            
+            darkmodeToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            });
+            
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary)';
+                uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = 'var(--primary-light)';
+                uploadArea.style.background = 'transparent';
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary-light)';
+                uploadArea.style.background = 'transparent';
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+                fileInput.value = '';
+            });
+            
+            clearAllBtn.addEventListener('click', clearAllFiles);
+            addMoreBtn.addEventListener('click', () => fileInput.click());
+            processBtn.addEventListener('click', startProcessing);
+            downloadBtn.addEventListener('click', downloadAll);
+            startProcessingBtn.addEventListener('click', startProcessing);
+            savePresetBtn.addEventListener('click', savePreset);
+            
+            // Options event listeners
+            qualitySlider.addEventListener('input', () => {
+                qualityValue.textContent = `${qualitySlider.value}%`;
+            });
+            
+            opacitySlider.addEventListener('input', () => {
+                opacityValue.textContent = `${opacitySlider.value}%`;
+            });
+            
+            resizeEnabled.addEventListener('change', () => {
+                resizeOptions.style.display = resizeEnabled.checked ? 'block' : 'none';
+            });
+            
+            watermarkEnabled.addEventListener('change', () => {
+                watermarkOptions.style.display = watermarkEnabled.checked ? 'block' : 'none';
+            });
+            
+            // Functions
+            function handleFiles(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    if (file.type.startsWith('image/')) {
+                        uploadedFiles.push(file);
+                        addFileToList(file);
+                        addFileToPreview(file);
+                    }
+                }
+                updateStats();
+                updateProcessButton();
+            }
+            
+            function addFileToList(file) {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <i class="fas fa-file-image file-icon"></i>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-times file-remove" data-name="${file.name}"></i>
+                `;
+                fileList.appendChild(fileItem);
+                
+                // Add event listener to remove button
+                fileItem.querySelector('.file-remove').addEventListener('click', function() {
+                    const fileName = this.getAttribute('data-name');
+                    removeFile(fileName);
+                });
+            }
+            
+            function addFileToPreview(file) {
+                // Remove empty state if present
+                const emptyState = previewGrid.querySelector('.empty-state');
+                if (emptyState) {
+                    previewGrid.removeChild(emptyState);
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${e.target.result}" alt="${file.name}" class="preview-image">
+                        <div class="preview-overlay">
+                            <div class="preview-name">${file.name}</div>
+                            <div class="preview-actions">
+                                <i class="fas fa-eye preview-action"></i>
+                                <i class="fas fa-trash preview-action" data-name="${file.name}"></i>
+                            </div>
+                        </div>
+                    `;
+                    previewGrid.appendChild(previewItem);
+                    
+                    // Add event listener to remove button
+                    previewItem.querySelector('.fa-trash').addEventListener('click', function() {
+                        const fileName = this.getAttribute('data-name');
+                        removeFile(fileName);
+                    });
+                    
+                    // Add event listener to view button
+                    previewItem.querySelector('.fa-eye').addEventListener('click', function() {
+                        const imgSrc = this.closest('.preview-item').querySelector('img').src;
+                        viewImage(imgSrc, file.name);
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            function removeFile(fileName) {
+                // Remove from uploadedFiles array
+                uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+                
+                // Remove from file list
+                const fileItems = fileList.querySelectorAll('.file-item');
+                fileItems.forEach(item => {
+                    if (item.querySelector('.file-name').textContent === fileName) {
+                        fileList.removeChild(item);
+                    }
+                });
+                
+                // Remove from preview
+                const previewItems = previewGrid.querySelectorAll('.preview-item');
+                previewItems.forEach(item => {
+                    const nameEl = item.querySelector('.preview-name');
+                    if (nameEl && nameEl.textContent === fileName) {
+                        previewGrid.removeChild(item);
+                    }
+                });
+                
+                // If no files left, show empty state
+                if (uploadedFiles.length === 0) {
+                    const emptyState = document.createElement('div');
+                    emptyState.className = 'preview-item empty-state';
+                    emptyState.innerHTML = `
+                        <div style="height: 180px; display: flex; align-items: center; justify-content: center; background: var(--light-gray); border-radius: var(--border-radius);">
+                            <div style="text-align: center; color: var(--gray);">
+                                <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <div>No images uploaded yet</div>
+                            </div>
+                        </div>
+                    `;
+                    previewGrid.appendChild(emptyState);
+                }
+                
+                updateStats();
+                updateProcessButton();
+            }
+            
+            function clearAllFiles() {
+                uploadedFiles = [];
+                fileList.innerHTML = '';
+                previewGrid.innerHTML = '';
+                
+                // Add empty state
+                const emptyState = document.createElement('div');
+                emptyState.className = 'preview-item empty-state';
+                emptyState.innerHTML = `
+                    <div style="height: 180px; display: flex; align-items: center; justify-content: center; background: var(--light-gray); border-radius: var(--border-radius);">
+                        <div style="text-align: center; color: var(--gray);">
+                            <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <div>No images uploaded yet</div>
+                        </div>
+                    </div>
+                `;
+                previewGrid.appendChild(emptyState);
+                
+                updateStats();
+                updateProcessButton();
+            }
+            
+            function updateStats() {
+                totalFilesEl.textContent = uploadedFiles.length;
+                
+                const totalSize = uploadedFiles.reduce((sum, file) => sum + file.size, 0);
+                totalSizeEl.textContent = formatFileSize(totalSize);
+                
+                // Simple estimation: 1 second per MB
+                const estimatedSeconds = Math.ceil(totalSize / (1024 * 1024));
+                estimatedTimeEl.textContent = estimatedSeconds > 60 
+                    ? `${Math.ceil(estimatedSeconds / 60)} min` 
+                    : `${estimatedSeconds} s`;
+            }
+            
+            function updateProcessButton() {
+                if (uploadedFiles.length > 0 && !isProcessing) {
+                    processBtn.disabled = false;
+                    processBtn.classList.remove('btn-disabled');
+                } else {
+                    processBtn.disabled = true;
+                    processBtn.classList.add('btn-disabled');
+                }
+            }
+            
+            function startProcessing() {
+                if (uploadedFiles.length === 0 || isProcessing) return;
+                
+                isProcessing = true;
+                processBtn.disabled = true;
+                processBtn.classList.add('btn-disabled');
+                processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                
+                processedFiles = [];
+                let processedCount = 0;
+                
+                // Simulate processing with progress
+                const interval = setInterval(() => {
+                    processedCount++;
+                    const progress = (processedCount / uploadedFiles.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    progressPercent.textContent = `${Math.round(progress)}%`;
+                    
+                    if (processedCount >= uploadedFiles.length) {
+                        clearInterval(interval);
+                        isProcessing = false;
+                        processBtn.innerHTML = '<i class="fas fa-cogs"></i> Process Images';
+                        downloadBtn.disabled = false;
+                        downloadBtn.classList.remove('btn-disabled');
+                        
+                        // Show success message
+                        alert('Processing completed successfully! You can now download your processed images.');
+                    }
+                }, 500);
+            }
+            
+            function downloadAll() {
+                if (processedFiles.length === 0) {
+                    alert('No processed files available for download. Please process your images first.');
+                    return;
+                }
+                
+                // In a real implementation, this would download the actual processed files
+                alert('Downloading processed files... In a real implementation, this would download the actual processed images.');
+            }
+            
+            function savePreset() {
+                const presetName = prompt('Enter a name for this preset:');
+                if (presetName) {
+                    alert(`Preset "${presetName}" saved successfully!`);
+                }
+            }
+            
+            function viewImage(src, name) {
+                // In a real implementation, this would open a modal with the image
+                alert(`Viewing image: ${name}`);
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+                else return (bytes / 1048576).toFixed(1) + ' MB';
+            }
+            
+            // Initialize
+            updateStats();
+            updateProcessButton();
+        });
+    </script>
+</body>
+</html>

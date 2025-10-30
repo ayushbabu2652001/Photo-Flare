@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Business Plan - Advanced features for teams including 5TB storage, team management, and dedicated support">
+    <title>Business Plan | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e44);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .plan-header {
+            padding: 3rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .plan-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .plan-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .plan-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        .enterprise-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-name {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-period {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--dark);
+        }
+
+        .plan-features li i {
+            width: 24px;
+            text-align: center;
+            color: var(--success);
+        }
+
+        .plan-details {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            background: var(--light);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text h3 {
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .feature-text p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+
+        .benefits-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1.2rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .comparison-table th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .feature-check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .feature-missing {
+            color: var(--danger);
+            font-weight: bold;
+        }
+
+        .team-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .team-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-feature {
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            transition: var(--transition);
+        }
+
+        .team-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .team-feature h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .team-feature p {
+            color: var(--gray);
+        }
+
+        .upgrade-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .upgrade-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            color: var(--dark);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--warning);
+            position: relative;
+        }
+
+        .pricing-card.enterprise {
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warning);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .enterprise-badge-small {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-period {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+            color: var(--dark);
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--dark);
+        }
+
+        .pricing-features li i {
+            color: var(--success);
+        }
+
+        .pricing-features li .fa-times {
+            color: var(--danger);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .plan-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .benefits-grid, .pricing-cards, .team-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .plan-header {
+                padding: 2rem 0;
+            }
+            
+            .plan-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .plan-card, .plan-details, .benefits-section, .comparison-section, .team-section, .upgrade-section, .contact-form {
+                padding: 2rem 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html" class="active">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Plan Header -->
+    <section class="plan-header">
+        <div class="container">
+            <h1>Business Plan</h1>
+            <p>Enterprise-grade features for teams including 5TB storage, team management, and dedicated support</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Plan Content -->
+        <section class="plan-content">
+            <div class="plan-card">
+                <div class="enterprise-badge">ENTERPRISE GRADE</div>
+                <div>
+                    <div class="plan-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h2 class="plan-name">Business Plan</h2>
+                    <div class="price">$24.99<span class="price-period">/month</span></div>
+                    
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Advanced Encryption</li>
+                        <li><i class="fas fa-check"></i> All Premium Features</li>
+                        <li><i class="fas fa-check"></i> 5TB Storage</li>
+                        <li><i class="fas fa-check"></i> Team Management</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support</li>
+                        <li><i class="fas fa-check"></i> Custom Branding</li>
+                        <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                        <li><i class="fas fa-check"></i> API Access</li>
+                        <li><i class="fas fa-check"></i> SSO Integration</li>
+                    </ul>
+                </div>
+                
+                <a href="#contact" class="btn btn-primary">Choose Business</a>
+            </div>
+            
+            <div class="plan-details">
+                <h2 class="section-title">Business Features</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Advanced Encryption</h3>
+                            <p>Military-grade encryption with custom security policies and compliance features for your organization.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Team Management</h3>
+                            <p>Manage user permissions, roles, and access controls for your entire team with ease.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>5TB Storage</h3>
+                            <p>Ample storage for your entire organization with advanced backup and recovery options.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Dedicated Support</h3>
+                            <p>Priority support with a dedicated account manager and 24/7 emergency assistance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Why Choose Business Plan?</h2>
+                <p>The Business Plan is designed for organizations that need advanced security, team management, and enterprise-grade features:</p>
+                <ul class="plan-features" style="margin-top: 1rem;">
+                    <li><i class="fas fa-check"></i> Secure collaboration for teams of any size</li>
+                    <li><i class="fas fa-check"></i> Advanced administrative controls and reporting</li>
+                    <li><i class="fas fa-check"></i> Custom security policies and compliance features</li>
+                    <li><i class="fas fa-check"></i> Priority access to new enterprise features</li>
+                    <li><i class="fas fa-check"></i> Custom onboarding and training for your team</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Team Section -->
+        <section class="team-section">
+            <h2 class="section-title">Team Management Features</h2>
+            <p>Manage your team efficiently with our advanced collaboration tools</p>
+            
+            <div class="team-features">
+                <div class="team-feature">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Role-Based Access</h3>
+                    <p>Assign different permission levels to team members based on their roles and responsibilities.</p>
+                </div>
+                
+                <div class="team-feature">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Team Workspaces</h3>
+                    <p>Create shared workspaces for different projects or departments with controlled access.</p>
+                </div>
+                
+                <div class="team-feature">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Usage Analytics</h3>
+                    <p>Monitor team activity, storage usage, and productivity with detailed analytics and reports.</p>
+                </div>
+                
+                <div class="team-feature">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Workflow Automation</h3>
+                    <p>Automate repetitive tasks and create custom workflows to streamline team operations.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <h2 class="section-title">Business Benefits</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Enhanced Security</h3>
+                    <p>Advanced encryption, compliance features, and custom security policies to protect your business data.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Efficiently manage team members, permissions, and shared resources with advanced controls.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Productivity Analytics</h3>
+                    <p>Gain insights into team performance and storage usage with detailed analytics and reporting.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-life-ring"></i>
+                    </div>
+                    <h3>Dedicated Support</h3>
+                    <p>Get personalized assistance with a dedicated account manager and priority support channels.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <h2 class="section-title">Premium vs. Business Comparison</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Premium Plan</th>
+                        <th>Business Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Storage Space</td>
+                        <td class="feature-check">1TB</td>
+                        <td class="feature-check">5TB</td>
+                    </tr>
+                    <tr>
+                        <td>Team Members</td>
+                        <td class="feature-missing">1 User</td>
+                        <td class="feature-check">Up to 10 Users</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Support</td>
+                        <td class="feature-check">Priority</td>
+                        <td class="feature-check">Dedicated Manager</td>
+                    </tr>
+                    <tr>
+                        <td>Security Features</td>
+                        <td class="feature-check">Standard Encryption</td>
+                        <td class="feature-check">Advanced Encryption</td>
+                    </tr>
+                    <tr>
+                        <td>Team Management</td>
+                        <td class="feature-missing">No</td>
+                        <td class="feature-check">Advanced Controls</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Branding</td>
+                        <td class="feature-missing">No</td>
+                        <td class="feature-check">Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Analytics & Reporting</td>
+                        <td class="feature-missing">Basic</td>
+                        <td class="feature-check">Advanced</td>
+                    </tr>
+                    <tr>
+                        <td>API Access</td>
+                        <td class="feature-missing">No</td>
+                        <td class="feature-check">Full Access</td>
+                    </tr>
+                    <tr>
+                        <td>SSO Integration</td>
+                        <td class="feature-missing">No</td>
+                        <td class="feature-check">Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Contact Form -->
+        <section class="contact-form" id="contact">
+            <h2 class="section-title">Get Started with Business Plan</h2>
+            <p>Contact our sales team to discuss your business needs and get a customized quote.</p>
+            
+            <form id="business-contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Business Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="team-size">Team Size</label>
+                        <select id="team-size" name="team-size" required>
+                            <option value="">Select team size</option>
+                            <option value="1-10">1-10 people</option>
+                            <option value="11-50">11-50 people</option>
+                            <option value="51-200">51-200 people</option>
+                            <option value="201-500">201-500 people</option>
+                            <option value="500+">500+ people</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Additional Requirements</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your specific business needs..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Contact Sales Team</button>
+            </form>
+        </section>
+        
+        <!-- Upgrade Section -->
+        <section class="upgrade-section">
+            <h2>Compare All Plans</h2>
+            <p>Find the perfect plan for your needs with our transparent pricing</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Free Plan</h3>
+                    <div class="pricing-price">$0<span class="pricing-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-times"></i> No Transfer Encryption</li>
+                        <li><i class="fas fa-check"></i> Basic Cloud Transfers</li>
+                        <li><i class="fas fa-check"></i> 5GB Storage</li>
+                        <li><i class="fas fa-check"></i> Standard Support</li>
+                    </ul>
+                    <a href="free-plan.html" class="btn btn-outline">Choose Free</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <h3>Premium Plan</h3>
+                    <div class="pricing-price">$9.99<span class="pricing-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Transfer Encryption</li>
+                        <li><i class="fas fa-check"></i> All Cloud Providers</li>
+                        <li><i class="fas fa-check"></i> 1TB Storage</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Advanced Sync Options</li>
+                    </ul>
+                    <a href="premium-plan.html" class="btn btn-warning">Choose Premium</a>
+                </div>
+                
+                <div class="pricing-card enterprise">
+                    <div class="enterprise-badge-small">ENTERPRISE</div>
+                    <h3>Business Plan</h3>
+                    <div class="pricing-price">$24.99<span class="pricing-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Advanced Encryption</li>
+                        <li><i class="fas fa-check"></i> All Premium Features</li>
+                        <li><i class="fas fa-check"></i> 5TB Storage</li>
+                        <li><i class="fas fa-check"></i> Team Management</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Choose Business</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('business-contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real application, you would send the form data to a server
+                    // For this demo, we'll just show an alert
+                    alert('Thank you for your interest in our Business Plan! Our sales team will contact you shortly.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

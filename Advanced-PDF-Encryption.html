@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced PDF encryption with AES-256 security, permission controls, and digital signatures. Protect your PDF files with enterprise-grade security features.">
+    <meta name="keywords" content="PDF encryption, PDF security, protect PDF, password protect PDF, AES encryption, PDF permissions">
+    <title>Advanced PDF Encryption - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e00);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #d00000);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-right: 1px solid var(--light-gray);
+        }
+
+        .options-section {
+            flex: 2;
+            min-width: 300px;
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-info.active {
+            display: block;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-size {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .option-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary);
+        }
+
+        .option-group h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-group h3 i {
+            color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .permission-badge {
+            background: var(--warning);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .password-strength {
+            height: 4px;
+            background: var(--light-gray);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+        }
+
+        .strength-weak { background: var(--danger); width: 25%; }
+        .strength-fair { background: var(--warning); width: 50%; }
+        .strength-good { background: #ffc107; width: 75%; }
+        .strength-strong { background: var(--success); width: 100%; }
+
+        .password-feedback {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            color: var(--gray);
+        }
+
+        .encryption-levels {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .encryption-level {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .encryption-level.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .encryption-level i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .level-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .preview-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        .preview-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .preview-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .preview-content {
+            min-height: 300px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            background: var(--light);
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .security-summary {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .security-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .security-item:last-child {
+            border-bottom: none;
+        }
+
+        .security-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: var(--success);
+            color: white;
+        }
+
+        .status-inactive {
+            background: var(--light-gray);
+            color: var(--gray);
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .download-section.active {
+            display: block;
+        }
+
+        .download-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .file-details {
+            text-align: left;
+        }
+
+        .file-details h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .file-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .features-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .premium-upsell h2 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .premium-upsell p {
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .encryption-levels {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .download-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .file-details {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem;
+            }
+            
+            .tool-content {
+                padding: 1rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .preview-tabs {
+                flex-direction: column;
+            }
+            
+            .preview-tab {
+                text-align: center;
+            }
+            
+            .option-group {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>Advanced PDF Encryption <span class="premium-badge">PRO</span></h1>
+                <p>Protect your PDF files with military-grade AES-256 encryption, granular permissions, and digital signatures. Enterprise-level security for sensitive documents.</p>
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Military-Grade AES-256 Encryption</span>
+                </div>
+            </div>
+            
+            <div class="tool-content">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3>Upload PDF File</h3>
+                        <p>Drag & drop your PDF file here or click to browse</p>
+                        <p class="file-types">Supports: PDF (Max: 100MB)</p>
+                        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <div class="file-name">
+                            <span id="fileName">document.pdf</span>
+                            <i class="fas fa-times" id="removeFile" style="cursor: pointer;"></i>
+                        </div>
+                        <div class="file-size" id="fileSize">0 KB</div>
+                        <div class="progress-bar">
+                            <div class="progress" id="uploadProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-upsell">
+                        <h2>Unlock Advanced Security Features</h2>
+                        <p>Upgrade to Photo Flare Pro to access AES-256 encryption, granular permission controls, digital signatures, and advanced security settings.</p>
+                        <a href="pricing.html" class="btn btn-warning">Upgrade Now</a>
+                    </div>
+                </div>
+                
+                <div class="options-section">
+                    <div class="option-group">
+                        <h3><i class="fas fa-key"></i> Encryption Settings</h3>
+                        
+                        <div class="input-group">
+                            <label for="ownerPassword">Owner Password (Required)</label>
+                            <input type="password" id="ownerPassword" placeholder="Set owner/master password">
+                            <div class="password-strength">
+                                <div class="strength-meter" id="ownerStrength"></div>
+                            </div>
+                            <div class="password-feedback" id="ownerFeedback">Password strength: None</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="userPassword">User Password (Optional)</label>
+                            <input type="password" id="userPassword" placeholder="Set user password for opening">
+                            <div class="password-strength">
+                                <div class="strength-meter" id="userStrength"></div>
+                            </div>
+                            <div class="password-feedback" id="userFeedback">Password strength: None</div>
+                        </div>
+                        
+                        <div class="encryption-levels">
+                            <div class="encryption-level selected" data-level="aes256">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>AES-256</h4>
+                                <p>Military Grade</p>
+                                <div class="level-badge">Recommended</div>
+                            </div>
+                            <div class="encryption-level" data-level="aes128">
+                                <i class="fas fa-lock"></i>
+                                <h4>AES-128</h4>
+                                <p>Strong Security</p>
+                            </div>
+                            <div class="encryption-level" data-level="rc4">
+                                <i class="fas fa-unlock"></i>
+                                <h4>RC4-128</h4>
+                                <p>Basic Security</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3><i class="fas fa-user-lock"></i> Permission Controls</h3>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowPrinting" checked>
+                                <label for="allowPrinting">
+                                    <span>Allow Printing</span>
+                                    <span class="permission-badge">Low Resolution</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowCopying">
+                                <label for="allowCopying">Allow Content Copying</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowModifications">
+                                <label for="allowModifications">Allow Document Modifications</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowAnnotations">
+                                <label for="allowAnnotations">Allow Annotations and Forms</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowAccessibility">
+                                <label for="allowAccessibility">Enable Accessibility</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="allowAssembly">
+                                <label for="allowAssembly">Allow Document Assembly</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3><i class="fas fa-certificate"></i> Advanced Security</h3>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="enableWatermark">
+                                <label for="enableWatermark">Add Security Watermark</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="enableExpiration">
+                                <label for="enableExpiration">Set Document Expiration</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="enableDigitalSignature">
+                                <label for="enableDigitalSignature">Add Digital Signature</label>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group" id="expirationDateGroup" style="display: none;">
+                            <label for="expirationDate">Expiration Date</label>
+                            <input type="date" id="expirationDate">
+                        </div>
+                        
+                        <div class="input-group" id="watermarkTextGroup" style="display: none;">
+                            <label for="watermarkText">Watermark Text</label>
+                            <input type="text" id="watermarkText" placeholder="Enter watermark text (e.g., CONFIDENTIAL)">
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="encryptBtn" disabled>
+                            <i class="fas fa-lock"></i> Encrypt PDF
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview-section" id="previewSection">
+                <div class="preview-tabs">
+                    <div class="preview-tab active" data-tab="security">Security Summary</div>
+                    <div class="preview-tab" data-tab="preview">PDF Preview</div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-tab-content active" id="securityTab">
+                        <div class="security-summary">
+                            <h3 style="margin-bottom: 1.5rem; text-align: center;">Security Configuration Summary</h3>
+                            <div class="security-item">
+                                <span>Encryption Level</span>
+                                <div class="security-status">
+                                    <span id="summaryEncryption">AES-256</span>
+                                    <span class="status-badge status-active">Active</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Owner Password</span>
+                                <div class="security-status">
+                                    <span>••••••••</span>
+                                    <span class="status-badge status-active">Set</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>User Password</span>
+                                <div class="security-status">
+                                    <span id="summaryUserPass">Not Set</span>
+                                    <span class="status-badge status-inactive">Inactive</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Printing</span>
+                                <div class="security-status">
+                                    <span id="summaryPrinting">Allowed (Low Res)</span>
+                                    <span class="status-badge status-active">Enabled</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Content Copying</span>
+                                <div class="security-status">
+                                    <span id="summaryCopying">Not Allowed</span>
+                                    <span class="status-badge status-inactive">Disabled</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Document Modifications</span>
+                                <div class="security-status">
+                                    <span id="summaryModifications">Not Allowed</span>
+                                    <span class="status-badge status-inactive">Disabled</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Security Watermark</span>
+                                <div class="security-status">
+                                    <span id="summaryWatermark">Not Set</span>
+                                    <span class="status-badge status-inactive">Disabled</span>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <span>Digital Signature</span>
+                                <div class="security-status">
+                                    <span id="summarySignature">Not Set</span>
+                                    <span class="status-badge status-inactive">Disabled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-tab-content" id="previewTab">
+                        <i class="fas fa-file-pdf" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Encrypted PDF Preview</h3>
+                        <p>Your PDF file is now protected with advanced encryption.</p>
+                        <p style="color: var(--gray); margin-top: 1rem;">Open the file with a PDF viewer to see the security in action.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-section" id="downloadSection">
+                <div class="download-info">
+                    <div class="file-details">
+                        <h3>Encryption Complete!</h3>
+                        <p>Your PDF file has been successfully encrypted with advanced security settings.</p>
+                    </div>
+                    <button class="btn btn-success" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Encrypted PDF
+                    </button>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <button class="btn btn-outline" id="saveTemplateBtn">
+                        <i class="fas fa-save"></i> Save Security Template
+                    </button>
+                </div>
+                <p style="margin-top: 1rem;">Need to encrypt another file? <a href="#" id="encryptAnother">Encrypt another PDF</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Advanced PDF Security Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Military-Grade Encryption</h3>
+                    <p>AES-256 encryption ensures your documents are protected with the same security standards used by governments and financial institutions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-lock feature-icon"></i>
+                    <h3 class="feature-title">Granular Permissions</h3>
+                    <p>Control exactly what users can do with your PDF - printing, copying, modifying, and more with detailed permission settings.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-certificate feature-icon"></i>
+                    <h3 class="feature-title">Digital Signatures</h3>
+                    <p>Add verifiable digital signatures to ensure document authenticity and integrity with timestamping capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hourglass-end feature-icon"></i>
+                    <h3 class="feature-title">Expiration Controls</h3>
+                    <p>Set automatic expiration dates for sensitive documents to ensure they become inaccessible after a specified time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const removeFile = document.getElementById('removeFile');
+        const encryptBtn = document.getElementById('encryptBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const previewSection = document.getElementById('previewSection');
+        const downloadSection = document.getElementById('downloadSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const encryptAnother = document.getElementById('encryptAnother');
+        const saveTemplateBtn = document.getElementById('saveTemplateBtn');
+        const previewTabs = document.querySelectorAll('.preview-tab');
+        const previewTabContents = document.querySelectorAll('.preview-tab-content');
+        const encryptionLevels = document.querySelectorAll('.encryption-level');
+        const ownerPassword = document.getElementById('ownerPassword');
+        const userPassword = document.getElementById('userPassword');
+        const ownerStrength = document.getElementById('ownerStrength');
+        const userStrength = document.getElementById('userStrength');
+        const ownerFeedback = document.getElementById('ownerFeedback');
+        const userFeedback = document.getElementById('userFeedback');
+        const enableWatermark = document.getElementById('enableWatermark');
+        const enableExpiration = document.getElementById('enableExpiration');
+        const enableDigitalSignature = document.getElementById('enableDigitalSignature');
+        const expirationDateGroup = document.getElementById('expirationDateGroup');
+        const watermarkTextGroup = document.getElementById('watermarkTextGroup');
+
+        // Security summary elements
+        const summaryEncryption = document.getElementById('summaryEncryption');
+        const summaryUserPass = document.getElementById('summaryUserPass');
+        const summaryPrinting = document.getElementById('summaryPrinting');
+        const summaryCopying = document.getElementById('summaryCopying');
+        const summaryModifications = document.getElementById('summaryModifications');
+        const summaryWatermark = document.getElementById('summaryWatermark');
+        const summarySignature = document.getElementById('summarySignature');
+
+        // Event Listeners
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.1)';
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.background = '';
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            if (e.dataTransfer.files.length) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        removeFile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetFile();
+        });
+
+        encryptBtn.addEventListener('click', encryptPdf);
+        resetBtn.addEventListener('click', resetAll);
+        downloadBtn.addEventListener('click', downloadPdf);
+        encryptAnother.addEventListener('click', resetAll);
+        saveTemplateBtn.addEventListener('click', saveTemplate);
+
+        // Encryption level selection
+        encryptionLevels.forEach(level => {
+            level.addEventListener('click', () => {
+                encryptionLevels.forEach(l => l.classList.remove('selected'));
+                level.classList.add('selected');
+                updateSecuritySummary();
+            });
+        });
+
+        // Password strength calculation
+        ownerPassword.addEventListener('input', () => {
+            calculatePasswordStrength(ownerPassword.value, ownerStrength, ownerFeedback);
+            updateSecuritySummary();
+        });
+
+        userPassword.addEventListener('input', () => {
+            calculatePasswordStrength(userPassword.value, userStrength, userFeedback);
+            updateSecuritySummary();
+        });
+
+        // Advanced security options
+        enableWatermark.addEventListener('change', () => {
+            watermarkTextGroup.style.display = enableWatermark.checked ? 'block' : 'none';
+            updateSecuritySummary();
+        });
+
+        enableExpiration.addEventListener('change', () => {
+            expirationDateGroup.style.display = enableExpiration.checked ? 'block' : 'none';
+            updateSecuritySummary();
+        });
+
+        enableDigitalSignature.addEventListener('change', updateSecuritySummary);
+
+        // Permission checkboxes
+        document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', updateSecuritySummary);
+        });
+
+        // Tab switching
+        previewTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                previewTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active content
+                previewTabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabName}Tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Functions
+        function handleFileSelect(file) {
+            if (file.type !== 'application/pdf') {
+                alert('Please select a PDF file.');
+                return;
+            }
+
+            if (file.size > 100 * 1024 * 1024) {
+                alert('File size exceeds 100MB limit. Please choose a smaller file.');
+                return;
+            }
+
+            // Show file info
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.add('active');
+            encryptBtn.disabled = false;
+
+            // Simulate upload progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    // Show preview section after upload
+                    previewSection.classList.add('active');
+                    updateSecuritySummary();
+                }
+                uploadProgress.style.width = `${progress}%`;
+            }, 200);
+        }
+
+        function resetFile() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            encryptBtn.disabled = true;
+            previewSection.classList.remove('active');
+            uploadProgress.style.width = '0%';
+        }
+
+        function resetAll() {
+            resetFile();
+            downloadSection.classList.remove('active');
+            
+            // Reset form options
+            ownerPassword.value = '';
+            userPassword.value = '';
+            ownerStrength.className = 'strength-meter';
+            userStrength.className = 'strength-meter';
+            ownerFeedback.textContent = 'Password strength: None';
+            userFeedback.textContent = 'Password strength: None';
+            
+            // Reset encryption level
+            encryptionLevels.forEach(l => l.classList.remove('selected'));
+            document.querySelector('[data-level="aes256"]').classList.add('selected');
+            
+            // Reset permissions
+            document.getElementById('allowPrinting').checked = true;
+            document.getElementById('allowCopying').checked = false;
+            document.getElementById('allowModifications').checked = false;
+            document.getElementById('allowAnnotations').checked = false;
+            document.getElementById('allowAccessibility').checked = false;
+            document.getElementById('allowAssembly').checked = false;
+            
+            // Reset advanced options
+            document.getElementById('enableWatermark').checked = false;
+            document.getElementById('enableExpiration').checked = false;
+            document.getElementById('enableDigitalSignature').checked = false;
+            document.getElementById('expirationDate').value = '';
+            document.getElementById('watermarkText').value = '';
+            expirationDateGroup.style.display = 'none';
+            watermarkTextGroup.style.display = 'none';
+        }
+
+        function calculatePasswordStrength(password, strengthElement, feedbackElement) {
+            let strength = 0;
+            let feedback = '';
+            
+            if (password.length === 0) {
+                strengthElement.className = 'strength-meter';
+                feedbackElement.textContent = 'Password strength: None';
+                return;
+            }
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            if (password.length >= 12) strength += 1;
+            
+            // Character variety checks
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^a-zA-Z0-9]/.test(password)) strength += 1;
+            
+            // Set strength class and feedback
+            if (strength <= 2) {
+                strengthElement.className = 'strength-meter strength-weak';
+                feedback = 'Weak';
+            } else if (strength <= 4) {
+                strengthElement.className = 'strength-meter strength-fair';
+                feedback = 'Fair';
+            } else if (strength <= 5) {
+                strengthElement.className = 'strength-meter strength-good';
+                feedback = 'Good';
+            } else {
+                strengthElement.className = 'strength-meter strength-strong';
+                feedback = 'Strong';
+            }
+            
+            feedbackElement.textContent = `Password strength: ${feedback}`;
+        }
+
+        function updateSecuritySummary() {
+            // Update encryption level
+            const selectedLevel = document.querySelector('.encryption-level.selected');
+            summaryEncryption.textContent = selectedLevel.querySelector('h4').textContent;
+            
+            // Update user password status
+            summaryUserPass.textContent = userPassword.value ? '••••••••' : 'Not Set';
+            
+            // Update permissions
+            summaryPrinting.textContent = document.getElementById('allowPrinting').checked ? 'Allowed (Low Res)' : 'Not Allowed';
+            summaryCopying.textContent = document.getElementById('allowCopying').checked ? 'Allowed' : 'Not Allowed';
+            summaryModifications.textContent = document.getElementById('allowModifications').checked ? 'Allowed' : 'Not Allowed';
+            
+            // Update advanced features
+            summaryWatermark.textContent = enableWatermark.checked ? 
+                (document.getElementById('watermarkText').value || 'CONFIDENTIAL') : 'Not Set';
+            summarySignature.textContent = enableDigitalSignature.checked ? 'Applied' : 'Not Set';
+        }
+
+        function encryptPdf() {
+            if (!ownerPassword.value) {
+                alert('Please set an owner password to encrypt the PDF.');
+                ownerPassword.focus();
+                return;
+            }
+
+            // Show loading state
+            encryptBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Encrypting...';
+            encryptBtn.disabled = true;
+
+            // Simulate encryption process
+            setTimeout(() => {
+                // Show download section
+                downloadSection.classList.add('active');
+                encryptBtn.innerHTML = '<i class="fas fa-lock"></i> Encrypt PDF';
+                encryptBtn.disabled = false;
+                
+                // Scroll to download section
+                downloadSection.scrollIntoView({ behavior: 'smooth' });
+            }, 3000);
+        }
+
+        function downloadPdf() {
+            // In a real implementation, this would download the actual encrypted file
+            alert('In a real implementation, this would download your encrypted PDF file. Since this is a demo, no actual file is downloaded.');
+            
+            // Simulate download success
+            downloadBtn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+            setTimeout(() => {
+                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Encrypted PDF';
+            }, 2000);
+        }
+
+        function saveTemplate() {
+            // In a real implementation, this would save the security settings as a template
+            alert('Security template saved! You can reuse these settings for future PDF encryptions.');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Check if user has premium access
+        function checkPremiumAccess() {
+            // In a real implementation, this would check user's subscription status
+            return false; // Default to false for demo
+        }
+
+        // Initialize tool
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user has premium access
+            const hasPremium = checkPremiumAccess();
+            
+            if (!hasPremium) {
+                // Show premium features as disabled
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'inline-block';
+                });
+                
+                // Show upsell message
+                document.querySelector('.premium-upsell').style.display = 'block';
+                
+                // Disable some advanced options for free users
+                document.getElementById('enableDigitalSignature').disabled = true;
+                document.querySelector('[data-level="aes256"]').style.opacity = '0.6';
+                document.querySelector('[data-level="aes256"]').style.cursor = 'not-allowed';
+            } else {
+                // Hide premium badges and upsell for premium users
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'none';
+                });
+                document.querySelector('.premium-upsell').style.display = 'none';
+            }
+            
+            // Set minimum date for expiration to today
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('expirationDate').min = tomorrow.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>

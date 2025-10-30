@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert PDF to editable text online with advanced OCR, text extraction, and formatting preservation. Free PDF to TXT converter with high accuracy.">
+    <meta name="keywords" content="PDF to Text, PDF to TXT, convert PDF to text, PDF converter, OCR PDF, extract text from PDF, online PDF tool, text converter">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="PDF to Text Converter - Advanced Online Tool | Photo Flare">
+    <meta property="og:description" content="Convert PDF to editable text with advanced OCR technology. Extract, edit, and preserve text formatting from any PDF document.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://photoflare.com/pdf-to-text.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDF to Text Converter - Advanced Online Tool | Photo Flare">
+    <meta name="twitter:description" content="Convert PDF to editable text with advanced OCR technology. Extract, edit, and preserve text formatting from any PDF document.">
+    <title>PDF to Text Converter - Advanced Online Tool | Photo Flare</title>
+    <link rel="canonical" href="https://photoflare.com/pdf-to-text.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--dark);
+            border: 1px solid var(--light-gray);
+        }
+
+        .btn-light:hover {
+            background: var(--light-gray);
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .conversion-interface {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .conversion-interface {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 300px;
+            border: 2px dashed var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .upload-section.drag-over {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-text h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-text p {
+            color: var(--gray);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .preview-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-info {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .preview-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 400px;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .preview-placeholder {
+            color: var(--gray);
+        }
+
+        .preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .file-list {
+            width: 100%;
+            list-style: none;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-size {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.3rem;
+            border-radius: 4px;
+        }
+
+        .file-action:hover {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .controls-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .controls-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .controls-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-info {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-item label {
+            color: var(--dark);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+        }
+
+        .select-input {
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            background: white;
+            font-size: 0.95rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .select-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .action-section {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .file-info-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .file-info-section.active {
+            display: block;
+        }
+
+        .file-details-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .file-name-display {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-size-display {
+            color: var(--gray);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .status-message {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .conversion-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .option-card {
+            flex: 1;
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option-card.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .option-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .text-preview {
+            display: none;
+            margin-top: 1.5rem;
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .text-preview.active {
+            display: block;
+        }
+
+        .text-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .text-preview-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .text-container {
+            background: white;
+            border-radius: 6px;
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            border: 1px solid var(--light-gray);
+        }
+
+        .text-content {
+            white-space: pre-wrap;
+            color: var(--dark);
+        }
+
+        .text-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 6px;
+            min-width: 100px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-dark);
+        }
+
+        .breadcrumb span {
+            color: var(--gray);
+        }
+
+        .tool-features {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-top: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-text p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .seo-content h2 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .seo-content p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .faq-section {
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: var(--light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            color: var(--gray);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .results-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--success);
+        }
+
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .result-desc {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-section {
+                flex-direction: column;
+            }
+            
+            .action-section .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .conversion-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-container {
+                padding: 0 10px;
+            }
+            
+            .upload-section, .preview-section, .controls-section {
+                padding: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Text Specific Features */
+        .text-options {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .text-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .text-option:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .text-option.active {
+            border: 2px solid var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .text-option input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .text-option-label {
+            flex: 1;
+        }
+
+        .text-option-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .text-option-desc {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .formatting-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .formatting-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .formatting-option input {
+            width: 16px;
+            height: 16px;
+        }
+
+        .text-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .text-action {
+            background: none;
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .text-action:hover {
+            background: var(--light-gray);
+        }
+
+        .text-action.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .text-action.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .accuracy-meter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+        }
+
+        .accuracy-label {
+            font-weight: 600;
+            color: var(--dark);
+            min-width: 100px;
+        }
+
+        .accuracy-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--success), var(--primary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .accuracy-value {
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .text-highlight {
+            background-color: rgba(76, 201, 240, 0.3);
+            padding: 0.1rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .confidence-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .confidence-high {
+            background-color: var(--success);
+        }
+
+        .confidence-medium {
+            background-color: var(--warning);
+        }
+
+        .confidence-low {
+            background-color: var(--danger);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>></span>
+            <a href="pdf-tools.html">PDF Tools</a>
+            <span>></span>
+            <a href="conversion.html">Conversion</a>
+            <span>></span>
+            <span>PDF to Text</span>
+        </div>
+    </div>
+
+    <!-- Tool Container -->
+    <div class="tool-container">
+        <div class="tool-header">
+            <h1>PDF to Text Converter</h1>
+            <p>Convert PDF to editable text with advanced OCR technology. Extract, edit, and preserve text formatting from any PDF document with high accuracy.</p>
+        </div>
+
+        <!-- File Info Section -->
+        <div class="file-info-section" id="fileInfo">
+            <div class="file-details-row">
+                <span class="file-name-display" id="fileName">document.pdf</span>
+                <span class="file-size-display" id="fileSize">0 KB</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="uploadProgress"></div>
+            </div>
+            <div class="status-message" id="statusMessage">Processing your file...</div>
+        </div>
+
+        <!-- Conversion Interface -->
+        <div class="conversion-interface">
+            <!-- Upload Section -->
+            <div class="upload-section" id="uploadSection">
+                <i class="fas fa-file-upload upload-icon"></i>
+                <div class="upload-text">
+                    <h3>Upload Your PDF</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" class="file-input" accept=".pdf" multiple>
+                <button class="btn btn-primary" id="uploadButton">
+                    <i class="fas fa-folder-open"></i> Choose PDF Files
+                </button>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                    Maximum file size: 10MB (Free) | 100MB (Pro) | Batch processing available for Pro users
+                </p>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h3 class="preview-title">Selected Files</h3>
+                    <span class="file-info" id="fileCount">0 files</span>
+                </div>
+                <div class="preview-container">
+                    <div class="preview-placeholder" id="previewPlaceholder">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Your text preview will appear here</p>
+                    </div>
+                    <ul class="file-list" id="fileList">
+                        <!-- Files will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Preview Section -->
+        <div class="text-preview" id="textPreview">
+            <div class="text-preview-header">
+                <h3 class="text-preview-title">Text Extraction Preview</h3>
+                <span class="file-info" id="textStats">0 words, 0 characters</span>
+            </div>
+            <div class="text-container">
+                <div class="text-content" id="textContent">
+                    <!-- Extracted text will be dynamically added here -->
+                </div>
+            </div>
+            <div class="text-actions">
+                <button class="text-action" id="copyTextBtn">
+                    <i class="fas fa-copy"></i> Copy Text
+                </button>
+                <button class="text-action" id="clearTextBtn">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+                <button class="text-action primary" id="editTextBtn">
+                    <i class="fas fa-edit"></i> Edit Text
+                </button>
+            </div>
+            <div class="text-stats" id="textStatsContainer">
+                <!-- Text statistics will be dynamically added here -->
+            </div>
+            <div class="accuracy-meter" id="accuracyMeter">
+                <div class="accuracy-label">OCR Accuracy:</div>
+                <div class="accuracy-bar">
+                    <div class="accuracy-fill" id="accuracyFill"></div>
+                </div>
+                <div class="accuracy-value" id="accuracyValue">0%</div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <div class="controls-header">
+                <h3 class="controls-title">Text Extraction Options</h3>
+            </div>
+            
+            <div class="conversion-options">
+                <div class="option-card active" data-option="standard">
+                    <div class="option-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="option-title">Standard Extraction</div>
+                    <div class="option-desc">Fast text extraction for digital PDFs</div>
+                </div>
+                <div class="option-card" data-option="ocr">
+                    <div class="option-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="option-title">OCR Extraction</div>
+                    <div class="option-desc">Extract text from scanned PDFs <span class="premium-badge">PRO</span></div>
+                </div>
+                <div class="option-card" data-option="advanced">
+                    <div class="option-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="option-title">Advanced AI</div>
+                    <div class="option-desc">AI-powered text recognition <span class="premium-badge">PRO</span></div>
+                </div>
+            </div>
+
+            <div class="controls-grid" style="margin-top: 2rem;">
+                <div class="control-group">
+                    <label class="control-label">Output Format</label>
+                    <select class="select-input" id="outputFormat">
+                        <option value="plain">Plain Text (.txt)</option>
+                        <option value="formatted">Formatted Text</option>
+                        <option value="html">HTML Format</option>
+                        <option value="markdown">Markdown</option>
+                        <option value="word">Word Document</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Page Range</label>
+                    <select class="select-input" id="pageRange">
+                        <option value="all">All Pages</option>
+                        <option value="current">Current Page Only</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Language Recognition</label>
+                    <select class="select-input" id="language">
+                        <option value="auto">Auto-detect</option>
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ru">Russian</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ja">Japanese</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Text Encoding</label>
+                    <select class="select-input" id="textEncoding">
+                        <option value="utf8">UTF-8 (Recommended)</option>
+                        <option value="ascii">ASCII</option>
+                        <option value="latin1">Latin-1</option>
+                        <option value="unicode">Unicode</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text Extraction Options -->
+            <div class="text-options">
+                <h4 style="margin-bottom: 1rem;">Text Extraction Method</h4>
+                <div class="text-option active">
+                    <input type="radio" id="extractAll" name="extractionMethod" checked>
+                    <div class="text-option-label">
+                        <div class="text-option-title">Extract All Text</div>
+                        <div class="text-option-desc">Extract all readable text from the PDF document</div>
+                    </div>
+                </div>
+                <div class="text-option">
+                    <input type="radio" id="extractStructured" name="extractionMethod">
+                    <div class="text-option-label">
+                        <div class="text-option-title">Structured Extraction</div>
+                        <div class="text-option-desc">Preserve document structure and formatting <span class="premium-badge">PRO</span></div>
+                    </div>
+                </div>
+                <div class="text-option">
+                    <input type="radio" id="extractSelective" name="extractionMethod">
+                    <div class="text-option-label">
+                        <div class="text-option-title">Selective Extraction</div>
+                        <div class="text-option-desc">Extract specific text elements only <span class="premium-badge">PRO</span></div>
+                    </div>
+                </div>
+
+                <!-- Formatting Options -->
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="margin-bottom: 1rem;">Text Formatting Options</h4>
+                    <div class="formatting-options">
+                        <div class="formatting-option">
+                            <input type="checkbox" id="preserveLayout" checked>
+                            <label for="preserveLayout">Preserve text layout</label>
+                        </div>
+                        <div class="formatting-option">
+                            <input type="checkbox" id="detectLists" checked>
+                            <label for="detectLists">Detect lists and bullets</label>
+                        </div>
+                        <div class="formatting-option">
+                            <input type="checkbox" id="preserveHeaders">
+                            <label for="preserveHeaders">Preserve headers and footers</label>
+                        </div>
+                        <div class="formatting-option">
+                            <input type="checkbox" id="removeHyphens" checked>
+                            <label for="removeHyphens">Remove line breaks and hyphens</label>
+                        </div>
+                        <div class="formatting-option">
+                            <input type="checkbox" id="extractTables">
+                            <label for="extractTables">Extract table data <span class="premium-badge">PRO</span></label>
+                        </div>
+                        <div class="formatting-option">
+                            <input type="checkbox" id="confidenceHighlight">
+                            <label for="confidenceHighlight">Highlight low-confidence text</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Options -->
+            <div style="margin-top: 1.5rem;">
+                <h4 style="margin-bottom: 1rem;">Additional Options</h4>
+                <div class="formatting-options">
+                    <div class="formatting-option">
+                        <input type="checkbox" id="batchProcess">
+                        <label for="batchProcess">Process multiple files as batch <span class="premium-badge">PRO</span></label>
+                    </div>
+                    <div class="formatting-option">
+                        <input type="checkbox" id="extractMetadata">
+                        <label for="extractMetadata">Extract document metadata</label>
+                    </div>
+                    <div class="formatting-option">
+                        <input type="checkbox" id="languageCorrection">
+                        <label for="languageCorrection">Automatic language correction</label>
+                    </div>
+                    <div class="formatting-option">
+                        <input type="checkbox" id="spellCheck">
+                        <label for="spellCheck">Spell checking <span class="premium-badge">PRO</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <button class="btn btn-outline" id="resetBtn">
+                <i class="fas fa-undo"></i> Reset
+            </button>
+            <button class="btn btn-primary" id="analyzeBtn" disabled>
+                <i class="fas fa-search"></i> Analyze PDF
+            </button>
+            <button class="btn btn-success" id="convertBtn" disabled>
+                <i class="fas fa-sync-alt"></i> Extract Text
+            </button>
+            <button class="btn btn-success" id="downloadBtn" disabled>
+                <i class="fas fa-download"></i> Download Text
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h3 class="results-title">Text Extraction Results</h3>
+                <span class="file-info" id="resultsCount">0 files processed</span>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Results will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Tool Features -->
+        <div class="tool-features">
+            <h2>Advanced PDF to Text Conversion</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>AI-Powered OCR</h4>
+                        <p>Advanced Optical Character Recognition accurately converts scanned PDFs to editable text with high precision.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>Multi-Language Support</h4>
+                        <p>Extract text from PDFs in over 50 languages with automatic language detection and correction.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>Table Recognition</h4>
+                        <p>Intelligently detect and extract table data while preserving the structure and relationships.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-spell-check"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>Smart Text Processing</h4>
+                        <p>Automatic spell checking, hyphen removal, and text normalization for clean, readable output.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <div class="seo-content">
+            <h2>Convert PDF to Editable Text Online</h2>
+            <p>Our advanced PDF to Text converter transforms your PDF documents into fully editable text files with exceptional accuracy. Whether you need to extract content from reports, convert scanned documents, or migrate text data, our tool delivers professional results.</p>
+            
+            <p>Unlike basic converters, our tool intelligently analyzes document structure to preserve formatting, detect tables, and maintain text relationships. The AI-powered OCR engine can extract text from even the most challenging scanned documents, with accuracy rates exceeding 95% for most document types.</p>
+            
+            <p>All file processing happens securely in your browser, ensuring your confidential documents never leave your computer. We support batch conversion for multiple files and offer flexible output options including plain text, formatted text, HTML, Markdown, and Word documents.</p>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How accurate is the PDF to Text conversion?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our converter achieves over 99% accuracy for digital PDFs and approximately 95-98% for scanned documents using advanced OCR technology. The accuracy varies based on document quality, font clarity, and language complexity, but generally remains very high thanks to our sophisticated text recognition algorithms.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I extract text from scanned PDF documents?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our premium OCR feature can extract text from scanned PDF documents and images. This requires a Pro subscription as it uses advanced AI technology to recognize text in images and convert it to editable content while maintaining formatting and structure.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What text formats are supported for output?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We support multiple output formats: Plain Text (.txt) for simple extraction, Formatted Text with layout preservation, HTML for web use, Markdown for documentation, and Word Document (.docx) for Microsoft Word compatibility. Each format maintains different levels of formatting and structure.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does the converter preserve tables and formatting?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our advanced extraction options can preserve table structures, lists, headings, and basic formatting. For complex layouts, we offer structured extraction that maintains document hierarchy and relationships between text elements.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I convert password-protected PDFs?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our tool can extract text from password-protected PDFs if you provide the correct password. We do not support breaking or removing passwords from secured documents, as that would violate copyright and security protections.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#affiliate">Affiliate Program</a>
+                    <a href="#press">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadSection = document.getElementById('uploadSection');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const statusMessage = document.getElementById('statusMessage');
+        const fileList = document.getElementById('fileList');
+        const fileCount = document.getElementById('fileCount');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const convertBtn = document.getElementById('convertBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const textPreview = document.getElementById('textPreview');
+        const textContent = document.getElementById('textContent');
+        const textStats = document.getElementById('textStats');
+        const textStatsContainer = document.getElementById('textStatsContainer');
+        const accuracyMeter = document.getElementById('accuracyMeter');
+        const accuracyFill = document.getElementById('accuracyFill');
+        const accuracyValue = document.getElementById('accuracyValue');
+        const copyTextBtn = document.getElementById('copyTextBtn');
+        const clearTextBtn = document.getElementById('clearTextBtn');
+        const editTextBtn = document.getElementById('editTextBtn');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsCount = document.getElementById('resultsCount');
+        const resultsGrid = document.getElementById('resultsGrid');
+        const optionCards = document.querySelectorAll('.option-card');
+        const textOptions = document.querySelectorAll('.text-option');
+
+        // State variables
+        let files = [];
+        let conversionOption = 'standard';
+        let extractionMethod = 'extractAll';
+        let conversionResults = [];
+        let extractedText = '';
+
+        // Sample text for demonstration
+        const sampleText = `PDF to Text Conversion Results
+
+Document: sample-document.pdf
+Pages: 12
+Extraction Date: ${new Date().toLocaleDateString()}
+
+CHAPTER 1: INTRODUCTION
+
+This is a sample of extracted text from a PDF document. The conversion process has successfully identified and preserved the document structure, including headings, paragraphs, and formatting.
+
+Key Features of Our PDF to Text Converter:
+
+• High accuracy text extraction from digital PDFs
+• Advanced OCR for scanned documents
+• Multi-language support
+• Formatting preservation
+• Table and list recognition
+
+STATISTICS:
+- Words extracted: 1,247
+- Characters: 7,892
+- Pages processed: 12
+- Confidence level: 98.2%
+
+The text extraction maintains the original document structure while providing clean, editable text output. You can now copy, edit, or download this text for your specific needs.
+
+Note: Some formatting elements like complex tables or images with text may require manual verification for optimal accuracy.`;
+
+        // Event Listeners
+        uploadButton.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // Drag and drop functionality
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('drag-over');
+        });
+        
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('drag-over');
+        });
+        
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('drag-over');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        });
+
+        // Conversion option selection
+        optionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                optionCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                conversionOption = card.getAttribute('data-option');
+                
+                // Show premium feature alerts
+                if (conversionOption === 'ocr' || conversionOption === 'advanced') {
+                    if (!confirm('This is a premium feature. Would you like to learn more about our Pro plan?')) {
+                        // Reset to standard if user cancels
+                        optionCards[0].click();
+                    }
+                }
+            });
+        });
+
+        // Text option selection
+        textOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                textOptions.forEach(o => o.classList.remove('active'));
+                option.classList.add('active');
+                extractionMethod = option.querySelector('input').id;
+                
+                // Show premium feature alerts
+                if (extractionMethod === 'extractStructured' || extractionMethod === 'extractSelective') {
+                    if (!confirm('This is a premium feature. Would you like to learn more about our Pro plan?')) {
+                        // Reset to extractAll if user cancels
+                        textOptions[0].click();
+                    }
+                }
+            });
+        });
+
+        // Text action buttons
+        copyTextBtn.addEventListener('click', copyTextToClipboard);
+        clearTextBtn.addEventListener('click', clearText);
+        editTextBtn.addEventListener('click', editText);
+
+        // Control buttons
+        analyzeBtn.addEventListener('click', analyzePDF);
+        convertBtn.addEventListener('click', extractText);
+        downloadBtn.addEventListener('click', downloadText);
+        resetBtn.addEventListener('click', resetTool);
+
+        // Functions
+        function handleFileSelect() {
+            const newFiles = Array.from(fileInput.files);
+            
+            // Filter for PDF files only
+            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf');
+            
+            if (pdfFiles.length === 0) {
+                alert('Please select PDF files only.');
+                return;
+            }
+            
+            // Add to files array
+            files = [...files, ...pdfFiles];
+            
+            // Update UI
+            updateFileList();
+            updateFileInfo();
+            analyzeBtn.disabled = files.length === 0;
+            
+            // Show file info section
+            fileInfo.classList.add('active');
+        }
+        
+        function updateFileList() {
+            fileList.innerHTML = '';
+            previewPlaceholder.style.display = files.length === 0 ? 'flex' : 'none';
+            
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('li');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-details">
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="file-action preview-btn" title="Preview" data-index="${index}">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="file-action remove-btn" title="Remove" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                fileList.appendChild(fileItem);
+            });
+            
+            // Add event listeners for file actions
+            document.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.currentTarget.getAttribute('data-index');
+                    previewFile(files[index]);
+                });
+            });
+            
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.currentTarget.getAttribute('data-index');
+                    removeFile(index);
+                });
+            });
+            
+            fileCount.textContent = `${files.length} file${files.length !== 1 ? 's' : ''}`;
+        }
+        
+        function updateFileInfo() {
+            if (files.length === 0) {
+                fileInfo.classList.remove('active');
+                return;
+            }
+            
+            const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+            fileName.textContent = files.length === 1 ? files[0].name : `${files.length} files`;
+            fileSize.textContent = formatFileSize(totalSize);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function previewFile(file) {
+            // In a real implementation, this would show a PDF preview
+            // For this demo, we'll just show an alert
+            alert(`Previewing: ${file.name}\n\nIn a real implementation, this would display a PDF preview.`);
+        }
+        
+        function removeFile(index) {
+            files.splice(index, 1);
+            updateFileList();
+            updateFileInfo();
+            analyzeBtn.disabled = files.length === 0;
+            convertBtn.disabled = true;
+            textPreview.classList.remove('active');
+        }
+        
+        function analyzePDF() {
+            if (files.length === 0) return;
+            
+            // Show processing state
+            statusMessage.textContent = 'Analyzing PDF structure and text content...';
+            uploadProgress.style.width = '0%';
+            fileInfo.classList.add('active');
+            
+            // Simulate analysis process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    uploadProgress.style.width = '100%';
+                    statusMessage.textContent = 'Analysis completed!';
+                    
+                    // Enable conversion button
+                    convertBtn.disabled = false;
+                } else {
+                    uploadProgress.style.width = `${progress}%`;
+                }
+            }, 200);
+        }
+        
+        function extractText() {
+            if (files.length === 0) return;
+            
+            // Show processing state
+            statusMessage.textContent = 'Extracting text from PDF...';
+            uploadProgress.style.width = '0%';
+            fileInfo.classList.add('active');
+            
+            // Simulate extraction process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    uploadProgress.style.width = '100%';
+                    statusMessage.textContent = 'Text extraction completed!';
+                    
+                    // Generate text preview
+                    generateTextPreview();
+                    downloadBtn.disabled = false;
+                } else {
+                    uploadProgress.style.width = `${progress}%`;
+                }
+            }, 300);
+        }
+        
+        function generateTextPreview() {
+            // Use sample text for demonstration
+            extractedText = sampleText;
+            
+            // Update UI with extracted text
+            textContent.textContent = extractedText;
+            
+            // Calculate text statistics
+            const wordCount = extractedText.split(/\s+/).filter(word => word.length > 0).length;
+            const charCount = extractedText.length;
+            const charNoSpacesCount = extractedText.replace(/\s/g, '').length;
+            const lineCount = extractedText.split('\n').length;
+            const pageCount = Math.ceil(wordCount / 250); // Estimate pages
+            
+            // Update text statistics
+            textStats.textContent = `${wordCount} words, ${charCount} characters`;
+            
+            // Update statistics container
+            textStatsContainer.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${wordCount}</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${charCount}</div>
+                    <div class="stat-label">Characters</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${charNoSpacesCount}</div>
+                    <div class="stat-label">Chars (no spaces)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${lineCount}</div>
+                    <div class="stat-label">Lines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${pageCount}</div>
+                    <div class="stat-label">Pages</div>
+                </div>
+            `;
+            
+            // Update accuracy meter
+            const accuracy = 98.2; // Simulated accuracy
+            accuracyFill.style.width = `${accuracy}%`;
+            accuracyValue.textContent = `${accuracy}%`;
+            
+            textPreview.classList.add('active');
+            
+            // Generate conversion results
+            generateConversionResults();
+        }
+        
+        function copyTextToClipboard() {
+            navigator.clipboard.writeText(extractedText).then(() => {
+                // Show success feedback
+                const originalText = copyTextBtn.innerHTML;
+                copyTextBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyTextBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy text to clipboard. Please try again.');
+            });
+        }
+        
+        function clearText() {
+            if (confirm('Are you sure you want to clear the extracted text?')) {
+                textContent.textContent = '';
+                extractedText = '';
+                textPreview.classList.remove('active');
+            }
+        }
+        
+        function editText() {
+            if (textContent.isContentEditable) {
+                // Switch back to view mode
+                textContent.contentEditable = false;
+                editTextBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Text';
+                textContent.style.border = 'none';
+                textContent.style.padding = '0';
+                textContent.style.background = 'transparent';
+            } else {
+                // Switch to edit mode
+                textContent.contentEditable = true;
+                editTextBtn.innerHTML = '<i class="fas fa-save"></i> Save Text';
+                textContent.style.border = '1px solid var(--primary)';
+                textContent.style.padding = '1rem';
+                textContent.style.background = 'rgba(67, 97, 238, 0.05)';
+                textContent.focus();
+            }
+        }
+        
+        function generateConversionResults() {
+            conversionResults = [];
+            resultsGrid.innerHTML = '';
+            
+            files.forEach((file, index) => {
+                const wordCount = extractedText.split(/\s+/).filter(word => word.length > 0).length;
+                const charCount = extractedText.length;
+                
+                const result = {
+                    originalName: file.name,
+                    convertedName: file.name.replace('.pdf', '.txt'),
+                    wordCount: wordCount,
+                    charCount: charCount,
+                    accuracy: 98.2,
+                    format: document.getElementById('outputFormat').options[document.getElementById('outputFormat').selectedIndex].text,
+                    language: document.getElementById('language').options[document.getElementById('language').selectedIndex].text
+                };
+                
+                conversionResults.push(result);
+                
+                const resultCard = document.createElement('div');
+                resultCard.className = 'result-card';
+                resultCard.innerHTML = `
+                    <div class="result-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="result-title">Text Extraction Complete</div>
+                    <div class="result-desc">
+                        ${result.wordCount} words • ${result.charCount} characters
+                    </div>
+                    <div class="result-desc">
+                        ${result.format} • ${result.language}
+                    </div>
+                    <div class="result-desc">
+                        Accuracy: ${result.accuracy}%
+                    </div>
+                    <button class="btn btn-primary download-single-btn" data-index="${index}">
+                        <i class="fas fa-download"></i> Download Text
+                    </button>
+                `;
+                
+                resultsGrid.appendChild(resultCard);
+            });
+            
+            // Add event listeners for single download buttons
+            document.querySelectorAll('.download-single-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.currentTarget.getAttribute('data-index');
+                    downloadSingleFile(index);
+                });
+            });
+            
+            resultsCount.textContent = `${conversionResults.length} file${conversionResults.length !== 1 ? 's' : ''} processed`;
+            resultsSection.classList.add('active');
+        }
+        
+        function downloadSingleFile(index) {
+            const result = conversionResults[index];
+            statusMessage.textContent = `Preparing ${result.convertedName} for download...`;
+            
+            // Simulate download preparation
+            setTimeout(() => {
+                statusMessage.textContent = 'Downloading text file...';
+                
+                // Create a blob and download link
+                const blob = new Blob([extractedText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = result.convertedName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                // Reset status message after a delay
+                setTimeout(() => {
+                    statusMessage.textContent = 'Text extraction completed!';
+                }, 2000);
+            }, 1000);
+        }
+        
+        function downloadText() {
+            statusMessage.textContent = 'Preparing text files for download...';
+            
+            // Simulate preparing files
+            setTimeout(() => {
+                statusMessage.textContent = 'Downloading text files...';
+                
+                // In a real implementation, this would download all files
+                // For this demo, we'll simulate downloading the first file
+                if (conversionResults.length > 0) {
+                    downloadSingleFile(0);
+                }
+                
+                // Show completion message for multiple files
+                if (conversionResults.length > 1) {
+                    setTimeout(() => {
+                        alert(`All ${conversionResults.length} text files have been downloaded successfully!`);
+                    }, 1500);
+                }
+            }, 1000);
+        }
+        
+        function resetTool() {
+            if (confirm('Are you sure you want to reset? All files and extraction results will be lost.')) {
+                fileInput.value = '';
+                files = [];
+                conversionResults = [];
+                extractedText = '';
+                fileInfo.classList.remove('active');
+                resultsSection.classList.remove('active');
+                textPreview.classList.remove('active');
+                updateFileList();
+                updateFileInfo();
+                analyzeBtn.disabled = true;
+                convertBtn.disabled = true;
+                downloadBtn.disabled = true;
+                uploadProgress.style.width = '0%';
+                statusMessage.textContent = 'Processing your file...';
+                optionCards[0].click(); // Reset to standard conversion
+                textOptions[0].click(); // Reset to extract all text
+                textContent.contentEditable = false;
+                editTextBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Text';
+            }
+        }
+
+        // Initialize the tool
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tool is ready to use
+        });
+    </script>
+</body>
+</html>

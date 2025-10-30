@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Process multiple files at once with Photo Flare's premium Batch File Processor. Convert, resize, compress, and apply effects to multiple files simultaneously.">
+    <meta name="keywords" content="batch file processor, batch processing, multiple file converter, bulk file processing, premium tools, photo flare">
+    <title>Batch File Processor - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e44);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-header {
+            padding: 2rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            background: var(--light);
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 8px;
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 40px;
+            text-align: center;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .file-info {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.3rem;
+            border-radius: 4px;
+        }
+
+        .file-action-btn:hover {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .processing-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .process-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            justify-content: between;
+        }
+
+        .control-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            width: 80px;
+            text-align: center;
+        }
+
+        select {
+            padding: 0.7rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            background: white;
+            font-size: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .progress-section.active {
+            display: block;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-card {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            flex: 1;
+        }
+
+        .progress-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-card .label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .progress-bar-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .file-progress-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .file-progress-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .file-progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-progress-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        .status-pending {
+            background: var(--gray);
+        }
+
+        .status-processing {
+            background: var(--warning);
+        }
+
+        .status-completed {
+            background: var(--success);
+        }
+
+        .status-error {
+            background: var(--danger);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .result-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card .label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .premium-feature {
+            position: relative;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .premium-feature:hover .premium-overlay {
+            opacity: 1;
+        }
+
+        .premium-overlay i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .upgrade-prompt h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+            
+            .download-options .btn {
+                width: 100%;
+            }
+            
+            .progress-info, .results-info {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem 0;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .progress-info, .results-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Header -->
+    <section class="tool-header">
+        <div class="container">
+            <h1>Batch File Processor</h1>
+            <p>Process multiple files at once with advanced batch operations. Convert, resize, compress, and apply effects to hundreds of files simultaneously.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Upgrade Prompt for Free Users -->
+        <div class="upgrade-prompt" id="upgradePrompt">
+            <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+            <p>This is a premium tool. Upgrade to unlock all features and remove limitations.</p>
+            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
+        </div>
+
+        <!-- Main Tool Container -->
+        <div class="tool-container">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h2 class="section-title"><i class="fas fa-upload"></i> Upload Files</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Files</h3>
+                    <p>Supported formats: Images (JPG, PNG, GIF), PDFs, Documents (DOC, DOCX)</p>
+                    <p class="file-size-limit">Max files: 10 (Free) / 100 (Pro) | Max file size: 50MB each</p>
+                    <button class="btn btn-primary">Select Files</button>
+                    <input type="file" id="fileInput" multiple style="display: none;">
+                </div>
+                
+                <div class="file-list" id="fileList">
+                    <div class="file-list-placeholder" id="fileListPlaceholder">
+                        <p style="text-align: center; color: var(--gray); padding: 2rem;">No files selected</p>
+                    </div>
+                    <!-- File items will be added here dynamically -->
+                </div>
+                
+                <div class="file-actions">
+                    <button class="btn btn-outline" id="clearAllBtn">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                    <button class="btn btn-outline" id="selectAllBtn">
+                        <i class="fas fa-check-square"></i> Select All
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Processing Section -->
+            <div class="processing-section">
+                <h2 class="section-title"><i class="fas fa-cog"></i> Processing Options</h2>
+                
+                <div class="process-controls">
+                    <div class="control-group">
+                        <label class="control-label">Operation Type</label>
+                        <select id="operationType">
+                            <option value="convert">Convert Format</option>
+                            <option value="resize">Resize Images</option>
+                            <option value="compress">Compress Files</option>
+                            <option value="watermark">Add Watermark</option>
+                            <option value="rename">Rename Files</option>
+                            <option value="pdf-merge">Merge PDFs</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Convert Options -->
+                    <div class="control-group" id="convertOptions">
+                        <label class="control-label">Convert To</label>
+                        <select id="convertFormat">
+                            <option value="jpg">JPG</option>
+                            <option value="png">PNG</option>
+                            <option value="pdf">PDF</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Resize Options -->
+                    <div class="control-group" id="resizeOptions" style="display: none;">
+                        <label class="control-label">Resize Dimensions</label>
+                        <div class="range-container">
+                            <input type="number" id="resizeWidth" placeholder="Width" min="100" max="4000" value="800">
+                            <span>x</span>
+                            <input type="number" id="resizeHeight" placeholder="Height" min="100" max="4000" value="600">
+                            <select id="resizeUnit">
+                                <option value="px">px</option>
+                                <option value="%">%</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="maintainAspect" checked>
+                            <label for="maintainAspect">Maintain aspect ratio</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Compression Options -->
+                    <div class="control-group" id="compressOptions" style="display: none;">
+                        <label class="control-label">Compression Level <span class="control-value" id="compressionValue">Medium</span></label>
+                        <div class="range-container">
+                            <input type="range" id="compressionRange" min="1" max="3" value="2">
+                            <select id="compressionSelect">
+                                <option value="1">Low (Larger files)</option>
+                                <option value="2" selected>Medium</option>
+                                <option value="3">High (Smaller files)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Watermark Options -->
+                    <div class="premium-feature" id="watermarkOptions" style="display: none;">
+                        <label class="control-label">Watermark Settings</label>
+                        <div class="control-group">
+                            <input type="text" id="watermarkText" placeholder="Watermark text" class="search-input" style="width: 100%; padding: 0.7rem; border-radius: var(--border-radius); border: 1px solid var(--light-gray);">
+                        </div>
+                        <div class="range-container">
+                            <input type="number" id="watermarkSize" min="10" max="100" value="24" style="width: 80px;">
+                            <span>px</span>
+                            <select id="watermarkPosition">
+                                <option value="top-left">Top Left</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="bottom-right" selected>Bottom Right</option>
+                                <option value="center">Center</option>
+                            </select>
+                        </div>
+                        <div class="premium-overlay">
+                            <i class="fas fa-crown"></i>
+                            <p>Watermarking is a premium feature</p>
+                            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Rename Options -->
+                    <div class="control-group" id="renameOptions" style="display: none;">
+                        <label class="control-label">Rename Pattern</label>
+                        <div class="range-container">
+                            <input type="text" id="renamePattern" placeholder="File name pattern" value="file_{number}" style="flex: 1; padding: 0.7rem; border-radius: var(--border-radius); border: 1px solid var(--light-gray);">
+                        </div>
+                        <p class="help-text">Use {number} for sequential numbering, {name} for original name</p>
+                    </div>
+                    
+                    <!-- Output Settings -->
+                    <div class="control-group">
+                        <label class="control-label">Output Settings</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="preserveOriginals" checked>
+                            <label for="preserveOriginals">Keep original files</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="createZip" checked>
+                            <label for="createZip">Download as ZIP archive</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="processBtn"><i class="fas fa-play"></i> Start Processing</button>
+                    <button class="btn btn-outline" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection">
+            <div class="progress-header">
+                <h2 class="section-title"><i class="fas fa-tasks"></i> Processing Files</h2>
+                <button class="btn btn-outline" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+            </div>
+            
+            <div class="progress-info">
+                <div class="progress-card">
+                    <div class="value" id="processedCount">0</div>
+                    <div class="label">Processed</div>
+                </div>
+                <div class="progress-card">
+                    <div class="value" id="remainingCount">0</div>
+                    <div class="label">Remaining</div>
+                </div>
+                <div class="progress-card">
+                    <div class="value" id="successCount">0</div>
+                    <div class="label">Successful</div>
+                </div>
+                <div class="progress-card">
+                    <div class="value" id="errorCount">0</div>
+                    <div class="label">Errors</div>
+                </div>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress" id="overallProgress"></div>
+                </div>
+                <div class="progress-text">
+                    <span>Overall Progress</span>
+                    <span id="overallProgressText">0%</span>
+                </div>
+            </div>
+            
+            <h3 class="section-title">File Progress</h3>
+            <div class="file-progress-list" id="fileProgressList">
+                <!-- File progress items will be added here dynamically -->
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2 class="section-title"><i class="fas fa-check-circle"></i> Processing Complete!</h2>
+                <button class="btn btn-outline" id="newBatchBtn"><i class="fas fa-plus"></i> New Batch</button>
+            </div>
+            
+            <div class="results-info">
+                <div class="result-card">
+                    <div class="value" id="totalProcessed">0</div>
+                    <div class="label">Total Files</div>
+                </div>
+                <div class="result-card">
+                    <div class="value" id="successResults">0</div>
+                    <div class="label">Successful</div>
+                </div>
+                <div class="result-card">
+                    <div class="value" id="errorResults">0</div>
+                    <div class="label">Errors</div>
+                </div>
+                <div class="result-card">
+                    <div class="value" id="timeSaved">0 min</div>
+                    <div class="label">Time Saved</div>
+                </div>
+            </div>
+            
+            <div class="download-options">
+                <button class="btn btn-success" id="downloadBtn"><i class="fas fa-download"></i> Download Results</button>
+                <button class="btn btn-outline" id="viewDetailsBtn"><i class="fas fa-list"></i> View Details</button>
+                <button class="btn btn-outline" id="savePresetBtn"><i class="fas fa-save"></i> Save Preset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const fileListPlaceholder = document.getElementById('fileListPlaceholder');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const selectAllBtn = document.getElementById('selectAllBtn');
+        const processBtn = document.getElementById('processBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const progressSection = document.getElementById('progressSection');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resultsSection = document.getElementById('resultsSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const viewDetailsBtn = document.getElementById('viewDetailsBtn');
+        const savePresetBtn = document.getElementById('savePresetBtn');
+        const newBatchBtn = document.getElementById('newBatchBtn');
+        
+        // Operation type elements
+        const operationType = document.getElementById('operationType');
+        const convertOptions = document.getElementById('convertOptions');
+        const resizeOptions = document.getElementById('resizeOptions');
+        const compressOptions = document.getElementById('compressOptions');
+        const watermarkOptions = document.getElementById('watermarkOptions');
+        const renameOptions = document.getElementById('renameOptions');
+        
+        // Progress elements
+        const processedCount = document.getElementById('processedCount');
+        const remainingCount = document.getElementById('remainingCount');
+        const successCount = document.getElementById('successCount');
+        const errorCount = document.getElementById('errorCount');
+        const overallProgress = document.getElementById('overallProgress');
+        const overallProgressText = document.getElementById('overallProgressText');
+        const fileProgressList = document.getElementById('fileProgressList');
+        
+        // Results elements
+        const totalProcessed = document.getElementById('totalProcessed');
+        const successResults = document.getElementById('successResults');
+        const errorResults = document.getElementById('errorResults');
+        const timeSaved = document.getElementById('timeSaved');
+        
+        // Premium Features
+        const upgradePrompt = document.getElementById('upgradePrompt');
+        
+        // State Variables
+        let files = [];
+        let isPremiumUser = false; // This would be set based on user authentication
+        let isProcessing = false;
+        let processingInterval = null;
+        
+        // Initialize the tool
+        function init() {
+            // Check if user is premium (in a real app, this would come from backend)
+            // For demo purposes, we'll set it to false
+            isPremiumUser = false;
+            
+            if (!isPremiumUser) {
+                upgradePrompt.style.display = 'block';
+            } else {
+                upgradePrompt.style.display = 'none';
+            }
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Initialize operation type
+            updateOperationOptions();
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // Upload area events
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('drop', handleFileDrop);
+            
+            // File input change
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Operation type change
+            operationType.addEventListener('change', updateOperationOptions);
+            
+            // Button events
+            clearAllBtn.addEventListener('click', clearAllFiles);
+            selectAllBtn.addEventListener('click', selectAllFiles);
+            processBtn.addEventListener('click', startProcessing);
+            resetBtn.addEventListener('click', resetTool);
+            pauseBtn.addEventListener('click', togglePauseProcessing);
+            downloadBtn.addEventListener('click', downloadResults);
+            viewDetailsBtn.addEventListener('click', viewDetails);
+            savePresetBtn.addEventListener('click', savePreset);
+            newBatchBtn.addEventListener('click', resetTool);
+        }
+        
+        // Handle drag over event
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.borderColor = 'var(--primary)';
+            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+        }
+        
+        // Handle file drop
+        function handleFileDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.borderColor = 'var(--light-gray)';
+            uploadArea.style.backgroundColor = 'var(--light)';
+            
+            const droppedFiles = e.dataTransfer.files;
+            if (droppedFiles.length > 0) {
+                addFilesToBatch(Array.from(droppedFiles));
+            }
+        }
+        
+        // Handle file selection
+        function handleFileSelect(e) {
+            const selectedFiles = e.target.files;
+            if (selectedFiles.length > 0) {
+                addFilesToBatch(Array.from(selectedFiles));
+            }
+        }
+        
+        // Add files to the batch
+        function addFilesToBatch(newFiles) {
+            // Check file limits
+            const maxFiles = isPremiumUser ? 100 : 10;
+            if (files.length + newFiles.length > maxFiles) {
+                alert(`You can only process up to ${maxFiles} files at once. Please upgrade for more.`);
+                return;
+            }
+            
+            // Check file types and sizes
+            const validFiles = [];
+            for (const file of newFiles) {
+                if (isValidFileType(file) && isValidFileSize(file)) {
+                    validFiles.push(file);
+                }
+            }
+            
+            // Add valid files to the batch
+            files = [...files, ...validFiles];
+            
+            // Update UI
+            updateFileList();
+            
+            // Clear file input to allow selecting the same files again
+            fileInput.value = '';
+        }
+        
+        // Check if file type is valid
+        function isValidFileType(file) {
+            const validTypes = [
+                'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 
+                'application/pdf', 'application/msword', 
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            ];
+            
+            if (!validTypes.includes(file.type)) {
+                alert(`File "${file.name}" has an unsupported type.`);
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Check if file size is valid
+        function isValidFileSize(file) {
+            const maxSize = 50 * 1024 * 1024; // 50MB
+            
+            if (file.size > maxSize) {
+                alert(`File "${file.name}" exceeds the maximum size of 50MB.`);
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Update the file list UI
+        function updateFileList() {
+            // Clear the placeholder if there are files
+            if (files.length > 0) {
+                fileListPlaceholder.style.display = 'none';
+            } else {
+                fileListPlaceholder.style.display = 'block';
+                return;
+            }
+            
+            // Clear existing file items (except placeholder)
+            const existingItems = fileList.querySelectorAll('.file-item');
+            existingItems.forEach(item => item.remove());
+            
+            // Add file items
+            files.forEach((file, index) => {
+                const fileItem = createFileItem(file, index);
+                fileList.appendChild(fileItem);
+            });
+        }
+        
+        // Create a file item element
+        function createFileItem(file, index) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.dataset.index = index;
+            
+            // Determine file icon based on type
+            let fileIcon = 'fa-file';
+            if (file.type.startsWith('image/')) {
+                fileIcon = 'fa-file-image';
+            } else if (file.type === 'application/pdf') {
+                fileIcon = 'fa-file-pdf';
+            } else if (file.type.includes('word')) {
+                fileIcon = 'fa-file-word';
+            }
+            
+            fileItem.innerHTML = `
+                <div class="file-icon">
+                    <i class="fas ${fileIcon}"></i>
+                </div>
+                <div class="file-details">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-info">
+                        <span>${formatFileSize(file.size)}</span>
+                        <span>${file.type}</span>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="file-action-btn preview-btn" title="Preview">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="file-action-btn remove-btn" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Add event listeners to action buttons
+            const removeBtn = fileItem.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', () => removeFile(index));
+            
+            const previewBtn = fileItem.querySelector('.preview-btn');
+            previewBtn.addEventListener('click', () => previewFile(file));
+            
+            return fileItem;
+        }
+        
+        // Remove a file from the batch
+        function removeFile(index) {
+            files.splice(index, 1);
+            updateFileList();
+        }
+        
+        // Clear all files
+        function clearAllFiles() {
+            files = [];
+            updateFileList();
+        }
+        
+        // Select all files
+        function selectAllFiles() {
+            // In a real implementation, this would toggle selection state
+            alert('All files selected. In a real implementation, this would highlight selected files.');
+        }
+        
+        // Preview a file
+        function previewFile(file) {
+            if (file.type.startsWith('image/')) {
+                // For images, create a preview modal
+                const imageUrl = URL.createObjectURL(file);
+                alert(`Previewing: ${file.name}\n\nIn a real implementation, this would open a modal with the image.`);
+                URL.revokeObjectURL(imageUrl);
+            } else {
+                alert(`Preview for ${file.type} files is not available in this demo.`);
+            }
+        }
+        
+        // Update operation options based on selected operation
+        function updateOperationOptions() {
+            // Hide all option groups
+            convertOptions.style.display = 'none';
+            resizeOptions.style.display = 'none';
+            compressOptions.style.display = 'none';
+            watermarkOptions.style.display = 'none';
+            renameOptions.style.display = 'none';
+            
+            // Show the relevant option group
+            const operation = operationType.value;
+            switch(operation) {
+                case 'convert':
+                    convertOptions.style.display = 'block';
+                    break;
+                case 'resize':
+                    resizeOptions.style.display = 'block';
+                    break;
+                case 'compress':
+                    compressOptions.style.display = 'block';
+                    break;
+                case 'watermark':
+                    watermarkOptions.style.display = 'block';
+                    break;
+                case 'rename':
+                    renameOptions.style.display = 'block';
+                    break;
+                case 'pdf-merge':
+                    // No additional options for PDF merge
+                    break;
+            }
+        }
+        
+        // Start processing the batch
+        function startProcessing() {
+            if (files.length === 0) {
+                alert('Please add files to process.');
+                return;
+            }
+            
+            // Check if user has permission for selected operation
+            const operation = operationType.value;
+            if ((operation === 'watermark' || operation === 'pdf-merge') && !isPremiumUser) {
+                alert('This operation is only available to premium users. Please upgrade to use this feature.');
+                return;
+            }
+            
+            // Show progress section
+            progressSection.classList.add('active');
+            
+            // Initialize progress
+            initializeProgress();
+            
+            // Start processing simulation
+            isProcessing = true;
+            simulateProcessing();
+            
+            // Scroll to progress section
+            progressSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Initialize progress tracking
+        function initializeProgress() {
+            // Reset counters
+            processedCount.textContent = '0';
+            remainingCount.textContent = files.length.toString();
+            successCount.textContent = '0';
+            errorCount.textContent = '0';
+            overallProgress.style.width = '0%';
+            overallProgressText.textContent = '0%';
+            
+            // Clear file progress list
+            fileProgressList.innerHTML = '';
+            
+            // Create progress items for each file
+            files.forEach((file, index) => {
+                const progressItem = document.createElement('div');
+                progressItem.className = 'file-progress-item';
+                progressItem.dataset.index = index;
+                
+                progressItem.innerHTML = `
+                    <div class="file-progress-status status-pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="file-details">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-info">
+                            <span>Pending</span>
+                        </div>
+                    </div>
+                `;
+                
+                fileProgressList.appendChild(progressItem);
+            });
+        }
+        
+        // Simulate processing (in a real app, this would be actual processing)
+        function simulateProcessing() {
+            let processed = 0;
+            let success = 0;
+            let errors = 0;
+            
+            processingInterval = setInterval(() => {
+                if (!isProcessing) return;
+                
+                // Process next file
+                if (processed < files.length) {
+                    const fileIndex = processed;
+                    const progressItem = fileProgressList.querySelector(`[data-index="${fileIndex}"]`);
+                    const statusElement = progressItem.querySelector('.file-progress-status');
+                    const infoElement = progressItem.querySelector('.file-info span');
+                    
+                    // Update status to processing
+                    statusElement.className = 'file-progress-status status-processing';
+                    statusElement.innerHTML = '<i class="fas fa-sync fa-spin"></i>';
+                    infoElement.textContent = 'Processing...';
+                    
+                    // Simulate processing time
+                    setTimeout(() => {
+                        // Determine if this file will succeed or fail (10% chance of error)
+                        const isSuccess = Math.random() > 0.1;
+                        
+                        if (isSuccess) {
+                            // Success
+                            statusElement.className = 'file-progress-status status-completed';
+                            statusElement.innerHTML = '<i class="fas fa-check"></i>';
+                            infoElement.textContent = 'Completed';
+                            success++;
+                            successCount.textContent = success.toString();
+                        } else {
+                            // Error
+                            statusElement.className = 'file-progress-status status-error';
+                            statusElement.innerHTML = '<i class="fas fa-exclamation"></i>';
+                            infoElement.textContent = 'Error';
+                            errors++;
+                            errorCount.textContent = errors.toString();
+                        }
+                        
+                        processed++;
+                        processedCount.textContent = processed.toString();
+                        remainingCount.textContent = (files.length - processed).toString();
+                        
+                        // Update overall progress
+                        const progressPercent = Math.round((processed / files.length) * 100);
+                        overallProgress.style.width = `${progressPercent}%`;
+                        overallProgressText.textContent = `${progressPercent}%`;
+                        
+                        // Check if all files are processed
+                        if (processed === files.length) {
+                            finishProcessing(success, errors);
+                        }
+                    }, 1000 + Math.random() * 2000); // Random processing time between 1-3 seconds
+                }
+            }, 500); // Start processing a new file every 500ms
+        }
+        
+        // Finish processing and show results
+        function finishProcessing(success, errors) {
+            clearInterval(processingInterval);
+            isProcessing = false;
+            
+            // Update results
+            totalProcessed.textContent = files.length.toString();
+            successResults.textContent = success.toString();
+            errorResults.textContent = errors.toString();
+            
+            // Calculate time saved (estimate)
+            const estimatedTime = files.length * 15; // 15 seconds per file if done manually
+            const timeSavedMinutes = Math.round(estimatedTime / 60);
+            timeSaved.textContent = `${timeSavedMinutes} min`;
+            
+            // Show results section
+            resultsSection.classList.add('active');
+            
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Toggle pause/resume processing
+        function togglePauseProcessing() {
+            isProcessing = !isProcessing;
+            
+            if (isProcessing) {
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                pauseBtn.classList.remove('btn-success');
+                pauseBtn.classList.add('btn-outline');
+            } else {
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+                pauseBtn.classList.remove('btn-outline');
+                pauseBtn.classList.add('btn-success');
+            }
+        }
+        
+        // Download results
+        function downloadResults() {
+            // In a real implementation, this would download the processed files
+            // For demo purposes, we'll create a dummy download
+            alert('Downloading processed files... In a real implementation, this would download a ZIP file with all processed files.');
+        }
+        
+        // View details
+        function viewDetails() {
+            alert('Showing processing details... In a real implementation, this would show a detailed report of the processing results.');
+        }
+        
+        // Save preset
+        function savePreset() {
+            if (!isPremiumUser) {
+                alert('Saving presets is a premium feature. Please upgrade to use this feature.');
+                return;
+            }
+            
+            const presetName = prompt('Enter a name for this preset:');
+            if (presetName) {
+                alert(`Preset "${presetName}" saved! In a real implementation, this would save your settings for future use.`);
+            }
+        }
+        
+        // Reset the tool to initial state
+        function resetTool() {
+            // Clear files
+            files = [];
+            updateFileList();
+            
+            // Reset processing state
+            isProcessing = false;
+            if (processingInterval) {
+                clearInterval(processingInterval);
+            }
+            
+            // Hide progress and results sections
+            progressSection.classList.remove('active');
+            resultsSection.classList.remove('active');
+            
+            // Reset operation to default
+            operationType.value = 'convert';
+            updateOperationOptions();
+            
+            // Reset pause button
+            pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            pauseBtn.classList.remove('btn-success');
+            pauseBtn.classList.add('btn-outline');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+        
+        // Initialize the tool when the page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

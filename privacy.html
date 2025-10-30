@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Privacy Policy - Learn how we protect your data, what information we collect, and how we use it to improve our services.">
+    <meta name="keywords" content="Photo Flare privacy policy, data protection, GDPR, CCPA, privacy, data security">
+    <title>Privacy Policy - Photo Flare | Data Protection & Privacy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse-hero 15s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            color: var(--gray);
+        }
+
+        .privacy-container {
+            display: flex;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .privacy-nav {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+            animation: float-nav 10s ease-in-out infinite;
+        }
+
+        .privacy-nav h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .privacy-nav h3 i {
+            color: var(--primary);
+        }
+
+        .privacy-nav ul {
+            list-style: none;
+        }
+
+        .privacy-nav li {
+            margin-bottom: 0.8rem;
+        }
+
+        .privacy-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        .privacy-nav a:hover, .privacy-nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .privacy-content {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--box-shadow);
+            animation: float-content 12s ease-in-out infinite;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .privacy-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .privacy-section:last-child {
+            border-bottom: none;
+        }
+
+        .privacy-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+
+        .privacy-section p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .privacy-section ul, .privacy-section ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .privacy-section li {
+            margin-bottom: 0.8rem;
+            color: var(--gray);
+        }
+
+        .highlight-box {
+            background: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            animation: float-highlight 8s ease-in-out infinite;
+        }
+
+        .highlight-box.warning {
+            background: rgba(248, 150, 30, 0.05);
+            border-left-color: var(--warning);
+        }
+
+        .highlight-box.success {
+            background: rgba(76, 201, 240, 0.05);
+            border-left-color: var(--success);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 0 0 1px var(--light-gray);
+            animation: float-table 9s ease-in-out infinite;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: rgba(67, 97, 238, 0.02);
+        }
+
+        .toggle-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-header:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .toggle-header h4 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .toggle-icon {
+            transition: var(--transition);
+        }
+
+        .toggle-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .toggle-section.active .toggle-content {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .toggle-section.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .privacy-badges {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .privacy-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            animation: float-badge 7s ease-in-out infinite;
+        }
+
+        .privacy-badge:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .privacy-badge:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .privacy-badge i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .update-info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            animation: float-update 6s ease-in-out infinite;
+        }
+
+        .update-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #ffffff; /* Changed to white for better contrast */
+        }
+
+        .update-info p {
+            color: #f0f0f0; /* Changed to light gray for better readability */
+        }
+
+        .contact-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            text-align: center;
+            animation: float-contact 8s ease-in-out infinite;
+        }
+
+        .contact-section h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse-hero {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-nav {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes float-content {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-highlight {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes float-table {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-badge {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-update {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-contact {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .privacy-container {
+                gap: 2rem;
+            }
+            
+            .privacy-nav {
+                flex: 0 0 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .privacy-container {
+                flex-direction: column;
+            }
+            
+            .privacy-nav {
+                position: static;
+                width: 100%;
+            }
+            
+            .privacy-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .privacy-content {
+                padding: 1.5rem;
+            }
+            
+            .data-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .privacy-badges {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .privacy-content {
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="privacy-hero">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us. Learn how we protect your data and respect your privacy rights.</p>
+            
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="privacy.html" class="active">Privacy Policy</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Content -->
+    <section class="privacy-main">
+        <div class="container">
+            <div class="privacy-container">
+                <!-- Navigation Sidebar -->
+                <div class="privacy-nav">
+                    <h3><i class="fas fa-file-contract"></i> Policy Sections</h3>
+                    <ul>
+                        <li><a href="#introduction" class="active">Introduction</a></li>
+                        <li><a href="#information-collection">Information We Collect</a></li>
+                        <li><a href="#how-we-use">How We Use Information</a></li>
+                        <li><a href="#data-sharing">Data Sharing</a></li>
+                        <li><a href="#data-security">Data Security</a></li>
+                        <li><a href="#your-rights">Your Rights</a></li>
+                        <li><a href="#cookies">Cookies & Tracking</a></li>
+                        <li><a href="#international">International Transfers</a></li>
+                        <li><a href="#children">Children's Privacy</a></li>
+                        <li><a href="#changes">Policy Changes</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Main Content -->
+                <div class="privacy-content">
+                    <!-- Introduction -->
+                    <section id="introduction" class="privacy-section">
+                        <h2 class="section-title">Introduction</h2>
+                        <p>Welcome to Photo Flare's Privacy Policy. This policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.</p>
+                        
+                        <div class="highlight-box">
+                            <p><strong>Important:</strong> We process your files locally in your browser whenever possible. Your files never leave your device unless you explicitly choose to use cloud-based features.</p>
+                        </div>
+                        
+                        <p>Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site or use our services.</p>
+                        
+                        <p>We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the "Last Updated" date of this Privacy Policy.</p>
+                    </section>
+
+                    <!-- Information Collection -->
+                    <section id="information-collection" class="privacy-section">
+                        <h2 class="section-title">Information We Collect</h2>
+                        <p>We collect several types of information from and about users of our website, including information:</p>
+                        
+                        <h3>Personal Information</h3>
+                        <p>We may collect personal information that you voluntarily provide to us when you:</p>
+                        <ul>
+                            <li>Register for an account</li>
+                            <li>Subscribe to our services</li>
+                            <li>Contact our support team</li>
+                            <li>Participate in surveys or promotions</li>
+                        </ul>
+                        
+                        <h3>Automatically Collected Information</h3>
+                        <p>When you use our services, we automatically collect certain information, including:</p>
+                        <ul>
+                            <li><strong>Usage Data:</strong> Information about how you use our website and services</li>
+                            <li><strong>Device Information:</strong> Information about your device and internet connection</li>
+                            <li><strong>Location Data:</strong> Approximate location based on your IP address</li>
+                        </ul>
+                        
+                        <div class="highlight-box warning">
+                            <p><strong>File Processing:</strong> For most tools, your files are processed entirely in your browser and never sent to our servers. For larger files or certain premium features, temporary server processing may be required.</p>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Data Type</th>
+                                    <th>What We Collect</th>
+                                    <th>How We Use It</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Account Information</td>
+                                    <td>Name, email, subscription details</td>
+                                    <td>Service provision, communication, billing</td>
+                                </tr>
+                                <tr>
+                                    <td>Usage Data</td>
+                                    <td>Tools used, session duration, feature preferences</td>
+                                    <td>Service improvement, personalization</td>
+                                </tr>
+                                <tr>
+                                    <td>Technical Information</td>
+                                    <td>IP address, browser type, device information</td>
+                                    <td>Security, analytics, compatibility</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- How We Use Information -->
+                    <section id="how-we-use" class="privacy-section">
+                        <h2 class="section-title">How We Use Your Information</h2>
+                        <p>We use the information we collect about you for various purposes, including to:</p>
+                        
+                        <div class="privacy-badges">
+                            <div class="privacy-badge">
+                                <i class="fas fa-cogs"></i>
+                                <div>
+                                    <h4>Provide Services</h4>
+                                    <p>Operate and maintain our tools</p>
+                                </div>
+                            </div>
+                            <div class="privacy-badge">
+                                <i class="fas fa-user-shield"></i>
+                                <div>
+                                    <h4>Security</h4>
+                                    <p>Protect against fraudulent activity</p>
+                                </div>
+                            </div>
+                            <div class="privacy-badge">
+                                <i class="fas fa-chart-line"></i>
+                                <div>
+                                    <h4>Improve Services</h4>
+                                    <p>Analyze usage to enhance features</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h3>Legal Bases for Processing</h3>
+                        <p>We process your personal information based on the following legal grounds:</p>
+                        <ul>
+                            <li><strong>Performance of a contract:</strong> When we provide you with services you've requested</li>
+                            <li><strong>Legitimate interests:</strong> To improve our services and ensure security</li>
+                            <li><strong>Consent:</strong> When you've given us explicit permission</li>
+                            <li><strong>Legal obligation:</strong> When required to comply with applicable laws</li>
+                        </ul>
+                    </section>
+
+                    <!-- Data Sharing -->
+                    <section id="data-sharing" class="privacy-section">
+                        <h2 class="section-title">Data Sharing and Disclosure</h2>
+                        <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:</p>
+                        
+                        <div class="toggle-section">
+                            <div class="toggle-header">
+                                <h4>Service Providers</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="toggle-content">
+                                <p>We may share your information with third-party vendors who perform services on our behalf, such as:</p>
+                                <ul>
+                                    <li>Payment processing</li>
+                                    <li>Data analytics</li>
+                                    <li>Customer support</li>
+                                    <li>Marketing services</li>
+                                </ul>
+                                <p>These service providers are contractually obligated to protect your data and use it only for the purposes we specify.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-section">
+                            <div class="toggle-header">
+                                <h4>Legal Requirements</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="toggle-content">
+                                <p>We may disclose your information if required to do so by law or in response to:</p>
+                                <ul>
+                                    <li>Valid legal process (subpoenas, court orders)</li>
+                                    <li>Government requests</li>
+                                    <li>To protect our rights, privacy, safety, or property</li>
+                                    <li>To enforce our terms and conditions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-section">
+                            <div class="toggle-header">
+                                <h4>Business Transfers</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="toggle-content">
+                                <p>In the event of a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of that transaction. We will notify you via email and/or a prominent notice on our website of any change in ownership or uses of your personal information.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Data Security -->
+                    <section id="data-security" class="privacy-section">
+                        <h2 class="section-title">Data Security</h2>
+                        <p>We implement appropriate technical and organizational security measures designed to protect the security of any personal information we process.</p>
+                        
+                        <div class="highlight-box success">
+                            <p><strong>Local Processing:</strong> Our core technology processes your files directly in your browser, which means your sensitive documents never leave your device unless you explicitly choose to use cloud-based features.</p>
+                        </div>
+                        
+                        <p>However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure.</p>
+                        
+                        <h3>Our Security Measures Include:</h3>
+                        <ul>
+                            <li>Encryption of data in transit using SSL/TLS</li>
+                            <li>Regular security assessments and penetration testing</li>
+                            <li>Access controls and authentication mechanisms</li>
+                            <li>Secure data storage with limited access</li>
+                            <li>Regular staff training on data protection</li>
+                        </ul>
+                    </section>
+
+                    <!-- Your Rights -->
+                    <section id="your-rights" class="privacy-section">
+                        <h2 class="section-title">Your Privacy Rights</h2>
+                        <p>Depending on your location, you may have certain rights regarding your personal information:</p>
+                        
+                        <div class="privacy-badges">
+                            <div class="privacy-badge">
+                                <i class="fas fa-eye"></i>
+                                <div>
+                                    <h4>Right to Access</h4>
+                                    <p>Request copies of your personal data</p>
+                                </div>
+                            </div>
+                            <div class="privacy-badge">
+                                <i class="fas fa-edit"></i>
+                                <div>
+                                    <h4>Right to Rectification</h4>
+                                    <p>Request correction of inaccurate data</p>
+                                </div>
+                            </div>
+                            <div class="privacy-badge">
+                                <i class="fas fa-trash-alt"></i>
+                                <div>
+                                    <h4>Right to Erasure</h4>
+                                    <p>Request deletion of your personal data</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>To exercise any of these rights, please contact us using the information provided in the "Contact Us" section below. We will respond to your request within 30 days.</p>
+                        
+                        <h3>Data Retention</h3>
+                        <p>We retain personal information only for as long as necessary to fulfill the purposes for which it was collected, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+                    </section>
+
+                    <!-- Cookies -->
+                    <section id="cookies" class="privacy-section">
+                        <h2 class="section-title">Cookies and Tracking Technologies</h2>
+                        <p>We use cookies and similar tracking technologies to track activity on our service and hold certain information.</p>
+                        
+                        <h3>Types of Cookies We Use</h3>
+                        <ul>
+                            <li><strong>Essential Cookies:</strong> Necessary for the website to function properly</li>
+                            <li><strong>Performance Cookies:</strong> Help us understand how visitors interact with our website</li>
+                            <li><strong>Functionality Cookies:</strong> Enable enhanced functionality and personalization</li>
+                            <li><strong>Targeting Cookies:</strong> Used to deliver relevant advertisements</li>
+                        </ul>
+                        
+                        <h3>Managing Cookies</h3>
+                        <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our service.</p>
+                        
+                        <p>For more information about how we use cookies and your choices regarding cookies, please visit our <a href="cookies.html">Cookie Policy</a>.</p>
+                    </section>
+
+                    <!-- International Transfers -->
+                    <section id="international" class="privacy-section">
+                        <h2 class="section-title">International Data Transfers</h2>
+                        <p>Your information, including personal data, may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p>
+                        
+                        <p>If you are located outside the United States and choose to provide information to us, please note that we transfer the data, including personal data, to the United States and process it there.</p>
+                        
+                        <p>We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy.</p>
+                    </section>
+
+                    <!-- Children's Privacy -->
+                    <section id="children" class="privacy-section">
+                        <h2 class="section-title">Children's Privacy</h2>
+                        <p>Our service is not intended for use by children under the age of 13 ("Children").</p>
+                        
+                        <p>We do not knowingly collect personally identifiable information from children under 13. If you become aware that a child has provided us with personal data, please contact us. If we become aware that we have collected personal data from children without verification of parental consent, we take steps to remove that information from our servers.</p>
+                    </section>
+
+                    <!-- Policy Changes -->
+                    <section id="changes" class="privacy-section">
+                        <h2 class="section-title">Changes to This Privacy Policy</h2>
+                        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                        
+                        <div class="update-info">
+                            <h3>Last Updated: October 15, 2023</h3>
+                            <p>We recommend that you review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                        </div>
+                    </section>
+
+                    <!-- Contact Us -->
+                    <section id="contact" class="privacy-section">
+                        <h2 class="section-title">Contact Us</h2>
+                        <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                        
+                        <div class="contact-section">
+                            <h3>Photo Flare Privacy Team</h3>
+                            <p>Email: <a href="mailto:privacy@photoflare.com" style="color: var(--primary);">privacy@photoflare.com</a></p>
+                            <p>Address: 123 Privacy Lane, Data Protection City, DP 12345</p>
+                            <p>We typically respond to privacy-related inquiries within 2 business days.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        // Update active nav link
+                        document.querySelectorAll('.privacy-nav a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Toggle sections
+        const toggleHeaders = document.querySelectorAll('.toggle-header');
+        
+        toggleHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const section = this.parentElement;
+                section.classList.toggle('active');
+            });
+        });
+
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('.privacy-section');
+        const navLinks = document.querySelectorAll('.privacy-nav a');
+        
+        function updateActiveNavLink() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        // Breadcrumb navigation
+        document.querySelector('.breadcrumb a[href="index.html"]').addEventListener('click', function(e) {
+            if (this.getAttribute('href') === 'index.html') {
+                e.preventDefault();
+                alert('This would navigate to the home page in a real implementation.');
+            }
+        });
+
+        // Print functionality
+        const printButton = document.createElement('button');
+        printButton.className = 'btn btn-primary';
+        printButton.innerHTML = '<i class="fas fa-print"></i> Print Policy';
+        printButton.style.marginTop = '2rem';
+        printButton.style.marginLeft = 'auto';
+        printButton.style.marginRight = 'auto';
+        printButton.style.display = 'block';
+        
+        printButton.addEventListener('click', function() {
+            window.print();
+        });
+        
+        document.querySelector('.privacy-content').appendChild(printButton);
+    </script>
+</body>
+</html>

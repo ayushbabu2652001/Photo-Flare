@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Image Enhancer - Enhance image quality, upscale resolution, remove noise, and improve details with advanced AI technology. Part of Photo Flare's premium tools.">
+    <meta name="keywords" content="AI image enhancer, image upscaler, photo quality improvement, noise reduction, image sharpening, AI photo enhancement">
+    <title>AI Image Enhancer - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #f3722c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .upload-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px dashed var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .upload-section.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .file-label:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .image-preview {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preview-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            background: var(--light);
+        }
+
+        .controls-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .controls-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .control-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .preset-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .preset-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+
+        .processing-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 8px solid white;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .comparison-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+        }
+
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .comparison-before, .comparison-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--light);
+        }
+
+        .comparison-after {
+            width: 50%;
+            border-right: 2px solid white;
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .comparison-slider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .comparison-slider::after {
+            content: "↔";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .results-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .premium-upsell h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-feature i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-preview {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem;
+            }
+            
+            .tool-content {
+                padding: 1.5rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .controls-section {
+                padding: 1.5rem;
+            }
+            
+            .preset-buttons {
+                flex-direction: column;
+            }
+            
+            .comparison-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1><i class="fas fa-robot"></i> AI Image Enhancer</h1>
+                <p>Enhance image quality, upscale resolution, remove noise, and improve details with advanced AI technology</p>
+                <span class="premium-badge">PREMIUM TOOL</span>
+            </div>
+
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section" id="uploadSection">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <div class="upload-text">
+                        <h3>Upload Your Image</h3>
+                        <p>Drag & drop your image here or click to browse</p>
+                        <p>Supports JPG, PNG, WebP (Max: 10MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*">
+                    <label for="fileInput" class="file-label">
+                        <i class="fas fa-folder-open"></i> Choose Image
+                    </label>
+                </div>
+
+                <!-- Image Preview Section -->
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <div class="preview-container">
+                        <h3 class="preview-title">Original Image</h3>
+                        <img id="originalImage" class="preview-image" src="" alt="Original Image">
+                    </div>
+                    <div class="preview-container">
+                        <h3 class="preview-title">Enhanced Image</h3>
+                        <img id="enhancedImage" class="preview-image" src="" alt="Enhanced Image">
+                    </div>
+                </div>
+
+                <!-- Controls Section -->
+                <div class="controls-section" id="controlsSection" style="display: none;">
+                    <h2 class="controls-title">Enhancement Controls</h2>
+                    
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Upscale Factor</span>
+                                <span class="control-value" id="upscaleValue">2x</span>
+                            </div>
+                            <input type="range" min="1" max="4" step="1" value="2" class="slider" id="upscaleSlider">
+                            <div class="preset-buttons">
+                                <button class="preset-btn" data-value="1">1x</button>
+                                <button class="preset-btn active" data-value="2">2x</button>
+                                <button class="preset-btn" data-value="3">3x</button>
+                                <button class="preset-btn" data-value="4">4x</button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Noise Reduction</span>
+                                <span class="control-value" id="noiseValue">50%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="noiseSlider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Sharpness</span>
+                                <span class="control-value" id="sharpnessValue">60%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="60" class="slider" id="sharpnessSlider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Color Enhancement</span>
+                                <span class="control-value" id="colorValue">40%</span>
+                            </div>
+                            <input type="range" min="0" max="100" value="40" class="slider" id="colorSlider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Brightness</span>
+                                <span class="control-value" id="brightnessValue">0%</span>
+                            </div>
+                            <input type="range" min="-50" max="50" value="0" class="slider" id="brightnessSlider">
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">
+                                <span>Contrast</span>
+                                <span class="control-value" id="contrastValue">10%</span>
+                            </div>
+                            <input type="range" min="-50" max="50" value="10" class="slider" id="contrastSlider">
+                        </div>
+                    </div>
+
+                    <div class="preset-buttons">
+                        <button class="preset-btn" id="portraitPreset">Portrait</button>
+                        <button class="preset-btn" id="landscapePreset">Landscape</button>
+                        <button class="preset-btn" id="lowLightPreset">Low Light</button>
+                        <button class="preset-btn active" id="balancedPreset">Balanced</button>
+                        <button class="preset-btn" id="maxQualityPreset">Max Quality</button>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="enhanceBtn">
+                            <i class="fas fa-magic"></i> Enhance Image
+                        </button>
+                        <button class="btn btn-success" id="downloadBtn" style="display: none;">
+                            <i class="fas fa-download"></i> Download Enhanced
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comparison Section -->
+                <div class="comparison-section" id="comparisonSection" style="display: none;">
+                    <h2 class="controls-title">Before & After Comparison</h2>
+                    <div class="comparison-container" id="comparisonContainer">
+                        <img id="comparisonBefore" class="comparison-before" src="" alt="Before">
+                        <img id="comparisonAfter" class="comparison-after" src="" alt="After">
+                        <div class="comparison-slider" id="comparisonSlider"></div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <h2 class="controls-title">Enhancement Results</h2>
+                    <div class="results-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="resolutionStat">0 MP</div>
+                            <div class="stat-label">Resolution</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="qualityStat">0%</div>
+                            <div class="stat-label">Quality Improvement</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="sizeStat">0 KB</div>
+                            <div class="stat-label">File Size</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="processingStat">0.0s</div>
+                            <div class="stat-label">Processing Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Upsell -->
+                <div class="premium-upsell">
+                    <h3>Unlock Full Potential with Photo Flare Pro</h3>
+                    <p>Upgrade to access all premium features and remove limitations</p>
+                    
+                    <div class="premium-features">
+                        <div class="premium-feature">
+                            <i class="fas fa-bolt"></i>
+                            <div>
+                                <h4>Faster Processing</h4>
+                                <p>Priority queue and GPU acceleration</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Higher Resolution</h4>
+                                <p>Upscale up to 8x (vs 4x for free)</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-infinity"></i>
+                            <div>
+                                <h4>Unlimited Enhancements</h4>
+                                <p>No daily limits on processing</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <div>
+                                <h4>Batch Processing</h4>
+                                <p>Enhance multiple images at once</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="pricing.html" class="btn btn-warning">
+                        <i class="fas fa-crown"></i> Upgrade to Pro - Only $4/month
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Processing Overlay -->
+    <div class="processing-overlay" id="processingOverlay" style="display: none;">
+        <div class="processing-spinner"></div>
+        <h2>Enhancing Your Image</h2>
+        <p>Our AI is working its magic...</p>
+        <p id="processingProgress">Processing: 0%</p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const imagePreview = document.getElementById('imagePreview');
+        const originalImage = document.getElementById('originalImage');
+        const enhancedImage = document.getElementById('enhancedImage');
+        const controlsSection = document.getElementById('controlsSection');
+        const comparisonSection = document.getElementById('comparisonSection');
+        const comparisonBefore = document.getElementById('comparisonBefore');
+        const comparisonAfter = document.getElementById('comparisonAfter');
+        const comparisonSlider = document.getElementById('comparisonSlider');
+        const comparisonContainer = document.getElementById('comparisonContainer');
+        const resultsSection = document.getElementById('resultsSection');
+        const processingOverlay = document.getElementById('processingOverlay');
+        const processingProgress = document.getElementById('processingProgress');
+        
+        // Control Elements
+        const upscaleSlider = document.getElementById('upscaleSlider');
+        const upscaleValue = document.getElementById('upscaleValue');
+        const noiseSlider = document.getElementById('noiseSlider');
+        const noiseValue = document.getElementById('noiseValue');
+        const sharpnessSlider = document.getElementById('sharpnessSlider');
+        const sharpnessValue = document.getElementById('sharpnessValue');
+        const colorSlider = document.getElementById('colorSlider');
+        const colorValue = document.getElementById('colorValue');
+        const brightnessSlider = document.getElementById('brightnessSlider');
+        const brightnessValue = document.getElementById('brightnessValue');
+        const contrastSlider = document.getElementById('contrastSlider');
+        const contrastValue = document.getElementById('contrastValue');
+        
+        // Buttons
+        const enhanceBtn = document.getElementById('enhanceBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const presetButtons = document.querySelectorAll('.preset-btn');
+        
+        // Stats Elements
+        const resolutionStat = document.getElementById('resolutionStat');
+        const qualityStat = document.getElementById('qualityStat');
+        const sizeStat = document.getElementById('sizeStat');
+        const processingStat = document.getElementById('processingStat');
+        
+        // Global Variables
+        let originalImageData = null;
+        let enhancedImageData = null;
+        let isProcessing = false;
+        
+        // Event Listeners
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadSection.addEventListener('dragover', handleDragOver);
+        uploadSection.addEventListener('drop', handleFileDrop);
+        
+        // Slider Event Listeners
+        upscaleSlider.addEventListener('input', updateUpscaleValue);
+        noiseSlider.addEventListener('input', updateNoiseValue);
+        sharpnessSlider.addEventListener('input', updateSharpnessValue);
+        colorSlider.addEventListener('input', updateColorValue);
+        brightnessSlider.addEventListener('input', updateBrightnessValue);
+        contrastSlider.addEventListener('input', updateContrastValue);
+        
+        // Button Event Listeners
+        enhanceBtn.addEventListener('click', enhanceImage);
+        downloadBtn.addEventListener('click', downloadEnhancedImage);
+        resetBtn.addEventListener('click', resetTool);
+        
+        // Preset Button Event Listeners
+        presetButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                presetButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Apply preset based on button ID
+                applyPreset(this.id);
+            });
+        });
+        
+        // Comparison Slider Functionality
+        let isDragging = false;
+        comparisonSlider.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+        
+        comparisonSlider.addEventListener('touchstart', startDragging);
+        document.addEventListener('touchmove', drag);
+        document.addEventListener('touchend', stopDragging);
+        
+        // Functions
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadSection.classList.add('active');
+        }
+        
+        function handleFileDrop(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        }
+        
+        function handleFileSelect() {
+            if (!fileInput.files.length) return;
+            
+            const file = fileInput.files[0];
+            
+            // Check file type
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPG, PNG, WebP)');
+                return;
+            }
+            
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit. Please choose a smaller image.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                originalImage.src = e.target.result;
+                originalImageData = e.target.result;
+                
+                // Show preview and controls
+                imagePreview.style.display = 'flex';
+                controlsSection.style.display = 'block';
+                
+                // Reset enhanced image
+                enhancedImage.src = '';
+                enhancedImageData = null;
+                downloadBtn.style.display = 'none';
+                comparisonSection.style.display = 'none';
+                resultsSection.style.display = 'none';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function updateUpscaleValue() {
+            const value = upscaleSlider.value;
+            upscaleValue.textContent = `${value}x`;
+            
+            // Update preset buttons
+            const presetBtn = document.querySelector(`.preset-btn[data-value="${value}"]`);
+            if (presetBtn) {
+                presetButtons.forEach(btn => btn.classList.remove('active'));
+                presetBtn.classList.add('active');
+            }
+        }
+        
+        function updateNoiseValue() {
+            noiseValue.textContent = `${noiseSlider.value}%`;
+        }
+        
+        function updateSharpnessValue() {
+            sharpnessValue.textContent = `${sharpnessSlider.value}%`;
+        }
+        
+        function updateColorValue() {
+            colorValue.textContent = `${colorSlider.value}%`;
+        }
+        
+        function updateBrightnessValue() {
+            brightnessValue.textContent = `${brightnessSlider.value}%`;
+        }
+        
+        function updateContrastValue() {
+            contrastValue.textContent = `${contrastSlider.value}%`;
+        }
+        
+        function applyPreset(presetId) {
+            switch(presetId) {
+                case 'portraitPreset':
+                    upscaleSlider.value = 2;
+                    noiseSlider.value = 70;
+                    sharpnessSlider.value = 40;
+                    colorSlider.value = 30;
+                    brightnessSlider.value = 10;
+                    contrastSlider.value = 15;
+                    break;
+                case 'landscapePreset':
+                    upscaleSlider.value = 2;
+                    noiseSlider.value = 40;
+                    sharpnessSlider.value = 70;
+                    colorSlider.value = 60;
+                    brightnessSlider.value = 5;
+                    contrastSlider.value = 20;
+                    break;
+                case 'lowLightPreset':
+                    upscaleSlider.value = 2;
+                    noiseSlider.value = 80;
+                    sharpnessSlider.value = 50;
+                    colorSlider.value = 50;
+                    brightnessSlider.value = 20;
+                    contrastSlider.value = 25;
+                    break;
+                case 'balancedPreset':
+                    upscaleSlider.value = 2;
+                    noiseSlider.value = 50;
+                    sharpnessSlider.value = 60;
+                    colorSlider.value = 40;
+                    brightnessSlider.value = 0;
+                    contrastSlider.value = 10;
+                    break;
+                case 'maxQualityPreset':
+                    upscaleSlider.value = 4;
+                    noiseSlider.value = 80;
+                    sharpnessSlider.value = 80;
+                    colorSlider.value = 60;
+                    brightnessSlider.value = 5;
+                    contrastSlider.value = 15;
+                    break;
+                default:
+                    // For numeric preset buttons
+                    if (this && this.dataset && this.dataset.value) {
+                        upscaleSlider.value = this.dataset.value;
+                    }
+            }
+            
+            // Update all slider displays
+            updateUpscaleValue();
+            updateNoiseValue();
+            updateSharpnessValue();
+            updateColorValue();
+            updateBrightnessValue();
+            updateContrastValue();
+        }
+        
+        function enhanceImage() {
+            if (!originalImageData || isProcessing) return;
+            
+            isProcessing = true;
+            processingOverlay.style.display = 'flex';
+            
+            // Simulate AI processing with progress updates
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    finishEnhancement();
+                }
+                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+            }, 300);
+            
+            // In a real implementation, this would be an API call to an AI service
+            // For this demo, we'll simulate the enhancement by applying filters to the image
+            setTimeout(finishEnhancement, 3000);
+        }
+        
+        function finishEnhancement() {
+            isProcessing = false;
+            processingOverlay.style.display = 'none';
+            
+            // In a real implementation, this would be the enhanced image from the AI service
+            // For this demo, we'll create a canvas and apply some filters to simulate enhancement
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Calculate new dimensions based on upscale factor
+                const upscaleFactor = parseInt(upscaleSlider.value);
+                canvas.width = img.width * upscaleFactor;
+                canvas.height = img.height * upscaleFactor;
+                
+                // Draw original image scaled up
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                
+                // Apply filters based on slider values (simulated enhancement)
+                // In a real implementation, this would be done by the AI model
+                
+                // Get image data
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Apply brightness and contrast (simplified)
+                const brightness = parseInt(brightnessSlider.value) / 100;
+                const contrast = parseInt(contrastSlider.value) / 100;
+                
+                for (let i = 0; i < data.length; i += 4) {
+                    // Brightness
+                    data[i] = Math.min(255, data[i] + (brightness * 255));
+                    data[i+1] = Math.min(255, data[i+1] + (brightness * 255));
+                    data[i+2] = Math.min(255, data[i+2] + (brightness * 255));
+                    
+                    // Contrast (simplified)
+                    const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+                    data[i] = factor * (data[i] - 128) + 128;
+                    data[i+1] = factor * (data[i+1] - 128) + 128;
+                    data[i+2] = factor * (data[i+2] - 128) + 128;
+                }
+                
+                ctx.putImageData(imageData, 0, 0);
+                
+                // Convert to data URL and set as enhanced image
+                enhancedImageData = canvas.toDataURL('image/jpeg', 0.9);
+                enhancedImage.src = enhancedImageData;
+                
+                // Update comparison images
+                comparisonBefore.src = originalImageData;
+                comparisonAfter.src = enhancedImageData;
+                
+                // Show download button and comparison section
+                downloadBtn.style.display = 'inline-flex';
+                comparisonSection.style.display = 'block';
+                
+                // Calculate and display stats
+                calculateStats(img, canvas);
+                resultsSection.style.display = 'block';
+            };
+            
+            img.src = originalImageData;
+        }
+        
+        function calculateStats(originalImg, enhancedCanvas) {
+            // Resolution
+            const originalMP = (originalImg.width * originalImg.height / 1000000).toFixed(1);
+            const enhancedMP = (enhancedCanvas.width * enhancedCanvas.height / 1000000).toFixed(1);
+            resolutionStat.textContent = `${originalMP} → ${enhancedMP} MP`;
+            
+            // Quality improvement (simulated)
+            const qualityImprovement = 20 + parseInt(noiseSlider.value) * 0.3 + 
+                                     parseInt(sharpnessSlider.value) * 0.4 + 
+                                     parseInt(colorSlider.value) * 0.3;
+            qualityStat.textContent = `${Math.min(100, Math.round(qualityImprovement))}%`;
+            
+            // File size (simulated)
+            const originalSize = fileInput.files[0].size / 1024;
+            const enhancedSize = originalSize * parseInt(upscaleSlider.value) * 1.5;
+            sizeStat.textContent = `${Math.round(originalSize)} → ${Math.round(enhancedSize)} KB`;
+            
+            // Processing time (simulated)
+            const processingTime = (2 + Math.random()).toFixed(1);
+            processingStat.textContent = `${processingTime}s`;
+        }
+        
+        function downloadEnhancedImage() {
+            if (!enhancedImageData) return;
+            
+            const link = document.createElement('a');
+            link.download = `enhanced-${Date.now()}.jpg`;
+            link.href = enhancedImageData;
+            link.click();
+        }
+        
+        function resetTool() {
+            fileInput.value = '';
+            originalImage.src = '';
+            enhancedImage.src = '';
+            imagePreview.style.display = 'none';
+            controlsSection.style.display = 'none';
+            comparisonSection.style.display = 'none';
+            resultsSection.style.display = 'none';
+            downloadBtn.style.display = 'none';
+            
+            // Reset sliders to default values
+            upscaleSlider.value = 2;
+            noiseSlider.value = 50;
+            sharpnessSlider.value = 60;
+            colorSlider.value = 40;
+            brightnessSlider.value = 0;
+            contrastSlider.value = 10;
+            
+            // Update slider displays
+            updateUpscaleValue();
+            updateNoiseValue();
+            updateSharpnessValue();
+            updateColorValue();
+            updateBrightnessValue();
+            updateContrastValue();
+            
+            // Reset preset buttons
+            presetButtons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById('balancedPreset').classList.add('active');
+        }
+        
+        // Comparison slider functions
+        function startDragging(e) {
+            isDragging = true;
+            e.preventDefault();
+        }
+        
+        function drag(e) {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            let x = 0;
+            
+            if (e.type === 'mousemove') {
+                x = e.pageX - comparisonContainer.getBoundingClientRect().left;
+            } else if (e.type === 'touchmove') {
+                x = e.touches[0].pageX - comparisonContainer.getBoundingClientRect().left;
+            }
+            
+            // Constrain x to container width
+            x = Math.max(0, Math.min(x, comparisonContainer.offsetWidth));
+            
+            // Update slider position and after image width
+            comparisonSlider.style.left = `${x}px`;
+            comparisonAfter.style.width = `${x}px`;
+        }
+        
+        function stopDragging() {
+            isDragging = false;
+        }
+        
+        // Initialize slider values
+        updateUpscaleValue();
+        updateNoiseValue();
+        updateSharpnessValue();
+        updateColorValue();
+        updateBrightnessValue();
+        updateContrastValue();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert Excel to PDF with advanced features like formatting preservation, batch conversion, and custom layouts. Maintain Excel formulas, charts, and formatting in PDF output.">
+    <meta name="keywords" content="Excel to PDF, Excel conversion, XLSX to PDF, spreadsheet to PDF, advanced PDF tools, Excel formatting preservation">
+    <title>Excel to PDF (Advanced) - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e00);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-right: 1px solid var(--light-gray);
+        }
+
+        .options-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-info.active {
+            display: block;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-size {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-group h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-group h3 i {
+            color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .radio-item label {
+            cursor: pointer;
+        }
+
+        .select-group {
+            margin-bottom: 1rem;
+        }
+
+        .select-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .select-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .range-group {
+            margin-bottom: 1rem;
+        }
+
+        .range-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .range-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .range-inputs input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .range-inputs span {
+            color: var(--gray);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .preview-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        .preview-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .preview-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .preview-content {
+            min-height: 300px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            background: var(--light);
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .preview-table th, .preview-table td {
+            border: 1px solid var(--light-gray);
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .preview-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .preview-table tr:nth-child(even) {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .pdf-preview {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-preview-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pdf-preview-content {
+            flex: 1;
+            padding: 2rem;
+            overflow: auto;
+        }
+
+        .pdf-page {
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .download-section {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .download-section.active {
+            display: block;
+        }
+
+        .download-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .file-details {
+            text-align: left;
+        }
+
+        .file-details h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .file-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .features-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .premium-upsell h2 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .premium-upsell p {
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .download-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .file-details {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem;
+            }
+            
+            .tool-content {
+                padding: 1rem;
+            }
+            
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .preview-tabs {
+                flex-direction: column;
+            }
+            
+            .preview-tab {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>Excel to PDF (Advanced) <span class="premium-badge">PRO</span></h1>
+                <p>Convert Excel spreadsheets to PDF with advanced formatting preservation, batch processing, and custom layout options. Maintain formulas, charts, and formatting in your PDF output.</p>
+            </div>
+            
+            <div class="tool-content">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>Upload Excel File</h3>
+                        <p>Drag & drop your Excel file here or click to browse</p>
+                        <p class="file-types">Supports: XLSX, XLS, CSV (Max: 100MB)</p>
+                        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display: none;">
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <div class="file-name">
+                            <span id="fileName">spreadsheet.xlsx</span>
+                            <i class="fas fa-times" id="removeFile" style="cursor: pointer;"></i>
+                        </div>
+                        <div class="file-size" id="fileSize">0 KB</div>
+                        <div class="progress-bar">
+                            <div class="progress" id="uploadProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="premium-upsell">
+                        <h2>Unlock Advanced Features</h2>
+                        <p>Upgrade to Photo Flare Pro to access batch processing, advanced formatting options, and custom layout settings for perfect Excel to PDF conversions.</p>
+                        <a href="pricing.html" class="btn btn-warning">Upgrade Now</a>
+                    </div>
+                </div>
+                
+                <div class="options-section">
+                    <div class="option-group">
+                        <h3><i class="fas fa-cog"></i> Conversion Options</h3>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="preserveFormatting" checked>
+                                <label for="preserveFormatting">Preserve Excel formatting</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="includeCharts" checked>
+                                <label for="includeCharts">Include charts and graphs</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="includeFormulas">
+                                <label for="includeFormulas">Include formula references</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="landscapeOrientation">
+                                <label for="landscapeOrientation">Landscape orientation</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3><i class="fas fa-file-pdf"></i> PDF Output</h3>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="entireWorkbook" name="outputScope" checked>
+                                <label for="entireWorkbook">Entire workbook</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="activeWorksheet" name="outputScope">
+                                <label for="activeWorksheet">Active worksheet only</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="selectedSheets" name="outputScope">
+                                <label for="selectedSheets">Selected worksheets</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <h3><i class="fas fa-palette"></i> Layout & Formatting</h3>
+                        <div class="select-group">
+                            <label for="pageSize">Page Size</label>
+                            <select id="pageSize">
+                                <option value="a4">A4</option>
+                                <option value="letter">Letter</option>
+                                <option value="legal">Legal</option>
+                                <option value="a3">A3</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label for="marginSize">Margin Size</label>
+                            <select id="marginSize">
+                                <option value="normal">Normal</option>
+                                <option value="narrow">Narrow</option>
+                                <option value="wide">Wide</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+                        <div class="range-group">
+                            <label for="scale">Scale to Fit</label>
+                            <div class="range-inputs">
+                                <input type="number" id="scale" min="50" max="200" value="100">
+                                <span>%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="convertBtn" disabled>
+                            <i class="fas fa-sync-alt"></i> Convert to PDF
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview-section" id="previewSection">
+                <div class="preview-tabs">
+                    <div class="preview-tab active" data-tab="excel">Excel Preview</div>
+                    <div class="preview-tab" data-tab="pdf">PDF Preview</div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-tab-content active" id="excelTab">
+                        <table class="preview-table" id="excelPreview">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Q1 Sales</th>
+                                    <th>Q2 Sales</th>
+                                    <th>Q3 Sales</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Laptops</td>
+                                    <td>$12,500</td>
+                                    <td>$14,200</td>
+                                    <td>$15,800</td>
+                                    <td>$42,500</td>
+                                </tr>
+                                <tr>
+                                    <td>Smartphones</td>
+                                    <td>$18,300</td>
+                                    <td>$20,100</td>
+                                    <td>$22,500</td>
+                                    <td>$60,900</td>
+                                </tr>
+                                <tr>
+                                    <td>Tablets</td>
+                                    <td>$8,700</td>
+                                    <td>$9,500</td>
+                                    <td>$10,200</td>
+                                    <td>$28,400</td>
+                                </tr>
+                                <tr>
+                                    <td>Accessories</td>
+                                    <td>$5,200</td>
+                                    <td>$6,100</td>
+                                    <td>$7,300</td>
+                                    <td>$18,600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="preview-tab-content" id="pdfTab">
+                        <div class="pdf-preview">
+                            <div class="pdf-preview-header">
+                                <span>Sales Report Q1-Q3 2023</span>
+                                <span>Page 1 of 1</span>
+                            </div>
+                            <div class="pdf-preview-content">
+                                <div class="pdf-page">
+                                    <h2 style="text-align: center; margin-bottom: 1.5rem;">Sales Report Q1-Q3 2023</h2>
+                                    <table style="width: 100%; border-collapse: collapse;">
+                                        <thead>
+                                            <tr style="background-color: #4361ee; color: white;">
+                                                <th style="padding: 0.8rem; border: 1px solid #ddd;">Product</th>
+                                                <th style="padding: 0.8rem; border: 1px solid #ddd;">Q1 Sales</th>
+                                                <th style="padding: 0.8rem; border: 1px solid #ddd;">Q2 Sales</th>
+                                                <th style="padding: 0.8rem; border: 1px solid #ddd;">Q3 Sales</th>
+                                                <th style="padding: 0.8rem; border: 1px solid #ddd;">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">Laptops</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$12,500</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$14,200</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$15,800</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$42,500</td>
+                                            </tr>
+                                            <tr style="background-color: #f8f9fa;">
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">Smartphones</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$18,300</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$20,100</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$22,500</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$60,900</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">Tablets</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$8,700</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$9,500</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$10,200</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$28,400</td>
+                                            </tr>
+                                            <tr style="background-color: #f8f9fa;">
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">Accessories</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$5,200</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$6,100</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$7,300</td>
+                                                <td style="padding: 0.8rem; border: 1px solid #ddd;">$18,600</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div style="margin-top: 2rem; text-align: right; font-style: italic;">
+                                        Generated by Photo Flare Excel to PDF Converter
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-section" id="downloadSection">
+                <div class="download-info">
+                    <div class="file-details">
+                        <h3>Conversion Complete!</h3>
+                        <p>Your Excel file has been successfully converted to PDF format.</p>
+                    </div>
+                    <button class="btn btn-success" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download PDF File
+                    </button>
+                </div>
+                <p>Need to convert another file? <a href="#" id="convertAnother">Convert another Excel file</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Advanced Excel to PDF Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-palette feature-icon"></i>
+                    <h3 class="feature-title">Format Preservation</h3>
+                    <p>Maintain all Excel formatting including fonts, colors, cell styles, and conditional formatting in your PDF.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-bar feature-icon"></i>
+                    <h3 class="feature-title">Chart & Graph Support</h3>
+                    <p>Convert Excel charts, graphs, and visualizations to high-quality images in your PDF document.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-copy feature-icon"></i>
+                    <h3 class="feature-title">Batch Processing</h3>
+                    <p>Convert multiple Excel files to PDF simultaneously with our advanced batch processing feature.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sliders-h feature-icon"></i>
+                    <h3 class="feature-title">Custom Layout Options</h3>
+                    <p>Adjust page size, margins, orientation, and scaling to create the perfect PDF layout.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#affiliate">Affiliate Program</a>
+                    <a href="#press">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const removeFile = document.getElementById('removeFile');
+        const convertBtn = document.getElementById('convertBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const previewSection = document.getElementById('previewSection');
+        const downloadSection = document.getElementById('downloadSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const convertAnother = document.getElementById('convertAnother');
+        const previewTabs = document.querySelectorAll('.preview-tab');
+        const previewTabContents = document.querySelectorAll('.preview-tab-content');
+        const scaleInput = document.getElementById('scale');
+
+        // Event Listeners
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.1)';
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.background = '';
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.background = '';
+            if (e.dataTransfer.files.length) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        removeFile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetFile();
+        });
+
+        convertBtn.addEventListener('click', convertToPdf);
+        resetBtn.addEventListener('click', resetAll);
+        downloadBtn.addEventListener('click', downloadPdf);
+        convertAnother.addEventListener('click', resetAll);
+
+        // Scale input validation
+        scaleInput.addEventListener('change', () => {
+            let value = parseInt(scaleInput.value);
+            if (value < 50) scaleInput.value = 50;
+            if (value > 200) scaleInput.value = 200;
+        });
+
+        // Tab switching
+        previewTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                previewTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active content
+                previewTabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabName}Tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Functions
+        function handleFileSelect(file) {
+            const validTypes = [
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.ms-excel',
+                'text/csv'
+            ];
+            
+            if (!validTypes.includes(file.type) && !file.name.match(/\.(xlsx|xls|csv)$/i)) {
+                alert('Please select an Excel file (XLSX, XLS, or CSV).');
+                return;
+            }
+
+            if (file.size > 100 * 1024 * 1024) {
+                alert('File size exceeds 100MB limit. Please choose a smaller file.');
+                return;
+            }
+
+            // Show file info
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.add('active');
+            convertBtn.disabled = false;
+
+            // Simulate upload progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    // Show preview section after upload
+                    previewSection.classList.add('active');
+                    
+                    // Update preview with file data (in a real app, this would parse the actual file)
+                    updateExcelPreview(file.name);
+                }
+                uploadProgress.style.width = `${progress}%`;
+            }, 200);
+        }
+
+        function updateExcelPreview(filename) {
+            // In a real implementation, this would parse the Excel file and display actual data
+            const excelPreview = document.getElementById('excelPreview');
+            
+            // Update table header based on filename
+            const headerCells = excelPreview.querySelectorAll('th');
+            if (filename.includes('financial') || filename.includes('budget')) {
+                headerCells[0].textContent = 'Category';
+                headerCells[1].textContent = 'Jan';
+                headerCells[2].textContent = 'Feb';
+                headerCells[3].textContent = 'Mar';
+                headerCells[4].textContent = 'Q1 Total';
+            } else if (filename.includes('inventory')) {
+                headerCells[0].textContent = 'Item';
+                headerCells[1].textContent = 'Stock';
+                headerCells[2].textContent = 'Price';
+                headerCells[3].textContent = 'Value';
+                headerCells[4].textContent = 'Status';
+            }
+            // Otherwise keep the default sales headers
+        }
+
+        function resetFile() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            convertBtn.disabled = true;
+            previewSection.classList.remove('active');
+            uploadProgress.style.width = '0%';
+        }
+
+        function resetAll() {
+            resetFile();
+            downloadSection.classList.remove('active');
+            
+            // Reset form options
+            document.getElementById('preserveFormatting').checked = true;
+            document.getElementById('includeCharts').checked = true;
+            document.getElementById('includeFormulas').checked = false;
+            document.getElementById('landscapeOrientation').checked = false;
+            document.getElementById('entireWorkbook').checked = true;
+            document.getElementById('pageSize').value = 'a4';
+            document.getElementById('marginSize').value = 'normal';
+            document.getElementById('scale').value = '100';
+        }
+
+        function convertToPdf() {
+            // Show loading state
+            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            convertBtn.disabled = true;
+
+            // Simulate conversion process
+            setTimeout(() => {
+                // Show download section
+                downloadSection.classList.add('active');
+                convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert to PDF';
+                convertBtn.disabled = false;
+                
+                // Update PDF preview tab with conversion settings
+                updatePdfPreview();
+                
+                // Switch to PDF preview tab
+                previewTabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="pdf"]').classList.add('active');
+                previewTabContents.forEach(c => c.classList.remove('active'));
+                document.getElementById('pdfTab').classList.add('active');
+                
+                // Scroll to download section
+                downloadSection.scrollIntoView({ behavior: 'smooth' });
+            }, 3000);
+        }
+
+        function updatePdfPreview() {
+            // Update PDF preview based on user settings
+            const pdfPreview = document.querySelector('.pdf-preview-content');
+            const page = pdfPreview.querySelector('.pdf-page');
+            
+            // Apply orientation
+            if (document.getElementById('landscapeOrientation').checked) {
+                page.style.width = '100%';
+            } else {
+                page.style.maxWidth = '800px';
+            }
+            
+            // Apply scaling
+            const scale = parseInt(document.getElementById('scale').value) / 100;
+            page.style.transform = `scale(${scale})`;
+            page.style.transformOrigin = 'top center';
+        }
+
+        function downloadPdf() {
+            // In a real implementation, this would download the actual converted file
+            alert('In a real implementation, this would download your PDF file. Since this is a demo, no actual file is downloaded.');
+            
+            // Simulate download success
+            downloadBtn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+            setTimeout(() => {
+                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF File';
+            }, 2000);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Check if user has premium access
+        function checkPremiumAccess() {
+            // In a real implementation, this would check user's subscription status
+            return false; // Default to false for demo
+        }
+
+        // Initialize tool
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user has premium access
+            const hasPremium = checkPremiumAccess();
+            
+            if (!hasPremium) {
+                // Show premium features as disabled
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'inline-block';
+                });
+                
+                // Show upsell message
+                document.querySelector('.premium-upsell').style.display = 'block';
+                
+                // Disable some advanced options for free users
+                document.getElementById('includeFormulas').disabled = true;
+                document.getElementById('selectedSheets').disabled = true;
+            } else {
+                // Hide premium badges and upsell for premium users
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'none';
+                });
+                document.querySelector('.premium-upsell').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced color adjustment tool for images. Adjust brightness, contrast, saturation, hue, temperature and more with real-time preview.">
+    <meta name="keywords" content="adjust colors, image color correction, photo editing, brightness, contrast, saturation, hue, temperature, color balance, photo enhancement">
+    <title>Adjust Colors - Advanced Image Color Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .tool-header {
+            padding: 2rem 0 1rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 1rem;
+            color: var(--gray);
+        }
+
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--light);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .toolbar-left, .toolbar-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .toolbar-btn {
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .toolbar-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .editor-content {
+            display: flex;
+            height: 600px;
+        }
+
+        .editor-sidebar {
+            width: 350px;
+            background: var(--light);
+            border-right: 1px solid var(--light-gray);
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .editor-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .canvas-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #editor-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .image-comparison {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            cursor: col-resize;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .comparison-slider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .comparison-slider::after {
+            content: '↔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .tool-panel {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--dark);
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-gray);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        .slider-value {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .editor-footer {
+            padding: 1.5rem;
+            background: var(--light);
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .zoom-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .zoom-level {
+            min-width: 60px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .view-option {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-option:hover {
+            background: var(--light-gray);
+        }
+
+        .view-option.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .format-option {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .format-option:hover {
+            background: var(--light-gray);
+        }
+
+        .format-option.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .histogram-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .histogram-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .histogram-canvas {
+            width: 100%;
+            height: 80px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .preset-item {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .preset-item:hover {
+            transform: scale(1.05);
+        }
+
+        .preset-item.active {
+            border-color: var(--primary);
+        }
+
+        .preset-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preset-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.3rem;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .color-channel {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .channel-label {
+            min-width: 80px;
+            font-weight: 500;
+        }
+
+        .channel-slider {
+            flex: 1;
+        }
+
+        .channel-value {
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Font Selector */
+        .font-selector {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .editor-content {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .editor-content {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .editor-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .editor-main {
+                min-height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .editor-toolbar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .toolbar-left, .toolbar-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .editor-footer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .preset-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem 0 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html" class="active">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Header -->
+    <section class="tool-header">
+        <div class="container">
+            <h1>Advanced Color Adjustment Tool</h1>
+            <p>Fine-tune brightness, contrast, saturation, hue, temperature and more with professional-grade color controls.</p>
+            <p>Your images are processed securely in your browser - they never leave your computer.</p>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor Container -->
+    <div class="container">
+        <div class="editor-container">
+            <div class="editor-toolbar">
+                <div class="toolbar-left">
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" id="upload-btn">
+                            <i class="fas fa-upload"></i> Upload Image
+                        </button>
+                        <button class="toolbar-btn" id="reset-btn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+                <div class="toolbar-right">
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn active" id="basic-btn">
+                            <i class="fas fa-sliders-h"></i> Basic Adjustments
+                        </button>
+                        <button class="toolbar-btn" id="color-btn">
+                            <i class="fas fa-palette"></i> Color Balance
+                        </button>
+                        <button class="toolbar-btn" id="curves-btn">
+                            <i class="fas fa-chart-line"></i> Tone Curves
+                        </button>
+                        <button class="toolbar-btn" id="presets-btn">
+                            <i class="fas fa-magic"></i> Presets
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-content">
+                <div class="editor-sidebar">
+                    <!-- Upload Panel -->
+                    <div class="tool-panel active" id="upload-panel">
+                        <h3 class="panel-title">Upload Image</h3>
+                        <div class="file-upload-area" id="file-upload-area">
+                            <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                            <p>Drag & drop your image here</p>
+                            <p>or</p>
+                            <button class="btn btn-primary" id="browse-btn">Browse Files</button>
+                            <input type="file" id="file-input" class="file-input" accept="image/*">
+                        </div>
+                        <img id="image-preview" class="image-preview" alt="Preview">
+                        <div class="control-group">
+                            <label class="control-label">Supported formats: JPG, PNG, GIF, WEBP</label>
+                            <label class="control-label">Max file size: 10MB (Free) / 100MB (Pro)</label>
+                        </div>
+                    </div>
+
+                    <!-- Basic Adjustments Panel -->
+                    <div class="tool-panel" id="basic-panel">
+                        <h3 class="panel-title">Basic Adjustments</h3>
+                        <div class="control-group">
+                            <label class="control-label">Brightness</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="brightness">
+                                <span class="slider-value" id="brightness-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Contrast</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="contrast">
+                                <span class="slider-value" id="contrast-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Saturation</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="saturation">
+                                <span class="slider-value" id="saturation-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Exposure</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="exposure">
+                                <span class="slider-value" id="exposure-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Highlights</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="highlights">
+                                <span class="slider-value" id="highlights-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Shadows</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="shadows">
+                                <span class="slider-value" id="shadows-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Clarity</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="clarity">
+                                <span class="slider-value" id="clarity-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-small" id="auto-adjust">Auto Adjust</button>
+                            <button class="btn btn-outline btn-small" id="reset-basic">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Color Balance Panel -->
+                    <div class="tool-panel" id="color-panel">
+                        <h3 class="panel-title">Color Balance</h3>
+                        <div class="control-group">
+                            <label class="control-label">Temperature</label>
+                            <div class="slider-container">
+                                <input type="range" min="-100" max="100" value="0" class="slider" id="temperature">
+                                <span class="slider-value" id="temperature-value">0</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Tint</label>
+                            <div class="slider-container">
+                                <input type="range" min="-100" max="100" value="0" class="slider" id="tint">
+                                <span class="slider-value" id="tint-value">0</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Hue</label>
+                            <div class="slider-container">
+                                <input type="range" min="-180" max="180" value="0" class="slider" id="hue">
+                                <span class="slider-value" id="hue-value">0°</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Vibrance</label>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="200" value="100" class="slider" id="vibrance">
+                                <span class="slider-value" id="vibrance-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Color Channels</label>
+                            <div class="color-channel">
+                                <span class="channel-label">Red</span>
+                                <input type="range" min="0" max="200" value="100" class="channel-slider" id="red-channel">
+                                <span class="channel-value" id="red-value">100%</span>
+                            </div>
+                            <div class="color-channel">
+                                <span class="channel-label">Green</span>
+                                <input type="range" min="0" max="200" value="100" class="channel-slider" id="green-channel">
+                                <span class="channel-value" id="green-value">100%</span>
+                            </div>
+                            <div class="color-channel">
+                                <span class="channel-label">Blue</span>
+                                <input type="range" min="0" max="200" value="100" class="channel-slider" id="blue-channel">
+                                <span class="channel-value" id="blue-value">100%</span>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary btn-small" id="auto-white-balance">Auto White Balance</button>
+                            <button class="btn btn-outline btn-small" id="reset-color">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Tone Curves Panel -->
+                    <div class="tool-panel" id="curves-panel">
+                        <h3 class="panel-title">Tone Curves</h3>
+                        <div class="control-group">
+                            <div class="histogram-container">
+                                <div class="histogram-title">RGB Tone Curve</div>
+                                <canvas id="curve-canvas" width="300" height="200" style="width: 100%; height: 200px; background: #f8f9fa; border-radius: 4px; cursor: crosshair;"></canvas>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Curve Channel</label>
+                            <select id="curve-channel" class="font-selector">
+                                <option value="rgb">RGB</option>
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Curve Points</label>
+                            <div class="btn-group">
+                                <button class="btn btn-outline btn-small" id="reset-curve">Reset Curve</button>
+                                <button class="btn btn-outline btn-small" id="s-curve">S-Curve</button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Advanced Options</label>
+                            <div class="color-channel">
+                                <span class="channel-label">Gamma</span>
+                                <input type="range" min="0.1" max="5" value="1" step="0.1" class="channel-slider" id="gamma">
+                                <span class="channel-value" id="gamma-value">1.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Presets Panel -->
+                    <div class="tool-panel" id="presets-panel">
+                        <h3 class="panel-title">Color Presets</h3>
+                        <div class="preset-grid">
+                            <div class="preset-item active">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4);"></div>
+                                <div class="preset-name">Original</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #a1c4fd, #c2e9fb);"></div>
+                                <div class="preset-name">Cool</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);"></div>
+                                <div class="preset-name">Warm</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);"></div>
+                                <div class="preset-name">Vibrant</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #d4fc79, #96e6a1);"></div>
+                                <div class="preset-name">Natural</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);"></div>
+                                <div class="preset-name">Soft</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                                <div class="preset-name">Dramatic</div>
+                            </div>
+                            <div class="preset-item">
+                                <div class="preset-preview" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                                <div class="preset-name">Cinematic</div>
+                            </div>
+                        </div>
+                        <div class="btn-group" style="margin-top: 1rem;">
+                            <button class="btn btn-outline btn-small" id="save-preset">Save Preset</button>
+                            <button class="btn btn-outline btn-small" id="manage-presets">Manage</button>
+                        </div>
+                    </div>
+
+                    <!-- Histogram -->
+                    <div class="histogram-container">
+                        <div class="histogram-title">Image Histogram</div>
+                        <canvas id="histogram-canvas" class="histogram-canvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="canvas-container">
+                        <div class="comparison-container">
+                            <canvas id="editor-canvas"></canvas>
+                            <div class="comparison-slider" id="comparison-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-footer">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-out">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="zoom-btn" id="zoom-in">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="fit-to-screen">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                </div>
+                <div class="view-options">
+                    <span class="view-option active" data-view="single">Single View</span>
+                    <span class="view-option" data-view="comparison">Comparison</span>
+                    <span class="view-option" data-view="split">Split View</span>
+                </div>
+                <div class="download-options">
+                    <span class="format-option active" data-format="png">PNG</span>
+                    <span class="format-option" data-format="jpg">JPG</span>
+                    <span class="format-option" data-format="webp">WEBP</span>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="fas fa-download"></i> Download Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Professional Color Adjustment Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-sliders-h feature-icon"></i>
+                    <h3 class="feature-title">Basic Adjustments</h3>
+                    <p>Fine-tune brightness, contrast, saturation, exposure, highlights, shadows and clarity.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-balance-scale feature-icon"></i>
+                    <h3 class="feature-title">Color Balance</h3>
+                    <p>Adjust temperature, tint, hue, vibrance and individual color channels.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">Tone Curves</h3>
+                    <p>Professional-grade tone curve adjustment for precise color control.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-history feature-icon"></i>
+                    <h3 class="feature-title">Real-time Preview</h3>
+                    <p>See changes instantly with before/after comparison views.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Canvas and context
+        const canvas = document.getElementById('editor-canvas');
+        const ctx = canvas.getContext('2d');
+        const histogramCanvas = document.getElementById('histogram-canvas');
+        const histogramCtx = histogramCanvas.getContext('2d');
+        const curveCanvas = document.getElementById('curve-canvas');
+        const curveCtx = curveCanvas.getContext('2d');
+        
+        // State variables
+        let originalImage = null;
+        let currentImage = null;
+        let zoomLevel = 1;
+        let currentView = 'single';
+        let isComparing = false;
+        let comparisonPosition = 50;
+        let curvePoints = [
+            { x: 0, y: 0 },
+            { x: 255, y: 255 }
+        ];
+        let isDraggingCurve = false;
+        let draggedPointIndex = -1;
+        
+        // Color adjustment values
+        const adjustments = {
+            brightness: 100,
+            contrast: 100,
+            saturation: 100,
+            exposure: 100,
+            highlights: 100,
+            shadows: 100,
+            clarity: 100,
+            temperature: 0,
+            tint: 0,
+            hue: 0,
+            vibrance: 100,
+            red: 100,
+            green: 100,
+            blue: 100,
+            gamma: 1.0
+        };
+        
+        // Initialize canvas
+        function initCanvas() {
+            canvas.width = 800;
+            canvas.height = 600;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '24px Arial';
+            ctx.fillStyle = '#6c757d';
+            ctx.textAlign = 'center';
+            ctx.fillText('Upload an image to adjust colors', canvas.width / 2, canvas.height / 2);
+            
+            // Initialize histogram
+            drawEmptyHistogram();
+            
+            // Initialize tone curve
+            drawToneCurve();
+        }
+        
+        // Load image to canvas
+        function loadImageToCanvas(file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    originalImage = img;
+                    currentImage = img;
+                    
+                    // Calculate dimensions to fit canvas while maintaining aspect ratio
+                    const aspectRatio = img.width / img.height;
+                    let newWidth, newHeight;
+                    
+                    if (aspectRatio > 1) {
+                        // Landscape
+                        newWidth = Math.min(canvas.width, img.width);
+                        newHeight = newWidth / aspectRatio;
+                    } else {
+                        // Portrait
+                        newHeight = Math.min(canvas.height, img.height);
+                        newWidth = newHeight * aspectRatio;
+                    }
+                    
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+                    
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                };
+                img.src = e.target.result;
+                
+                // Show preview
+                document.getElementById('image-preview').src = e.target.result;
+                document.getElementById('image-preview').style.display = 'block';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        // Draw image with current adjustments
+        function drawImageWithAdjustments() {
+            if (!currentImage) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (currentView === 'single' || currentView === 'split') {
+                // Draw the adjusted image
+                ctx.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
+                applyAdjustments();
+                
+                if (currentView === 'split') {
+                    // Draw a vertical line to separate before/after
+                    ctx.beginPath();
+                    ctx.moveTo(canvas.width / 2, 0);
+                    ctx.lineTo(canvas.width / 2, canvas.height);
+                    ctx.strokeStyle = 'white';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    // Draw the original image on the left side
+                    ctx.globalCompositeOperation = 'source-atop';
+                    ctx.drawImage(originalImage, 0, 0, canvas.width / 2, canvas.height);
+                    ctx.globalCompositeOperation = 'source-over';
+                }
+            } else if (currentView === 'comparison') {
+                // Draw comparison view
+                const splitX = (comparisonPosition / 100) * canvas.width;
+                
+                // Draw original on left
+                ctx.drawImage(originalImage, 0, 0, splitX, canvas.height);
+                
+                // Draw adjusted on right
+                ctx.drawImage(currentImage, splitX, 0, canvas.width - splitX, canvas.height);
+                applyAdjustments(splitX, 0, canvas.width - splitX, canvas.height);
+            }
+        }
+        
+        // Apply color adjustments to the canvas
+        function applyAdjustments(x = 0, y = 0, width = canvas.width, height = canvas.height) {
+            if (!currentImage) return;
+            
+            const imageData = ctx.getImageData(x, y, width, height);
+            const data = imageData.data;
+            
+            // Apply all adjustments
+            for (let i = 0; i < data.length; i += 4) {
+                let r = data[i];
+                let g = data[i + 1];
+                let b = data[i + 2];
+                
+                // Apply brightness
+                r = applyBrightness(r, adjustments.brightness);
+                g = applyBrightness(g, adjustments.brightness);
+                b = applyBrightness(b, adjustments.brightness);
+                
+                // Apply contrast
+                r = applyContrast(r, adjustments.contrast);
+                g = applyContrast(g, adjustments.contrast);
+                b = applyContrast(b, adjustments.contrast);
+                
+                // Apply saturation
+                const satResult = applySaturation(r, g, b, adjustments.saturation);
+                r = satResult.r;
+                g = satResult.g;
+                b = satResult.b;
+                
+                // Apply exposure
+                r = applyExposure(r, adjustments.exposure);
+                g = applyExposure(g, adjustments.exposure);
+                b = applyExposure(b, adjustments.exposure);
+                
+                // Apply temperature (warm/cool)
+                const tempResult = applyTemperature(r, g, b, adjustments.temperature);
+                r = tempResult.r;
+                g = tempResult.g;
+                b = tempResult.b;
+                
+                // Apply tint
+                const tintResult = applyTint(r, g, b, adjustments.tint);
+                r = tintResult.r;
+                g = tintResult.g;
+                b = tintResult.b;
+                
+                // Apply hue
+                const hueResult = applyHue(r, g, b, adjustments.hue);
+                r = hueResult.r;
+                g = hueResult.g;
+                b = hueResult.b;
+                
+                // Apply vibrance
+                const vibranceResult = applyVibrance(r, g, b, adjustments.vibrance);
+                r = vibranceResult.r;
+                g = vibranceResult.g;
+                b = vibranceResult.b;
+                
+                // Apply color channels
+                r = applyChannel(r, adjustments.red);
+                g = applyChannel(g, adjustments.green);
+                b = applyChannel(b, adjustments.blue);
+                
+                // Apply gamma
+                r = applyGamma(r, adjustments.gamma);
+                g = applyGamma(g, adjustments.gamma);
+                b = applyGamma(b, adjustments.gamma);
+                
+                // Apply tone curve
+                const curveResult = applyToneCurve(r, g, b);
+                r = curveResult.r;
+                g = curveResult.g;
+                b = curveResult.b;
+                
+                // Clamp values to valid range
+                data[i] = clamp(r, 0, 255);
+                data[i + 1] = clamp(g, 0, 255);
+                data[i + 2] = clamp(b, 0, 255);
+            }
+            
+            ctx.putImageData(imageData, x, y);
+        }
+        
+        // Individual adjustment functions
+        function applyBrightness(value, adjustment) {
+            return value * (adjustment / 100);
+        }
+        
+        function applyContrast(value, adjustment) {
+            const factor = (259 * (adjustment + 255)) / (255 * (259 - adjustment));
+            return factor * (value - 128) + 128;
+        }
+        
+        function applySaturation(r, g, b, adjustment) {
+            const gray = 0.2989 * r + 0.5870 * g + 0.1140 * b;
+            return {
+                r: gray + (r - gray) * (adjustment / 100),
+                g: gray + (g - gray) * (adjustment / 100),
+                b: gray + (b - gray) * (adjustment / 100)
+            };
+        }
+        
+        function applyExposure(value, adjustment) {
+            return value * Math.pow(2, (adjustment - 100) / 100);
+        }
+        
+        function applyTemperature(r, g, b, adjustment) {
+            // Warm (positive) or cool (negative) adjustment
+            if (adjustment > 0) {
+                // Warm - increase red, decrease blue
+                r += adjustment * 0.5;
+                b -= adjustment * 0.5;
+            } else {
+                // Cool - decrease red, increase blue
+                r += adjustment * 0.5;
+                b -= adjustment * 0.5;
+            }
+            return { r, g, b };
+        }
+        
+        function applyTint(r, g, b, adjustment) {
+            // Green (negative) or magenta (positive) adjustment
+            if (adjustment > 0) {
+                // Magenta - increase red and blue
+                r += adjustment * 0.3;
+                b += adjustment * 0.3;
+            } else {
+                // Green - increase green
+                g -= adjustment * 0.3;
+            }
+            return { r, g, b };
+        }
+        
+        function applyHue(r, g, b, adjustment) {
+            // Convert RGB to HSL
+            let h, s, l;
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                
+                h /= 6;
+            }
+            
+            // Adjust hue
+            h = (h + adjustment / 360) % 1;
+            if (h < 0) h += 1;
+            
+            // Convert back to RGB
+            let r1, g1, b1;
+            if (s === 0) {
+                r1 = g1 = b1 = l; // achromatic
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                
+                r1 = hue2rgb(p, q, h + 1/3);
+                g1 = hue2rgb(p, q, h);
+                b1 = hue2rgb(p, q, h - 1/3);
+            }
+            
+            return {
+                r: r1 * 255,
+                g: g1 * 255,
+                b: b1 * 255
+            };
+        }
+        
+        function applyVibrance(r, g, b, adjustment) {
+            const avg = (r + g + b) / 3;
+            const max = Math.max(r, g, b);
+            const amt = ((Math.abs(max - avg) * 2 / 255) * (adjustment - 100)) / 100;
+            
+            if (r !== max) r += (max - r) * amt;
+            if (g !== max) g += (max - g) * amt;
+            if (b !== max) b += (max - b) * amt;
+            
+            return { r, g, b };
+        }
+        
+        function applyChannel(value, adjustment) {
+            return value * (adjustment / 100);
+        }
+        
+        function applyGamma(value, adjustment) {
+            return 255 * Math.pow(value / 255, 1 / adjustment);
+        }
+        
+        function applyToneCurve(r, g, b) {
+            // Simple implementation - in a real app, this would use the actual curve points
+            // For now, we'll apply a basic S-curve if points exist
+            if (curvePoints.length >= 2) {
+                // Apply curve to each channel based on curve-channel selection
+                const channel = document.getElementById('curve-channel').value;
+                
+                if (channel === 'rgb' || channel === 'red') {
+                    r = applyCurveToValue(r);
+                }
+                if (channel === 'rgb' || channel === 'green') {
+                    g = applyCurveToValue(g);
+                }
+                if (channel === 'rgb' || channel === 'blue') {
+                    b = applyCurveToValue(b);
+                }
+            }
+            
+            return { r, g, b };
+        }
+        
+        function applyCurveToValue(value) {
+            // Find the two points that bracket the value
+            for (let i = 0; i < curvePoints.length - 1; i++) {
+                if (value >= curvePoints[i].x && value <= curvePoints[i + 1].x) {
+                    // Linear interpolation between points
+                    const t = (value - curvePoints[i].x) / (curvePoints[i + 1].x - curvePoints[i].x);
+                    return curvePoints[i].y + t * (curvePoints[i + 1].y - curvePoints[i].y);
+                }
+            }
+            return value;
+        }
+        
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+        
+        // Update histogram
+        function updateHistogram() {
+            if (!currentImage) return;
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            const histogram = {
+                r: new Array(256).fill(0),
+                g: new Array(256).fill(0),
+                b: new Array(256).fill(0),
+                luminance: new Array(256).fill(0)
+            };
+            
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+                
+                histogram.r[r]++;
+                histogram.g[g]++;
+                histogram.b[b]++;
+                histogram.luminance[Math.floor(luminance)]++;
+            }
+            
+            drawHistogram(histogram);
+        }
+        
+        function drawEmptyHistogram() {
+            histogramCtx.fillStyle = '#f8f9fa';
+            histogramCtx.fillRect(0, 0, histogramCanvas.width, histogramCanvas.height);
+            
+            histogramCtx.fillStyle = '#6c757d';
+            histogramCtx.font = '12px Arial';
+            histogramCtx.textAlign = 'center';
+            histogramCtx.fillText('Histogram will appear here', histogramCanvas.width / 2, histogramCanvas.height / 2);
+        }
+        
+        function drawHistogram(histogram) {
+            const width = histogramCanvas.width;
+            const height = histogramCanvas.height;
+            
+            histogramCtx.clearRect(0, 0, width, height);
+            
+            // Find the maximum value for normalization
+            const max = Math.max(
+                ...histogram.r,
+                ...histogram.g,
+                ...histogram.b,
+                ...histogram.luminance
+            );
+            
+            // Draw luminance histogram (gray)
+            histogramCtx.fillStyle = 'rgba(100, 100, 100, 0.5)';
+            for (let i = 0; i < 256; i++) {
+                const value = histogram.luminance[i];
+                const barHeight = (value / max) * height;
+                histogramCtx.fillRect(i * (width / 256), height - barHeight, width / 256, barHeight);
+            }
+            
+            // Draw RGB histograms
+            histogramCtx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+            for (let i = 0; i < 256; i++) {
+                const value = histogram.r[i];
+                const barHeight = (value / max) * height;
+                histogramCtx.fillRect(i * (width / 256), height - barHeight, width / 256, barHeight);
+            }
+            
+            histogramCtx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+            for (let i = 0; i < 256; i++) {
+                const value = histogram.g[i];
+                const barHeight = (value / max) * height;
+                histogramCtx.fillRect(i * (width / 256), height - barHeight, width / 256, barHeight);
+            }
+            
+            histogramCtx.fillStyle = 'rgba(0, 0, 255, 0.5)';
+            for (let i = 0; i < 256; i++) {
+                const value = histogram.b[i];
+                const barHeight = (value / max) * height;
+                histogramCtx.fillRect(i * (width / 256), height - barHeight, width / 256, barHeight);
+            }
+        }
+        
+        // Tone curve functions
+        function drawToneCurve() {
+            const width = curveCanvas.width;
+            const height = curveCanvas.height;
+            
+            curveCtx.clearRect(0, 0, width, height);
+            
+            // Draw grid
+            curveCtx.strokeStyle = '#e9ecef';
+            curveCtx.lineWidth = 1;
+            
+            // Vertical lines
+            for (let i = 0; i <= 10; i++) {
+                const x = i * (width / 10);
+                curveCtx.beginPath();
+                curveCtx.moveTo(x, 0);
+                curveCtx.lineTo(x, height);
+                curveCtx.stroke();
+            }
+            
+            // Horizontal lines
+            for (let i = 0; i <= 10; i++) {
+                const y = i * (height / 10);
+                curveCtx.beginPath();
+                curveCtx.moveTo(0, y);
+                curveCtx.lineTo(width, y);
+                curveCtx.stroke();
+            }
+            
+            // Draw diagonal line
+            curveCtx.strokeStyle = '#6c757d';
+            curveCtx.lineWidth = 1;
+            curveCtx.beginPath();
+            curveCtx.moveTo(0, height);
+            curveCtx.lineTo(width, 0);
+            curveCtx.stroke();
+            
+            // Draw curve
+            curveCtx.strokeStyle = '#4361ee';
+            curveCtx.lineWidth = 2;
+            curveCtx.beginPath();
+            
+            for (let i = 0; i < curvePoints.length; i++) {
+                const x = (curvePoints[i].x / 255) * width;
+                const y = height - (curvePoints[i].y / 255) * height;
+                
+                if (i === 0) {
+                    curveCtx.moveTo(x, y);
+                } else {
+                    curveCtx.lineTo(x, y);
+                }
+            }
+            
+            curveCtx.stroke();
+            
+            // Draw control points
+            curveCtx.fillStyle = '#4361ee';
+            for (let i = 0; i < curvePoints.length; i++) {
+                const x = (curvePoints[i].x / 255) * width;
+                const y = height - (curvePoints[i].y / 255) * height;
+                
+                curveCtx.beginPath();
+                curveCtx.arc(x, y, 5, 0, Math.PI * 2);
+                curveCtx.fill();
+            }
+        }
+        
+        // Download image
+        function downloadImage(format) {
+            if (!currentImage) {
+                alert('Please upload an image first.');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = `color-adjusted-image.${format}`;
+            link.href = canvas.toDataURL(`image/${format}`);
+            link.click();
+        }
+        
+        // Auto adjust function
+        function autoAdjust() {
+            // Reset all adjustments to default
+            Object.keys(adjustments).forEach(key => {
+                if (key !== 'gamma') {
+                    adjustments[key] = key === 'temperature' || key === 'tint' || key === 'hue' ? 0 : 100;
+                } else {
+                    adjustments[key] = 1.0;
+                }
+            });
+            
+            // Update sliders
+            updateSlidersFromAdjustments();
+            
+            // Redraw image
+            drawImageWithAdjustments();
+            updateHistogram();
+        }
+        
+        // Update sliders from current adjustments
+        function updateSlidersFromAdjustments() {
+            document.getElementById('brightness').value = adjustments.brightness;
+            document.getElementById('brightness-value').textContent = `${adjustments.brightness}%`;
+            
+            document.getElementById('contrast').value = adjustments.contrast;
+            document.getElementById('contrast-value').textContent = `${adjustments.contrast}%`;
+            
+            document.getElementById('saturation').value = adjustments.saturation;
+            document.getElementById('saturation-value').textContent = `${adjustments.saturation}%`;
+            
+            document.getElementById('exposure').value = adjustments.exposure;
+            document.getElementById('exposure-value').textContent = `${adjustments.exposure}%`;
+            
+            document.getElementById('highlights').value = adjustments.highlights;
+            document.getElementById('highlights-value').textContent = `${adjustments.highlights}%`;
+            
+            document.getElementById('shadows').value = adjustments.shadows;
+            document.getElementById('shadows-value').textContent = `${adjustments.shadows}%`;
+            
+            document.getElementById('clarity').value = adjustments.clarity;
+            document.getElementById('clarity-value').textContent = `${adjustments.clarity}%`;
+            
+            document.getElementById('temperature').value = adjustments.temperature;
+            document.getElementById('temperature-value').textContent = adjustments.temperature;
+            
+            document.getElementById('tint').value = adjustments.tint;
+            document.getElementById('tint-value').textContent = adjustments.tint;
+            
+            document.getElementById('hue').value = adjustments.hue;
+            document.getElementById('hue-value').textContent = `${adjustments.hue}°`;
+            
+            document.getElementById('vibrance').value = adjustments.vibrance;
+            document.getElementById('vibrance-value').textContent = `${adjustments.vibrance}%`;
+            
+            document.getElementById('red-channel').value = adjustments.red;
+            document.getElementById('red-value').textContent = `${adjustments.red}%`;
+            
+            document.getElementById('green-channel').value = adjustments.green;
+            document.getElementById('green-value').textContent = `${adjustments.green}%`;
+            
+            document.getElementById('blue-channel').value = adjustments.blue;
+            document.getElementById('blue-value').textContent = `${adjustments.blue}%`;
+            
+            document.getElementById('gamma').value = adjustments.gamma;
+            document.getElementById('gamma-value').textContent = adjustments.gamma.toFixed(1);
+        }
+        
+        // Initialize the application
+        function init() {
+            initCanvas();
+            
+            // File upload handling
+            document.getElementById('file-input').addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    loadImageToCanvas(e.target.files[0]);
+                }
+            });
+            
+            document.getElementById('browse-btn').addEventListener('click', function() {
+                document.getElementById('file-input').click();
+            });
+            
+            document.getElementById('file-upload-area').addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#4361ee';
+                this.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            });
+            
+            document.getElementById('file-upload-area').addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#e9ecef';
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            document.getElementById('file-upload-area').addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#e9ecef';
+                this.style.backgroundColor = 'transparent';
+                
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    loadImageToCanvas(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Toolbar button event handlers
+            const toolButtons = document.querySelectorAll('.toolbar-btn');
+            toolButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    toolButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Hide all panels except upload panel
+                    document.querySelectorAll('.tool-panel').forEach(panel => {
+                        if (panel.id !== 'upload-panel') {
+                            panel.classList.remove('active');
+                        }
+                    });
+                    
+                    // Show corresponding panel
+                    const toolId = this.id;
+                    if (toolId === 'basic-btn') {
+                        document.getElementById('basic-panel').classList.add('active');
+                    } else if (toolId === 'color-btn') {
+                        document.getElementById('color-panel').classList.add('active');
+                    } else if (toolId === 'curves-btn') {
+                        document.getElementById('curves-panel').classList.add('active');
+                    } else if (toolId === 'presets-btn') {
+                        document.getElementById('presets-panel').classList.add('active');
+                    }
+                });
+            });
+            
+            // Basic adjustment sliders
+            const basicSliders = [
+                'brightness', 'contrast', 'saturation', 'exposure', 
+                'highlights', 'shadows', 'clarity'
+            ];
+            
+            basicSliders.forEach(sliderId => {
+                const slider = document.getElementById(sliderId);
+                const valueDisplay = document.getElementById(`${sliderId}-value`);
+                
+                slider.addEventListener('input', function() {
+                    adjustments[sliderId] = parseInt(this.value);
+                    valueDisplay.textContent = `${this.value}%`;
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                });
+            });
+            
+            // Color adjustment sliders
+            const colorSliders = [
+                'temperature', 'tint', 'hue', 'vibrance'
+            ];
+            
+            colorSliders.forEach(sliderId => {
+                const slider = document.getElementById(sliderId);
+                const valueDisplay = document.getElementById(`${sliderId}-value`);
+                
+                slider.addEventListener('input', function() {
+                    adjustments[sliderId] = parseInt(this.value);
+                    
+                    if (sliderId === 'hue') {
+                        valueDisplay.textContent = `${this.value}°`;
+                    } else {
+                        valueDisplay.textContent = this.value;
+                    }
+                    
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                });
+            });
+            
+            // Color channel sliders
+            const channelSliders = ['red-channel', 'green-channel', 'blue-channel'];
+            
+            channelSliders.forEach(sliderId => {
+                const slider = document.getElementById(sliderId);
+                const channel = sliderId.split('-')[0];
+                const valueDisplay = document.getElementById(`${channel}-value`);
+                
+                slider.addEventListener('input', function() {
+                    adjustments[channel] = parseInt(this.value);
+                    valueDisplay.textContent = `${this.value}%`;
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                });
+            });
+            
+            // Gamma slider
+            document.getElementById('gamma').addEventListener('input', function() {
+                adjustments.gamma = parseFloat(this.value);
+                document.getElementById('gamma-value').textContent = this.value;
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            // Auto adjust buttons
+            document.getElementById('auto-adjust').addEventListener('click', autoAdjust);
+            document.getElementById('auto-white-balance').addEventListener('click', function() {
+                // Simple auto white balance - reset temperature and tint
+                adjustments.temperature = 0;
+                adjustments.tint = 0;
+                document.getElementById('temperature').value = 0;
+                document.getElementById('temperature-value').textContent = '0';
+                document.getElementById('tint').value = 0;
+                document.getElementById('tint-value').textContent = '0';
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            // Reset buttons
+            document.getElementById('reset-basic').addEventListener('click', function() {
+                // Reset basic adjustments
+                ['brightness', 'contrast', 'saturation', 'exposure', 'highlights', 'shadows', 'clarity'].forEach(key => {
+                    adjustments[key] = 100;
+                });
+                updateSlidersFromAdjustments();
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            document.getElementById('reset-color').addEventListener('click', function() {
+                // Reset color adjustments
+                ['temperature', 'tint', 'hue'].forEach(key => {
+                    adjustments[key] = 0;
+                });
+                adjustments.vibrance = 100;
+                adjustments.red = 100;
+                adjustments.green = 100;
+                adjustments.blue = 100;
+                updateSlidersFromAdjustments();
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            // View options
+            document.querySelectorAll('.view-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.view-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentView = this.getAttribute('data-view');
+                    drawImageWithAdjustments();
+                });
+            });
+            
+            // Comparison slider
+            const comparisonSlider = document.getElementById('comparison-slider');
+            let isDragging = false;
+            
+            comparisonSlider.addEventListener('mousedown', function(e) {
+                isDragging = true;
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging && currentView === 'comparison') {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    comparisonPosition = (x / canvas.width) * 100;
+                    comparisonPosition = Math.max(0, Math.min(100, comparisonPosition));
+                    comparisonSlider.style.left = `${comparisonPosition}%`;
+                    drawImageWithAdjustments();
+                }
+            });
+            
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+            
+            // Zoom controls
+            document.getElementById('zoom-in').addEventListener('click', function() {
+                if (zoomLevel < 3) {
+                    zoomLevel += 0.1;
+                    updateZoom();
+                }
+            });
+            
+            document.getElementById('zoom-out').addEventListener('click', function() {
+                if (zoomLevel > 0.2) {
+                    zoomLevel -= 0.1;
+                    updateZoom();
+                }
+            });
+            
+            document.getElementById('fit-to-screen').addEventListener('click', function() {
+                zoomLevel = 1;
+                updateZoom();
+            });
+            
+            // Download button
+            document.getElementById('download-btn').addEventListener('click', function() {
+                const activeFormat = document.querySelector('.format-option.active').getAttribute('data-format');
+                downloadImage(activeFormat);
+            });
+            
+            // Format selection
+            document.querySelectorAll('.format-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Reset button
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset all adjustments?')) {
+                    autoAdjust();
+                    curvePoints = [
+                        { x: 0, y: 0 },
+                        { x: 255, y: 255 }
+                    ];
+                    drawToneCurve();
+                }
+            });
+            
+            // Preset selection
+            document.querySelectorAll('.preset-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.preset-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const presetName = this.querySelector('.preset-name').textContent;
+                    applyColorPreset(presetName);
+                });
+            });
+            
+            // Tone curve interaction
+            curveCanvas.addEventListener('mousedown', function(e) {
+                const rect = curveCanvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Check if clicking on a point
+                for (let i = 0; i < curvePoints.length; i++) {
+                    const pointX = (curvePoints[i].x / 255) * curveCanvas.width;
+                    const pointY = curveCanvas.height - (curvePoints[i].y / 255) * curveCanvas.height;
+                    
+                    if (Math.abs(x - pointX) < 10 && Math.abs(y - pointY) < 10) {
+                        isDraggingCurve = true;
+                        draggedPointIndex = i;
+                        return;
+                    }
+                }
+                
+                // Add new point if not too close to existing points
+                const newX = (x / curveCanvas.width) * 255;
+                const newY = ((curveCanvas.height - y) / curveCanvas.height) * 255;
+                
+                let canAdd = true;
+                for (let i = 0; i < curvePoints.length; i++) {
+                    if (Math.abs(curvePoints[i].x - newX) < 20) {
+                        canAdd = false;
+                        break;
+                    }
+                }
+                
+                if (canAdd) {
+                    curvePoints.push({ x: newX, y: newY });
+                    curvePoints.sort((a, b) => a.x - b.x);
+                    drawToneCurve();
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                }
+            });
+            
+            curveCanvas.addEventListener('mousemove', function(e) {
+                if (isDraggingCurve && draggedPointIndex >= 0) {
+                    const rect = curveCanvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const newX = (x / curveCanvas.width) * 255;
+                    const newY = ((curveCanvas.height - y) / curveCanvas.height) * 255;
+                    
+                    // Constrain x position to not cross other points
+                    let minX = 0;
+                    let maxX = 255;
+                    
+                    if (draggedPointIndex > 0) {
+                        minX = curvePoints[draggedPointIndex - 1].x + 1;
+                    }
+                    
+                    if (draggedPointIndex < curvePoints.length - 1) {
+                        maxX = curvePoints[draggedPointIndex + 1].x - 1;
+                    }
+                    
+                    curvePoints[draggedPointIndex].x = Math.max(minX, Math.min(maxX, newX));
+                    curvePoints[draggedPointIndex].y = Math.max(0, Math.min(255, newY));
+                    
+                    drawToneCurve();
+                    drawImageWithAdjustments();
+                    updateHistogram();
+                }
+            });
+            
+            curveCanvas.addEventListener('mouseup', function() {
+                isDraggingCurve = false;
+                draggedPointIndex = -1;
+            });
+            
+            curveCanvas.addEventListener('dblclick', function(e) {
+                const rect = curveCanvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Find and remove point if double-clicked
+                for (let i = 1; i < curvePoints.length - 1; i++) { // Don't remove first and last points
+                    const pointX = (curvePoints[i].x / 255) * curveCanvas.width;
+                    const pointY = curveCanvas.height - (curvePoints[i].y / 255) * curveCanvas.height;
+                    
+                    if (Math.abs(x - pointX) < 10 && Math.abs(y - pointY) < 10) {
+                        curvePoints.splice(i, 1);
+                        drawToneCurve();
+                        drawImageWithAdjustments();
+                        updateHistogram();
+                        return;
+                    }
+                }
+            });
+            
+            // Curve controls
+            document.getElementById('reset-curve').addEventListener('click', function() {
+                curvePoints = [
+                    { x: 0, y: 0 },
+                    { x: 255, y: 255 }
+                ];
+                drawToneCurve();
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            document.getElementById('s-curve').addEventListener('click', function() {
+                curvePoints = [
+                    { x: 0, y: 0 },
+                    { x: 85, y: 60 },
+                    { x: 170, y: 195 },
+                    { x: 255, y: 255 }
+                ];
+                drawToneCurve();
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+            
+            // Curve channel selector
+            document.getElementById('curve-channel').addEventListener('change', function() {
+                drawImageWithAdjustments();
+                updateHistogram();
+            });
+        }
+        
+        // Apply color preset
+        function applyColorPreset(presetName) {
+            // Reset all adjustments first
+            autoAdjust();
+            
+            switch(presetName) {
+                case 'Cool':
+                    adjustments.temperature = -30;
+                    adjustments.tint = 10;
+                    break;
+                case 'Warm':
+                    adjustments.temperature = 30;
+                    adjustments.tint = -5;
+                    break;
+                case 'Vibrant':
+                    adjustments.saturation = 130;
+                    adjustments.vibrance = 120;
+                    break;
+                case 'Natural':
+                    adjustments.brightness = 105;
+                    adjustments.contrast = 110;
+                    break;
+                case 'Soft':
+                    adjustments.contrast = 90;
+                    adjustments.saturation = 85;
+                    adjustments.clarity = 80;
+                    break;
+                case 'Dramatic':
+                    adjustments.contrast = 130;
+                    adjustments.saturation = 110;
+                    adjustments.exposure = 90;
+                    break;
+                case 'Cinematic':
+                    adjustments.contrast = 120;
+                    adjustments.saturation = 80;
+                    adjustments.temperature = 20;
+                    adjustments.tint = 10;
+                    break;
+            }
+            
+            updateSlidersFromAdjustments();
+            drawImageWithAdjustments();
+            updateHistogram();
+        }
+        
+        // Update zoom level
+        function updateZoom() {
+            document.getElementById('zoom-level').textContent = `${Math.round(zoomLevel * 100)}%`;
+            
+            if (currentImage) {
+                const container = document.querySelector('.canvas-container');
+                container.style.transform = `scale(${zoomLevel})`;
+            }
+        }
+        
+        // Initialize the application when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

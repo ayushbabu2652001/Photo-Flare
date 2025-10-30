@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced file explorer for Photo Flare's Cloud Storage Integration. Manage, organize, and access your files across multiple cloud storage providers.">
+    <meta name="keywords" content="file explorer, cloud storage, file management, photo flare, premium tools">
+    <title>Advanced File Explorer | Photo Flare Cloud Storage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .tool-header {
+            padding: 2rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .file-explorer {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .explorer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .explorer-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .explorer-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray);
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sort-controls select {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.9rem;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .file-grid.list-view {
+            grid-template-columns: 1fr;
+            max-height: 500px;
+        }
+
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .file-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .file-item.selected {
+            background: rgba(67, 97, 238, 0.1);
+            border: 2px solid var(--primary);
+        }
+
+        .file-item.list-view {
+            flex-direction: row;
+            text-align: left;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .file-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .file-item.selected .file-icon {
+            color: var(--primary-dark);
+        }
+
+        .file-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .file-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            word-break: break-word;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-item.list-view .file-name {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: unset;
+        }
+
+        .file-details {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .file-size, .file-date {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .file-actions {
+            display: none;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            gap: 0.3rem;
+        }
+
+        .file-item:hover .file-actions {
+            display: flex;
+        }
+
+        .file-action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray);
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-action-btn:hover {
+            background: white;
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .file-preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .preview-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            text-align: center;
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .preview-close:hover {
+            transform: scale(1.1);
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 8px;
+        }
+
+        .preview-info {
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .preview-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .preview-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .preview-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .detail-value {
+            color: var(--dark);
+        }
+
+        .selection-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .selection-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .context-menu {
+            position: fixed;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            min-width: 180px;
+            overflow: hidden;
+        }
+
+        .context-menu-item {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .context-menu-item:hover {
+            background: var(--light);
+        }
+
+        .context-menu-item i {
+            width: 16px;
+            text-align: center;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: var(--light-gray);
+            margin: 0.2rem 0;
+        }
+
+        .premium-feature {
+            position: relative;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .premium-feature:hover .premium-overlay {
+            opacity: 1;
+        }
+
+        .premium-overlay i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .upgrade-prompt h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .file-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .explorer-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .explorer-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+            
+            .file-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem 0;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .file-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .file-item.list-view {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Header -->
+    <section class="tool-header">
+        <div class="container">
+            <h1>Advanced File Explorer</h1>
+            <p>Manage, organize, and access your files across multiple cloud storage providers with our powerful file explorer.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Upgrade Prompt for Free Users -->
+        <div class="upgrade-prompt" id="upgradePrompt">
+            <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+            <p>Advanced file explorer features are available with a premium subscription. Upgrade to unlock all capabilities.</p>
+            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
+        </div>
+
+        <!-- File Explorer -->
+        <div class="file-explorer">
+            <div class="explorer-header">
+                <div class="breadcrumb" id="breadcrumb">
+                    <a href="#" class="breadcrumb-home">
+                        <i class="fas fa-cloud"></i> Cloud Storage
+                    </a>
+                    <span>></span>
+                    <a href="#" data-path="my-files">
+                        <i class="fas fa-folder"></i> My Files
+                    </a>
+                    <span id="current-folder-path"></span>
+                </div>
+                <div class="explorer-actions">
+                    <button class="btn btn-outline" id="refreshBtn">
+                        <i class="fas fa-redo"></i> Refresh
+                    </button>
+                    <button class="btn btn-outline premium-feature" id="uploadBtn">
+                        <i class="fas fa-upload"></i> Upload
+                        <div class="premium-overlay">
+                            <i class="fas fa-crown"></i>
+                            <p>Cloud upload is a premium feature</p>
+                            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                        </div>
+                    </button>
+                    <button class="btn btn-outline" id="newFolderBtn">
+                        <i class="fas fa-folder-plus"></i> New Folder
+                    </button>
+                </div>
+            </div>
+
+            <div class="explorer-toolbar">
+                <div class="view-controls">
+                    <button class="view-btn active" id="gridViewBtn" title="Grid View">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" id="listViewBtn" title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search files and folders...">
+                </div>
+                
+                <div class="sort-controls">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy">
+                        <option value="name">Name</option>
+                        <option value="date">Date Modified</option>
+                        <option value="size">Size</option>
+                        <option value="type">Type</option>
+                    </select>
+                    <button class="btn btn-outline btn-sm" id="sortOrderBtn" title="Ascending/Descending">
+                        <i class="fas fa-sort-amount-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="file-grid" id="fileGrid">
+                <!-- File items will be populated by JavaScript -->
+            </div>
+            
+            <div class="selection-info" id="selectionInfo" style="display: none;">
+                <span id="selectedCount">0 items selected</span>
+                <div class="selection-actions">
+                    <button class="btn btn-outline btn-sm" id="downloadSelectedBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn btn-outline btn-sm" id="shareSelectedBtn">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                    <button class="btn btn-outline btn-sm" id="deleteSelectedBtn">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- File Preview Modal -->
+        <div class="file-preview" id="filePreview">
+            <div class="preview-content">
+                <button class="preview-close" id="previewClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="previewContainer">
+                    <!-- Preview content will be inserted here -->
+                </div>
+                <div class="preview-info">
+                    <h3 id="previewFileName">File Name</h3>
+                    <div class="preview-details" id="previewFileDetails">
+                        <!-- File details will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Context Menu -->
+        <div class="context-menu" id="contextMenu">
+            <button class="context-menu-item" id="ctxOpen">
+                <i class="fas fa-folder-open"></i> Open
+            </button>
+            <button class="context-menu-item" id="ctxDownload">
+                <i class="fas fa-download"></i> Download
+            </button>
+            <button class="context-menu-item" id="ctxShare">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+            <div class="context-menu-divider"></div>
+            <button class="context-menu-item" id="ctxRename">
+                <i class="fas fa-edit"></i> Rename
+            </button>
+            <button class="context-menu-item" id="ctxCopy">
+                <i class="fas fa-copy"></i> Copy
+            </button>
+            <button class="context-menu-item" id="ctxMove">
+                <i class="fas fa-folder"></i> Move
+            </button>
+            <div class="context-menu-divider"></div>
+            <button class="context-menu-item" id="ctxDelete">
+                <i class="fas fa-trash"></i> Delete
+            </button>
+            <button class="context-menu-item premium-feature" id="ctxCompress">
+                <i class="fas fa-file-archive"></i> Compress
+                <div class="premium-overlay">
+                    <i class="fas fa-crown"></i>
+                    <p>File compression is a premium feature</p>
+                    <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const fileGrid = document.getElementById('fileGrid');
+        const breadcrumb = document.getElementById('breadcrumb');
+        const searchInput = document.getElementById('searchInput');
+        const sortBy = document.getElementById('sortBy');
+        const sortOrderBtn = document.getElementById('sortOrderBtn');
+        const gridViewBtn = document.getElementById('gridViewBtn');
+        const listViewBtn = document.getElementById('listViewBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const newFolderBtn = document.getElementById('newFolderBtn');
+        const selectionInfo = document.getElementById('selectionInfo');
+        const selectedCount = document.getElementById('selectedCount');
+        const downloadSelectedBtn = document.getElementById('downloadSelectedBtn');
+        const shareSelectedBtn = document.getElementById('shareSelectedBtn');
+        const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+        const filePreview = document.getElementById('filePreview');
+        const previewClose = document.getElementById('previewClose');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewFileName = document.getElementById('previewFileName');
+        const previewFileDetails = document.getElementById('previewFileDetails');
+        const contextMenu = document.getElementById('contextMenu');
+        const upgradePrompt = document.getElementById('upgradePrompt');
+        
+        // Context menu items
+        const ctxOpen = document.getElementById('ctxOpen');
+        const ctxDownload = document.getElementById('ctxDownload');
+        const ctxShare = document.getElementById('ctxShare');
+        const ctxRename = document.getElementById('ctxRename');
+        const ctxCopy = document.getElementById('ctxCopy');
+        const ctxMove = document.getElementById('ctxMove');
+        const ctxDelete = document.getElementById('ctxDelete');
+        const ctxCompress = document.getElementById('ctxCompress');
+        
+        // State Variables
+        let currentPath = ['my-files'];
+        let selectedFiles = [];
+        let isListView = false;
+        let sortOrder = 'asc';
+        let isPremiumUser = false; // This would be set based on user authentication
+        let fileSystem = {};
+        let contextMenuTarget = null;
+        
+        // Initialize the file explorer
+        function init() {
+            // Check if user is premium (in a real app, this would come from backend)
+            // For demo purposes, we'll set it to false
+            isPremiumUser = false;
+            
+            if (!isPremiumUser) {
+                upgradePrompt.style.display = 'block';
+            } else {
+                upgradePrompt.style.display = 'none';
+            }
+            
+            // Initialize file system data
+            initFileSystem();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Render initial file view
+            renderFileGrid();
+            updateBreadcrumb();
+        }
+        
+        // Initialize sample file system data
+        function initFileSystem() {
+            fileSystem = {
+                'my-files': {
+                    name: 'My Files',
+                    type: 'folder',
+                    path: 'my-files',
+                    children: {
+                        'documents': {
+                            name: 'Documents',
+                            type: 'folder',
+                            path: 'my-files/documents',
+                            children: {
+                                'report.pdf': {
+                                    name: 'report.pdf',
+                                    type: 'file',
+                                    extension: 'pdf',
+                                    size: '2.4 MB',
+                                    modified: '2023-10-15',
+                                    path: 'my-files/documents/report.pdf'
+                                },
+                                'notes.txt': {
+                                    name: 'notes.txt',
+                                    type: 'file',
+                                    extension: 'txt',
+                                    size: '15 KB',
+                                    modified: '2023-10-10',
+                                    path: 'my-files/documents/notes.txt'
+                                }
+                            }
+                        },
+                        'images': {
+                            name: 'Images',
+                            type: 'folder',
+                            path: 'my-files/images',
+                            children: {
+                                'photo1.jpg': {
+                                    name: 'photo1.jpg',
+                                    type: 'file',
+                                    extension: 'jpg',
+                                    size: '3.2 MB',
+                                    modified: '2023-10-12',
+                                    path: 'my-files/images/photo1.jpg'
+                                },
+                                'photo2.png': {
+                                    name: 'photo2.png',
+                                    type: 'file',
+                                    extension: 'png',
+                                    size: '1.8 MB',
+                                    modified: '2023-10-08',
+                                    path: 'my-files/images/photo2.png'
+                                },
+                                'vacation': {
+                                    name: 'Vacation',
+                                    type: 'folder',
+                                    path: 'my-files/images/vacation',
+                                    children: {
+                                        'beach.jpg': {
+                                            name: 'beach.jpg',
+                                            type: 'file',
+                                            extension: 'jpg',
+                                            size: '4.1 MB',
+                                            modified: '2023-09-20',
+                                            path: 'my-files/images/vacation/beach.jpg'
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        'videos': {
+                            name: 'Videos',
+                            type: 'folder',
+                            path: 'my-files/videos',
+                            children: {
+                                'demo.mp4': {
+                                    name: 'demo.mp4',
+                                    type: 'file',
+                                    extension: 'mp4',
+                                    size: '15.7 MB',
+                                    modified: '2023-10-05',
+                                    path: 'my-files/videos/demo.mp4'
+                                }
+                            }
+                        },
+                        'presentation.pptx': {
+                            name: 'presentation.pptx',
+                            type: 'file',
+                            extension: 'pptx',
+                            size: '5.3 MB',
+                            modified: '2023-10-18',
+                            path: 'my-files/presentation.pptx'
+                        },
+                        'budget.xlsx': {
+                            name: 'budget.xlsx',
+                            type: 'file',
+                            extension: 'xlsx',
+                            size: '1.2 MB',
+                            modified: '2023-10-14',
+                            path: 'my-files/budget.xlsx'
+                        }
+                    }
+                }
+            };
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // View controls
+            gridViewBtn.addEventListener('click', () => switchView('grid'));
+            listViewBtn.addEventListener('click', () => switchView('list'));
+            
+            // Search
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Sort controls
+            sortBy.addEventListener('change', renderFileGrid);
+            sortOrderBtn.addEventListener('click', toggleSortOrder);
+            
+            // Action buttons
+            refreshBtn.addEventListener('click', refreshFileList);
+            uploadBtn.addEventListener('click', uploadFile);
+            newFolderBtn.addEventListener('click', createNewFolder);
+            
+            // Selection actions
+            downloadSelectedBtn.addEventListener('click', downloadSelected);
+            shareSelectedBtn.addEventListener('click', shareSelected);
+            deleteSelectedBtn.addEventListener('click', deleteSelected);
+            
+            // Preview modal
+            previewClose.addEventListener('click', closePreview);
+            
+            // Context menu
+            document.addEventListener('click', closeContextMenu);
+            document.addEventListener('contextmenu', handleContextMenu);
+            
+            // Context menu actions
+            ctxOpen.addEventListener('click', handleContextOpen);
+            ctxDownload.addEventListener('click', handleContextDownload);
+            ctxShare.addEventListener('click', handleContextShare);
+            ctxRename.addEventListener('click', handleContextRename);
+            ctxCopy.addEventListener('click', handleContextCopy);
+            ctxMove.addEventListener('click', handleContextMove);
+            ctxDelete.addEventListener('click', handleContextDelete);
+            ctxCompress.addEventListener('click', handleContextCompress);
+        }
+        
+        // Switch between grid and list view
+        function switchView(view) {
+            isListView = view === 'list';
+            
+            if (isListView) {
+                fileGrid.classList.add('list-view');
+                gridViewBtn.classList.remove('active');
+                listViewBtn.classList.add('active');
+            } else {
+                fileGrid.classList.remove('list-view');
+                gridViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+            }
+            
+            renderFileGrid();
+        }
+        
+        // Handle search input
+        function handleSearch() {
+            renderFileGrid();
+        }
+        
+        // Toggle sort order
+        function toggleSortOrder() {
+            sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            sortOrderBtn.innerHTML = sortOrder === 'asc' 
+                ? '<i class="fas fa-sort-amount-down"></i>' 
+                : '<i class="fas fa-sort-amount-up"></i>';
+            renderFileGrid();
+        }
+        
+        // Render file grid based on current path and filters
+        function renderFileGrid() {
+            const currentFolder = getCurrentFolder();
+            if (!currentFolder || !currentFolder.children) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortByValue = sortBy.value;
+            
+            // Get files and folders
+            let items = Object.values(currentFolder.children);
+            
+            // Apply search filter
+            if (searchTerm) {
+                items = items.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Apply sorting
+            items.sort((a, b) => {
+                let aValue, bValue;
+                
+                switch (sortByValue) {
+                    case 'name':
+                        aValue = a.name.toLowerCase();
+                        bValue = b.name.toLowerCase();
+                        break;
+                    case 'date':
+                        aValue = new Date(a.modified || '1970-01-01');
+                        bValue = new Date(b.modified || '1970-01-01');
+                        break;
+                    case 'size':
+                        aValue = parseFileSize(a.size || '0');
+                        bValue = parseFileSize(b.size || '0');
+                        break;
+                    case 'type':
+                        aValue = a.type + (a.extension || '');
+                        bValue = b.type + (b.extension || '');
+                        break;
+                    default:
+                        aValue = a.name.toLowerCase();
+                        bValue = b.name.toLowerCase();
+                }
+                
+                if (sortOrder === 'asc') {
+                    return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                } else {
+                    return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                }
+            });
+            
+            // Clear the grid
+            fileGrid.innerHTML = '';
+            
+            // Add items to the grid
+            items.forEach(item => {
+                const fileItem = createFileItem(item);
+                fileGrid.appendChild(fileItem);
+            });
+            
+            // Show empty state if no items
+            if (items.length === 0) {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.style.gridColumn = '1 / -1';
+                emptyState.style.textAlign = 'center';
+                emptyState.style.padding = '2rem';
+                emptyState.style.color = 'var(--gray)';
+                emptyState.innerHTML = `
+                    <i class="fas fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3>No files found</h3>
+                    <p>${searchTerm ? 'Try adjusting your search terms' : 'This folder is empty'}</p>
+                `;
+                fileGrid.appendChild(emptyState);
+            }
+        }
+        
+        // Create a file item element
+        function createFileItem(item) {
+            const fileItem = document.createElement('div');
+            fileItem.className = `file-item ${isListView ? 'list-view' : ''}`;
+            fileItem.dataset.type = item.type;
+            fileItem.dataset.name = item.name;
+            fileItem.dataset.path = item.path;
+            
+            const fileIcon = getFileIcon(item);
+            const fileSize = item.type === 'folder' ? '' : `<div class="file-size"><i class="fas fa-weight-hanging"></i> ${item.size || 'Unknown'}</div>`;
+            const fileDate = item.modified ? `<div class="file-date"><i class="far fa-clock"></i> ${formatDate(item.modified)}</div>` : '';
+            
+            fileItem.innerHTML = `
+                <div class="file-icon">${fileIcon}</div>
+                <div class="file-info">
+                    <div class="file-name">${item.name}</div>
+                    <div class="file-details">
+                        ${fileSize}
+                        ${fileDate}
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="file-action-btn" title="Preview">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="file-action-btn" title="More options">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Add event listeners
+            fileItem.addEventListener('click', (e) => {
+                if (!e.target.closest('.file-actions')) {
+                    handleFileClick(item, e);
+                }
+            });
+            
+            fileItem.addEventListener('dblclick', () => {
+                if (item.type === 'folder') {
+                    navigateToFolder(item.path);
+                } else {
+                    openFilePreview(item);
+                }
+            });
+            
+            // Add context menu
+            fileItem.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showContextMenu(e, item);
+            });
+            
+            // Add action button events
+            const actionButtons = fileItem.querySelectorAll('.file-action-btn');
+            actionButtons[0].addEventListener('click', () => openFilePreview(item));
+            actionButtons[1].addEventListener('click', (e) => {
+                e.stopPropagation();
+                showContextMenu(e, item);
+            });
+            
+            return fileItem;
+        }
+        
+        // Get appropriate icon for file type
+        function getFileIcon(item) {
+            if (item.type === 'folder') {
+                return '<i class="fas fa-folder"></i>';
+            }
+            
+            const extension = item.extension || '';
+            const iconMap = {
+                'pdf': 'file-pdf',
+                'doc': 'file-word',
+                'docx': 'file-word',
+                'xls': 'file-excel',
+                'xlsx': 'file-excel',
+                'ppt': 'file-powerpoint',
+                'pptx': 'file-powerpoint',
+                'txt': 'file-alt',
+                'jpg': 'file-image',
+                'jpeg': 'file-image',
+                'png': 'file-image',
+                'gif': 'file-image',
+                'mp4': 'file-video',
+                'mov': 'file-video',
+                'avi': 'file-video',
+                'mp3': 'file-audio',
+                'wav': 'file-audio',
+                'zip': 'file-archive',
+                'rar': 'file-archive'
+            };
+            
+            const icon = iconMap[extension.toLowerCase()] || 'file';
+            return `<i class="fas fa-${icon}"></i>`;
+        }
+        
+        // Handle file click (selection)
+        function handleFileClick(item, event) {
+            const fileItem = event.currentTarget;
+            
+            if (event.ctrlKey || event.metaKey) {
+                // Multi-select with Ctrl/Cmd
+                fileItem.classList.toggle('selected');
+                
+                if (fileItem.classList.contains('selected')) {
+                    selectedFiles.push(item);
+                } else {
+                    selectedFiles = selectedFiles.filter(file => file.path !== item.path);
+                }
+            } else if (event.shiftKey && selectedFiles.length > 0) {
+                // Range select with Shift
+                // This would require more complex implementation in a real app
+                fileItem.classList.add('selected');
+                if (!selectedFiles.find(file => file.path === item.path)) {
+                    selectedFiles.push(item);
+                }
+            } else {
+                // Single select
+                document.querySelectorAll('.file-item.selected').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                fileItem.classList.add('selected');
+                selectedFiles = [item];
+            }
+            
+            updateSelectionInfo();
+        }
+        
+        // Update selection info bar
+        function updateSelectionInfo() {
+            if (selectedFiles.length > 0) {
+                selectedCount.textContent = `${selectedFiles.length} item${selectedFiles.length > 1 ? 's' : ''} selected`;
+                selectionInfo.style.display = 'flex';
+            } else {
+                selectionInfo.style.display = 'none';
+            }
+        }
+        
+        // Navigate to a folder
+        function navigateToFolder(path) {
+            currentPath = path.split('/');
+            renderFileGrid();
+            updateBreadcrumb();
+        }
+        
+        // Update breadcrumb navigation
+        function updateBreadcrumb() {
+            // Clear existing breadcrumb items (except the first one)
+            const breadcrumbItems = breadcrumb.querySelectorAll('a:not(.breadcrumb-home), span');
+            breadcrumbItems.forEach(item => item.remove());
+            
+            // Add breadcrumb items for current path
+            let currentPathStr = '';
+            
+            currentPath.forEach((segment, index) => {
+                currentPathStr += (index > 0 ? '/' : '') + segment;
+                
+                if (index > 0) {
+                    // Add separator
+                    const separator = document.createElement('span');
+                    separator.textContent = '>';
+                    breadcrumb.appendChild(separator);
+                    
+                    // Add breadcrumb item
+                    const crumb = document.createElement('a');
+                    crumb.href = '#';
+                    crumb.dataset.path = currentPathStr;
+                    
+                    const folder = getFolderByPath(currentPathStr);
+                    crumb.innerHTML = `<i class="fas fa-folder"></i> ${folder ? folder.name : segment}`;
+                    
+                    crumb.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        navigateToFolder(currentPathStr);
+                    });
+                    
+                    breadcrumb.appendChild(crumb);
+                }
+            });
+        }
+        
+        // Get current folder object
+        function getCurrentFolder() {
+            return getFolderByPath(currentPath.join('/'));
+        }
+        
+        // Get folder by path
+        function getFolderByPath(path) {
+            const segments = path.split('/');
+            let current = fileSystem;
+            
+            for (const segment of segments) {
+                if (current && current.children && current.children[segment]) {
+                    current = current.children[segment];
+                } else {
+                    return null;
+                }
+            }
+            
+            return current;
+        }
+        
+        // Refresh file list
+        function refreshFileList() {
+            // In a real app, this would fetch the latest data from the server
+            // For demo purposes, we'll just re-render
+            renderFileGrid();
+            addLogMessage('File list refreshed');
+        }
+        
+        // Upload file
+        function uploadFile() {
+            if (!isPremiumUser) {
+                alert('File upload to cloud storage is a premium feature. Please upgrade to use this capability.');
+                return;
+            }
+            
+            // In a real implementation, this would open a file picker
+            // For demo purposes, we'll simulate file upload
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.multiple = true;
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+            
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    // Simulate upload process
+                    addLogMessage(`Uploading ${files.length} file(s)...`);
+                    
+                    setTimeout(() => {
+                        addLogMessage('Files uploaded successfully');
+                        // In a real app, we would add the files to the file system and re-render
+                        renderFileGrid();
+                    }, 1500);
+                }
+                
+                document.body.removeChild(fileInput);
+            });
+            
+            fileInput.click();
+        }
+        
+        // Create new folder
+        function createNewFolder() {
+            const folderName = prompt('Enter folder name:');
+            if (folderName) {
+                // In a real implementation, this would create the folder in the cloud
+                addLogMessage(`Folder "${folderName}" created`);
+                
+                // Add to file system (for demo purposes)
+                const currentFolder = getCurrentFolder();
+                if (currentFolder && currentFolder.children) {
+                    const newFolderPath = currentFolder.path + '/' + folderName.toLowerCase().replace(/\s+/g, '-');
+                    currentFolder.children[folderName.toLowerCase().replace(/\s+/g, '-')] = {
+                        name: folderName,
+                        type: 'folder',
+                        path: newFolderPath,
+                        children: {}
+                    };
+                    
+                    renderFileGrid();
+                }
+            }
+        }
+        
+        // Download selected files
+        function downloadSelected() {
+            if (selectedFiles.length === 0) return;
+            
+            addLogMessage(`Preparing to download ${selectedFiles.length} file(s)...`);
+            
+            // In a real implementation, this would trigger downloads
+            // For demo purposes, we'll just show a message
+            setTimeout(() => {
+                addLogMessage('Download completed');
+            }, 1000);
+        }
+        
+        // Share selected files
+        function shareSelected() {
+            if (selectedFiles.length === 0) return;
+            
+            // In a real implementation, this would open a sharing dialog
+            const fileNames = selectedFiles.map(file => file.name).join(', ');
+            alert(`Sharing dialog would open for: ${fileNames}`);
+        }
+        
+        // Delete selected files
+        function deleteSelected() {
+            if (selectedFiles.length === 0) return;
+            
+            const confirmDelete = confirm(`Are you sure you want to delete ${selectedFiles.length} item(s)?`);
+            if (confirmDelete) {
+                // In a real implementation, this would delete the files from the cloud
+                selectedFiles.forEach(file => {
+                    addLogMessage(`Deleted: ${file.name}`);
+                });
+                
+                selectedFiles = [];
+                updateSelectionInfo();
+                renderFileGrid();
+            }
+        }
+        
+        // Open file preview
+        function openFilePreview(file) {
+            previewFileName.textContent = file.name;
+            
+            // Set preview content based on file type
+            if (file.extension && ['jpg', 'jpeg', 'png', 'gif'].includes(file.extension.toLowerCase())) {
+                previewContainer.innerHTML = `<img src="https://picsum.photos/600/400?random=1" alt="${file.name}" class="preview-image">`;
+            } else if (file.extension === 'pdf') {
+                previewContainer.innerHTML = `
+                    <div style="padding: 2rem; text-align: center;">
+                        <i class="fas fa-file-pdf" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <p>PDF preview would be displayed here</p>
+                    </div>
+                `;
+            } else {
+                previewContainer.innerHTML = `
+                    <div style="padding: 2rem; text-align: center;">
+                        <i class="fas fa-file" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <p>Preview not available for this file type</p>
+                    </div>
+                `;
+            }
+            
+            // Set file details
+            previewFileDetails.innerHTML = `
+                <div class="preview-detail">
+                    <span class="detail-label">Type:</span>
+                    <span class="detail-value">${file.extension ? file.extension.toUpperCase() : 'Folder'}</span>
+                </div>
+                <div class="preview-detail">
+                    <span class="detail-label">Size:</span>
+                    <span class="detail-value">${file.size || 'N/A'}</span>
+                </div>
+                <div class="preview-detail">
+                    <span class="detail-label">Modified:</span>
+                    <span class="detail-value">${file.modified ? formatDate(file.modified) : 'Unknown'}</span>
+                </div>
+                <div class="preview-detail">
+                    <span class="detail-label">Location:</span>
+                    <span class="detail-value">${file.path}</span>
+                </div>
+            `;
+            
+            // Show preview
+            filePreview.style.display = 'flex';
+        }
+        
+        // Close file preview
+        function closePreview() {
+            filePreview.style.display = 'none';
+        }
+        
+        // Handle context menu
+        function handleContextMenu(e) {
+            const fileItem = e.target.closest('.file-item');
+            if (fileItem) {
+                e.preventDefault();
+                contextMenuTarget = fileItem;
+                showContextMenu(e, {
+                    type: fileItem.dataset.type,
+                    name: fileItem.dataset.name,
+                    path: fileItem.dataset.path
+                });
+            }
+        }
+        
+        // Show context menu
+        function showContextMenu(e, file) {
+            contextMenu.style.display = 'flex';
+            contextMenu.style.left = `${e.pageX}px`;
+            contextMenu.style.top = `${e.pageY}px`;
+            contextMenu.dataset.targetPath = file.path;
+            
+            // Position the menu to stay within viewport
+            const rect = contextMenu.getBoundingClientRect();
+            if (rect.right > window.innerWidth) {
+                contextMenu.style.left = `${e.pageX - rect.width}px`;
+            }
+            if (rect.bottom > window.innerHeight) {
+                contextMenu.style.top = `${e.pageY - rect.height}px`;
+            }
+        }
+        
+        // Close context menu
+        function closeContextMenu() {
+            contextMenu.style.display = 'none';
+        }
+        
+        // Context menu actions
+        function handleContextOpen() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                if (file.type === 'folder') {
+                    navigateToFolder(path);
+                } else {
+                    openFilePreview(file);
+                }
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextDownload() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                addLogMessage(`Downloading: ${file.name}`);
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextShare() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                alert(`Sharing dialog would open for: ${file.name}`);
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextRename() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                const newName = prompt('Enter new name:', file.name);
+                if (newName && newName !== file.name) {
+                    addLogMessage(`Renamed "${file.name}" to "${newName}"`);
+                    file.name = newName;
+                    renderFileGrid();
+                }
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextCopy() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                addLogMessage(`Copied: ${file.name}`);
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextMove() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                alert(`Move dialog would open for: ${file.name}`);
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextDelete() {
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                const confirmDelete = confirm(`Are you sure you want to delete "${file.name}"?`);
+                if (confirmDelete) {
+                    addLogMessage(`Deleted: ${file.name}`);
+                    // In a real implementation, this would delete the file from the file system
+                    renderFileGrid();
+                }
+            }
+            
+            closeContextMenu();
+        }
+        
+        function handleContextCompress() {
+            if (!isPremiumUser) {
+                alert('File compression is a premium feature. Please upgrade to use this capability.');
+                closeContextMenu();
+                return;
+            }
+            
+            const path = contextMenu.dataset.targetPath;
+            const file = getFileByPath(path);
+            
+            if (file) {
+                addLogMessage(`Compressing: ${file.name}`);
+            }
+            
+            closeContextMenu();
+        }
+        
+        // Get file by path
+        function getFileByPath(path) {
+            const segments = path.split('/');
+            let current = fileSystem;
+            
+            for (let i = 0; i < segments.length; i++) {
+                const segment = segments[i];
+                if (current && current.children && current.children[segment]) {
+                    current = current.children[segment];
+                } else {
+                    return null;
+                }
+            }
+            
+            return current;
+        }
+        
+        // Utility functions
+        function parseFileSize(sizeStr) {
+            const units = {
+                'KB': 1024,
+                'MB': 1024 * 1024,
+                'GB': 1024 * 1024 * 1024
+            };
+            
+            const match = sizeStr.match(/([\d.]+)\s*([KMG]?B)/);
+            if (match) {
+                const value = parseFloat(match[1]);
+                const unit = match[2];
+                return value * (units[unit] || 1);
+            }
+            
+            return 0;
+        }
+        
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+        
+        function addLogMessage(message) {
+            // In a real implementation, this would add to an activity log
+            console.log(message);
+        }
+        
+        // Initialize the file explorer when the page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

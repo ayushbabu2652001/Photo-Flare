@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Cloud Storage - Securely store, access, and manage your files from anywhere. Sync across all your devices with advanced organization features.">
+    <meta name="keywords" content="cloud storage, file storage, online storage, file sharing, Photo Flare, document storage, image storage">
+    <title>Cloud Storage - Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-success: linear-gradient(135deg, var(--success), #3a86ff);
+            --gradient-warning: linear-gradient(135deg, var(--warning), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .profile-header .user-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .profile-plan {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .profile-menu {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .profile-menu a:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .profile-menu i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .profile-action-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-switch.active::after {
+            left: 29px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .storage-hero {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .storage-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .storage-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .cloud-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .storage-overview {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .storage-stats {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+        }
+
+        .stats-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .stats-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .stats-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .storage-usage {
+            margin-bottom: 2rem;
+        }
+
+        .usage-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .usage-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .usage-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .usage-bar {
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .usage-progress {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .storage-details {
+            margin-top: 1.5rem;
+        }
+
+        .storage-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .storage-detail:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+
+        .detail-icon {
+            width: 24px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-actions {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+        }
+
+        .actions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .actions-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .upload-text {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-action {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-action:hover {
+            background: rgba(67, 97, 238, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .quick-action-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .quick-action-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .files-section {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .files-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .files-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .file-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .file-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .file-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .pdf-icon {
+            background: #e63946;
+        }
+
+        .image-icon {
+            background: #4cc9f0;
+        }
+
+        .document-icon {
+            background: #f8961e;
+        }
+
+        .file-details h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .file-details p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .file-actions-menu {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-action:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .upgrade-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+
+        .upgrade-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .upgrade-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-text {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .storage-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .storage-plan {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .storage-plan.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .storage-plan.popular::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom-left-radius: 12px;
+        }
+
+        .storage-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-storage {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .plan-period {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .plan-features i {
+            color: var(--success);
+        }
+
+        .features-section {
+            margin: 3rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .storage-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .storage-plans {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .storage-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .storage-plan.popular {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .storage-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .storage-hero p {
+                font-size: 1rem;
+            }
+            
+            .files-header, .file-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .file-actions-menu {
+                justify-content: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-dropdown {
+                width: 100%;
+                right: 0;
+                left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .storage-hero {
+                padding: 1.5rem 0 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="cloud-storage.html" class="active">Cloud Storage</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">JS</div>
+                        <div class="user-name">John Smith</div>
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown">
+                            <div class="profile-header">
+                                <div class="user-avatar">JS</div>
+                                <div class="profile-info">
+                                    <h3>John Smith</h3>
+                                    <p>john.smith@example.com</p>
+                                    <div class="profile-plan">Pro Yearly Plan</div>
+                                </div>
+                            </div>
+                            <ul class="profile-menu">
+                                <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+                                <li><a href="account-settings.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+                                <li><a href="billing-subscription.html"><i class="fas fa-credit-card"></i> Billing & Subscription</a></li>
+                                <li><a href="usage-history.html"><i class="fas fa-history"></i> Usage History</a></li>
+                                <li><a href="storage-management.html"><i class="fas fa-cloud"></i> Storage Management</a></li>
+                                <li><a href="team-members.html"><i class="fas fa-users"></i> Team Members</a></li>
+                            </ul>
+                            <div class="profile-actions">
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-bell"></i>
+                                        <span>Notifications</span>
+                                    </div>
+                                    <div class="toggle-switch active" id="notification-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-moon"></i>
+                                        <span>Dark Mode</span>
+                                    </div>
+                                    <div class="toggle-switch" id="darkmode-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-language"></i>
+                                        <span>Language: English</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="logout.html" class="btn btn-outline" style="width: 100%; margin-top: 1rem; text-align: center;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                    <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Storage Hero Section -->
+    <section class="storage-hero">
+        <div class="container">
+            <div class="cloud-badge">CLOUD STORAGE</div>
+            <h1>Your Files, Safe and Accessible Everywhere</h1>
+            <p>Store, sync, and share your files securely across all your devices. Access your documents and images anytime, anywhere with Photo Flare Cloud Storage.</p>
+            <div class="quick-stats">
+                <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">5GB</div>
+                        <div style="color: var(--gray);">Free Storage</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">256-bit</div>
+                        <div style="color: var(--gray);">Encryption</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">∞</div>
+                        <div style="color: var(--gray);">Devices</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storage Overview -->
+    <div class="container">
+        <div class="storage-overview">
+            <!-- Storage Stats -->
+            <div class="storage-stats">
+                <div class="stats-header">
+                    <div class="stats-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="stats-title">Storage Overview</h3>
+                </div>
+                
+                <div class="storage-usage">
+                    <div class="usage-info">
+                        <span class="usage-label">Storage Used</span>
+                        <span class="usage-value">3.2 GB of 5 GB</span>
+                    </div>
+                    <div class="usage-bar">
+                        <div class="usage-progress" style="width: 64%;"></div>
+                    </div>
+                </div>
+                
+                <div class="storage-details">
+                    <div class="storage-detail">
+                        <div class="detail-label">
+                            <i class="fas fa-file-pdf detail-icon"></i>
+                            <span>Documents</span>
+                        </div>
+                        <span class="detail-value">1.2 GB</span>
+                    </div>
+                    <div class="storage-detail">
+                        <div class="detail-label">
+                            <i class="fas fa-image detail-icon"></i>
+                            <span>Images</span>
+                        </div>
+                        <span class="detail-value">1.8 GB</span>
+                    </div>
+                    <div class="storage-detail">
+                        <div class="detail-label">
+                            <i class="fas fa-file-archive detail-icon"></i>
+                            <span>Other Files</span>
+                        </div>
+                        <span class="detail-value">0.2 GB</span>
+                    </div>
+                    <div class="storage-detail">
+                        <div class="detail-label">
+                            <i class="fas fa-share-alt detail-icon"></i>
+                            <span>Shared Files</span>
+                        </div>
+                        <span class="detail-value">12</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fas fa-sync-alt"></i> Sync Now
+                </button>
+            </div>
+            
+            <!-- File Actions -->
+            <div class="file-actions">
+                <div class="actions-header">
+                    <h3 class="actions-title">File Management</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="btn btn-primary" id="newFolderBtn">
+                            <i class="fas fa-folder-plus"></i> New Folder
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3>Upload Files</h3>
+                    <p class="upload-text">Drag & drop files here or click to browse</p>
+                    <div class="upload-btn" id="uploadButton">
+                        <i class="fas fa-folder-open"></i> Choose Files
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" multiple>
+                    <p>Max file size: 100MB (Free) / 500MB (Pro)</p>
+                </div>
+                
+                <div class="quick-actions">
+                    <div class="quick-action" id="recentFiles">
+                        <i class="fas fa-history quick-action-icon"></i>
+                        <div class="quick-action-title">Recent Files</div>
+                    </div>
+                    <div class="quick-action" id="sharedFiles">
+                        <i class="fas fa-share-alt quick-action-icon"></i>
+                        <div class="quick-action-title">Shared Files</div>
+                    </div>
+                    <div class="quick-action" id="favorites">
+                        <i class="fas fa-star quick-action-icon"></i>
+                        <div class="quick-action-title">Favorites</div>
+                    </div>
+                    <div class="quick-action" id="trash">
+                        <i class="fas fa-trash quick-action-icon"></i>
+                        <div class="quick-action-title">Trash</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Files Section -->
+        <div class="files-section">
+            <h2 class="section-title"><i class="fas fa-clock"></i> Recent Files</h2>
+            <div class="files-container">
+                <div class="files-header">
+                    <div>Name</div>
+                    <div>Size</div>
+                    <div>Modified</div>
+                    <div>Actions</div>
+                </div>
+                <div class="file-list">
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon pdf-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Annual_Report_2023.pdf</h4>
+                                <p>PDF Document</p>
+                            </div>
+                        </div>
+                        <div>2.4 MB</div>
+                        <div>2 days ago</div>
+                        <div class="file-actions-menu">
+                            <div class="file-action" title="Download">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="file-action" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="file-action" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon image-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Vacation_Photo.jpg</h4>
+                                <p>JPEG Image</p>
+                            </div>
+                        </div>
+                        <div>4.7 MB</div>
+                        <div>1 week ago</div>
+                        <div class="file-actions-menu">
+                            <div class="file-action" title="Download">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="file-action" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="file-action" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon document-icon">
+                                <i class="fas fa-file-word"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>Project_Proposal.docx</h4>
+                                <p>Word Document</p>
+                            </div>
+                        </div>
+                        <div>1.2 MB</div>
+                        <div>3 weeks ago</div>
+                        <div class="file-actions-menu">
+                            <div class="file-action" title="Download">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="file-action" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="file-action" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon pdf-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4>User_Manual.pdf</h4>
+                                <p>PDF Document</p>
+                            </div>
+                        </div>
+                        <div>5.1 MB</div>
+                        <div>1 month ago</div>
+                        <div class="file-actions-menu">
+                            <div class="file-action" title="Download">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="file-action" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="file-action" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Upgrade Section -->
+        <div class="upgrade-section">
+            <div class="upgrade-content">
+                <h2 class="upgrade-title">Need More Storage?</h2>
+                <p class="upgrade-text">Upgrade to a premium plan and get more storage space, larger file uploads, and advanced sharing options.</p>
+                <button class="btn btn-success">
+                    <i class="fas fa-crown"></i> Upgrade Now
+                </button>
+                
+                <div class="storage-plans">
+                    <div class="storage-plan">
+                        <div class="plan-storage">50 GB</div>
+                        <div class="plan-price">$2.99</div>
+                        <div class="plan-period">per month</div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 50 GB Storage</li>
+                            <li><i class="fas fa-check"></i> 200MB File Size</li>
+                            <li><i class="fas fa-check"></i> Basic Sharing</li>
+                            <li><i class="fas fa-check"></i> 30-Day Version History</li>
+                        </ul>
+                        <button class="btn btn-outline">Select Plan</button>
+                    </div>
+                    
+                    <div class="storage-plan popular">
+                        <div class="plan-storage">200 GB</div>
+                        <div class="plan-price">$4.99</div>
+                        <div class="plan-period">per month</div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 200 GB Storage</li>
+                            <li><i class="fas fa-check"></i> 500MB File Size</li>
+                            <li><i class="fas fa-check"></i> Advanced Sharing</li>
+                            <li><i class="fas fa-check"></i> 90-Day Version History</li>
+                            <li><i class="fas fa-check"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn btn-primary">Select Plan</button>
+                    </div>
+                    
+                    <div class="storage-plan">
+                        <div class="plan-storage">2 TB</div>
+                        <div class="plan-price">$9.99</div>
+                        <div class="plan-period">per month</div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 2 TB Storage</li>
+                            <li><i class="fas fa-check"></i> 2GB File Size</li>
+                            <li><i class="fas fa-check"></i> Advanced Sharing</li>
+                            <li><i class="fas fa-check"></i> 1-Year Version History</li>
+                            <li><i class="fas fa-check"></i> Priority Support</li>
+                            <li><i class="fas fa-check"></i> Team Collaboration</li>
+                        </ul>
+                        <button class="btn btn-outline">Select Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2 class="section-title" style="text-align: center;">Why Choose Photo Flare Cloud Storage?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Bank-Level Security</h3>
+                    <p>Your files are encrypted with 256-bit AES encryption both in transit and at rest.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sync feature-icon"></i>
+                    <h3 class="feature-title">Automatic Sync</h3>
+                    <p>Changes to your files are automatically synced across all your devices in real-time.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-share feature-icon"></i>
+                    <h3 class="feature-title">Easy Sharing</h3>
+                    <p>Share files and folders with anyone, with customizable permissions and expiry dates.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-history feature-icon"></i>
+                    <h3 class="feature-title">Version History</h3>
+                    <p>Access previous versions of your files and restore them with one click.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadButton = document.getElementById('uploadButton');
+        const fileInput = document.getElementById('fileInput');
+        const newFolderBtn = document.getElementById('newFolderBtn');
+        const recentFilesBtn = document.getElementById('recentFiles');
+        const sharedFilesBtn = document.getElementById('sharedFiles');
+        const favoritesBtn = document.getElementById('favorites');
+        const trashBtn = document.getElementById('trash');
+        const fileActions = document.querySelectorAll('.file-action');
+        const upgradeButtons = document.querySelectorAll('.storage-plan .btn');
+        
+        // Profile dropdown functionality
+        const userProfile = document.querySelector('.user-profile');
+        const profileDropdown = document.querySelector('.profile-dropdown');
+        
+        // Event Listeners
+        userProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            profileDropdown.classList.remove('active');
+        });
+        
+        // Toggle switches functionality
+        const notificationToggle = document.getElementById('notification-toggle');
+        const darkmodeToggle = document.getElementById('darkmode-toggle');
+        
+        notificationToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            alert('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+        });
+        
+        darkmodeToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+        });
+        
+        uploadButton.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', handleFileUpload);
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('active');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('active');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileUpload();
+            }
+        });
+        
+        newFolderBtn.addEventListener('click', createNewFolder);
+        
+        recentFilesBtn.addEventListener('click', () => {
+            alert('Showing recent files...');
+        });
+        
+        sharedFilesBtn.addEventListener('click', () => {
+            alert('Showing shared files...');
+        });
+        
+        favoritesBtn.addEventListener('click', () => {
+            alert('Showing favorite files...');
+        });
+        
+        trashBtn.addEventListener('click', () => {
+            alert('Showing trash folder...');
+        });
+        
+        fileActions.forEach(action => {
+            action.addEventListener('click', handleFileAction);
+        });
+        
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Redirecting to upgrade page...');
+            });
+        });
+        
+        // Functions
+        function handleFileUpload() {
+            const files = fileInput.files;
+            
+            if (files.length) {
+                let fileNames = [];
+                for (let i = 0; i < files.length; i++) {
+                    fileNames.push(files[i].name);
+                }
+                
+                alert(`Uploading ${files.length} file(s):\n${fileNames.join('\n')}`);
+                
+                // Reset file input
+                fileInput.value = '';
+            }
+        }
+        
+        function createNewFolder() {
+            const folderName = prompt('Enter folder name:');
+            
+            if (folderName) {
+                alert(`Creating folder: "${folderName}"`);
+                // In a real application, this would create the folder via API
+            }
+        }
+        
+        function handleFileAction(e) {
+            const action = e.currentTarget;
+            const actionType = action.querySelector('i').className;
+            const fileItem = action.closest('.file-item');
+            const fileName = fileItem.querySelector('h4').textContent;
+            
+            if (actionType.includes('fa-download')) {
+                alert(`Downloading: ${fileName}`);
+            } else if (actionType.includes('fa-share-alt')) {
+                alert(`Sharing: ${fileName}`);
+            } else if (actionType.includes('fa-trash')) {
+                if (confirm(`Are you sure you want to move "${fileName}" to trash?`)) {
+                    alert(`Moved "${fileName}" to trash`);
+                    // In a real application, this would move the file to trash via API
+                }
+            }
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update storage usage progress bar animation
+            const progressBar = document.querySelector('.usage-progress');
+            setTimeout(() => {
+                progressBar.style.width = '64%';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

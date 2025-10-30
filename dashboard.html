@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Dashboard - Manage your tools, track usage, and access advanced AI features.">
+    <meta name="keywords" content="Photo Flare, Dashboard, AI tools, document processing, image editing">
+    <title>Dashboard - Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-success: linear-gradient(135deg, var(--success), #3a86ff);
+            --gradient-warning: linear-gradient(135deg, var(--warning), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .profile-header .user-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .profile-plan {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .profile-menu {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .profile-menu a:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .profile-menu i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .profile-action-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-switch.active::after {
+            left: 29px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .dashboard-hero {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .dashboard-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .dashboard-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            transition: var(--transition);
+            animation: float-card 10s ease-in-out infinite;
+        }
+
+        .dashboard-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .dashboard-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .dashboard-card:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ai-tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .ai-tool-header {
+            padding: 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .ai-tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-tool-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .ai-tool-body {
+            padding: 1.5rem;
+        }
+
+        .ai-tool-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .ai-tool-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-tool-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .ai-tool-features i {
+            color: var(--success);
+        }
+
+        .usage-chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--gradient-primary);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+
+        .chart-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .recent-activity {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.premium {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .plan-card.premium::before {
+            content: "CURRENT PLAN";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom-left-radius: 12px;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .plan-period {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features i {
+            color: var(--success);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-action {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .quick-action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quick-action-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .premium-badge {
+            background: var(--gradient-warning);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float-card {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .ai-tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .plan-card.premium {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dashboard-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .dashboard-hero p {
+                font-size: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .profile-dropdown {
+                width: 100%;
+                right: 0;
+                left: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-hero {
+                padding: 1.5rem 0 1rem;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="ai-tools.html">AI Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">JS</div>
+                        <div class="user-name">John Smith</div>
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown">
+                            <div class="profile-header">
+                                <div class="user-avatar">JS</div>
+                                <div class="profile-info">
+                                    <h3>John Smith</h3>
+                                    <p>john.smith@example.com</p>
+                                    <div class="profile-plan">Pro Yearly Plan</div>
+                                </div>
+                            </div>
+                            <ul class="profile-menu">
+                                <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+                                <li><a href="account-settings.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+                                <li><a href="billing-subscription.html"><i class="fas fa-credit-card"></i> Billing & Subscription</a></li>
+                                <li><a href="usage-history.html"><i class="fas fa-history"></i> Usage History</a></li>
+                                <li><a href="storage-management.html"><i class="fas fa-cloud"></i> Storage Management</a></li>
+                                <li><a href="team-members.html"><i class="fas fa-users"></i> Team Members</a></li>
+                            </ul>
+                            <div class="profile-actions">
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-bell"></i>
+                                        <span>Notifications</span>
+                                    </div>
+                                    <div class="toggle-switch active" id="notification-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-moon"></i>
+                                        <span>Dark Mode</span>
+                                    </div>
+                                    <div class="toggle-switch" id="darkmode-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-language"></i>
+                                        <span>Language: English</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="logout.html" class="btn btn-outline" style="width: 100%; margin-top: 1rem; text-align: center;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                    <a href="settings.html" class="btn btn-outline"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+        <div class="container">
+            <h1>Welcome to Your Dashboard</h1>
+            <p>Manage your tools, track usage, and access advanced AI features all in one place.</p>
+            <div class="quick-actions">
+                <a href="ai-image-enhancer.html" class="quick-action">
+                    <i class="fas fa-magic quick-action-icon"></i>
+                    <div class="quick-action-title">AI Image Enhancer</div>
+                </a>
+                <a href="batch-processor.html" class="quick-action">
+                    <i class="fas fa-layer-group quick-action-icon"></i>
+                    <div class="quick-action-title">Batch Processor</div>
+                </a>
+                <a href="cloud-storage.html" class="quick-action">
+                    <i class="fas fa-cloud quick-action-icon"></i>
+                    <div class="quick-action-title">Cloud Storage</div>
+                </a>
+                <a href="recent-files.html" class="quick-action">
+                    <i class="fas fa-history quick-action-icon"></i>
+                    <div class="quick-action-title">Recent Files</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <div class="container">
+        <div class="dashboard-grid">
+            <!-- Usage Statistics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-bar card-icon"></i> Usage Statistics</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">Files Processed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">AI Tools Used</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3.2GB</div>
+                        <div class="stat-label">Storage Used</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">Monthly Limit</div>
+                    </div>
+                </div>
+                <div class="usage-chart">
+                    <div class="chart-bar" style="height: 70%;">
+                        <div class="chart-label">Mon</div>
+                    </div>
+                    <div class="chart-bar" style="height: 50%;">
+                        <div class="chart-label">Tue</div>
+                    </div>
+                    <div class="chart-bar" style="height: 80%;">
+                        <div class="chart-label">Wed</div>
+                    </div>
+                    <div class="chart-bar" style="height: 60%;">
+                        <div class="chart-label">Thu</div>
+                    </div>
+                    <div class="chart-bar" style="height: 90%;">
+                        <div class="chart-label">Fri</div>
+                    </div>
+                    <div class="chart-bar" style="height: 40%;">
+                        <div class="chart-label">Sat</div>
+                    </div>
+                    <div class="chart-bar" style="height: 30%;">
+                        <div class="chart-label">Sun</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Plan -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-crown card-icon"></i> Your Plan</h2>
+                </div>
+                <div class="plan-card premium">
+                    <h3 class="plan-name">Pro Yearly</h3>
+                    <div class="plan-price">$30</div>
+                    <div class="plan-period">per year</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> All 100+ tools</li>
+                        <li><i class="fas fa-check"></i> 20 Premium AI tools</li>
+                        <li><i class="fas fa-check"></i> File size limit: 500MB</li>
+                        <li><i class="fas fa-check"></i> Cloud storage (5GB)</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Ad-free experience</li>
+                    </ul>
+                    <button class="btn btn-primary">Manage Subscription</button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-history card-icon"></i> Recent Activity</h2>
+                </div>
+                <ul class="recent-activity">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">PDF Compressed</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Background Removed from Image</div>
+                            <div class="activity-time">5 hours ago</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">AI Image Enhancement Applied</div>
+                            <div class="activity-time">Yesterday</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Word to PDF Conversion</div>
+                            <div class="activity-time">2 days ago</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- AI Tools -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-robot card-icon"></i> AI Tools</h2>
+                </div>
+                <div class="ai-tools-grid">
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-header">
+                            <i class="fas fa-magic ai-tool-icon"></i>
+                            <h3 class="ai-tool-title">AI Image Enhancer</h3>
+                        </div>
+                        <div class="ai-tool-body">
+                            <p class="ai-tool-description">Automatically enhance image quality, colors, and details using advanced AI algorithms.</p>
+                            <ul class="ai-tool-features">
+                                <li><i class="fas fa-check"></i> Upscale resolution</li>
+                                <li><i class="fas fa-check"></i> Color correction</li>
+                                <li><i class="fas fa-check"></i> Noise reduction</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Use Tool</button>
+                        </div>
+                    </div>
+                    <div class="ai-tool-card">
+                        <div class="ai-tool-header">
+                            <i class="fas fa-brain ai-tool-icon"></i>
+                            <h3 class="ai-tool-title">Background Remover</h3>
+                        </div>
+                        <div class="ai-tool-body">
+                            <p class="ai-tool-description">Remove backgrounds from images automatically with precision using AI technology.</p>
+                            <ul class="ai-tool-features">
+                                <li><i class="fas fa-check"></i> One-click removal</li>
+                                <li><i class="fas fa-check"></i> Hair and fine details</li>
+                                <li><i class="fas fa-check"></i> Transparent background</li>
+                            </ul>
+                            <button class="btn btn-primary" style="width: 100%;">Use Tool</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storage Usage -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-hdd card-icon"></i> Storage Usage</h2>
+                </div>
+                <div class="storage-progress">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>3.2 GB of 5 GB used</span>
+                        <span>64%</span>
+                    </div>
+                    <div style="height: 10px; background: var(--light-gray); border-radius: 5px; overflow: hidden;">
+                        <div style="height: 100%; width: 64%; background: var(--gradient-primary); border-radius: 5px;"></div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Documents</span>
+                            <span>1.2 GB</span>
+                        </div>
+                        <div style="height: 6px; background: var(--light-gray); border-radius: 3px; overflow: hidden;">
+                            <div style="height: 100%; width: 40%; background: var(--primary); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Images</span>
+                            <span>1.8 GB</span>
+                        </div>
+                        <div style="height: 6px; background: var(--light-gray); border-radius: 3px; overflow: hidden;">
+                            <div style="height: 100%; width: 60%; background: var(--secondary); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Other Files</span>
+                            <span>0.2 GB</span>
+                        </div>
+                        <div style="height: 6px; background: var(--light-gray); border-radius: 3px; overflow: hidden;">
+                            <div style="height: 100%; width: 7%; background: var(--accent); border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" style="width: 100%; margin-top: 1.5rem;">Manage Storage</button>
+            </div>
+
+            <!-- Upcoming Features -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-rocket card-icon"></i> Coming Soon</h2>
+                </div>
+                <div style="padding: 1rem 0;">
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 1rem 0; border-bottom: 1px solid var(--light-gray);">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(67, 97, 238, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">AI Video Enhancement</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Enhance video quality automatically</div>
+                        </div>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 1rem 0; border-bottom: 1px solid var(--light-gray);">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(67, 97, 238, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">AI Document Translation</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Translate documents while preserving formatting</div>
+                        </div>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 1rem 0;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(67, 97, 238, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <i class="fas fa-file-audio"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Audio Transcription</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Convert audio to text with high accuracy</div>
+                        </div>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline" style="width: 100%;">Suggest a Feature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profile dropdown functionality
+            const userProfile = document.querySelector('.user-profile');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+            
+            userProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                profileDropdown.classList.remove('active');
+            });
+            
+            // Toggle switches functionality
+            const notificationToggle = document.getElementById('notification-toggle');
+            const darkmodeToggle = document.getElementById('darkmode-toggle');
+            
+            notificationToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                alert('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            });
+            
+            darkmodeToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            });
+            
+            // Quick action buttons
+            const quickActions = document.querySelectorAll('.quick-action');
+            quickActions.forEach(action => {
+                action.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const toolName = this.querySelector('.quick-action-title').textContent;
+                        alert(`Opening ${toolName}... This would navigate to the tool in a real implementation.`);
+                    }
+                });
+            });
+
+            // AI tool cards
+            const aiToolCards = document.querySelectorAll('.ai-tool-card');
+            aiToolCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'BUTTON') {
+                        const toolName = this.querySelector('.ai-tool-title').textContent;
+                        alert(`Opening ${toolName}... This would navigate to the tool in a real implementation.`);
+                    }
+                });
+            });
+
+            // AI tool buttons
+            const aiToolButtons = document.querySelectorAll('.ai-tool-card .btn');
+            aiToolButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const toolName = this.closest('.ai-tool-card').querySelector('.ai-tool-title').textContent;
+                    alert(`Launching ${toolName}... This would open the tool interface in a real implementation.`);
+                });
+            });
+
+            // Plan management button
+            const planButton = document.querySelector('.plan-card .btn');
+            planButton.addEventListener('click', function() {
+                alert('Opening subscription management... This would redirect to the subscription page in a real implementation.');
+            });
+
+            // Storage management button
+            const storageButton = document.querySelector('.storage-progress + .btn');
+            storageButton.addEventListener('click', function() {
+                alert('Opening storage management... This would show storage options in a real implementation.');
+            });
+
+            // Feature suggestion button
+            const featureButton = document.querySelector('.dashboard-card:last-child .btn');
+            featureButton.addEventListener('click', function() {
+                alert('Opening feature suggestion form... This would show a form in a real implementation.');
+            });
+
+            // Settings button
+            const settingsButton = document.querySelector('.header-actions .btn-outline');
+            settingsButton.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    alert('Opening settings... This would show user settings in a real implementation.');
+                }
+            });
+
+            // Update chart bars with random heights for demo
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach(bar => {
+                // Already set with inline styles, but we can add interactivity
+                bar.addEventListener('mouseover', function() {
+                    this.style.opacity = '0.7';
+                });
+                
+                bar.addEventListener('mouseout', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

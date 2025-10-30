@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Resize images online with Photo Flare's advanced image resizer. Maintain aspect ratio, batch processing, and multiple resizing algorithms.">
+    <meta name="keywords" content="resize image, image resizer, photo resize, resize tool, image scaling, online resize tool">
+    <title>Resize Image - Online Photo Resizing Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .tool-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-right: 1px solid var(--light-gray);
+        }
+
+        .preview-section {
+            flex: 2;
+            min-width: 500px;
+            padding: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-info.active {
+            display: block;
+        }
+
+        .file-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .file-info span {
+            font-weight: 600;
+        }
+
+        .settings-panel {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .settings-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-panel h3 i {
+            color: var(--primary);
+        }
+
+        .resize-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .method-option {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .method-option:hover {
+            border-color: var(--primary);
+        }
+
+        .method-option.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.2);
+        }
+
+        .method-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .dimension-controls {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: end;
+        }
+
+        .dimension-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dimension-input label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .dimension-input input {
+            padding: 0.7rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .dimension-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .dimension-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+
+        .size-presets {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .size-preset {
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .size-preset:hover {
+            border-color: var(--primary);
+        }
+
+        .size-preset.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .advanced-options {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .toggle-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-option input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .algorithm-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .algorithm-option {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .algorithm-option:hover {
+            border-color: var(--primary);
+        }
+
+        .algorithm-option.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .image-comparison {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .image-box {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .image-preview {
+            width: 100%;
+            max-width: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .image-preview img {
+            width: 100%;
+            display: block;
+        }
+
+        .resize-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .quality-control {
+            margin-bottom: 1.5rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--light-gray);
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .slider-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .results-panel {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            width: 100%;
+        }
+
+        .results-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-panel h3 i {
+            color: var(--primary);
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .savings {
+            color: var(--success);
+        }
+
+        .features-section {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--light-gray);
+        }
+
+        .batch-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .batch-section h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .batch-section h3 i {
+            color: var(--primary);
+        }
+
+        .batch-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .batch-files {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .batch-file {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .batch-file img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .batch-file .file-name {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            text-align: center;
+            background: var(--light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .batch-file .file-dimensions {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+        }
+
+        .batch-file .remove-file {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(230, 57, 70, 0.8);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .preview-section {
+                min-width: 100%;
+            }
+            
+            .image-comparison {
+                flex-direction: column;
+            }
+            
+            .resize-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .dimension-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .dimension-separator {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .resize-methods, .algorithm-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html" class="active">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>Resize Image</h1>
+                <p>Resize your images with precision. Maintain aspect ratio, choose from presets, or set custom dimensions with advanced algorithms.</p>
+            </div>
+            
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <h3>Upload Your Image</h3>
+                        <p>Drag & drop your image here or click to browse</p>
+                        <p class="tooltip">Supported formats: JPG, PNG, WebP, GIF, BMP
+                            <span class="tooltiptext">Maximum file size: 10MB (Free) / 100MB (Pro)</span>
+                        </p>
+                        <input type="file" id="fileInput" class="file-input" accept="image/*">
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
+                    </div>
+                    
+                    <div class="file-info" id="fileInfo">
+                        <p>File: <span id="fileName">-</span></p>
+                        <p>Size: <span id="fileSize">-</span></p>
+                        <p>Dimensions: <span id="fileDimensions">-</span></p>
+                        <p>Type: <span id="fileType">-</span></p>
+                    </div>
+                    
+                    <div class="settings-panel">
+                        <h3><i class="fas fa-sliders-h"></i> Resize Settings</h3>
+                        
+                        <div class="resize-methods">
+                            <div class="method-option selected" data-method="dimensions">
+                                <i class="fas fa-ruler-combined method-icon"></i>
+                                <div>Dimensions</div>
+                            </div>
+                            <div class="method-option" data-method="percentage">
+                                <i class="fas fa-percentage method-icon"></i>
+                                <div>Percentage</div>
+                            </div>
+                            <div class="method-option" data-method="preset">
+                                <i class="fas fa-th method-icon"></i>
+                                <div>Preset Sizes</div>
+                            </div>
+                        </div>
+                        
+                        <div id="dimensionsMethod" class="method-content">
+                            <div class="dimension-controls">
+                                <div class="dimension-input">
+                                    <label for="widthInput">Width (px)</label>
+                                    <input type="number" id="widthInput" min="1" value="800">
+                                </div>
+                                <div class="dimension-separator">×</div>
+                                <div class="dimension-input">
+                                    <label for="heightInput">Height (px)</label>
+                                    <input type="number" id="heightInput" min="1" value="600">
+                                </div>
+                            </div>
+                            
+                            <div class="toggle-options">
+                                <label class="toggle-option">
+                                    <input type="checkbox" id="maintainAspect" checked>
+                                    <span>Maintain aspect ratio</span>
+                                </label>
+                                <label class="toggle-option">
+                                    <input type="checkbox" id="constrainProportions">
+                                    <span>Constrain proportions</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="percentageMethod" class="method-content" style="display: none;">
+                            <div class="slider-container">
+                                <input type="range" min="1" max="200" value="100" class="slider" id="percentageSlider">
+                                <span class="slider-value" id="percentageValue">100%</span>
+                            </div>
+                        </div>
+                        
+                        <div id="presetMethod" class="method-content" style="display: none;">
+                            <div class="size-presets">
+                                <div class="size-preset" data-width="1920" data-height="1080">1920×1080</div>
+                                <div class="size-preset" data-width="1280" data-height="720">1280×720</div>
+                                <div class="size-preset" data-width="1024" data-height="768">1024×768</div>
+                                <div class="size-preset" data-width="800" data-height="600">800×600</div>
+                                <div class="size-preset" data-width="640" data-height="480">640×480</div>
+                                <div class="size-preset" data-width="400" data-height="300">400×300</div>
+                                <div class="size-preset" data-width="256" data-height="256">256×256</div>
+                                <div class="size-preset" data-width="128" data-height="128">128×128</div>
+                                <div class="size-preset" data-width="64" data-height="64">64×64</div>
+                            </div>
+                        </div>
+                        
+                        <div class="quality-control">
+                            <label for="qualitySlider">Output Quality: <span id="qualityValue">90%</span></label>
+                            <div class="slider-container">
+                                <input type="range" min="10" max="100" value="90" class="slider" id="qualitySlider">
+                                <span class="slider-value" id="qualityDisplay">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="advanced-options">
+                            <h4><i class="fas fa-flask"></i> Advanced Options</h4>
+                            
+                            <div class="algorithm-options">
+                                <div class="algorithm-option selected" data-algorithm="lanczos">
+                                    Lanczos3
+                                </div>
+                                <div class="algorithm-option" data-algorithm="bicubic">
+                                    Bicubic
+                                </div>
+                                <div class="algorithm-option" data-algorithm="bilinear">
+                                    Bilinear
+                                </div>
+                                <div class="algorithm-option" data-algorithm="nearest">
+                                    Nearest
+                                </div>
+                            </div>
+                            
+                            <div class="toggle-options" style="margin-top: 1rem;">
+                                <label class="toggle-option">
+                                    <input type="checkbox" id="preserveMetadata">
+                                    <span>Preserve Metadata</span>
+                                </label>
+                                <label class="toggle-option">
+                                    <input type="checkbox" id="optimizeSize" checked>
+                                    <span>Optimize for Web</span>
+                                </label>
+                                <label class="toggle-option">
+                                    <input type="checkbox" id="enhanceEdges" disabled>
+                                    <span>AI Enhance Edges <span class="premium-badge">PRO</span></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-outline" id="resetBtn">
+                                <i class="fas fa-sync"></i> Reset
+                            </button>
+                            <button class="btn btn-primary" id="resizeBtn">
+                                <i class="fas fa-expand-arrows-alt"></i> Resize Image
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Batch Resize Section -->
+                    <div class="batch-section">
+                        <h3><i class="fas fa-layer-group"></i> Batch Resize <span class="premium-badge">PRO</span></h3>
+                        <div class="batch-upload">
+                            <p>Resize multiple images at once (Pro feature)</p>
+                            <div class="batch-files" id="batchFiles">
+                                <!-- Batch files will be added here -->
+                            </div>
+                            <button class="btn btn-outline" id="addBatchBtn" disabled>
+                                <i class="fas fa-plus"></i> Add More Images
+                            </button>
+                            <button class="btn btn-success" id="resizeBatchBtn" disabled>
+                                <i class="fas fa-expand-arrows-alt"></i> Resize All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-container">
+                        <div class="loading" id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <p>Resizing your image...</p>
+                        </div>
+                        
+                        <div id="singlePreview" style="display: none;">
+                            <h3>Resize Preview</h3>
+                            <div class="image-comparison">
+                                <div class="image-box">
+                                    <h4>Original</h4>
+                                    <div class="image-preview">
+                                        <img id="beforeImage" src="" alt="Original image">
+                                    </div>
+                                    <div class="file-info-small">
+                                        <p id="originalDimensions">-</p>
+                                        <p id="originalSize">-</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="resize-arrow">
+                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                </div>
+                                
+                                <div class="image-box">
+                                    <h4>Resized</h4>
+                                    <div class="image-preview">
+                                        <img id="afterImage" src="" alt="Resized image">
+                                    </div>
+                                    <div class="file-info-small">
+                                        <p id="resizedDimensions">-</p>
+                                        <p id="resizedSize">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="results-panel">
+                                <h3><i class="fas fa-chart-bar"></i> Resize Results</h3>
+                                <div class="result-stats">
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="originalFileSize">-</div>
+                                        <div class="stat-label">Original Size</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="resizedFileSize">-</div>
+                                        <div class="stat-label">Resized Size</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value savings" id="sizeReduction">-</div>
+                                        <div class="stat-label">Size Reduction</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="qualityRetained">90%</div>
+                                        <div class="stat-label">Quality Retained</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-success" id="downloadBtn">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                    <button class="btn btn-outline" id="resizeAnotherBtn">
+                                        <i class="fas fa-redo"></i> Resize Another
+                                    </button>
+                                    <button class="btn btn-primary" id="shareBtn">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="batchPreview" style="display: none;">
+                            <h3>Batch Resize Results</h3>
+                            <div class="results-panel">
+                                <div class="result-stats">
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="totalFiles">0</div>
+                                        <div class="stat-label">Total Files</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value savings" id="avgSizeReduction">0%</div>
+                                        <div class="stat-label">Avg. Size Reduction</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="totalSizeSaved">-</div>
+                                        <div class="stat-label">Total Size Saved</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="successRate">100%</div>
+                                        <div class="stat-label">Success Rate</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-success" id="downloadAllBtn">
+                                        <i class="fas fa-download"></i> Download All
+                                    </button>
+                                    <button class="btn btn-outline" id="newBatchBtn">
+                                        <i class="fas fa-plus"></i> New Batch
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="emptyState" class="empty-state">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <h3>No Image Uploaded</h3>
+                            <p>Upload an image to see the resize preview and results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Use Our Image Resizer?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p>Resize images in seconds with our optimized algorithms that work directly in your browser.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Secure & Private</h3>
+                    <p>Your images are processed locally in your browser and never uploaded to our servers.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-crop-alt feature-icon"></i>
+                    <h3 class="feature-title">Multiple Resize Methods</h3>
+                    <p>Choose from dimensions, percentage scaling, or preset sizes for different use cases.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-magic feature-icon"></i>
+                    <h3 class="feature-title">Advanced Algorithms</h3>
+                    <p>Select from Lanczos, Bicubic, Bilinear, or Nearest Neighbor resampling algorithms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#affiliate">Affiliate Program</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const fileDimensions = document.getElementById('fileDimensions');
+        const fileType = document.getElementById('fileType');
+        const methodOptions = document.querySelectorAll('.method-option');
+        const dimensionsMethod = document.getElementById('dimensionsMethod');
+        const percentageMethod = document.getElementById('percentageMethod');
+        const presetMethod = document.getElementById('presetMethod');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const maintainAspect = document.getElementById('maintainAspect');
+        const percentageSlider = document.getElementById('percentageSlider');
+        const percentageValue = document.getElementById('percentageValue');
+        const sizePresets = document.querySelectorAll('.size-preset');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityDisplay = document.getElementById('qualityDisplay');
+        const qualityValue = document.getElementById('qualityValue');
+        const algorithmOptions = document.querySelectorAll('.algorithm-option');
+        const resetBtn = document.getElementById('resetBtn');
+        const resizeBtn = document.getElementById('resizeBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const singlePreview = document.getElementById('singlePreview');
+        const batchPreview = document.getElementById('batchPreview');
+        const emptyState = document.getElementById('emptyState');
+        const beforeImage = document.getElementById('beforeImage');
+        const afterImage = document.getElementById('afterImage');
+        const originalDimensions = document.getElementById('originalDimensions');
+        const originalSize = document.getElementById('originalSize');
+        const resizedDimensions = document.getElementById('resizedDimensions');
+        const resizedSize = document.getElementById('resizedSize');
+        const originalFileSize = document.getElementById('originalFileSize');
+        const resizedFileSize = document.getElementById('resizedFileSize');
+        const sizeReduction = document.getElementById('sizeReduction');
+        const qualityRetained = document.getElementById('qualityRetained');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resizeAnotherBtn = document.getElementById('resizeAnotherBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const batchFiles = document.getElementById('batchFiles');
+        const addBatchBtn = document.getElementById('addBatchBtn');
+        const resizeBatchBtn = document.getElementById('resizeBatchBtn');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
+        const newBatchBtn = document.getElementById('newBatchBtn');
+        const totalFiles = document.getElementById('totalFiles');
+        const avgSizeReduction = document.getElementById('avgSizeReduction');
+        const totalSizeSaved = document.getElementById('totalSizeSaved');
+        const successRate = document.getElementById('successRate');
+
+        // Global variables
+        let originalFile = null;
+        let originalImage = new Image();
+        let resizedImageData = null;
+        let batchFilesList = [];
+        let isBatchMode = false;
+        let currentMethod = 'dimensions';
+        let currentAlgorithm = 'lanczos';
+        let originalWidth = 0;
+        let originalHeight = 0;
+        let aspectRatio = 1;
+
+        // Event Listeners
+        browseBtn.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        
+        // Method selection
+        methodOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                methodOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                currentMethod = option.getAttribute('data-method');
+                
+                // Show/hide method content
+                dimensionsMethod.style.display = 'none';
+                percentageMethod.style.display = 'none';
+                presetMethod.style.display = 'none';
+                
+                if (currentMethod === 'dimensions') {
+                    dimensionsMethod.style.display = 'block';
+                } else if (currentMethod === 'percentage') {
+                    percentageMethod.style.display = 'block';
+                } else if (currentMethod === 'preset') {
+                    presetMethod.style.display = 'block';
+                }
+            });
+        });
+        
+        // Dimension inputs
+        widthInput.addEventListener('input', updateDimensions);
+        heightInput.addEventListener('input', updateDimensions);
+        
+        // Percentage slider
+        percentageSlider.addEventListener('input', updatePercentage);
+        
+        // Size presets
+        sizePresets.forEach(preset => {
+            preset.addEventListener('click', () => {
+                sizePresets.forEach(p => p.classList.remove('selected'));
+                preset.classList.add('selected');
+                
+                const width = parseInt(preset.getAttribute('data-width'));
+                const height = parseInt(preset.getAttribute('data-height'));
+                
+                widthInput.value = width;
+                heightInput.value = height;
+                
+                // Update dimensions without triggering aspect ratio lock
+                const maintainAspectState = maintainAspect.checked;
+                maintainAspect.checked = false;
+                updateDimensions();
+                maintainAspect.checked = maintainAspectState;
+            });
+        });
+        
+        // Quality slider
+        qualitySlider.addEventListener('input', updateQualityDisplay);
+        
+        // Algorithm selection
+        algorithmOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                algorithmOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                currentAlgorithm = option.getAttribute('data-algorithm');
+            });
+        });
+        
+        // Action buttons
+        resetBtn.addEventListener('click', resetSettings);
+        resizeBtn.addEventListener('click', resizeImage);
+        downloadBtn.addEventListener('click', downloadResizedImage);
+        resizeAnotherBtn.addEventListener('click', resetTool);
+        shareBtn.addEventListener('click', shareResults);
+        addBatchBtn.addEventListener('click', () => fileInput.click());
+        resizeBatchBtn.addEventListener('click', resizeBatch);
+        downloadAllBtn.addEventListener('click', downloadBatch);
+        newBatchBtn.addEventListener('click', resetBatch);
+
+        // Functions
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+            
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.dataTransfer.files);
+                } else {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            }
+        }
+
+        function handleFileSelect(e) {
+            if (e.target.files && e.target.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.target.files);
+                    // Reset file input to allow selecting the same file again
+                    e.target.value = '';
+                } else {
+                    handleFile(e.target.files[0]);
+                }
+            }
+        }
+
+        function handleFile(file) {
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPG, PNG, WebP, GIF, BMP)');
+                return;
+            }
+            
+            // Check file size (10MB limit for free users)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit. Please upgrade to Pro for larger files.');
+                return;
+            }
+            
+            originalFile = file;
+            updateFileInfo(file);
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalImage.onload = function() {
+                    originalWidth = originalImage.width;
+                    originalHeight = originalImage.height;
+                    aspectRatio = originalWidth / originalHeight;
+                    
+                    // Set initial dimensions
+                    widthInput.value = originalWidth;
+                    heightInput.value = originalHeight;
+                    
+                    // Show preview
+                    beforeImage.src = e.target.result;
+                    
+                    // Update dimension stats
+                    originalDimensions.textContent = `${originalWidth} × ${originalHeight}`;
+                    originalSize.textContent = formatFileSize(file.size);
+                    
+                    // Show single preview and hide empty state
+                    emptyState.style.display = 'none';
+                    singlePreview.style.display = 'block';
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleBatchFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (!file.type.match('image.*')) {
+                    continue;
+                }
+                
+                // Check file size (10MB limit for free users)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`);
+                    continue;
+                }
+                
+                // Add to batch if not already added
+                if (!batchFilesList.some(f => f.name === file.name && f.size === file.size)) {
+                    batchFilesList.push(file);
+                    addBatchFilePreview(file);
+                }
+            }
+            
+            // Update batch UI
+            updateBatchUI();
+        }
+
+        function addBatchFilePreview(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const batchFileElement = document.createElement('div');
+                    batchFileElement.className = 'batch-file';
+                    batchFileElement.innerHTML = `
+                        <img src="${e.target.result}" alt="${file.name}">
+                        <div class="file-dimensions">${img.width}×${img.height}</div>
+                        <div class="file-name">${file.name}</div>
+                        <div class="remove-file" data-filename="${file.name}">×</div>
+                    `;
+                    
+                    batchFiles.appendChild(batchFileElement);
+                    
+                    // Add remove event listener
+                    batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
+                        const filename = this.getAttribute('data-filename');
+                        removeBatchFile(filename);
+                    });
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeBatchFile(filename) {
+            batchFilesList = batchFilesList.filter(file => file.name !== filename);
+            
+            // Remove from UI
+            const fileElements = batchFiles.querySelectorAll('.batch-file');
+            fileElements.forEach(element => {
+                if (element.querySelector('.file-name').textContent === filename) {
+                    element.remove();
+                }
+            });
+            
+            updateBatchUI();
+        }
+
+        function updateBatchUI() {
+            if (batchFilesList.length > 0) {
+                addBatchBtn.disabled = false;
+                resizeBatchBtn.disabled = false;
+                isBatchMode = true;
+                
+                // Show batch preview and hide single preview
+                singlePreview.style.display = 'none';
+                emptyState.style.display = 'none';
+                batchPreview.style.display = 'block';
+                
+                totalFiles.textContent = batchFilesList.length;
+            } else {
+                addBatchBtn.disabled = true;
+                resizeBatchBtn.disabled = true;
+                isBatchMode = false;
+                
+                // Show empty state
+                batchPreview.style.display = 'none';
+                singlePreview.style.display = 'none';
+                emptyState.style.display = 'flex';
+            }
+        }
+
+        function updateFileInfo(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileType.textContent = file.name.split('.').pop().toUpperCase();
+            fileInfo.classList.add('active');
+        }
+
+        function updateDimensions() {
+            if (maintainAspect.checked && originalWidth && originalHeight) {
+                if (this === widthInput) {
+                    // Width changed, adjust height to maintain aspect ratio
+                    heightInput.value = Math.round(widthInput.value / aspectRatio);
+                } else if (this === heightInput) {
+                    // Height changed, adjust width to maintain aspect ratio
+                    widthInput.value = Math.round(heightInput.value * aspectRatio);
+                }
+            }
+        }
+
+        function updatePercentage() {
+            const value = percentageSlider.value;
+            percentageValue.textContent = `${value}%`;
+            
+            if (originalWidth && originalHeight) {
+                const newWidth = Math.round(originalWidth * value / 100);
+                const newHeight = Math.round(originalHeight * value / 100);
+                
+                widthInput.value = newWidth;
+                heightInput.value = newHeight;
+            }
+        }
+
+        function updateQualityDisplay() {
+            const value = qualitySlider.value;
+            qualityDisplay.textContent = `${value}%`;
+            qualityValue.textContent = `${value}%`;
+        }
+
+        function resetSettings() {
+            if (originalWidth && originalHeight) {
+                widthInput.value = originalWidth;
+                heightInput.value = originalHeight;
+                percentageSlider.value = 100;
+                updatePercentage();
+                qualitySlider.value = 90;
+                updateQualityDisplay();
+            }
+        }
+
+        function resizeImage() {
+            if (!originalFile) {
+                alert('Please select an image first');
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            
+            // Simulate resize process
+            setTimeout(() => {
+                const newWidth = parseInt(widthInput.value);
+                const newHeight = parseInt(heightInput.value);
+                const quality = parseInt(qualitySlider.value) / 100;
+                
+                // Calculate resized size (simulated)
+                const originalSizeValue = originalFile.size;
+                const resizedSizeValue = Math.round(originalSizeValue * (newWidth * newHeight) / (originalWidth * originalHeight) * quality);
+                const reduction = Math.round((1 - resizedSizeValue / originalSizeValue) * 100);
+                
+                // Update UI with results
+                originalFileSize.textContent = formatFileSize(originalSizeValue);
+                resizedFileSize.textContent = formatFileSize(resizedSizeValue);
+                
+                if (reduction > 0) {
+                    sizeReduction.textContent = `-${reduction}%`;
+                    sizeReduction.className = 'stat-value savings';
+                } else {
+                    sizeReduction.textContent = `+${Math.abs(reduction)}%`;
+                    sizeReduction.className = 'stat-value';
+                }
+                
+                qualityRetained.textContent = `${Math.round(quality * 100)}%`;
+                
+                // Update dimension stats
+                resizedDimensions.textContent = `${newWidth} × ${newHeight}`;
+                resizedSize.textContent = formatFileSize(resizedSizeValue);
+                
+                // Create resized image data URL (simulated)
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+                
+                // Apply selected algorithm (simulated)
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                
+                ctx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+                
+                resizedImageData = canvas.toDataURL('image/jpeg', quality);
+                afterImage.src = resizedImageData;
+                
+                loadingIndicator.classList.remove('active');
+            }, 1500);
+        }
+
+        function resizeBatch() {
+            if (batchFilesList.length === 0) {
+                alert('Please add images to resize');
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            
+            // Simulate batch resize
+            setTimeout(() => {
+                // Calculate batch results (simulated)
+                const totalOriginalSize = batchFilesList.reduce((sum, file) => sum + file.size, 0);
+                const totalResizedSize = Math.round(totalOriginalSize * 0.6); // Simulate 40% average reduction
+                const averageReduction = Math.round((1 - totalResizedSize / totalOriginalSize) * 100);
+                const totalSaved = totalOriginalSize - totalResizedSize;
+                
+                // Update batch results
+                totalFiles.textContent = batchFilesList.length;
+                avgSizeReduction.textContent = `${averageReduction}%`;
+                totalSizeSaved.textContent = formatFileSize(totalSaved);
+                successRate.textContent = '100%';
+                
+                loadingIndicator.classList.remove('active');
+            }, 2000);
+        }
+
+        function downloadResizedImage() {
+            if (!resizedImageData) {
+                alert('No resized image available');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = `resized_${originalFile.name}`;
+            link.href = resizedImageData;
+            link.click();
+        }
+
+        function downloadBatch() {
+            if (batchFilesList.length === 0) {
+                alert('No resized images available');
+                return;
+            }
+            
+            // In a real implementation, this would download a ZIP file with all resized images
+            alert('Batch download would start in a real implementation. This is a demo.');
+        }
+
+        function resetTool() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            singlePreview.style.display = 'none';
+            emptyState.style.display = 'flex';
+            originalFile = null;
+            resizedImageData = null;
+            
+            // Reset to default settings
+            resetSettings();
+        }
+
+        function resetBatch() {
+            batchFilesList = [];
+            batchFiles.innerHTML = '';
+            updateBatchUI();
+        }
+
+        function shareResults() {
+            if (!resizedImageData) {
+                alert('No resized image available to share');
+                return;
+            }
+            
+            // In a real implementation, this would open a share dialog
+            alert('Share functionality would open in a real implementation. This is a demo.');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Initialize
+        updatePercentage();
+        updateQualityDisplay();
+    </script>
+</body>
+</html>

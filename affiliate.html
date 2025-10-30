@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the Photo Flare Affiliate Program and earn up to 30% recurring commissions promoting our document and image tools.">
+    <meta name="keywords" content="Photo Flare affiliate program, document tools affiliate, image editing affiliate, recurring commissions, affiliate marketing">
+    <title>Photo Flare Affiliate Program | Earn Up To 30% Recurring Commissions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: float-benefit 10s ease-in-out infinite;
+        }
+
+        .benefit-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .benefit-card:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .benefit-card:nth-child(4) {
+            animation-delay: 4.5s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: none;
+        }
+
+        .benefit-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-benefit-icon 8s ease-in-out infinite;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .detailed-benefits {
+            margin: 4rem 0;
+        }
+
+        .benefit-detail {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-detail 12s ease-in-out infinite;
+        }
+
+        .benefit-detail:nth-child(even) {
+            flex-direction: row-reverse;
+            animation-delay: 2s;
+        }
+
+        .benefit-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .benefit-image {
+            flex: 0 0 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-image i {
+            font-size: 8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-image 10s ease-in-out infinite;
+        }
+
+        .benefit-content {
+            flex: 1;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .benefit-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list i {
+            color: var(--success);
+        }
+
+        .commission-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .commission-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tier-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            color: var(--dark);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: float-tier 12s ease-in-out infinite;
+        }
+
+        .tier-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .tier-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: none;
+        }
+
+        .tier-name {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .tier-rate {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            animation: float-rate 5s ease-in-out infinite;
+        }
+
+        .tier-requirements {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .tier-requirements li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .tier-requirements li:last-child {
+            border-bottom: none;
+        }
+
+        .tier-requirements i {
+            color: var(--success);
+        }
+
+        .tools-section {
+            margin: 4rem 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-tool 11s ease-in-out infinite;
+        }
+
+        .tool-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .tool-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .tool-card:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .tool-description {
+            color: var(--gray);
+        }
+
+        .how-it-works {
+            margin: 4rem 0;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-step 14s ease-in-out infinite;
+        }
+
+        .step:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .step:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .step:nth-child(4) {
+            animation-delay: 6s;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            animation: float-step-number 6s ease-in-out infinite;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: var(--gray);
+        }
+
+        .faq-section {
+            margin: 4rem 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            animation: float-faq 13s ease-in-out infinite;
+        }
+
+        .faq-item:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .faq-item:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .faq-item:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .faq-item:nth-child(5) {
+            animation-delay: 4s;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+            transition: var(--transition);
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .faq-question:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--gray);
+            display: none;
+        }
+
+        .faq-question.active + .faq-answer {
+            display: block;
+        }
+
+        .faq-toggle {
+            transition: var(--transition);
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-benefit {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes float-benefit-icon {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-4px) rotate(5deg);
+            }
+        }
+
+        @keyframes float-detail {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-image {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-5px) scale(1.05);
+            }
+        }
+
+        @keyframes float-tier {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-rate {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float-tool {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-step {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-5px);
+            }
+        }
+
+        @keyframes float-step-number {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-faq {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            margin: 4rem 0;
+        }
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            margin: 4rem 0;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .resource-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .resource-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .benefits-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .commission-tiers {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .benefit-detail {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .benefit-detail:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .benefit-image {
+                margin-bottom: 1.5rem;
+            }
+            
+            .steps-container {
+                gap: 1.5rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .step-number {
+                min-width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .commission-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .benefit-detail {
+                padding: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Earn Up To 30% Recurring Commissions</h1>
+            <p>Join the Photo Flare Affiliate Program and earn substantial passive income by promoting our industry-leading document and image processing tools.</p>
+            
+            <div style="margin-top: 2rem;">
+                <a href="#signup" class="btn btn-warning" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Join Now - It's Free</a>
+                <a href="#benefits" class="btn btn-outline"><i class="fas fa-arrow-down"></i> Explore Benefits</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">30%</div>
+                    <div class="stat-label">Maximum Commission</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">90</div>
+                    <div class="stat-label">Day Cookie Duration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$50</div>
+                    <div class="stat-label">Minimum Payout</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2,500+</div>
+                    <div class="stat-label">Active Affiliates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Why Partner With Photo Flare?</h2>
+            <p class="section-subtitle">Our affiliate program offers unique advantages that set us apart from other programs in the industry.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-money-bill-wave benefit-icon"></i>
+                    <h3 class="benefit-title">High Commissions</h3>
+                    <p>Earn up to 30% recurring commission on every referral. Our tiered structure rewards top performers.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-calendar-check benefit-icon"></i>
+                    <h3 class="benefit-title">Recurring Revenue</h3>
+                    <p>Get paid month after month for every customer you refer. Build a sustainable passive income stream.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-chart-line benefit-icon"></i>
+                    <h3 class="benefit-title">Proven Conversion Rates</h3>
+                    <p>Our tools have exceptional conversion rates with high customer satisfaction and retention.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-headset benefit-icon"></i>
+                    <h3 class="benefit-title">Dedicated Support</h3>
+                    <p>Get personalized support from our affiliate team with marketing materials and optimization tips.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Benefits Section -->
+    <section class="detailed-benefits">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Affiliate Benefits</h2>
+            <p class="section-subtitle">We provide everything you need to succeed as a Photo Flare affiliate partner.</p>
+            
+            <div class="benefit-detail">
+                <div class="benefit-image">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <div class="benefit-content">
+                    <h3>Advanced Analytics Dashboard</h3>
+                    <p>Track your performance with our comprehensive affiliate dashboard that provides real-time insights into your earnings, conversions, and traffic sources.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Real-time performance tracking</li>
+                        <li><i class="fas fa-check"></i> Conversion rate analytics</li>
+                        <li><i class="fas fa-check"></i> Traffic source breakdown</li>
+                        <li><i class="fas fa-check"></i> Earnings projections</li>
+                    </ul>
+                    <p>Our dashboard helps you optimize your campaigns for maximum profitability.</p>
+                </div>
+            </div>
+            
+            <div class="benefit-detail">
+                <div class="benefit-image">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="benefit-content">
+                    <h3>Extensive Marketing Resources</h3>
+                    <p>Access a wide range of professionally designed marketing materials to make promotion easy and effective.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Customizable banners in multiple sizes</li>
+                        <li><i class="fas fa-check"></i> Pre-written email templates</li>
+                        <li><i class="fas fa-check"></i> Social media content packages</li>
+                        <li><i class="fas fa-check"></i> Product comparison guides</li>
+                    </ul>
+                    <p>We provide everything you need to create compelling content that converts.</p>
+                </div>
+            </div>
+            
+            <div class="benefit-detail">
+                <div class="benefit-image">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="benefit-content">
+                    <h3>Dedicated Affiliate Manager</h3>
+                    <p>Our top-performing affiliates receive personalized support from dedicated account managers who help optimize your campaigns.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> One-on-one strategy sessions</li>
+                        <li><i class="fas fa-check"></i> Campaign performance reviews</li>
+                        <li><i class="fas fa-check"></i> Custom promotional opportunities</li>
+                        <li><i class="fas fa-check"></i> Priority support response</li>
+                    </ul>
+                    <p>We're invested in your success and provide the guidance needed to maximize your earnings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commission Section -->
+    <section class="commission-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Commission Tiers</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: rgba(255,255,255,0.8);">
+                Our tiered commission structure rewards performance. The more you refer, the more you earn.
+            </p>
+            
+            <div class="commission-tiers">
+                <div class="tier-card">
+                    <h3 class="tier-name">Starter</h3>
+                    <div class="tier-rate">20%</div>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Starting commission for all affiliates</p>
+                    <ul class="tier-requirements">
+                        <li><i class="fas fa-check"></i> 0-10 sales/month</li>
+                        <li><i class="fas fa-check"></i> Basic affiliate dashboard</li>
+                        <li><i class="fas fa-check"></i> Standard marketing materials</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                    </ul>
+                </div>
+                
+                <div class="tier-card">
+                    <h3 class="tier-name">Professional</h3>
+                    <div class="tier-rate">25%</div>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">For consistent performers</p>
+                    <ul class="tier-requirements">
+                        <li><i class="fas fa-check"></i> 11-25 sales/month</li>
+                        <li><i class="fas fa-check"></i> Advanced affiliate dashboard</li>
+                        <li><i class="fas fa-check"></i> Custom marketing materials</li>
+                        <li><i class="fas fa-check"></i> Priority email support</li>
+                        <li><i class="fas fa-check"></i> Performance bonuses</li>
+                    </ul>
+                </div>
+                
+                <div class="tier-card">
+                    <h3 class="tier-name">Elite</h3>
+                    <div class="tier-rate">30%</div>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">Our top affiliate partners</p>
+                    <ul class="tier-requirements">
+                        <li><i class="fas fa-check"></i> 26+ sales/month</li>
+                        <li><i class="fas fa-check"></i> Premium affiliate dashboard</li>
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check"></i> Phone & email support</li>
+                        <li><i class="fas fa-check"></i> Exclusive promotions</li>
+                        <li><i class="fas fa-check"></i> Highest performance bonuses</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.8);">
+                All commissions are recurring for the lifetime of the customer. <a href="commission-terms.html" class="external-link" style="color: white; border-bottom-color: white;">See full terms</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools-section">
+        <div class="container">
+            <h2 class="section-title">What You'll Be Promoting</h2>
+            <p class="section-subtitle">Photo Flare offers a comprehensive suite of document and image processing tools that customers love.</p>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <i class="fas fa-file-pdf tool-icon"></i>
+                    <h3 class="tool-title">PDF Tools</h3>
+                    <p class="tool-description">Convert, edit, compress, and manipulate PDF files with our comprehensive PDF toolkit.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <i class="fas fa-image tool-icon"></i>
+                    <h3 class="tool-title">Image Tools</h3>
+                    <p class="tool-description">Edit, convert, resize, and optimize images with our powerful image processing tools.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <i class="fas fa-exchange-alt tool-icon"></i>
+                    <h3 class="tool-title">Conversion Tools</h3>
+                    <p class="tool-description">Convert between different file formats with our fast and accurate conversion tools.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <i class="fas fa-crown tool-icon"></i>
+                    <h3 class="tool-title">Premium Tools</h3>
+                    <p class="tool-description">Access advanced features and capabilities with our premium subscription plans.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="max-width: 800px; margin: 0 auto; color: var(--gray);">
+                    With over 100 different tools and features, Photo Flare serves a wide range of customers from students and professionals to businesses of all sizes. This diversity makes it easier to find audiences interested in our products.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How Our Affiliate Program Works</h2>
+            <p class="section-subtitle">Getting started with our affiliate program is simple. Follow these four easy steps to start earning.</p>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Sign Up</h3>
+                        <p>Complete our quick affiliate application form. Approval is typically within 24 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Get Your Links</h3>
+                        <p>Access your unique affiliate links, banners, and marketing materials from your dashboard.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Promote</h3>
+                        <p>Share your links on your website, social media, email newsletters, or any other channel.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Earn Commissions</h3>
+                        <p>Get paid monthly for every customer who signs up through your affiliate links.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Affiliates Say</h2>
+            <p class="section-subtitle">Hear from successful affiliates who are earning with our program.</p>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The Photo Flare affiliate program has been a game-changer for my income. The recurring commissions mean I earn consistently every month without additional work."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davis</h4>
+                            <p>Tech Blogger</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "I've tried many affiliate programs, but Photo Flare stands out with their high conversion rates and excellent support. My earnings have increased by 40% since joining."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah Roberts</h4>
+                            <p>Digital Marketer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The 90-day cookie duration is fantastic! I get credit for purchases even when customers don't buy immediately. The dashboard is also very user-friendly."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <p>YouTube Creator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Affiliate Resources</h2>
+            <p class="section-subtitle">We provide all the tools you need to succeed as a Photo Flare affiliate.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <i class="fas fa-paint-brush resource-icon"></i>
+                    <h3 class="resource-title">Marketing Banners</h3>
+                    <p class="resource-description">Professionally designed banners in various sizes for all platforms.</p>
+                    <a href="#" class="btn btn-outline">Download</a>
+                </div>
+                
+                <div class="resource-card">
+                    <i class="fas fa-envelope resource-icon"></i>
+                    <h3 class="resource-title">Email Templates</h3>
+                    <p class="resource-description">Pre-written email campaigns that convert subscribers to customers.</p>
+                    <a href="#" class="btn btn-outline">Download</a>
+                </div>
+                
+                <div class="resource-card">
+                    <i class="fas fa-share-alt resource-icon"></i>
+                    <h3 class="resource-title">Social Media Kits</h3>
+                    <p class="resource-description">Ready-to-post content for all major social media platforms.</p>
+                    <a href="#" class="btn btn-outline">Download</a>
+                </div>
+                
+                <div class="resource-card">
+                    <i class="fas fa-book resource-icon"></i>
+                    <h3 class="resource-title">Product Guides</h3>
+                    <p class="resource-description">Detailed guides explaining all Photo Flare tools and features.</p>
+                    <a href="#" class="btn btn-outline">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Find answers to common questions about our affiliate program.</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much can I earn as a Photo Flare affiliate?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our commission structure starts at 20% and goes up to 30% for top performers. With our recurring commission model, you earn month after month for every customer you refer. Many of our affiliates earn hundreds to thousands of dollars per month.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How and when do I get paid?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We process affiliate payments monthly around the 15th of each month for the previous month's commissions. Payments are made via PayPal, bank transfer, or other methods depending on your location. The minimum payout threshold is $50.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is your cookie duration?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We use a 90-day cookie duration. This means if someone clicks your affiliate link and makes a purchase within 90 days, you'll receive credit for that sale.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I promote Photo Flare on social media?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! We encourage promotion on all social media platforms. We provide social media-friendly banners, pre-written posts, and other assets to make promotion easy and effective.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there a cost to join the affiliate program?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        No, joining our affiliate program is completely free. There are no hidden fees or charges. We believe in creating a mutually beneficial partnership with our affiliates.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="signup">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Earning?</h2>
+                <p>Join thousands of successful affiliates who are earning recurring commissions with Photo Flare. Sign up today and start building your passive income stream.</p>
+                <a href="affiliate-signup.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;"><i class="fas fa-rocket"></i> Join Now - It's Free!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate-program.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                // Close all other FAQ items
+                faqQuestions.forEach(q => {
+                    if (q !== this) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.style.display = 'none';
+                    }
+                });
+                
+                // Toggle current FAQ item
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                if (this.classList.contains('active')) {
+                    answer.style.display = 'block';
+                } else {
+                    answer.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animate stats counter
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Trigger stats animation when section comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

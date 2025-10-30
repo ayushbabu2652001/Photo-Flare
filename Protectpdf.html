@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Protect PDF files with passwords, encryption, and advanced security features. Secure your documents with Photo Flare's PDF protection tools.">
+    <meta name="keywords" content="protect PDF, PDF security, password protect PDF, encrypt PDF, PDF permissions, PDF encryption">
+    <title>Protect PDF Files - Advanced PDF Security | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #f3722c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .hero {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .tool-section {
+            margin: 3rem 0;
+        }
+
+        .tool-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .tool-icon-large {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            animation: float-icon 6s ease-in-out infinite;
+        }
+
+        .tool-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .protection-interface {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            min-height: 600px;
+        }
+
+        .protection-options {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .protection-preview {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .security-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .security-level {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .security-level:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .security-level.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .security-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .security-basic .security-icon {
+            color: var(--success);
+        }
+
+        .security-advanced .security-icon {
+            color: var(--warning);
+        }
+
+        .security-maximum .security-icon {
+            color: var(--danger);
+        }
+
+        .security-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .protection-form {
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 5px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+        }
+
+        .password-strength.weak .password-strength-bar {
+            width: 30%;
+            background: var(--danger);
+        }
+
+        .password-strength.medium .password-strength-bar {
+            width: 60%;
+            background: var(--warning);
+        }
+
+        .password-strength.strong .password-strength-bar {
+            width: 100%;
+            background: var(--success);
+        }
+
+        .permissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .permission-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .permission-item:hover {
+            border-color: var(--primary);
+        }
+
+        .permission-item input {
+            margin-right: 5px;
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .preview-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .preview-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .preview-content {
+            flex: 1;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .preview-content i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: float-pdf 8s ease-in-out infinite;
+        }
+
+        .preview-security {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-basic {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+
+        .badge-advanced {
+            background: rgba(248, 150, 30, 0.2);
+            color: var(--warning);
+        }
+
+        .badge-maximum {
+            background: rgba(230, 57, 70, 0.2);
+            color: var(--danger);
+        }
+
+        .file-input-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .file-input-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .file-input-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .file-input-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            animation: float-upload 7s ease-in-out infinite;
+        }
+
+        .file-input-area h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .file-input-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .file-info.active {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-details i {
+            color: var(--primary);
+        }
+
+        .advanced-features {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: float-card 12s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: none;
+        }
+
+        .feature-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-bottom-left-radius: 12px;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, #3a86ff, #8338ec);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .encryption-demo {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .encryption-demo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .encryption-demo-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .encryption-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .encryption-demo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .encryption-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2rem 0;
+            gap: 2rem;
+        }
+
+        .encryption-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .encryption-step-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            background: rgba(67, 97, 238, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+
+        .encryption-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: var(--box-shadow);
+            animation: float-banner 6s ease-in-out infinite;
+        }
+
+        .upgrade-prompt h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-prompt p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .faq-section {
+            margin: 3rem 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-toggle.active {
+            transform: rotate(180deg);
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        .related-tools {
+            margin: 3rem 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-link-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            animation: float-featured 9s ease-in-out infinite;
+        }
+
+        .tool-link-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .tool-link-card:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .tool-link-card:nth-child(4) {
+            animation-delay: 4.5s;
+        }
+
+        .tool-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+            animation: none;
+        }
+
+        .tool-link-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-featured-icon 7s ease-in-out infinite;
+        }
+
+        .tool-link-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float-hero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes float-btn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes float-featured {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes float-featured-icon {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-4px) rotate(5deg); }
+        }
+
+        @keyframes float-banner {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes float-pdf {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes float-upload {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Other Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 200px; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .protection-interface {
+                grid-template-columns: 1fr;
+            }
+            
+            .encryption-visual {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .encryption-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-container {
+                padding: 1.5rem;
+            }
+            
+            .tool-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .security-levels {
+                grid-template-columns: 1fr;
+            }
+            
+            .permissions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .file-input-area {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="editpdf.html">Edit PDF</a></li>
+                        <li><a href="protectpdf.html" class="active">Protect PDF</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Protect PDF Files with Advanced Security</h1>
+            <p>Secure your PDF documents with passwords, encryption, and permissions. Control access and protect sensitive information.</p>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tool Section -->
+    <section class="tool-section">
+        <div class="container">
+            <div class="tool-container">
+                <div class="tool-header">
+                    <div class="tool-icon-large">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div>
+                        <h1 class="tool-title">PDF Protection</h1>
+                        <p>Secure your PDF documents with advanced encryption and access controls</p>
+                    </div>
+                </div>
+
+                <div class="file-input-container">
+                    <div class="file-input-area" id="file-drop-area">
+                        <i class="fas fa-file-upload"></i>
+                        <h3>Upload your PDF file</h3>
+                        <p>Drag & drop your file here or click to browse</p>
+                        <button class="btn btn-primary" id="browse-btn">Browse Files</button>
+                        <input type="file" class="file-input" id="file-input" accept=".pdf">
+                    </div>
+                    
+                    <div class="file-info" id="file-info">
+                        <div class="file-details">
+                            <i class="fas fa-file-pdf"></i>
+                            <span id="file-name">document.pdf</span>
+                            <span id="file-size">(2.4 MB)</span>
+                        </div>
+                        <button class="btn btn-outline" id="remove-file">Remove</button>
+                    </div>
+                </div>
+
+                <div class="protection-interface">
+                    <div class="protection-options">
+                        <h3 style="margin-bottom: 1.5rem;">Security Options</h3>
+                        
+                        <div class="security-levels">
+                            <div class="security-level security-basic active" data-level="basic">
+                                <div class="security-icon">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <h4 class="security-title">Basic Protection</h4>
+                                <p class="security-description">Password to open</p>
+                            </div>
+                            
+                            <div class="security-level security-advanced" data-level="advanced">
+                                <div class="security-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4 class="security-title">Advanced Protection</h4>
+                                <p class="security-description">Permissions & encryption</p>
+                            </div>
+                            
+                            <div class="security-level security-maximum" data-level="maximum">
+                                <div class="security-icon">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <h4 class="security-title">Maximum Security</h4>
+                                <p class="security-description">Full security suite</p>
+                            </div>
+                        </div>
+                        
+                        <div class="protection-form">
+                            <div class="form-group">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" class="form-input" id="password" placeholder="Enter password to open PDF">
+                                <div class="password-strength" id="password-strength">
+                                    <div class="password-strength-bar"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" id="permissions-section" style="display: none;">
+                                <label class="form-label">Permissions</label>
+                                <div class="permissions-grid">
+                                    <label class="permission-item">
+                                        <input type="checkbox" id="permission-print">
+                                        <span>Printing</span>
+                                    </label>
+                                    <label class="permission-item">
+                                        <input type="checkbox" id="permission-copy">
+                                        <span>Copy content</span>
+                                    </label>
+                                    <label class="permission-item">
+                                        <input type="checkbox" id="permission-edit">
+                                        <span>Editing</span>
+                                    </label>
+                                    <label class="permission-item">
+                                        <input type="checkbox" id="permission-annotate">
+                                        <span>Annotations</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" id="owner-password-section" style="display: none;">
+                                <label class="form-label" for="owner-password">Owner Password</label>
+                                <input type="password" class="form-input" id="owner-password" placeholder="Enter owner password (for permissions)">
+                            </div>
+                            
+                            <div class="form-group" id="encryption-section" style="display: none;">
+                                <label class="form-label" for="encryption-level">Encryption Level</label>
+                                <select class="form-input" id="encryption-level">
+                                    <option value="128-bit">128-bit AES (Standard)</option>
+                                    <option value="256-bit">256-bit AES (High Security)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-success" id="protect-btn" style="width: 100%; margin-top: 1.5rem;">
+                            <i class="fas fa-shield-alt"></i> Protect PDF
+                        </button>
+                    </div>
+                    
+                    <div class="protection-preview">
+                        <div class="preview-header">
+                            <i class="fas fa-eye preview-icon"></i>
+                            <h3 class="preview-title">Security Preview</h3>
+                        </div>
+                        
+                        <div class="preview-content">
+                            <i class="fas fa-file-pdf"></i>
+                            <h3>PDF Security Preview</h3>
+                            <p>Your security settings will be displayed here</p>
+                        </div>
+                        
+                        <div class="preview-security" id="preview-security">
+                            <h4 style="margin-bottom: 0.5rem;">Current Security Level: <span id="security-level-display">Basic</span></h4>
+                            <div id="security-features">
+                                <span class="security-badge badge-basic">
+                                    <i class="fas fa-lock"></i> Password Protected
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Features Section -->
+    <section class="advanced-features">
+        <div class="container">
+            <h2 class="section-title">Advanced PDF Security Features</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: var(--gray);">
+                Unlock the full potential of PDF security with our premium advanced tools. 
+                Enterprise-grade protection for sensitive documents.
+            </p>
+            
+            <div class="features-grid">
+                <!-- Digital Signatures -->
+                <div class="feature-card">
+                    <div class="feature-badge">PRO</div>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <h3 class="feature-title">Digital Signatures</h3>
+                    </div>
+                    <p class="feature-description">
+                        Add legally binding digital signatures to your PDF documents with certificate-based authentication.
+                    </p>
+                    <div class="tool-cta">
+                        <a href="#" class="btn btn-primary">Try Digital Signatures</a>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                </div>
+                
+                <!-- Redaction -->
+                <div class="feature-card">
+                    <div class="feature-badge">ADVANCED</div>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <h3 class="feature-title">Advanced Redaction</h3>
+                    </div>
+                    <p class="feature-description">
+                        Permanently remove sensitive information from PDFs with our secure redaction tools.
+                    </p>
+                    <div class="tool-cta">
+                        <a href="#" class="btn btn-primary">Try Redaction</a>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                </div>
+                
+                <!-- Document Expiry -->
+                <div class="feature-card">
+                    <div class="feature-badge">ENTERPRISE</div>
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature-title">Document Expiry</h3>
+                    </div>
+                    <p class="feature-description">
+                        Set expiration dates for your PDF documents. Access automatically revokes after the set date.
+                    </p>
+                    <div class="tool-cta">
+                        <a href="#" class="btn btn-primary">Try Expiry</a>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Encryption Demo Section -->
+            <div class="encryption-demo">
+                <div class="encryption-demo-header">
+                    <i class="fas fa-key encryption-icon"></i>
+                    <h3 class="encryption-demo-title">Advanced Encryption Process</h3>
+                </div>
+                <p>Our advanced encryption ensures your PDF documents remain secure with multiple layers of protection.</p>
+                
+                <div class="encryption-visual">
+                    <div class="encryption-step">
+                        <div class="encryption-step-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h4>Upload PDF</h4>
+                        <p>Your document is uploaded securely</p>
+                    </div>
+                    
+                    <div class="encryption-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="encryption-step">
+                        <div class="encryption-step-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h4>Apply Encryption</h4>
+                        <p>Advanced AES encryption applied</p>
+                    </div>
+                    
+                    <div class="encryption-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="encryption-step">
+                        <div class="encryption-step-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Secure Document</h4>
+                        <p>Your PDF is now protected</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-lock"></i> Try Advanced Encryption
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Upgrade Prompt -->
+            <div class="upgrade-prompt">
+                <h3>Unlock All Advanced PDF Security Features</h3>
+                <p>Upgrade to Photo Flare Pro and get access to all advanced security tools, digital signatures, and enterprise-grade protection.</p>
+                <a href="subscription.html" class="btn btn-success" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                    <i class="fas fa-crown"></i> Upgrade to Pro - $4/month
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">30-day money-back guarantee · Cancel anytime</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How secure is PDF password protection?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our PDF protection uses industry-standard AES encryption with 128-bit or 256-bit key lengths, providing military-grade security for your documents.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I remove PDF protection if I forget the password?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, for security reasons, we cannot recover or remove passwords from protected PDFs. We recommend storing your passwords securely.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's the difference between user and owner passwords?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A user password is required to open the PDF. An owner password controls permissions (printing, editing, etc.) and can be different from the user password.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a file size limit for PDF protection?</span>
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Free users can protect PDF files up to 10MB. Premium users can protect files up to 100MB (monthly) or 500MB (yearly plan).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Tools Section -->
+    <section class="related-tools">
+        <div class="container">
+            <h2 class="section-title">More PDF Tools</h2>
+            <div class="tools-grid">
+                <a href="mergepdf.html" class="tool-link-card">
+                    <i class="fas fa-object-group tool-link-icon"></i>
+                    <h3 class="tool-link-title">Merge PDF</h3>
+                    <p>Combine multiple PDFs</p>
+                </a>
+                <a href="compresspdf.html" class="tool-link-card">
+                    <i class="fas fa-compress-arrows-alt tool-link-icon"></i>
+                    <h3 class="tool-link-title">Compress PDF</h3>
+                    <p>Reduce file size</p>
+                </a>
+                <a href="convertpdf.html" class="tool-link-card">
+                    <i class="fas fa-exchange-alt tool-link-icon"></i>
+                    <h3 class="tool-link-title">Convert PDF</h3>
+                    <p>PDF to Word, JPG, etc.</p>
+                </a>
+                <a href="editpdf.html" class="tool-link-card">
+                    <i class="fas fa-edit tool-link-icon"></i>
+                    <h3 class="tool-link-title">Edit PDF</h3>
+                    <p>Modify PDF content</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // File upload functionality
+        const fileInput = document.getElementById('file-input');
+        const fileDropArea = document.getElementById('file-drop-area');
+        const fileInfo = document.getElementById('file-info');
+        const fileName = document.getElementById('file-name');
+        const fileSize = document.getElementById('file-size');
+        const removeFileBtn = document.getElementById('remove-file');
+        const browseBtn = document.getElementById('browse-btn');
+        const protectBtn = document.getElementById('protect-btn');
+
+        // Security levels
+        const securityLevels = document.querySelectorAll('.security-level');
+        const passwordInput = document.getElementById('password');
+        const passwordStrength = document.getElementById('password-strength');
+        const permissionsSection = document.getElementById('permissions-section');
+        const ownerPasswordSection = document.getElementById('owner-password-section');
+        const encryptionSection = document.getElementById('encryption-section');
+
+        // Preview elements
+        const securityLevelDisplay = document.getElementById('security-level-display');
+        const securityFeatures = document.getElementById('security-features');
+
+        // Browse button click
+        browseBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelection(e.target.files[0]);
+            }
+        });
+
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileDropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            fileDropArea.style.borderColor = 'var(--primary)';
+            fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+        }
+
+        function unhighlight() {
+            fileDropArea.style.borderColor = 'var(--light-gray)';
+            fileDropArea.style.backgroundColor = 'var(--light)';
+        }
+
+        fileDropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                handleFileSelection(files[0]);
+            }
+        }
+
+        function handleFileSelection(file) {
+            // Check if file is PDF
+            if (file.type !== 'application/pdf') {
+                alert('Please select a PDF file.');
+                return;
+            }
+
+            // Update file info
+            fileName.textContent = file.name;
+            
+            // Format file size
+            const fileSizeBytes = file.size;
+            const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
+            fileSize.textContent = `(${fileSizeMB} MB)`;
+            
+            // Show file info
+            fileInfo.classList.add('active');
+            
+            // Update preview
+            const previewContent = document.querySelector('.preview-content');
+            previewContent.innerHTML = `
+                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3>PDF Ready for Protection</h3>
+                    <p>Your document is ready to be secured with the selected security options.</p>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
+                        <p><strong>File:</strong> ${file.name}</p>
+                        <p><strong>Size:</strong> ${fileSizeMB} MB</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Remove file
+        removeFileBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            
+            // Reset preview
+            const previewContent = document.querySelector('.preview-content');
+            previewContent.innerHTML = `
+                <i class="fas fa-file-pdf"></i>
+                <h3>PDF Security Preview</h3>
+                <p>Your security settings will be displayed here</p>
+            `;
+        });
+
+        // Security level selection
+        securityLevels.forEach(level => {
+            level.addEventListener('click', function() {
+                // Remove active class from all levels
+                securityLevels.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked level
+                this.classList.add('active');
+                
+                const levelType = this.getAttribute('data-level');
+                updateSecurityOptions(levelType);
+                updateSecurityPreview(levelType);
+            });
+        });
+
+        function updateSecurityOptions(level) {
+            // Reset all sections
+            permissionsSection.style.display = 'none';
+            ownerPasswordSection.style.display = 'none';
+            encryptionSection.style.display = 'none';
+            
+            // Show sections based on level
+            if (level === 'advanced') {
+                permissionsSection.style.display = 'block';
+                ownerPasswordSection.style.display = 'block';
+            } else if (level === 'maximum') {
+                permissionsSection.style.display = 'block';
+                ownerPasswordSection.style.display = 'block';
+                encryptionSection.style.display = 'block';
+            }
+        }
+
+        function updateSecurityPreview(level) {
+            let levelName = 'Basic';
+            let badges = '';
+            
+            if (level === 'basic') {
+                levelName = 'Basic';
+                badges = `
+                    <span class="security-badge badge-basic">
+                        <i class="fas fa-lock"></i> Password Protected
+                    </span>
+                `;
+            } else if (level === 'advanced') {
+                levelName = 'Advanced';
+                badges = `
+                    <span class="security-badge badge-advanced">
+                        <i class="fas fa-lock"></i> Password Protected
+                    </span>
+                    <span class="security-badge badge-advanced">
+                        <i class="fas fa-shield-alt"></i> Permissions Set
+                    </span>
+                `;
+            } else if (level === 'maximum') {
+                levelName = 'Maximum';
+                badges = `
+                    <span class="security-badge badge-maximum">
+                        <i class="fas fa-lock"></i> Password Protected
+                    </span>
+                    <span class="security-badge badge-maximum">
+                        <i class="fas fa-shield-alt"></i> Permissions Set
+                    </span>
+                    <span class="security-badge badge-maximum">
+                        <i class="fas fa-key"></i> 256-bit Encryption
+                    </span>
+                `;
+            }
+            
+            securityLevelDisplay.textContent = levelName;
+            securityFeatures.innerHTML = badges;
+        }
+
+        // Password strength indicator
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 'weak';
+            
+            if (password.length >= 12 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password)) {
+                strength = 'strong';
+            } else if (password.length >= 8) {
+                strength = 'medium';
+            }
+            
+            passwordStrength.className = 'password-strength ' + strength;
+        });
+
+        // Protect button click
+        protectBtn.addEventListener('click', () => {
+            if (!fileInput.files.length) {
+                alert('Please upload a PDF file first.');
+                return;
+            }
+            
+            if (!passwordInput.value) {
+                alert('Please enter a password to protect your PDF.');
+                return;
+            }
+            
+            // Show protection animation
+            protectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Protecting...';
+            protectBtn.disabled = true;
+            
+            // Simulate protection process
+            setTimeout(() => {
+                protectBtn.innerHTML = '<i class="fas fa-check"></i> PDF Protected!';
+                protectBtn.classList.remove('btn-success');
+                protectBtn.classList.add('btn-primary');
+                
+                // Create download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = '#';
+                downloadLink.className = 'btn btn-success';
+                downloadLink.innerHTML = '<i class="fas fa-download"></i> Download Protected PDF';
+                downloadLink.style.marginTop = '1rem';
+                downloadLink.style.width = '100%';
+                
+                // Add download link after button
+                protectBtn.parentNode.insertBefore(downloadLink, protectBtn.nextSibling);
+                
+                // Update preview
+                const previewContent = document.querySelector('.preview-content');
+                previewContent.innerHTML = `
+                    <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <div style="color: var(--success); font-size: 3rem; margin-bottom: 1rem;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>PDF Successfully Protected</h3>
+                        <p>Your document is now secured with the selected security options.</p>
+                    </div>
+                `;
+                
+                // Reset button after 5 seconds
+                setTimeout(() => {
+                    protectBtn.innerHTML = '<i class="fas fa-shield-alt"></i> Protect PDF';
+                    protectBtn.classList.remove('btn-primary');
+                    protectBtn.classList.add('btn-success');
+                    protectBtn.disabled = false;
+                    
+                    // Remove download link
+                    if (downloadLink.parentNode) {
+                        downloadLink.parentNode.removeChild(downloadLink);
+                    }
+                }, 5000);
+            }, 2000);
+        });
+
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const toggle = question.querySelector('.faq-toggle');
+                
+                // Toggle active class
+                answer.classList.toggle('active');
+                toggle.classList.toggle('active');
+            });
+        });
+
+        // Advanced feature buttons
+        const advancedFeatureButtons = document.querySelectorAll('.feature-card .btn');
+        
+        advancedFeatureButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("This is a premium feature. Upgrade to Pro to access all advanced security tools.");
+            });
+        });
+    </script>
+</body>
+</html>

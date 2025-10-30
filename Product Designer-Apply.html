@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product Designer at Photo Flare - Create intuitive, user-centered designs for our document tools, from concept to implementation.">
+    <meta name="keywords" content="Photo Flare careers, product designer, UX design, UI design, design jobs, remote work">
+    <title>Product Designer | Photo Flare Careers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
+        }
+
+        .hero {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-dark);
+        }
+
+        .breadcrumb span {
+            color: var(--gray);
+            margin: 0 10px;
+        }
+
+        .job-detail-section {
+            padding: 3rem 0;
+        }
+
+        .job-header {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .job-title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .job-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .job-tag.remote {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .job-tag.engineering {
+            background: rgba(114, 9, 183, 0.1);
+            color: var(--secondary);
+        }
+
+        .job-tag.design {
+            background: rgba(247, 37, 133, 0.1);
+            color: var(--accent);
+        }
+
+        .job-tag.marketing {
+            background: rgba(248, 150, 30, 0.1);
+            color: var(--warning);
+        }
+
+        .job-details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .job-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+        }
+
+        .job-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-title i {
+            color: var(--primary);
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--dark);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .job-description {
+            margin-bottom: 2rem;
+        }
+
+        .job-description p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .responsibilities-list, .requirements-list, .bonus-list {
+            margin-bottom: 2rem;
+        }
+
+        .responsibilities-list ul, .requirements-list ul, .bonus-list ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .responsibilities-list li, .requirements-list li, .bonus-list li {
+            margin-bottom: 0.8rem;
+            color: var(--gray);
+        }
+
+        .design-tools {
+            margin-bottom: 2rem;
+        }
+
+        .tools-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .tools-tag {
+            background: rgba(247, 37, 133, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .portfolio-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .portfolio-note {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .salary-info {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .salary-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .salary-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .salary-note {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .apply-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .apply-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .apply-desc {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Design-specific styles */
+        .design-process {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: var(--box-shadow);
+            border: 2px solid var(--primary);
+        }
+
+        .step-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .step-desc {
+            color: var(--gray);
+            font-size: 0.8rem;
+            max-width: 150px;
+            margin: 0 auto;
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .job-details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-title-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .job-header, .job-content, .apply-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .job-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .tools-tags {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="careers.html">Careers</a>
+                <span>/</span>
+                <span>Product Designer</span>
+            </div>
+            <h1>Product Designer</h1>
+            <p>Create intuitive, user-centered designs for our document tools, from concept to implementation.</p>
+        </div>
+    </section>
+
+    <!-- Job Detail Section -->
+    <section class="job-detail-section">
+        <div class="container">
+            <div class="job-header">
+                <div class="job-title-section">
+                    <div>
+                        <h1 class="job-title">Product Designer</h1>
+                        <div class="job-meta">
+                            <span class="job-tag design">Design</span>
+                            <span class="job-tag remote">Remote</span>
+                            <span class="job-tag">Full-time</span>
+                        </div>
+                    </div>
+                    <a href="#apply" class="btn btn-primary">Apply Now</a>
+                </div>
+                <p>Join our design team to create beautiful, intuitive experiences for our document processing tools. You'll work closely with product managers and engineers to translate complex workflows into simple, elegant interfaces that millions of users rely on every day.</p>
+            </div>
+            
+            <div class="job-details-grid">
+                <div class="job-content">
+                    <div class="job-description">
+                        <h2 class="section-title">About the Role</h2>
+                        <p>As a Product Designer at Photo Flare, you'll be responsible for the end-to-end design of our document processing tools. You'll conduct user research, create wireframes and prototypes, and work with engineers to implement your designs. You'll have a significant impact on our product direction and help shape the future of document processing.</p>
+                        <p>Our design team values collaboration, user empathy, and attention to detail. We're looking for someone who can balance user needs with business goals and technical constraints to create solutions that are both beautiful and functional.</p>
+                    </div>
+                    
+                    <div class="design-process">
+                        <h2 class="section-title">Our Design Process</h2>
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h3 class="step-title">Research</h3>
+                                <p class="step-desc">Understand user needs and business requirements</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h3 class="step-title">Ideate</h3>
+                                <p class="step-desc">Explore multiple solutions and create concepts</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h3 class="step-title">Design</h3>
+                                <p class="step-desc">Create detailed designs and prototypes</p>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <h3 class="step-title">Validate</h3>
+                                <p class="step-desc">Test with users and iterate based on feedback</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="design-tools">
+                        <h2 class="section-title">Our Design Tools</h2>
+                        <div class="tools-tags">
+                            <span class="tools-tag">Figma</span>
+                            <span class="tools-tag">Sketch</span>
+                            <span class="tools-tag">Adobe Creative Suite</span>
+                            <span class="tools-tag">Principle</span>
+                            <span class="tools-tag">InVision</span>
+                            <span class="tools-tag">Miro</span>
+                            <span class="tools-tag">UserTesting</span>
+                            <span class="tools-tag">Hotjar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="responsibilities-list">
+                        <h2 class="section-title">Key Responsibilities</h2>
+                        <ul>
+                            <li>Design user flows, wireframes, and high-fidelity mockups for new features</li>
+                            <li>Create interactive prototypes to test and validate design concepts</li>
+                            <li>Conduct user research and usability testing to inform design decisions</li>
+                            <li>Collaborate with product managers to define product requirements</li>
+                            <li>Work closely with engineers to ensure designs are implemented accurately</li>
+                            <li>Contribute to and maintain our design system</li>
+                            <li>Present design work to stakeholders and gather feedback</li>
+                            <li>Stay current with design trends, tools, and best practices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirements-list">
+                        <h2 class="section-title">Qualifications & Requirements</h2>
+                        <ul>
+                            <li>3+ years of product design experience</li>
+                            <li>Strong portfolio demonstrating user-centered design solutions</li>
+                            <li>Proficiency with design tools like Figma, Sketch, or Adobe XD</li>
+                            <li>Experience conducting user research and usability testing</li>
+                            <li>Understanding of information architecture and interaction design</li>
+                            <li>Knowledge of responsive design principles</li>
+                            <li>Excellent visual design skills with attention to typography and layout</li>
+                            <li>Strong communication and collaboration skills</li>
+                            <li>Ability to work effectively in a remote environment</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bonus-list">
+                        <h2 class="section-title">Bonus Points For</h2>
+                        <ul>
+                            <li>Experience designing for productivity or document processing tools</li>
+                            <li>Knowledge of front-end development (HTML/CSS/JavaScript)</li>
+                            <li>Experience with data visualization design</li>
+                            <li>Motion design or illustration skills</li>
+                            <li>Experience working in agile development environments</li>
+                            <li>Background in UX writing or content strategy</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="portfolio-section">
+                        <h3 class="portfolio-title">Portfolio Requirement</h3>
+                        <p class="portfolio-note">Please include a link to your portfolio in your application. We're particularly interested in seeing case studies that demonstrate your design process and problem-solving skills.</p>
+                        <p class="portfolio-note">Your portfolio should showcase at least 2-3 projects with explanations of your role, the design challenges you faced, and how you arrived at your solutions.</p>
+                    </div>
+                </div>
+                
+                <div class="job-sidebar">
+                    <div class="salary-info">
+                        <div class="salary-title">Estimated Salary Range</div>
+                        <div class="salary-amount">$95,000 - $130,000</div>
+                        <div class="salary-note">+ equity + benefits. Actual compensation will be based on experience and location.</div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-map-marker-alt"></i> Location</h3>
+                        <p>Remote (Global)</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-clock"></i> Job Type</h3>
+                        <p>Full-time</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-users"></i> Team</h3>
+                        <p>Product Design</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-calendar-alt"></i> Posted</h3>
+                        <p>3 days ago</p>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-share-alt"></i> Share This Job</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title"><i class="fas fa-arrow-left"></i> Back to Careers</h3>
+                        <a href="careers.html" class="btn btn-outline" style="width: 100%; text-align: center; margin-top: 1rem;">View All Positions</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="apply-section" id="apply">
+                <h2 class="apply-title">Ready to Apply?</h2>
+                <p class="apply-desc">We're excited to see your portfolio and learn how you approach design challenges. Click the button below to start your application.</p>
+                <a href="apply.html?position=product-designer" class="btn btn-accent">Apply for This Position</a>
+                <p style="margin-top: 1.5rem;">Questions about this role? <a href="contact.html" class="external-link">Contact our hiring team</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#home" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply initial styles for animation
+        document.querySelectorAll('.job-header, .job-content, .sidebar-card, .apply-section, .process-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

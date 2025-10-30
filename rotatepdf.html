@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rotate PDF pages with PhotoFlare - Advanced rotation options, batch processing, and precise page management.">
+    <meta name="keywords" content="rotate PDF, PDF rotation, flip PDF pages, PDF page orientation, PDF tools">
+    <title>Rotate PDF - Advanced PDF Rotation Tool | PhotoFlare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #554fd8;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --light: #f8f9ff;
+            --dark: #2A2D3E;
+            --gray: #8A8D9F;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #3A3F5C 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background: #eaeaea;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e68900;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--dark) 0%, #3A3F5C 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.03"><polygon points="1000,100 1000,0 0,100"></polygon></svg>');
+            background-size: cover;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tool Section */
+        .tool-section {
+            padding: 80px 0;
+        }
+
+        .tool-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 2px;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: var(--border-radius);
+            padding: 50px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+            margin-bottom: 30px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #f0f2ff;
+        }
+
+        .upload-area i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Editor Layout */
+        .editor-layout {
+            display: flex;
+            gap: 30px;
+            min-height: 700px;
+        }
+
+        .editor-sidebar {
+            flex: 0 0 400px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .editor-main {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Rotation Options */
+        .rotation-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .rotation-category {
+            margin-bottom: 10px;
+        }
+
+        .rotation-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .rotation-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .rotation-btn {
+            background: var(--light);
+            border: 1px solid #f0f0f0;
+            border-radius: var(--border-radius);
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rotation-btn:hover {
+            background: #f0f2ff;
+            border-color: var(--primary);
+        }
+
+        .rotation-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .rotation-btn.active i {
+            color: white;
+        }
+
+        .rotation-btn i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .rotation-btn span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Page Selection */
+        .page-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .selection-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .selection-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .selection-option:hover {
+            background: var(--light);
+        }
+
+        .selection-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .selection-option label {
+            font-size: 0.95rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .custom-pages {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .custom-pages.active {
+            display: block;
+        }
+
+        .page-range-input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .page-range-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
+
+        /* Batch Processing */
+        .batch-processing {
+            background: #e8f5e9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--success);
+        }
+
+        .batch-processing h4 {
+            color: var(--success);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .batch-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .batch-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .batch-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .batch-option label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        /* Page Thumbnails */
+        .page-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .page-thumbnail {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .page-thumbnail:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .page-thumbnail.selected {
+            border-color: var(--primary);
+            background: #f0f2ff;
+        }
+
+        .page-number {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .page-preview {
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.7rem;
+        }
+
+        .rotation-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        /* Editor Canvas */
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .editor-canvas {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            border: 2px dashed #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-placeholder {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .canvas-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+
+        .canvas-placeholder h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .page-preview-large {
+            width: 60%;
+            height: 80%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .page-content {
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .page-number-large {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .page-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .page-info {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Ad Container */
+        .ad-container {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            margin: 50px 0;
+            border: 1px dashed #ddd;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-column p {
+            color: #adb5bd;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .social-links-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links-footer a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links-footer a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .editor-layout {
+                flex-direction: column;
+            }
+            
+            .editor-sidebar {
+                flex: 1;
+                order: 2;
+            }
+            
+            .editor-main {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .rotation-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-thumbnails {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rotation-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .editor-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .editor-actions .btn {
+                width: 100%;
+            }
+            
+            .page-thumbnails {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt logo-icon"></i>
+                    <div class="logo-text">Photo<span>Flare</span></div>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="tools.html">All Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Log In</button>
+                    <button class="btn btn-primary">Sign Up Free</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Rotate PDF Pages</h1>
+            <p>Advanced PDF rotation with multiple options, batch processing, and precise page management</p>
+        </div>
+    </section>
+
+    <section class="tool-section">
+        <div class="container">
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>Upload PDF to Rotate</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                    <button class="btn btn-primary">Select PDF File</button>
+                    <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="sampleBtn">
+                        <i class="fas fa-download"></i> Load Sample Document
+                    </button>
+                    <button class="btn btn-secondary" id="batchBtn">
+                        <i class="fas fa-layer-group"></i> Add Multiple Files
+                    </button>
+                </div>
+            </div>
+
+            <div class="editor-layout" id="editorLayout" style="display: none;">
+                <div class="editor-sidebar">
+                    <div class="rotation-options">
+                        <div class="rotation-category">
+                            <h3>Rotation Options</h3>
+                            <div class="rotation-buttons">
+                                <div class="rotation-btn" data-rotation="90">
+                                    <i class="fas fa-redo"></i>
+                                    <span>90° Clockwise</span>
+                                </div>
+                                <div class="rotation-btn" data-rotation="-90">
+                                    <i class="fas fa-undo"></i>
+                                    <span>90° Counterclockwise</span>
+                                </div>
+                                <div class="rotation-btn" data-rotation="180">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>180° Flip</span>
+                                </div>
+                                <div class="rotation-btn" data-rotation="custom">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Custom Angle</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rotation-category" id="customRotation" style="display: none;">
+                            <h3>Custom Rotation</h3>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <input type="range" id="customAngle" min="0" max="360" value="0" style="flex: 1;">
+                                <span style="min-width: 50px; text-align: center; font-weight: 600;" id="customAngleValue">0°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-selection">
+                        <div class="rotation-category">
+                            <h3>Page Selection</h3>
+                            <div class="selection-options">
+                                <div class="selection-option">
+                                    <input type="radio" id="allPages" name="pageSelection" checked>
+                                    <label for="allPages">All Pages</label>
+                                </div>
+                                <div class="selection-option">
+                                    <input type="radio" id="currentPage" name="pageSelection">
+                                    <label for="currentPage">Current Page Only</label>
+                                </div>
+                                <div class="selection-option">
+                                    <input type="radio" id="pageRange" name="pageSelection">
+                                    <label for="pageRange">Custom Page Range</label>
+                                </div>
+                                <div class="selection-option">
+                                    <input type="radio" id="selectedPages" name="pageSelection">
+                                    <label for="selectedPages">Selected Pages Only</label>
+                                </div>
+                            </div>
+
+                            <div class="custom-pages" id="pageRangeInput">
+                                <input type="text" class="page-range-input" placeholder="e.g., 1-5, 7, 9-12">
+                            </div>
+                        </div>
+
+                        <div class="rotation-category">
+                            <h3>Page Thumbnails</h3>
+                            <div class="page-thumbnails" id="pageThumbnails">
+                                <!-- Thumbnails will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="batch-processing">
+                        <h4><i class="fas fa-layer-group"></i> Batch Processing</h4>
+                        <div class="batch-options">
+                            <div class="batch-option">
+                                <input type="checkbox" id="applyToAll">
+                                <label for="applyToAll">Apply same rotation to all files</label>
+                            </div>
+                            <div class="batch-option">
+                                <input type="checkbox" id="preserveRotation">
+                                <label for="preserveRotation">Preserve existing rotations</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="editor-header">
+                        <h3>PDF Rotation Preview</h3>
+                        <div class="editor-actions">
+                            <button class="btn btn-secondary" id="resetBtn">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                            <button class="btn btn-warning" id="previewBtn">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn btn-primary" id="applyBtn">
+                                <i class="fas fa-check"></i> Apply Rotation
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="editor-canvas" id="editorCanvas">
+                        <div class="canvas-placeholder">
+                            <i class="fas fa-file-pdf"></i>
+                            <h3>PDF Loaded Successfully</h3>
+                            <p>Select pages and rotation options to preview changes</p>
+                            <p>Click "Preview" to see how the rotation will appear</p>
+                        </div>
+                        <div class="page-preview-large" id="pagePreview" style="display: none;">
+                            <div class="page-content">
+                                PDF Page Content
+                                <div style="margin-top: 10px; font-size: 0.9rem;">
+                                    This is a preview of how your page will look after rotation
+                                </div>
+                            </div>
+                            <div class="page-number-large">Page 1</div>
+                        </div>
+                    </div>
+
+                    <div class="page-controls">
+                        <button class="btn btn-secondary" id="prevPage">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="page-info">
+                            Page <span id="currentPage">1</span> of <span id="totalPages">1</span>
+                        </div>
+                        <button class="btn btn-secondary" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense Ad Unit -->
+                <!-- Replace with your AdSense code -->
+                <div id="ad-unit-1">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="section-title">
+                    <h2>Advanced Rotation Features</h2>
+                    <p>Professional PDF rotation with precision controls and batch processing</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-redo"></i>
+                        <h3>Multiple Rotation Options</h3>
+                        <p>Rotate pages by 90°, 180°, or custom angles with precise control over orientation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h3>Flexible Page Selection</h3>
+                        <p>Rotate all pages, current page, custom ranges, or individually selected pages.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Batch Processing</h3>
+                        <p>Rotate multiple PDF files simultaneously with consistent settings across all documents.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Real-time Preview</h3>
+                        <p>See exactly how your pages will look after rotation before applying changes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-history"></i>
+                        <h3>Rotation History</h3>
+                        <p>Keep track of all rotations applied and easily revert changes if needed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Quality Preservation</h3>
+                        <p>Maintain original PDF quality and formatting during rotation process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PhotoFlare</h3>
+                    <p>Your one-stop solution for all file conversion and compression needs. Fast, secure, and easy to use.</p>
+                    <div class="social-links-footer">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Tools</h3>
+                    <ul>
+                        <li><a href="#">JPG to PDF</a></li>
+                        <li><a href="#">Compress PDF</a></li>
+                        <li><a href="#">Split PDF</a></li>
+                        <li><a href="#">PDF to Word</a></li>
+                        <li><a href="#">Excel to PDF</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 PhotoFlare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Tool variables
+        let currentRotation = 0;
+        let currentPage = 1;
+        let totalPages = 1;
+        let selectedPages = new Set();
+        let pageRotations = {};
+
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const editorLayout = document.getElementById('editorLayout');
+        const editorCanvas = document.getElementById('editorCanvas');
+        const rotationButtons = document.querySelectorAll('.rotation-btn');
+        const customRotation = document.getElementById('customRotation');
+        const customAngle = document.getElementById('customAngle');
+        const customAngleValue = document.getElementById('customAngleValue');
+        const pageSelectionRadios = document.querySelectorAll('input[name="pageSelection"]');
+        const pageRangeInput = document.getElementById('pageRangeInput');
+        const pageThumbnails = document.getElementById('pageThumbnails');
+        const pagePreview = document.getElementById('pagePreview');
+        const currentPageElement = document.getElementById('currentPage');
+        const totalPagesElement = document.getElementById('totalPages');
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const applyBtn = document.getElementById('applyBtn');
+        const previewBtn = document.getElementById('previewBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const sampleBtn = document.getElementById('sampleBtn');
+        const batchBtn = document.getElementById('batchBtn');
+
+        // Upload area click handler
+        uploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // File input change handler
+        fileInput.addEventListener('change', function() {
+            if (this.files.length) {
+                const file = this.files[0];
+                
+                // Check if file is PDF
+                if (file.type !== 'application/pdf') {
+                    alert('Please select a PDF file.');
+                    return;
+                }
+                
+                // Show editor layout
+                editorLayout.style.display = 'flex';
+                
+                // Scroll to editor
+                editorLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Simulate PDF processing
+                simulatePDFLoad();
+            }
+        });
+
+        // Sample PDF button handler
+        sampleBtn.addEventListener('click', function() {
+            // Show editor layout
+            editorLayout.style.display = 'flex';
+            
+            // Scroll to editor
+            editorLayout.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Simulate PDF processing
+            simulatePDFLoad();
+            
+            // Show success message
+            alert('Sample document loaded successfully! You can now rotate pages and preview changes.');
+        });
+
+        // Batch processing button handler
+        batchBtn.addEventListener('click', function() {
+            alert('In a real application, this would open a file dialog to select multiple PDF files for batch rotation.');
+        });
+
+        // Rotation button selection handler
+        rotationButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                rotationButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get rotation value
+                const rotationType = this.getAttribute('data-rotation');
+                
+                if (rotationType === 'custom') {
+                    // Show custom rotation controls
+                    customRotation.style.display = 'block';
+                    currentRotation = parseInt(customAngle.value);
+                } else {
+                    // Hide custom rotation controls
+                    customRotation.style.display = 'none';
+                    currentRotation = parseInt(rotationType);
+                }
+                
+                // Update preview
+                updatePagePreview();
+            });
+        });
+
+        // Custom angle change handler
+        customAngle.addEventListener('input', function() {
+            currentRotation = parseInt(this.value);
+            customAngleValue.textContent = this.value + '°';
+            updatePagePreview();
+        });
+
+        // Page selection radio handler
+        pageSelectionRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.id === 'pageRange') {
+                    pageRangeInput.classList.add('active');
+                } else {
+                    pageRangeInput.classList.remove('active');
+                }
+                
+                if (this.id === 'selectedPages') {
+                    // Enable page selection mode
+                    enablePageSelection();
+                } else {
+                    // Disable page selection mode
+                    disablePageSelection();
+                }
+            });
+        });
+
+        // Page navigation
+        prevPageBtn.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                currentPageElement.textContent = currentPage;
+                updatePagePreview();
+                updateThumbnailSelection();
+            }
+        });
+
+        nextPageBtn.addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                currentPageElement.textContent = currentPage;
+                updatePagePreview();
+                updateThumbnailSelection();
+            }
+        });
+
+        // Preview button handler
+        previewBtn.addEventListener('click', function() {
+            pagePreview.style.display = 'flex';
+            updatePagePreview();
+            
+            // Show success message
+            alert('Rotation preview updated! You can now see how the current page will look after rotation.');
+        });
+
+        // Reset button handler
+        resetBtn.addEventListener('click', function() {
+            // Reset all rotations
+            currentRotation = 0;
+            pageRotations = {};
+            selectedPages.clear();
+            
+            // Reset UI
+            rotationButtons.forEach(btn => btn.classList.remove('active'));
+            customRotation.style.display = 'none';
+            customAngle.value = 0;
+            customAngleValue.textContent = '0°';
+            
+            document.getElementById('allPages').checked = true;
+            pageRangeInput.classList.remove('active');
+            
+            // Update preview and thumbnails
+            updatePagePreview();
+            updateThumbnails();
+            updateThumbnailSelection();
+            
+            alert('All rotations have been reset. Pages are back to their original orientation.');
+        });
+
+        // Apply rotation button handler
+        applyBtn.addEventListener('click', function() {
+            // Show processing state
+            const originalText = applyBtn.innerHTML;
+            applyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Applying...';
+            applyBtn.disabled = true;
+            
+            // Simulate rotation process
+            setTimeout(function() {
+                applyBtn.innerHTML = originalText;
+                applyBtn.disabled = false;
+                
+                // Show success modal
+                showSuccessModal();
+            }, 2000);
+        });
+
+        // Function to simulate PDF loading
+        function simulatePDFLoad() {
+            // Update page info
+            totalPages = 8;
+            currentPage = 1;
+            currentPageElement.textContent = currentPage;
+            totalPagesElement.textContent = totalPages;
+            
+            // Show page preview
+            pagePreview.style.display = 'flex';
+            
+            // Generate thumbnails
+            generateThumbnails();
+            
+            // Update preview
+            updatePagePreview();
+        }
+
+        // Function to generate page thumbnails
+        function generateThumbnails() {
+            pageThumbnails.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'page-thumbnail';
+                thumbnail.setAttribute('data-page', i);
+                
+                thumbnail.innerHTML = `
+                    <div class="page-number">Page ${i}</div>
+                    <div class="page-preview">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    ${pageRotations[i] ? `<div class="rotation-indicator">${getRotationSymbol(pageRotations[i])}</div>` : ''}
+                `;
+                
+                thumbnail.addEventListener('click', function() {
+                    if (document.getElementById('selectedPages').checked) {
+                        // Toggle selection
+                        if (selectedPages.has(i)) {
+                            selectedPages.delete(i);
+                            this.classList.remove('selected');
+                        } else {
+                            selectedPages.add(i);
+                            this.classList.add('selected');
+                        }
+                    } else {
+                        // Navigate to page
+                        currentPage = i;
+                        currentPageElement.textContent = currentPage;
+                        updatePagePreview();
+                        updateThumbnailSelection();
+                    }
+                });
+                
+                pageThumbnails.appendChild(thumbnail);
+            }
+            
+            updateThumbnailSelection();
+        }
+
+        // Function to get rotation symbol
+        function getRotationSymbol(rotation) {
+            switch(rotation) {
+                case 90: return '↻';
+                case -90: return '↺';
+                case 180: return '↷';
+                default: return '↻';
+            }
+        }
+
+        // Function to update thumbnail selection
+        function updateThumbnailSelection() {
+            document.querySelectorAll('.page-thumbnail').forEach(thumb => {
+                const pageNum = parseInt(thumb.getAttribute('data-page'));
+                
+                if (pageNum === currentPage && !document.getElementById('selectedPages').checked) {
+                    thumb.classList.add('selected');
+                } else if (!selectedPages.has(pageNum) || document.getElementById('selectedPages').checked) {
+                    thumb.classList.remove('selected');
+                }
+            });
+        }
+
+        // Function to update page preview
+        function updatePagePreview() {
+            // Update rotation transform
+            const rotation = pageRotations[currentPage] || currentRotation;
+            pagePreview.style.transform = `rotate(${rotation}deg)`;
+            
+            // Update page number
+            pagePreview.querySelector('.page-number-large').textContent = `Page ${currentPage}`;
+            
+            // Update rotation indicator on current thumbnail
+            const currentThumb = document.querySelector(`.page-thumbnail[data-page="${currentPage}"]`);
+            if (currentThumb) {
+                let indicator = currentThumb.querySelector('.rotation-indicator');
+                if (rotation !== 0) {
+                    if (!indicator) {
+                        indicator = document.createElement('div');
+                        indicator.className = 'rotation-indicator';
+                        currentThumb.appendChild(indicator);
+                    }
+                    indicator.textContent = getRotationSymbol(rotation);
+                } else if (indicator) {
+                    indicator.remove();
+                }
+            }
+        }
+
+        // Function to enable page selection mode
+        function enablePageSelection() {
+            document.querySelectorAll('.page-thumbnail').forEach(thumb => {
+                thumb.style.cursor = 'pointer';
+            });
+        }
+
+        // Function to disable page selection mode
+        function disablePageSelection() {
+            document.querySelectorAll('.page-thumbnail').forEach(thumb => {
+                thumb.style.cursor = 'default';
+            });
+            selectedPages.clear();
+            updateThumbnailSelection();
+        }
+
+        // Function to show success modal
+        function showSuccessModal() {
+            // Create success modal
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '10000';
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 40px; border-radius: 12px; text-align: center; max-width: 500px;">
+                    <div style="font-size: 4rem; color: #4CAF50; margin-bottom: 20px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px; color: #2A2D3E;">Rotation Applied Successfully!</h3>
+                    <p style="margin-bottom: 25px; color: #8A8D9F;">Your PDF pages have been rotated according to your settings.</p>
+                    <div style="display: flex; gap: 15px; justify-content: center;">
+                        <button class="btn btn-primary" id="downloadRotated">
+                            <i class="fas fa-download"></i> Download Rotated PDF
+                        </button>
+                        <button class="btn btn-secondary" id="closeModal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add event listeners to modal buttons
+            document.getElementById('downloadRotated').addEventListener('click', function() {
+                alert('In a real application, this would download the rotated PDF document.');
+                document.body.removeChild(modal);
+            });
+            
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+        }
+
+        // Drag and drop functionality for upload area
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--primary)';
+            uploadArea.style.backgroundColor = '#f0f2ff';
+        });
+
+        uploadArea.addEventListener('dragleave', function() {
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.backgroundColor = 'var(--light)';
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.backgroundColor = 'var(--light)';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                const event = new Event('change', { bubbles: true });
+                fileInput.dispatchEvent(event);
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up initial state
+            updatePagePreview();
+        });
+    </script>
+</body>
+</html>
