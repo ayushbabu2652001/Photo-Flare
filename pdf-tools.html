@@ -44,13 +44,35 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Loading Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-slow {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-fast {
+            animation: float 4s ease-in-out infinite;
         }
 
         /* Mobile Header - Sticky */
@@ -455,40 +477,6 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #3a86ff);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
-        }
-
-        /* Floating Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-slow {
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .floating-fast {
-            animation: float 4s ease-in-out infinite;
-        }
-
         /* PDF Hero Section */
         .pdf-hero {
             padding: 2rem 0 1rem;
@@ -523,6 +511,50 @@
             max-width: 700px;
             margin: 0 auto 1.5rem;
             color: var(--gray);
+        }
+
+        .search-box {
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 50px;
+            border: 2px solid var(--light-gray);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .search-btn {
+            position: relative;
+            margin-top: 0.5rem;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 44px;
+        }
+
+        .search-btn:active {
+            transform: scale(0.98);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
         }
 
         .pdf-tools-grid {
@@ -870,8 +902,24 @@
 
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
             .pdf-hero h1 {
                 font-size: 2.2rem;
+            }
+            
+            .search-box {
+                max-width: 500px;
+            }
+            
+            .search-btn {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                width: auto;
+                margin-top: 0;
             }
             
             .pdf-tools-grid {
@@ -1161,6 +1209,15 @@
             }
         }
 
+        /* Fix for search button on mobile */
+        @media (max-width: 575px) {
+            .search-btn {
+                width: 100%;
+                position: relative;
+                margin-top: 0.5rem;
+            }
+        }
+
         /* Better footer spacing on very small screens */
         @media (max-width: 360px) {
             .footer-links {
@@ -1263,6 +1320,11 @@
         <div class="container">
             <h1>Powerful PDF Tools for All Your Needs</h1>
             <p>Edit, convert, merge, split, compress, and secure your PDF documents with our comprehensive suite of PDF tools. Fast, secure, and easy to use.</p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search for PDF tools...">
+                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+            </div>
             
             <div class="pdf-tools-grid">
                 <div class="pdf-tool-card floating">
@@ -1526,42 +1588,91 @@
     </footer>
 
     <script>
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const toolCards = document.querySelectorAll('.pdf-tool-card');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolCards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    if (cardText.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }, 300));
+        }
+
+        // Tool cards click handler
+        if (toolCards.length > 0) {
+            toolCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // If the link is just a placeholder (#), prevent default and show alert
+                    const link = this.querySelector('a');
+                    if (link && link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const toolName = this.querySelector('h3').textContent;
+                        alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
+                    }
+                });
+            });
+        }
+
+        // FAQ toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const mobileNavBtn = document.getElementById('mobileNavBtn');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const sidebarClose = document.getElementById('sidebarClose');
-            
-            // Check if elements exist before adding event listeners
-            if (mobileNavBtn && sidebar && sidebarOverlay && sidebarClose) {
-                // Open sidebar
-                mobileNavBtn.addEventListener('click', function() {
-                    sidebar.classList.add('active');
-                    sidebarOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-                });
-
-                // Close sidebar
-                function closeSidebar() {
-                    sidebar.classList.remove('active');
-                    sidebarOverlay.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore scrolling
-                }
-
-                sidebarClose.addEventListener('click', closeSidebar);
-                sidebarOverlay.addEventListener('click', closeSidebar);
-
-                // Close sidebar when clicking on a link
-                const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-                sidebarLinks.forEach(link => {
-                    link.addEventListener('click', closeSidebar);
-                });
-            } else {
-                console.error('One or more sidebar elements not found');
-            }
-
-            // FAQ toggle functionality
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
@@ -1579,62 +1690,55 @@
                     item.classList.toggle('active');
                 });
             });
+        });
 
-            // Tool cards click handler
-            const toolCards = document.querySelectorAll('.pdf-tool-card');
-            toolCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // Check if the click was on the button itself
-                    if (!e.target.closest('.btn')) {
-                        const link = this.querySelector('a');
-                        if (link && link.getAttribute('href').startsWith('#')) {
-                            e.preventDefault();
-                            const toolName = this.querySelector('h3').textContent;
-                            alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
-                        }
-                    }
-                });
-            });
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') !== '#') {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }
-                });
+        // Button click handlers for login and upgrade
+        const loginButtons = document.querySelectorAll('.btn-outline, .sidebar-btn.outline');
+        loginButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === 'login.html') {
+                    e.preventDefault();
+                    alert('Login functionality would be implemented here.');
+                }
             });
         });
 
-        // Function to insert Google AdSense code
-        function insertAdSense(adUnitId, adContainerId) {
-            const adContainer = document.getElementById(adContainerId);
-            if (adContainer && adUnitId) {
-                adContainer.innerHTML = `
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adUnitId}" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="${adUnitId}"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                `;
-            }
+        const upgradeButtons = document.querySelectorAll('.btn-primary, .sidebar-btn.primary, .mobile-header-btn.upgrade');
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === 'subscription.html') {
+                    e.preventDefault();
+                    alert('Upgrade functionality would be implemented here.');
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize page on load
+        function initializePage() {
+            // Any initialization code needed when the page loads
         }
 
-        // Example usage (replace with your actual Ad Unit IDs)
-        // insertAdSense('ca-pub-1234567890123456', 'ad-top');
-        // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
+        // Initialize on page load
+        initializePage();
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(initializePage, 250));
     </script>
 </body>
 </html>
