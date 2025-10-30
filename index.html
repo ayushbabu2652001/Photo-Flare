@@ -662,6 +662,147 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
+        /* Ad Container */
+        .ad-container {
+            margin: 1.5rem 0;
+            text-align: center;
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 2rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 2rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
         /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
@@ -687,6 +828,10 @@
             }
             
             .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -747,6 +892,26 @@
             .featured-icon {
                 font-size: 3rem;
             }
+            
+            .features {
+                padding: 3rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
         }
 
         /* Large Devices (992px and up) */
@@ -760,6 +925,10 @@
             }
             
             .featured-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .features-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
@@ -893,6 +1062,17 @@
             <p>Need help? Check out our <a href="Help.html" class="external-link">Help Center</a> or <a href="contact.html" class="external-link">Contact Support</a></p>
         </div>
     </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Featured Tools -->
     <section class="featured-tools">
@@ -1041,6 +1221,89 @@
             </div>
         </div>
     </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Photo Flare?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Secure & Private</h3>
+                    <p>All files are processed locally in your browser. Your data never leaves your computer.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3 class="feature-title">Fast Processing</h3>
+                    <p>Optimized algorithms ensure quick processing even for large files.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3 class="feature-title">Fully Responsive</h3>
+                    <p>Works perfectly on all devices - desktop, tablet, and mobile.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-gem feature-icon"></i>
+                    <h3 class="feature-title">High Quality</h3>
+                    <p>Maintain excellent quality while processing your files.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p>Learn more about our <a href="Learn-More-Security.html" class="external-link">security practices</a> and <a href="Learn-More-privacy.html" class="external-link">privacy policy</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Sidebar functionality
