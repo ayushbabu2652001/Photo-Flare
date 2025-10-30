@@ -382,6 +382,7 @@
             gap: 0.5rem; /* Reduced gap for smaller screens */
             align-items: center;
             flex-shrink: 0; /* Prevent buttons from shrinking */
+            flex-wrap: nowrap; /* Ensure buttons stay on same line */
         }
 
         .btn {
@@ -396,6 +397,7 @@
             gap: 8px;
             white-space: nowrap; /* Prevent text wrapping */
             font-size: 0.9rem; /* Slightly smaller font */
+            flex-shrink: 0; /* Prevent buttons from shrinking */
         }
 
         .btn-primary {
@@ -1028,12 +1030,18 @@
             }
             
             .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.6rem 0.9rem; /* Adjusted to keep buttons on same line */
+                font-size: 0.85rem;
             }
             
             .header-content {
                 gap: 0.5rem; /* Add gap between header elements */
+            }
+            
+            /* Ensure buttons stay on the same line */
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
             }
         }
 
@@ -1054,7 +1062,33 @@
             
             .btn {
                 padding: 0.5rem 0.8rem;
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+            }
+            
+            /* Further adjustments to ensure buttons stay on same line */
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap; /* Prevent wrapping of entire header */
+            }
+            
+            nav {
+                order: 3; /* Move nav to bottom on very narrow screens */
+                flex-basis: 100%; /* Take full width */
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                margin-left: auto; /* Push buttons to the right */
             }
         }
     </style>
