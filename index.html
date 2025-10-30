@@ -1058,6 +1058,21 @@
             .desktop-header {
                 display: none;
             }
+            
+            /* Ensure footer links are horizontal on mobile */
+            .footer-links {
+                flex-direction: row;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+                gap: 0.8rem;
+            }
+            
+            .footer-links a {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1155,12 +1170,12 @@
         /* Better footer spacing on very small screens */
         @media (max-width: 360px) {
             .footer-links {
-                flex-direction: column;
                 gap: 0.5rem;
             }
             
             .footer-links a {
-                padding: 0.5rem 0;
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
             }
         }
     </style>
