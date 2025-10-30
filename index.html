@@ -638,6 +638,30 @@
             border-bottom: 1px solid var(--primary-dark);
         }
 
+        /* Show More/Less Button */
+        .show-more-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .show-more-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .show-more-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
         /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
@@ -909,7 +933,7 @@
                         <div class="category-icon">
                             <i class="fas fa-file-pdf"></i>
                         </div>
-                        <h3 class="category-title">PDF Tools <span class="tool-count">25</span></h3>
+                        <h3 class="category-title">PDF Tools <span class="tool-count">10</span></h3>
                     </div>
                     <ul class="tool-list">
                         <li class="tool-item"><a href="mergepdf.html" class="tool-link"><i class="fas fa-object-group tool-icon"></i> Merge PDF</a></li>
@@ -917,7 +941,17 @@
                         <li class="tool-item"><a href="compresspdf.html" class="tool-link"><i class="fas fa-compress-arrows-alt tool-icon"></i> Compress PDF</a></li>
                         <li class="tool-item"><a href="Protectpdf.html" class="tool-link"><i class="fas fa-lock tool-icon"></i> Protect PDF</a></li>
                         <li class="tool-item"><a href="unlockpdf.html" class="tool-link"><i class="fas fa-unlock tool-icon"></i> Unlock PDF</a></li>
+                        <li class="tool-item"><a href="editpdf.html" class="tool-link"><i class="fas fa-edit tool-icon"></i> Edit PDF</a></li>
+                        <li class="tool-item"><a href="signpdf.html" class="tool-link"><i class="fas fa-signature tool-icon"></i> Sign PDF</a></li>
+                        <li class="tool-item"><a href="watermarkpdf.html" class="tool-link"><i class="fas fa-water tool-icon"></i> Watermark PDF</a></li>
+                        <li class="tool-item"><a href="rotatepdf.html" class="tool-link"><i class="fas fa-redo-alt tool-icon"></i> Rotate PDF</a></li>
+                        <li class="tool-item"><a href="organizepdf.html" class="tool-link"><i class="fas fa-sort-numeric-up tool-icon"></i> Organize PDF</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="pdf-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- PDF Conversion -->
@@ -926,7 +960,7 @@
                         <div class="category-icon">
                             <i class="fas fa-exchange-alt"></i>
                         </div>
-                        <h3 class="category-title">PDF Conversion <span class="tool-count">15</span></h3>
+                        <h3 class="category-title">PDF Conversion <span class="tool-count">10</span></h3>
                     </div>
                     <ul class="tool-list">
                         <li class="tool-item"><a href="pdftoword.html" class="tool-link"><i class="fas fa-file-word tool-icon"></i> PDF to Word</a></li>
@@ -934,7 +968,17 @@
                         <li class="tool-item"><a href="pdftoexcel.html" class="tool-link"><i class="fas fa-file-excel tool-icon"></i> PDF to Excel</a></li>
                         <li class="tool-item"><a href="pdftojpg.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> PDF to JPG</a></li>
                         <li class="tool-item"><a href="pdftopng.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> PDF to PNG</a></li>
+                        <li class="tool-item"><a href="pdftotext.html" class="tool-link"><i class="fas fa-file-alt tool-icon"></i> PDF to Text</a></li>
+                        <li class="tool-item"><a href="pdftohtml.html" class="tool-link"><i class="fas fa-file-code tool-icon"></i> PDF to HTML</a></li>
+                        <li class="tool-item"><a href="wordtopdf.html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> Word to PDF</a></li>
+                        <li class="tool-item"><a href="powerpointtopdf.html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> PowerPoint to PDF</a></li>
+                        <li class="tool-item"><a href="exceltopdf.html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> Excel to PDF</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="pdf-conversion">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Image Tools -->
@@ -943,7 +987,7 @@
                         <div class="category-icon">
                             <i class="fas fa-image"></i>
                         </div>
-                        <h3 class="category-title">Image Tools <span class="tool-count">20</span></h3>
+                        <h3 class="category-title">Image Tools <span class="tool-count">10</span></h3>
                     </div>
                     <ul class="tool-list">
                         <li class="tool-item"><a href="compressimage.html" class="tool-link"><i class="fas fa-compress-arrows-alt tool-icon"></i> Compress Image</a></li>
@@ -951,7 +995,17 @@
                         <li class="tool-item"><a href="cropimage.html" class="tool-link"><i class="fas fa-crop tool-icon"></i> Crop Image</a></li>
                         <li class="tool-item"><a href="resizeimage.html" class="tool-link"><i class="fas fa-expand-arrows-alt tool-icon"></i> Resize Image</a></li>
                         <li class="tool-item"><a href="editimage.html" class="tool-link"><i class="fas fa-edit tool-icon"></i> Edit Image</a></li>
+                        <li class="tool-item"><a href="watermarkimage.html" class="tool-link"><i class="fas fa-water tool-icon"></i> Watermark Image</a></li>
+                        <li class="tool-item"><a href="adjustcolor.html" class="tool-link"><i class="fas fa-adjust tool-icon"></i> Adjust Colors</a></li>
+                        <li class="tool-item"><a href="imagefilters.html" class="tool-link"><i class="fas fa-magic tool-icon"></i> Image Filters</a></li>
+                        <li class="tool-item"><a href="jpgtopng.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> JPG to PNG</a></li>
+                        <li class="tool-item"><a href="pngtojpg.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> PNG to JPG</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="image-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Premium Tools -->
@@ -960,7 +1014,7 @@
                         <div class="category-icon">
                             <i class="fas fa-crown"></i>
                         </div>
-                        <h3 class="category-title">Premium Tools <span class="tool-count">20</span></h3>
+                        <h3 class="category-title">Premium Tools <span class="tool-count">10</span></h3>
                     </div>
                     <ul class="tool-list">
                         <li class="tool-item"><a href="aiimageenhancer.html" class="tool-link"><i class="fas fa-robot tool-icon"></i> AI Image Enhancer <span class="premium-badge">PRO</span></a></li>
@@ -968,8 +1022,22 @@
                         <li class="tool-item"><a href="smart-object-removal.html" class="tool-link"><i class="fas fa-magic tool-icon"></i> Smart Object Removal <span class="premium-badge">PRO</span></a></li>
                         <li class="tool-item"><a href="pdf-to-excel-(advanced).html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> PDF to Excel (Advanced) <span class="premium-badge">PRO</span></a></li>
                         <li class="tool-item"><a href="excel-to-pdf-(advanced).html" class="tool-link"><i class="fas fa-file-excel tool-icon"></i> Excel to PDF (Advanced) <span class="premium-badge">PRO</span></a></li>
+                        <li class="tool-item"><a href="Advanced-PDF-Encryption.html" class="tool-link"><i class="fas fa-lock tool-icon"></i> Advanced PDF Encryption <span class="premium-badge">PRO</span></a></li>
+                        <li class="tool-item"><a href="OCR-Text-Recognition.html" class="tool-link"><i class="fas fa-search tool-icon"></i> OCR Text Recognition <span class="premium-badge">PRO</span></a></li>
+                        <li class="tool-item"><a href="Video-to-GIF-Converter.html" class="tool-link"><i class="fas fa-file-video tool-icon"></i> Video to GIF Converter <span class="premium-badge">PRO</span></a></li>
+                        <li class="tool-item"><a href="Batch-File-Processor.html" class="tool-link"><i class="fas fa-file-archive tool-icon"></i> Batch File Processor <span class="premium-badge">PRO</span></a></li>
+                        <li class="tool-item"><a href="Cloud-Storage-Integration.html" class="tool-link"><i class="fas fa-cloud tool-icon"></i> Cloud Storage Integration <span class="premium-badge">PRO</span></a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="premium-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Can't find what you're looking for? <a href="suggest-tool.html" class="external-link">Suggest a new tool</a> or check our <a href="full-tool-list.html" class="external-link">complete tool list</a>.</p>
             </div>
         </div>
     </section>
@@ -1064,6 +1132,60 @@
                 }
             });
         });
+
+        // Show More/Less functionality for tool categories
+        const showMoreButtons = document.querySelectorAll('.show-more-btn');
+        
+        showMoreButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const categoryId = this.getAttribute('data-category');
+                const category = document.getElementById(categoryId);
+                const toolItems = category.querySelectorAll('.tool-item');
+                const isExpanded = this.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    // Collapse - show only first 5 items
+                    toolItems.forEach((item, index) => {
+                        if (index >= 5) {
+                            item.style.display = 'none';
+                        }
+                    });
+                    this.innerHTML = '<i class="fas fa-chevron-down"></i> Show More';
+                    this.classList.remove('expanded');
+                } else {
+                    // Expand - show all items
+                    toolItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                    this.classList.add('expanded');
+                }
+                
+                updateToolCounts();
+            });
+        });
+
+        // Initially show only 5 items in each category on mobile
+        function initializeToolDisplay() {
+            if (window.innerWidth < 768) {
+                const categories = document.querySelectorAll('.tool-category');
+                categories.forEach(category => {
+                    const toolItems = category.querySelectorAll('.tool-item');
+                    toolItems.forEach((item, index) => {
+                        if (index >= 5) {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+                updateToolCounts();
+            }
+        }
+
+        // Initialize tool display on page load
+        initializeToolDisplay();
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', initializeToolDisplay);
     </script>
 </body>
 </html>
