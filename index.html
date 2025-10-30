@@ -47,6 +47,12 @@
             padding: 0 15px;
         }
 
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Mobile Header - Sticky */
         .mobile-header {
             display: none;
@@ -83,6 +89,10 @@
 
         .mobile-nav-btn:hover {
             background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
         }
 
         .mobile-logo {
@@ -131,6 +141,10 @@
 
         .mobile-header-btn:hover {
             background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
         }
 
         .mobile-header-btn.upgrade {
@@ -227,6 +241,10 @@
             color: var(--dark);
         }
 
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
         .sidebar-nav {
             padding: 1rem 0;
         }
@@ -248,11 +266,16 @@
             color: var(--dark);
             transition: var(--transition);
             font-weight: 500;
+            min-height: 44px;
         }
 
         .sidebar-nav a:hover, .sidebar-nav a.active {
             background: rgba(67, 97, 238, 0.1);
             color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
         }
 
         .sidebar-nav i {
@@ -282,10 +305,15 @@
             margin-bottom: 0.8rem;
             border: none;
             font-size: 1rem;
+            min-height: 44px;
         }
 
         .sidebar-btn:last-child {
             margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
         }
 
         .sidebar-btn.outline {
@@ -321,7 +349,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -329,7 +357,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            flex-shrink: 0; /* Prevent logo from shrinking */
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -349,16 +377,16 @@
         }
 
         nav {
-            flex-grow: 1; /* Allow nav to grow and take available space */
+            flex-grow: 1;
             display: flex;
-            justify-content: center; /* Center the navigation */
+            justify-content: center;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1rem; /* Reduced gap for smaller screens */
-            flex-wrap: wrap; /* Allow nav items to wrap */
+            gap: 1rem;
+            flex-wrap: wrap;
             justify-content: center;
         }
 
@@ -369,7 +397,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
-            white-space: nowrap; /* Prevent text wrapping */
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -379,14 +407,14 @@
 
         .header-actions {
             display: flex;
-            gap: 0.5rem; /* Reduced gap for smaller screens */
+            gap: 0.5rem;
             align-items: center;
-            flex-shrink: 0; /* Prevent buttons from shrinking */
-            flex-wrap: nowrap; /* Ensure buttons stay on same line */
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .btn {
-            padding: 0.7rem 1rem; /* Adjusted padding for smaller screens */
+            padding: 0.7rem 1rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -395,9 +423,14 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap; /* Prevent text wrapping */
-            font-size: 0.9rem; /* Slightly smaller font */
-            flex-shrink: 0; /* Prevent buttons from shrinking */
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -475,6 +508,11 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            min-height: 44px;
+        }
+
+        .search-btn:active {
+            transform: scale(0.98);
         }
 
         .search-btn:hover {
@@ -496,6 +534,7 @@
             box-shadow: var(--box-shadow);
             padding: 1rem;
             transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .tool-category:hover {
@@ -559,6 +598,11 @@
             align-items: center;
             gap: 10px;
             transition: var(--transition);
+            min-height: 44px;
+        }
+
+        .tool-link:active {
+            background: rgba(67, 97, 238, 0.15);
         }
 
         .tool-link:hover {
@@ -619,6 +663,7 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .featured-card:hover {
@@ -673,6 +718,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            min-height: 44px;
+        }
+
+        .show-more-btn:active {
+            transform: scale(0.98);
         }
 
         .show-more-btn:hover {
@@ -727,6 +777,7 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .feature-card:hover {
@@ -780,19 +831,19 @@
 
         .footer-links {
             display: flex;
-            flex-direction: row; /* Changed from column to row */
-            flex-wrap: wrap; /* Allow links to wrap to next line */
-            justify-content: center; /* Center the links */
-            gap: 1rem; /* Space between links */
-            align-items: center; /* Vertically center the links */
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
-            padding: 0.3rem 0.5rem; /* Add some padding for better touch targets */
-            white-space: nowrap; /* Prevent text from wrapping within a link */
+            padding: 0.3rem 0.5rem;
+            white-space: nowrap;
         }
 
         .footer-links a:hover {
@@ -1089,6 +1140,27 @@
             
             .header-actions {
                 margin-left: auto; /* Push buttons to the right */
+            }
+        }
+
+        /* Fix for search button on mobile */
+        @media (max-width: 575px) {
+            .search-btn {
+                width: 100%;
+                position: relative;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.5rem 0;
             }
         }
     </style>
@@ -1435,6 +1507,19 @@
     </footer>
 
     <script>
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // Sidebar functionality
         const mobileNavBtn = document.getElementById('mobileNavBtn');
         const sidebar = document.getElementById('sidebar');
@@ -1442,11 +1527,13 @@
         const sidebarClose = document.getElementById('sidebarClose');
 
         // Open sidebar
-        mobileNavBtn.addEventListener('click', function() {
-            sidebar.classList.add('active');
-            sidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-        });
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
 
         // Close sidebar
         function closeSidebar() {
@@ -1455,10 +1542,15 @@
             document.body.style.overflow = ''; // Restore scrolling
         }
 
-        sidebarClose.addEventListener('click', closeSidebar);
-        sidebarOverlay.addEventListener('click', closeSidebar);
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
 
-        // Close sidebar when clicking on a link (optional)
+        // Close sidebar when clicking on a link
         const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
         sidebarLinks.forEach(link => {
             link.addEventListener('click', closeSidebar);
@@ -1468,26 +1560,28 @@
         const searchInput = document.querySelector('.search-input');
         const toolItems = document.querySelectorAll('.tool-item');
         
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            toolItems.forEach(item => {
-                const toolText = item.textContent.toLowerCase();
-                if (toolText.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-            
-            updateToolCounts();
-        });
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolItems.forEach(item => {
+                    const toolText = item.textContent.toLowerCase();
+                    if (toolText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                updateToolCounts();
+            }, 300));
+        }
 
         // Tool count update
         function updateToolCounts() {
             const categories = document.querySelectorAll('.tool-category');
             categories.forEach(category => {
-                const visibleTools = category.querySelectorAll('.tool-item[style="display: block"], .tool-item:not([style])');
+                const visibleTools = category.querySelectorAll('.tool-item:not([style*="display: none"])');
                 const countElement = category.querySelector('.tool-count');
                 if (countElement) {
                     countElement.textContent = visibleTools.length;
@@ -1500,62 +1594,68 @@
 
         // Featured tools click handler
         const featuredCards = document.querySelectorAll('.featured-card');
-        featuredCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const toolName = this.querySelector('.featured-title').textContent;
-                    alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
-                }
-            });
-        });
-
-        // Tool items click handler
-        toolItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (this.querySelector('a').getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const toolName = this.textContent;
-                    if (this.querySelector('.premium-badge')) {
-                        alert(`"${toolName}" is a premium feature. Please upgrade to access this tool.`);
-                    } else {
+        if (featuredCards.length > 0) {
+            featuredCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const toolName = this.querySelector('.featured-title').textContent;
                         alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
                     }
-                }
+                });
             });
-        });
+        }
+
+        // Tool items click handler
+        if (toolItems.length > 0) {
+            toolItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (this.querySelector('a').getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const toolName = this.textContent;
+                        if (this.querySelector('.premium-badge')) {
+                            alert(`"${toolName}" is a premium feature. Please upgrade to access this tool.`);
+                        } else {
+                            alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
+                        }
+                    }
+                });
+            });
+        }
 
         // Show More/Less functionality for tool categories
         const showMoreButtons = document.querySelectorAll('.show-more-btn');
         
-        showMoreButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const categoryId = this.getAttribute('data-category');
-                const category = document.getElementById(categoryId);
-                const toolItems = category.querySelectorAll('.tool-item');
-                const isExpanded = this.classList.contains('expanded');
-                
-                if (isExpanded) {
-                    // Collapse - show only first 5 items
-                    toolItems.forEach((item, index) => {
-                        if (index >= 5) {
-                            item.style.display = 'none';
-                        }
-                    });
-                    this.innerHTML = '<i class="fas fa-chevron-down"></i> Show More';
-                    this.classList.remove('expanded');
-                } else {
-                    // Expand - show all items
-                    toolItems.forEach(item => {
-                        item.style.display = 'block';
-                    });
-                    this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
-                    this.classList.add('expanded');
-                }
-                
-                updateToolCounts();
+        if (showMoreButtons.length > 0) {
+            showMoreButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category');
+                    const category = document.getElementById(categoryId);
+                    const toolItems = category.querySelectorAll('.tool-item');
+                    const isExpanded = this.classList.contains('expanded');
+                    
+                    if (isExpanded) {
+                        // Collapse - show only first 5 items
+                        toolItems.forEach((item, index) => {
+                            if (index >= 5) {
+                                item.style.display = 'none';
+                            }
+                        });
+                        this.innerHTML = '<i class="fas fa-chevron-down"></i> Show More';
+                        this.classList.remove('expanded');
+                    } else {
+                        // Expand - show all items
+                        toolItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                        this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                        this.classList.add('expanded');
+                    }
+                    
+                    updateToolCounts();
+                });
             });
-        });
+        }
 
         // Initially show only 5 items in each category on mobile
         function initializeToolDisplay() {
@@ -1577,7 +1677,7 @@
         initializeToolDisplay();
 
         // Reinitialize on window resize
-        window.addEventListener('resize', initializeToolDisplay);
+        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
     </script>
 </body>
 </html>
