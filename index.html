@@ -941,6 +941,11 @@
                 flex-direction: column;
                 align-items: stretch;
                 display: none;
+                background: white;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                padding: 1.5rem;
+                margin-top: 1rem;
             }
             
             .nav-container.active {
@@ -965,9 +970,17 @@
             }
             
             .header-actions {
-                width: auto;
-                flex-direction: row;
+                width: 100%;
+                flex-direction: column;
                 gap: 0.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--light-gray);
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
             }
             
             .menu-toggle {
@@ -996,16 +1009,6 @@
         }
 
         @media (max-width: 576px) {
-            .header-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .header-actions .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
             .hero {
                 padding: 2rem 0 1rem;
             }
@@ -1031,6 +1034,56 @@
             .search-box {
                 display: flex;
                 flex-direction: column;
+            }
+            
+            .plan-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .plan-price {
+                font-size: 2.5rem;
+            }
+            
+            .offer-banner h3 {
+                font-size: 1.2rem;
+            }
+            
+            .offer-banner p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .category-title {
+                font-size: 1.1rem;
+            }
+            
+            .featured-title {
+                font-size: 1.1rem;
+            }
+            
+            .featured-card {
+                padding: 1.5rem;
+            }
+            
+            .featured-icon {
+                font-size: 2.5rem;
+            }
+            
+            .tool-category {
+                padding: 1rem;
             }
         }
     </style>
@@ -1062,11 +1115,11 @@
                             <li><a href="pricing.html">Pricing</a></li>
                         </ul>
                     </nav>
-                </div>
-                
-                <div class="header-actions">
-                    <a href="signup.html" class="btn btn-outline">Sign Up</a>
-                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                    
+                    <div class="header-actions">
+                        <a href="signup.html" class="btn btn-outline">Sign Up</a>
+                        <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                    </div>
                 </div>
             </div>
         </div>
