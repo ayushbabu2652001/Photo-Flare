@@ -763,15 +763,19 @@
 
         .footer-links {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+            flex-direction: row; /* Changed from column to row */
+            flex-wrap: wrap; /* Allow links to wrap to next line */
+            justify-content: center; /* Center the links */
+            gap: 1rem; /* Space between links */
+            align-items: center; /* Vertically center the links */
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
+            padding: 0.3rem 0.5rem; /* Add some padding for better touch targets */
+            white-space: nowrap; /* Prevent text from wrapping within a link */
         }
 
         .footer-links a:hover {
@@ -906,6 +910,7 @@
                 padding: 2rem;
             }
             
+            /* For larger screens, we can keep the footer links in a row */
             .footer-links {
                 flex-direction: row;
                 justify-content: center;
@@ -949,6 +954,16 @@
             
             .featured-card {
                 padding: 1rem;
+            }
+            
+            /* For very small screens, adjust the footer links spacing */
+            .footer-links {
+                gap: 0.7rem;
+            }
+            
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 0.2rem 0.4rem;
             }
         }
 
