@@ -1422,44 +1422,58 @@
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-        const mobileNavClose = document.getElementById('mobileNavClose');
-        
-        function toggleMobileNav() {
-            mobileNav.classList.toggle('active');
-            mobileNavOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-        }
-        
-        mobileNavToggle.addEventListener('click', toggleMobileNav);
-        mobileNavClose.addEventListener('click', toggleMobileNav);
-        mobileNavOverlay.addEventListener('click', toggleMobileNav);
-        
-        // Close mobile nav when clicking on a link
-        const mobileNavLinks = mobileNav.querySelectorAll('a');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', toggleMobileNav);
+        // Mobile Navigation Toggle - Fixed Version
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavToggle = document.getElementById('mobileNavToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            
+            // Function to toggle mobile navigation
+            function toggleMobileNav() {
+                mobileNav.classList.toggle('active');
+                mobileNavOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+            
+            // Event listeners for mobile navigation
+            if (mobileNavToggle) {
+                mobileNavToggle.addEventListener('click', toggleMobileNav);
+            }
+            
+            if (mobileNavClose) {
+                mobileNavClose.addEventListener('click', toggleMobileNav);
+            }
+            
+            if (mobileNavOverlay) {
+                mobileNavOverlay.addEventListener('click', toggleMobileNav);
+            }
+            
+            // Close mobile nav when clicking on a link
+            const mobileNavLinks = mobileNav.querySelectorAll('a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileNav);
+            });
         });
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
         const toolItems = document.querySelectorAll('.tool-item');
         
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            toolItems.forEach(item => {
-                const toolText = item.textContent.toLowerCase();
-                if (toolText.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolItems.forEach(item => {
+                    const toolText = item.textContent.toLowerCase();
+                    if (toolText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
-        });
+        }
 
         // Tool count update
         function updateToolCounts() {
@@ -1473,7 +1487,9 @@
             });
         }
 
-        searchInput.addEventListener('input', updateToolCounts);
+        if (searchInput) {
+            searchInput.addEventListener('input', updateToolCounts);
+        }
         
         // Initialize tool counts
         updateToolCounts();
