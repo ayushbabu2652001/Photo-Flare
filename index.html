@@ -68,6 +68,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -87,6 +88,17 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+
+        nav {
+            margin-right: 1.5rem;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -100,6 +112,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -123,6 +136,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -159,6 +173,40 @@
         .btn-success:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         .hero {
@@ -878,24 +926,52 @@
 
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
+                flex-wrap: wrap;
                 gap: 1rem;
+            }
+            
+            .logo {
+                flex-grow: 1;
+            }
+            
+            .nav-container {
+                order: 3;
+                flex-basis: 100%;
+                justify-content: flex-start;
+                flex-direction: column;
+                align-items: stretch;
+                display: none;
+            }
+            
+            .nav-container.active {
+                display: flex;
+            }
+            
+            nav {
+                margin-right: 0;
+                width: 100%;
             }
             
             nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            nav a {
+                display: block;
+                padding: 0.8rem 1rem;
+                border-radius: 8px;
             }
             
             .header-actions {
-                flex-direction: column;
-                width: 100%;
+                width: auto;
+                flex-direction: row;
+                gap: 0.5rem;
             }
             
-            .header-actions .btn {
-                width: 100%;
-                justify-content: center;
+            .menu-toggle {
+                display: flex;
             }
             
             .hero h1 {
@@ -920,6 +996,16 @@
         }
 
         @media (max-width: 576px) {
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
             .hero {
                 padding: 2rem 0 1rem;
             }
@@ -933,6 +1019,19 @@
                 align-items: center;
                 gap: 1rem;
             }
+            
+            .search-btn {
+                position: relative;
+                width: 100%;
+                margin-top: 0.5rem;
+                right: 0;
+                top: 0;
+            }
+            
+            .search-box {
+                display: flex;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -945,18 +1044,28 @@
                     <i class="fas fa-camera-retro logo-icon"></i>
                     <span class="logo-text">Photo Flare</span>
                 </a>
-                <nav>
-                    <ul>
-                        <li><a href="index.html" class="active">All Tools</a></li>
-                        <li><a href="pdf-tools.html">PDF Tools</a></li>
-                        <li><a href="image-tools.html">Image Tools</a></li>
-                        <li><a href="conversion.html">Conversion</a></li>
-                        <li><a href="premium-tools.html">Premium Tools</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                    </ul>
-                </nav>
+                
+                <button class="menu-toggle" id="menu-toggle" type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <div class="nav-container" id="nav-container">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html" class="active">All Tools</a></li>
+                            <li><a href="pdf-tools.html">PDF Tools</a></li>
+                            <li><a href="image-tools.html">Image Tools</a></li>
+                            <li><a href="conversion.html">Conversion</a></li>
+                            <li><a href="premium-tools.html">Premium Tools</a></li>
+                            <li><a href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
                 <div class="header-actions">
-                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="signup.html" class="btn btn-outline">Sign Up</a>
                     <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
                 </div>
             </div>
@@ -1269,6 +1378,15 @@
     </footer>
 
     <script>
+        // Mobile menu toggle functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const navContainer = document.getElementById('nav-container');
+        
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            navContainer.classList.toggle('active');
+        });
+
         // Search functionality
         const searchInput = document.querySelector('.search-input');
         const toolItems = document.querySelectorAll('.tool-item');
@@ -1358,6 +1476,17 @@
                     }
                 }
             });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navContainer.contains(event.target);
+            const isClickInsideToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickInsideToggle && navContainer.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                navContainer.classList.remove('active');
+            }
         });
 
         // Function to insert Google AdSense code
