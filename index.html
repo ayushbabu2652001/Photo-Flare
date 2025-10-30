@@ -54,13 +54,14 @@
             padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -186,7 +187,7 @@
             border: none;
             cursor: pointer;
             padding: 0;
-            z-index: 10;
+            z-index: 1001;
         }
 
         .menu-toggle span {
@@ -946,6 +947,11 @@
                 box-shadow: var(--box-shadow);
                 padding: 1.5rem;
                 margin-top: 1rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                z-index: 999;
             }
             
             .nav-container.active {
@@ -1098,7 +1104,7 @@
                     <span class="logo-text">Photo Flare</span>
                 </a>
                 
-                <button class="menu-toggle" id="menu-toggle" type="button">
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle navigation menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -1438,6 +1444,35 @@
         menuToggle.addEventListener('click', function() {
             menuToggle.classList.toggle('active');
             navContainer.classList.toggle('active');
+            
+            // Prevent body scrolling when menu is open
+            if (navContainer.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-container a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navContainer.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navContainer.contains(event.target);
+            const isClickInsideToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickInsideToggle && navContainer.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                navContainer.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
 
         // Search functionality
@@ -1455,6 +1490,9 @@
                     item.style.display = 'none';
                 }
             });
+            
+            // Update tool counts
+            updateToolCounts();
         });
 
         // Tool count update
@@ -1469,8 +1507,6 @@
             });
         }
 
-        searchInput.addEventListener('input', updateToolCounts);
-        
         // Initialize tool counts
         updateToolCounts();
 
@@ -1529,17 +1565,6 @@
                     }
                 }
             });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = navContainer.contains(event.target);
-            const isClickInsideToggle = menuToggle.contains(event.target);
-            
-            if (!isClickInsideNav && !isClickInsideToggle && navContainer.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                navContainer.classList.remove('active');
-            }
         });
 
         // Function to insert Google AdSense code
