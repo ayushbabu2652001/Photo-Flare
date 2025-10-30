@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your Photo Flare usage history, view past activities, and monitor your tool usage patterns.">
+    <meta name="keywords" content="Photo Flare, Usage History, Activity Tracking, Tool Usage, Analytics">
+    <title>Usage History - Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-success: linear-gradient(135deg, var(--success), #3a86ff);
+            --gradient-warning: linear-gradient(135deg, var(--warning), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .profile-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .profile-header .user-avatar {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .profile-plan {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .profile-menu {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .profile-menu a:hover {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .profile-menu a.active {
+            background: rgba(67, 97, 238, 0.15);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .profile-menu i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+        }
+
+        .profile-action-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: var(--transition);
+        }
+
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+
+        .toggle-switch.active::after {
+            left: 29px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .dashboard-hero {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .dashboard-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .dashboard-hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .usage-container {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .usage-sidebar {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .usage-content {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+        }
+
+        .usage-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .usage-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .usage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .usage-table th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .usage-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            vertical-align: middle;
+        }
+
+        .usage-table tr:hover {
+            background: rgba(67, 97, 238, 0.03);
+        }
+
+        .tool-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .tool-details h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .tool-details p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .status-processing {
+            background: rgba(248, 150, 30, 0.1);
+            color: var(--warning);
+        }
+
+        .status-failed {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--danger);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-icon {
+            color: var(--gray);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 1.5rem;
+        }
+
+        .usage-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            transition: var(--transition);
+        }
+
+        .category-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .category-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .category-details h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .category-details p {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .category-count {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .usage-container {
+                flex-direction: column;
+            }
+            
+            .usage-sidebar {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dashboard-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .dashboard-hero p {
+                font-size: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-dropdown {
+                width: 100%;
+                right: 0;
+                left: 0;
+            }
+            
+            .usage-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-hero {
+                padding: 1.5rem 0 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="ai-tools.html">AI Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="John Smith">
+                        </div>
+                        <div class="user-name">John Smith</div>
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown">
+                            <div class="profile-header">
+                                <div class="user-avatar">
+                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="John Smith">
+                                </div>
+                                <div class="profile-info">
+                                    <h3>John Smith</h3>
+                                    <p>john.smith@example.com</p>
+                                    <div class="profile-plan">Pro Yearly Plan</div>
+                                </div>
+                            </div>
+                            <ul class="profile-menu">
+                                <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+                                <li><a href="account-settings.html"><i class="fas fa-cog"></i> Account Settings</a></li>
+                                <li><a href="billing-subscription.html"><i class="fas fa-credit-card"></i> Billing & Subscription</a></li>
+                                <li><a href="usage-history.html" class="active"><i class="fas fa-history"></i> Usage History</a></li>
+                                <li><a href="storage-management.html"><i class="fas fa-cloud"></i> Storage Management</a></li>
+                                <li><a href="team-members.html"><i class="fas fa-users"></i> Team Members</a></li>
+                            </ul>
+                            <div class="profile-actions">
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-bell"></i>
+                                        <span>Notifications</span>
+                                    </div>
+                                    <div class="toggle-switch active" id="notification-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-moon"></i>
+                                        <span>Dark Mode</span>
+                                    </div>
+                                    <div class="toggle-switch" id="darkmode-toggle"></div>
+                                </div>
+                                <div class="profile-action">
+                                    <div class="profile-action-label">
+                                        <i class="fas fa-language"></i>
+                                        <span>Language: English</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="logout.html" class="btn btn-outline" style="width: 100%; margin-top: 1rem; text-align: center;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                    <a href="settings.html" class="btn btn-outline"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Usage History Hero -->
+    <section class="dashboard-hero">
+        <div class="container">
+            <h1>Usage History</h1>
+            <p>Track your tool usage, view past activities, and monitor your processing patterns.</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-file-alt stat-icon"></i>
+                <div class="stat-value">142</div>
+                <div class="stat-label">Files Processed</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-tools stat-icon"></i>
+                <div class="stat-value">28</div>
+                <div class="stat-label">Tools Used</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock stat-icon"></i>
+                <div class="stat-value">37.5</div>
+                <div class="stat-label">Hours Saved</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-chart-line stat-icon"></i>
+                <div class="stat-value">87%</div>
+                <div class="stat-label">Monthly Usage</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usage Content -->
+    <div class="container">
+        <div class="usage-container">
+            <!-- Usage Sidebar -->
+            <div class="usage-sidebar">
+                <h3 class="section-title"><i class="fas fa-filter"></i> Filters</h3>
+                
+                <div class="filter-group">
+                    <label for="date-range">Date Range</label>
+                    <select id="date-range" class="form-control">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week" selected>Last 7 Days</option>
+                        <option value="month">Last 30 Days</option>
+                        <option value="quarter">Last 3 Months</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="tool-type">Tool Type</label>
+                    <select id="tool-type" class="form-control">
+                        <option value="all">All Tools</option>
+                        <option value="pdf">PDF Tools</option>
+                        <option value="image">Image Tools</option>
+                        <option value="ai">AI Tools</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control">
+                        <option value="all">All Status</option>
+                        <option value="completed">Completed</option>
+                        <option value="processing">Processing</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Apply Filters</button>
+                
+                <h3 class="section-title" style="margin-top: 2rem;"><i class="fas fa-chart-pie"></i> Usage by Category</h3>
+                
+                <div class="usage-categories">
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="category-details">
+                                <h4>PDF Tools</h4>
+                                <p>Compression, conversion, editing</p>
+                            </div>
+                        </div>
+                        <div class="category-count">64</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="category-details">
+                                <h4>Image Tools</h4>
+                                <p>Editing, enhancement, conversion</p>
+                            </div>
+                        </div>
+                        <div class="category-count">48</div>
+                    </div>
+                    
+                    <div class="category-item">
+                        <div class="category-info">
+                            <div class="category-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="category-details">
+                                <h4>AI Tools</h4>
+                                <p>Enhancement, background removal</p>
+                            </div>
+                        </div>
+                        <div class="category-count">30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Content -->
+            <div class="usage-content">
+                <div class="usage-section">
+                    <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
+                    
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="search">Search</label>
+                            <input type="text" id="search" class="form-control" placeholder="Search by tool or file name...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="sort">Sort By</label>
+                            <select id="sort" class="form-control">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="tool">Tool Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="usage-table">
+                            <thead>
+                                <tr>
+                                    <th>Tool</th>
+                                    <th>File</th>
+                                    <th>Date & Time</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>PDF Compressor</h4>
+                                                <p>Reduced file size by 65%</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-file-pdf file-icon"></i>
+                                            <span>project_document.pdf</span>
+                                        </div>
+                                    </td>
+                                    <td>Today, 10:24 AM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-robot"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>AI Background Remover</h4>
+                                                <p>Removed background with precision</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-image file-icon"></i>
+                                            <span>product_photo.jpg</span>
+                                        </div>
+                                    </td>
+                                    <td>Today, 9:15 AM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-file-word"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>Word to PDF Converter</h4>
+                                                <p>Converted document format</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-file-word file-icon"></i>
+                                            <span>report_draft.docx</span>
+                                        </div>
+                                    </td>
+                                    <td>Yesterday, 3:42 PM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-magic"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>AI Image Enhancer</h4>
+                                                <p>Enhanced image quality</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-image file-icon"></i>
+                                            <span>landscape_photo.png</span>
+                                        </div>
+                                    </td>
+                                    <td>Yesterday, 11:20 AM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>PDF Merger</h4>
+                                                <p>Combined 3 documents</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-file-pdf file-icon"></i>
+                                            <span>merged_document.pdf</span>
+                                        </div>
+                                    </td>
+                                    <td>Oct 12, 2:15 PM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-crop-alt"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>Image Cropper</h4>
+                                                <p>Custom crop and resize</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-image file-icon"></i>
+                                            <span>profile_picture.jpg</span>
+                                        </div>
+                                    </td>
+                                    <td>Oct 10, 4:30 PM</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Download</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="tool-info">
+                                            <div class="tool-icon">
+                                                <i class="fas fa-file-excel"></i>
+                                            </div>
+                                            <div class="tool-details">
+                                                <h4>Excel to PDF</h4>
+                                                <p>Converted spreadsheet</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="file-info">
+                                            <i class="fas fa-file-excel file-icon"></i>
+                                            <span>financial_data.xlsx</span>
+                                        </div>
+                                    </td>
+                                    <td>Oct 8, 9:45 AM</td>
+                                    <td><span class="status-badge status-failed">Failed</span></td>
+                                    <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;">Retry</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <div class="page-btn active">1</div>
+                        <div class="page-btn">2</div>
+                        <div class="page-btn">3</div>
+                        <div class="page-btn">4</div>
+                        <div class="page-btn">></div>
+                    </div>
+                </div>
+                
+                <div class="usage-section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Usage Statistics</h2>
+                    
+                    <div class="chart-container">
+                        <!-- This would be a chart in a real implementation -->
+                        <div style="background: var(--light); border-radius: var(--border-radius); height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gray);">
+                            <div style="text-align: center;">
+                                <i class="fas fa-chart-bar" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                                <p>Usage chart would be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profile dropdown functionality
+            const userProfile = document.querySelector('.user-profile');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+            
+            userProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                profileDropdown.classList.remove('active');
+            });
+            
+            // Toggle switches functionality
+            const notificationToggle = document.getElementById('notification-toggle');
+            const darkmodeToggle = document.getElementById('darkmode-toggle');
+            
+            notificationToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+            
+            darkmodeToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                // In a real implementation, this would toggle dark mode
+                alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            });
+            
+            // Filter functionality
+            const applyFiltersBtn = document.querySelector('.usage-sidebar .btn');
+            applyFiltersBtn.addEventListener('click', function() {
+                const dateRange = document.getElementById('date-range').value;
+                const toolType = document.getElementById('tool-type').value;
+                const status = document.getElementById('status').value;
+                
+                alert(`Filters applied:\nDate Range: ${dateRange}\nTool Type: ${toolType}\nStatus: ${status}`);
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('search');
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('.usage-table tbody tr');
+                
+                rows.forEach(row => {
+                    const toolName = row.querySelector('.tool-details h4').textContent.toLowerCase();
+                    const fileName = row.querySelector('.file-info span').textContent.toLowerCase();
+                    
+                    if (toolName.includes(searchTerm) || fileName.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Sort functionality
+            const sortSelect = document.getElementById('sort');
+            sortSelect.addEventListener('change', function() {
+                alert(`Sorting by: ${this.options[this.selectedIndex].text}`);
+                // In a real implementation, this would reorder the table
+            });
+            
+            // Pagination functionality
+            const pageBtns = document.querySelectorAll('.page-btn');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    pageBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    alert(`Navigating to page ${this.textContent}`);
+                });
+            });
+            
+            // Download/Retry buttons
+            const actionBtns = document.querySelectorAll('.usage-table .btn');
+            actionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const toolName = this.closest('tr').querySelector('.tool-details h4').textContent;
+                    const fileName = this.closest('tr').querySelector('.file-info span').textContent;
+                    
+                    if (this.textContent === 'Download') {
+                        alert(`Downloading: ${fileName} (processed with ${toolName})`);
+                    } else if (this.textContent === 'Retry') {
+                        alert(`Retrying: ${fileName} with ${toolName}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

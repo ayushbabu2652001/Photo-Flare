@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert videos to high-quality GIFs with Photo Flare's premium Video to GIF Converter. Advanced features like frame rate control, quality adjustment, and trimming.">
+    <meta name="keywords" content="video to gif converter, gif maker, video converter, animated gif, premium tools, photo flare">
+    <title>Video to GIF Converter - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e44);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-header {
+            padding: 2rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .upload-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .file-info.active {
+            display: block;
+        }
+
+        .file-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-size {
+            color: var(--gray);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: right;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .preview-container {
+            position: relative;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-video, .preview-gif {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+
+        .preview-video.active, .preview-gif.active {
+            display: block;
+        }
+
+        .preview-placeholder {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light-gray);
+        }
+
+        .controls-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            justify-content: between;
+        }
+
+        .control-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            padding: 0.5rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            width: 80px;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .trim-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .trim-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .trim-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .action-buttons .btn {
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .results-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .result-gif {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-gif img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .info-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card .label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .premium-feature {
+            position: relative;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .premium-feature:hover .premium-overlay {
+            opacity: 1;
+        }
+
+        .premium-overlay i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .upgrade-prompt h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+            
+            .download-options .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem 0;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trim-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Header -->
+    <section class="tool-header">
+        <div class="container">
+            <h1>Video to GIF Converter</h1>
+            <p>Convert your videos to high-quality animated GIFs with advanced customization options. A premium Photo Flare tool.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Upgrade Prompt for Free Users -->
+        <div class="upgrade-prompt" id="upgradePrompt">
+            <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+            <p>This is a premium tool. Upgrade to unlock all features and remove limitations.</p>
+            <a href="remove-limitations-Upgrade-Now.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
+        </div>
+
+        <!-- Main Tool Container -->
+        <div class="tool-container">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h2 class="section-title"><i class="fas fa-upload"></i> Upload Video</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Video File</h3>
+                    <p>Supported formats: MP4, MOV, AVI, WebM, MKV</p>
+                    <p class="file-size-limit">Max file size: 100MB (Free) / 500MB (Pro)</p>
+                    <button class="btn btn-primary">Select Video File</button>
+                    <input type="file" id="fileInput" accept="video/*" style="display: none;">
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <div class="file-details">
+                        <span class="file-name" id="fileName">video.mp4</span>
+                        <span class="file-size" id="fileSize">0 MB</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="uploadProgress"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Uploading... 0%</div>
+                </div>
+                
+                <div class="premium-feature">
+                    <h2 class="section-title"><i class="fas fa-link"></i> Import from URL</h2>
+                    <div class="control-group">
+                        <input type="text" id="videoUrl" placeholder="Paste video URL (YouTube, Vimeo, etc.)" class="search-input" style="width: 100%; padding: 1rem; border-radius: var(--border-radius); border: 1px solid var(--light-gray);">
+                        <button class="btn btn-outline" id="fetchVideo" style="margin-top: 0.5rem;">Fetch Video</button>
+                    </div>
+                    <div class="premium-overlay">
+                        <i class="fas fa-crown"></i>
+                        <p>URL import is a premium feature</p>
+                        <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <h2 class="section-title"><i class="fas fa-eye"></i> Preview</h2>
+                
+                <div class="preview-container">
+                    <div class="preview-placeholder" id="previewPlaceholder">
+                        <i class="fas fa-video"></i>
+                        <p>Your video will appear here</p>
+                    </div>
+                    <video class="preview-video" id="previewVideo" controls></video>
+                    <img class="preview-gif" id="previewGif" alt="Generated GIF">
+                </div>
+                
+                <div class="premium-feature">
+                    <h2 class="section-title"><i class="fas fa-palette"></i> Customize Output</h2>
+                    <div class="control-group">
+                        <label class="control-label">Output Size <span class="control-value" id="sizeValue">640x360</span></label>
+                        <div class="range-container">
+                            <input type="range" id="sizeRange" min="320" max="1280" step="160" value="640">
+                            <input type="number" id="sizeInput" min="320" max="1280" value="640" style="width: 80px;">
+                            <span>px</span>
+                        </div>
+                    </div>
+                    <div class="premium-overlay">
+                        <i class="fas fa-crown"></i>
+                        <p>Custom output size is a premium feature</p>
+                        <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <h2 class="section-title"><i class="fas fa-sliders-h"></i> Conversion Settings</h2>
+            
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label class="control-label">Frame Rate <span class="control-value" id="fpsValue">10 fps</span></label>
+                    <div class="range-container">
+                        <input type="range" id="fpsRange" min="5" max="30" value="10">
+                        <input type="number" id="fpsInput" min="5" max="30" value="10">
+                        <span>fps</span>
+                    </div>
+                    <p class="help-text">Higher FPS = smoother but larger file</p>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Quality <span class="control-value" id="qualityValue">Medium</span></label>
+                    <div class="range-container">
+                        <input type="range" id="qualityRange" min="1" max="3" value="2">
+                        <select id="qualitySelect">
+                            <option value="1">Low</option>
+                            <option value="2" selected>Medium</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
+                    <p class="help-text">Higher quality = larger file size</p>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Duration <span class="control-value" id="durationValue">5s</span></label>
+                    <div class="range-container">
+                        <input type="range" id="durationRange" min="1" max="15" value="5">
+                        <input type="number" id="durationInput" min="1" max="15" value="5">
+                        <span>seconds</span>
+                    </div>
+                    <p class="help-text">Maximum length of the GIF</p>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Loop <span class="control-value" id="loopValue">Infinite</span></label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="loopCheckbox" checked>
+                        <label for="loopCheckbox">Loop GIF infinitely</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="reverseCheckbox">
+                        <label for="reverseCheckbox">Reverse playback</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trim-section">
+                <h3 class="section-title"><i class="fas fa-cut"></i> Trim Video</h3>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="trimCheckbox">
+                    <label for="trimCheckbox">Enable trimming</label>
+                </div>
+                
+                <div class="trim-controls" id="trimControls" style="display: none;">
+                    <div class="trim-input">
+                        <label>Start:</label>
+                        <input type="number" id="trimStart" min="0" value="0" step="0.1">
+                        <span>s</span>
+                    </div>
+                    <div class="trim-input">
+                        <label>End:</label>
+                        <input type="number" id="trimEnd" min="0" value="5" step="0.1">
+                        <span>s</span>
+                    </div>
+                    <button class="btn btn-outline" id="previewTrim">Preview Trim</button>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="convertBtn"><i class="fas fa-sync-alt"></i> Convert to GIF</button>
+                <button class="btn btn-outline" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <h2 class="section-title"><i class="fas fa-check-circle"></i> Conversion Complete!</h2>
+            
+            <div class="result-gif">
+                <img id="resultGif" src="" alt="Converted GIF">
+            </div>
+            
+            <div class="result-info">
+                <div class="info-card">
+                    <div class="value" id="resultSize">0 KB</div>
+                    <div class="label">File Size</div>
+                </div>
+                <div class="info-card">
+                    <div class="value" id="resultDimensions">0x0</div>
+                    <div class="label">Dimensions</div>
+                </div>
+                <div class="info-card">
+                    <div class="value" id="resultDuration">0s</div>
+                    <div class="label">Duration</div>
+                </div>
+                <div class="info-card">
+                    <div class="value" id="resultFrames">0</div>
+                    <div class="label">Frames</div>
+                </div>
+            </div>
+            
+            <div class="download-options">
+                <button class="btn btn-success" id="downloadBtn"><i class="fas fa-download"></i> Download GIF</button>
+                <button class="btn btn-outline" id="shareBtn"><i class="fas fa-share-alt"></i> Share</button>
+                <button class="btn btn-outline" id="newConversionBtn"><i class="fas fa-plus"></i> New Conversion</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressText = document.getElementById('progressText');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const previewVideo = document.getElementById('previewVideo');
+        const previewGif = document.getElementById('previewGif');
+        const convertBtn = document.getElementById('convertBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultGif = document.getElementById('resultGif');
+        const resultSize = document.getElementById('resultSize');
+        const resultDimensions = document.getElementById('resultDimensions');
+        const resultDuration = document.getElementById('resultDuration');
+        const resultFrames = document.getElementById('resultFrames');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const newConversionBtn = document.getElementById('newConversionBtn');
+        
+        // Control Elements
+        const fpsRange = document.getElementById('fpsRange');
+        const fpsInput = document.getElementById('fpsInput');
+        const fpsValue = document.getElementById('fpsValue');
+        const qualityRange = document.getElementById('qualityRange');
+        const qualitySelect = document.getElementById('qualitySelect');
+        const qualityValue = document.getElementById('qualityValue');
+        const durationRange = document.getElementById('durationRange');
+        const durationInput = document.getElementById('durationInput');
+        const durationValue = document.getElementById('durationValue');
+        const loopCheckbox = document.getElementById('loopCheckbox');
+        const reverseCheckbox = document.getElementById('reverseCheckbox');
+        const trimCheckbox = document.getElementById('trimCheckbox');
+        const trimControls = document.getElementById('trimControls');
+        const trimStart = document.getElementById('trimStart');
+        const trimEnd = document.getElementById('trimEnd');
+        const previewTrim = document.getElementById('previewTrim');
+        const sizeRange = document.getElementById('sizeRange');
+        const sizeInput = document.getElementById('sizeInput');
+        const sizeValue = document.getElementById('sizeValue');
+        
+        // Premium Features
+        const upgradePrompt = document.getElementById('upgradePrompt');
+        const videoUrl = document.getElementById('videoUrl');
+        const fetchVideo = document.getElementById('fetchVideo');
+        
+        // State Variables
+        let currentVideoFile = null;
+        let isPremiumUser = false; // This would be set based on user authentication
+        
+        // Initialize the tool
+        function init() {
+            // Check if user is premium (in a real app, this would come from backend)
+            // For demo purposes, we'll set it to false
+            isPremiumUser = false;
+            
+            if (!isPremiumUser) {
+                upgradePrompt.style.display = 'block';
+            } else {
+                upgradePrompt.style.display = 'none';
+            }
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Initialize controls
+            updateFPSValue();
+            updateQualityValue();
+            updateDurationValue();
+            updateSizeValue();
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // Upload area events
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('drop', handleFileDrop);
+            
+            // File input change
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Control synchronization
+            fpsRange.addEventListener('input', updateFPSValue);
+            fpsInput.addEventListener('input', updateFPSFromInput);
+            qualityRange.addEventListener('input', updateQualityValue);
+            qualitySelect.addEventListener('change', updateQualityFromSelect);
+            durationRange.addEventListener('input', updateDurationValue);
+            durationInput.addEventListener('input', updateDurationFromInput);
+            sizeRange.addEventListener('input', updateSizeValue);
+            sizeInput.addEventListener('input', updateSizeFromInput);
+            
+            // Trim controls
+            trimCheckbox.addEventListener('change', toggleTrimControls);
+            previewTrim.addEventListener('click', previewTrimmedVideo);
+            
+            // Action buttons
+            convertBtn.addEventListener('click', convertToGif);
+            resetBtn.addEventListener('click', resetTool);
+            downloadBtn.addEventListener('click', downloadGif);
+            shareBtn.addEventListener('click', shareGif);
+            newConversionBtn.addEventListener('click', resetTool);
+            
+            // Premium features
+            fetchVideo.addEventListener('click', fetchVideoFromUrl);
+        }
+        
+        // Handle drag over event
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.borderColor = 'var(--primary)';
+            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+        }
+        
+        // Handle file drop
+        function handleFileDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.borderColor = 'var(--light-gray)';
+            uploadArea.style.backgroundColor = 'var(--light)';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                processVideoFile(files[0]);
+            }
+        }
+        
+        // Handle file selection
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                processVideoFile(files[0]);
+            }
+        }
+        
+        // Process the selected video file
+        function processVideoFile(file) {
+            // Check file type
+            if (!file.type.startsWith('video/')) {
+                alert('Please select a valid video file.');
+                return;
+            }
+            
+            // Check file size (100MB for free users, 500MB for premium)
+            const maxSize = isPremiumUser ? 500 * 1024 * 1024 : 100 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert(`File size exceeds the limit. Maximum size is ${isPremiumUser ? '500MB' : '100MB'}.`);
+                return;
+            }
+            
+            currentVideoFile = file;
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            
+            // Show file info and progress
+            fileInfo.classList.add('active');
+            uploadProgress.style.width = '0%';
+            progressText.textContent = 'Uploading... 0%';
+            
+            // Simulate upload progress
+            simulateUploadProgress(() => {
+                // Upload complete
+                progressText.textContent = 'Upload complete!';
+                
+                // Create object URL for the video
+                const videoUrl = URL.createObjectURL(file);
+                previewVideo.src = videoUrl;
+                
+                // Show video and hide placeholder
+                previewPlaceholder.style.display = 'none';
+                previewVideo.classList.add('active');
+                
+                // Set video duration for trim controls
+                previewVideo.onloadedmetadata = function() {
+                    const duration = Math.floor(previewVideo.duration);
+                    durationRange.max = Math.min(duration, 15);
+                    durationInput.max = Math.min(duration, 15);
+                    trimEnd.max = duration;
+                    trimEnd.value = Math.min(duration, 5);
+                    durationRange.value = Math.min(duration, 5);
+                    durationInput.value = Math.min(duration, 5);
+                    updateDurationValue();
+                };
+            });
+        }
+        
+        // Simulate upload progress (in a real app, this would be actual upload)
+        function simulateUploadProgress(callback) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    callback();
+                }
+                
+                uploadProgress.style.width = `${progress}%`;
+                progressText.textContent = `Uploading... ${Math.floor(progress)}%`;
+            }, 200);
+        }
+        
+        // Update FPS value display
+        function updateFPSValue() {
+            const value = fpsRange.value;
+            fpsInput.value = value;
+            fpsValue.textContent = `${value} fps`;
+        }
+        
+        // Update FPS from input
+        function updateFPSFromInput() {
+            let value = parseInt(fpsInput.value);
+            if (value < 5) value = 5;
+            if (value > 30) value = 30;
+            fpsInput.value = value;
+            fpsRange.value = value;
+            fpsValue.textContent = `${value} fps`;
+        }
+        
+        // Update quality value display
+        function updateQualityValue() {
+            const value = qualityRange.value;
+            qualitySelect.value = value;
+            
+            const qualityText = value == 1 ? 'Low' : value == 2 ? 'Medium' : 'High';
+            qualityValue.textContent = qualityText;
+        }
+        
+        // Update quality from select
+        function updateQualityFromSelect() {
+            const value = qualitySelect.value;
+            qualityRange.value = value;
+            updateQualityValue();
+        }
+        
+        // Update duration value display
+        function updateDurationValue() {
+            const value = durationRange.value;
+            durationInput.value = value;
+            durationValue.textContent = `${value}s`;
+        }
+        
+        // Update duration from input
+        function updateDurationFromInput() {
+            let value = parseInt(durationInput.value);
+            const maxDuration = parseInt(durationRange.max);
+            if (value < 1) value = 1;
+            if (value > maxDuration) value = maxDuration;
+            durationInput.value = value;
+            durationRange.value = value;
+            durationValue.textContent = `${value}s`;
+        }
+        
+        // Update size value display
+        function updateSizeValue() {
+            const value = sizeRange.value;
+            sizeInput.value = value;
+            
+            // Calculate height based on 16:9 aspect ratio
+            const height = Math.round(value * 9 / 16);
+            sizeValue.textContent = `${value}x${height}`;
+        }
+        
+        // Update size from input
+        function updateSizeFromInput() {
+            let value = parseInt(sizeInput.value);
+            if (value < 320) value = 320;
+            if (value > 1280) value = 1280;
+            sizeInput.value = value;
+            sizeRange.value = value;
+            updateSizeValue();
+        }
+        
+        // Toggle trim controls visibility
+        function toggleTrimControls() {
+            if (trimCheckbox.checked) {
+                trimControls.style.display = 'flex';
+            } else {
+                trimControls.style.display = 'none';
+            }
+        }
+        
+        // Preview trimmed video
+        function previewTrimmedVideo() {
+            if (!previewVideo.src) return;
+            
+            const start = parseFloat(trimStart.value);
+            const end = parseFloat(trimEnd.value);
+            
+            if (start >= end) {
+                alert('End time must be greater than start time.');
+                return;
+            }
+            
+            previewVideo.currentTime = start;
+        }
+        
+        // Convert video to GIF
+        function convertToGif() {
+            if (!currentVideoFile) {
+                alert('Please upload a video first.');
+                return;
+            }
+            
+            // Show loading state
+            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            convertBtn.disabled = true;
+            
+            // In a real implementation, this would use a library like FFmpeg.js or a server-side process
+            // For this demo, we'll simulate the conversion process
+            simulateConversion(() => {
+                // Conversion complete
+                convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert to GIF';
+                convertBtn.disabled = false;
+                
+                // Show results
+                showConversionResults();
+            });
+        }
+        
+        // Simulate conversion process
+        function simulateConversion(callback) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    callback();
+                }
+                
+                convertBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Converting... ${Math.floor(progress)}%`;
+            }, 300);
+        }
+        
+        // Show conversion results
+        function showConversionResults() {
+            // In a real implementation, this would show the actual converted GIF
+            // For demo purposes, we'll use a placeholder
+            resultGif.src = 'https://via.placeholder.com/640x360/4361ee/ffffff?text=Converted+GIF+Preview';
+            
+            // Set result info (simulated)
+            resultSize.textContent = '1.2 MB';
+            resultDimensions.textContent = '640x360';
+            resultDuration.textContent = '5s';
+            resultFrames.textContent = '50';
+            
+            // Show results section
+            resultsSection.classList.add('active');
+            
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Download the converted GIF
+        function downloadGif() {
+            // In a real implementation, this would download the actual converted file
+            // For demo purposes, we'll create a dummy download
+            const link = document.createElement('a');
+            link.href = resultGif.src;
+            link.download = 'converted.gif';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Share the converted GIF
+        function shareGif() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My converted GIF',
+                    text: 'Check out this GIF I created with Photo Flare!',
+                    url: window.location.href
+                })
+                .catch(error => console.log('Error sharing:', error));
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                alert('Share URL: ' + window.location.href);
+            }
+        }
+        
+        // Reset the tool to initial state
+        function resetTool() {
+            // Reset file input
+            fileInput.value = '';
+            currentVideoFile = null;
+            
+            // Reset UI elements
+            fileInfo.classList.remove('active');
+            previewPlaceholder.style.display = 'flex';
+            previewVideo.classList.remove('active');
+            previewGif.classList.remove('active');
+            resultsSection.classList.remove('active');
+            
+            // Reset controls to default values
+            fpsRange.value = 10;
+            fpsInput.value = 10;
+            updateFPSValue();
+            
+            qualityRange.value = 2;
+            qualitySelect.value = 2;
+            updateQualityValue();
+            
+            durationRange.value = 5;
+            durationInput.value = 5;
+            updateDurationValue();
+            
+            sizeRange.value = 640;
+            sizeInput.value = 640;
+            updateSizeValue();
+            
+            loopCheckbox.checked = true;
+            reverseCheckbox.checked = false;
+            trimCheckbox.checked = false;
+            toggleTrimControls();
+            
+            trimStart.value = 0;
+            trimEnd.value = 5;
+            
+            // Clear video URL
+            videoUrl.value = '';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Fetch video from URL (premium feature)
+        function fetchVideoFromUrl() {
+            if (!isPremiumUser) {
+                alert('URL import is a premium feature. Please upgrade to use this feature.');
+                return;
+            }
+            
+            const url = videoUrl.value.trim();
+            if (!url) {
+                alert('Please enter a valid video URL.');
+                return;
+            }
+            
+            // In a real implementation, this would fetch the video from the URL
+            // For demo purposes, we'll simulate the process
+            alert('This would fetch the video from the URL in a real implementation.');
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+        
+        // Initialize the tool when the page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

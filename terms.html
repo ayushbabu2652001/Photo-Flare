@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Terms of Service - Learn about our policies, user rights, and obligations when using our document and image processing tools.">
+    <meta name="keywords" content="Photo Flare Terms of Service, user agreement, legal policies, document tools, image tools">
+    <title>Terms of Service - Photo Flare | Legal Policies & User Agreement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulse-hero 15s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .toc-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .toc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .toc-nav {
+            position: sticky;
+            top: 120px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .toc-nav h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toc-nav h3 i {
+            color: var(--primary);
+        }
+
+        .toc-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .toc-link {
+            color: var(--gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toc-link:hover, .toc-link.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .toc-link i {
+            font-size: 0.8rem;
+        }
+
+        .toc-content {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .toc-section-item {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .toc-section-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .toc-section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toc-section-title i {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .toc-text {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .toc-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+            color: var(--gray);
+        }
+
+        .highlight-box {
+            background: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .highlight-box p {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-transparent {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-transparent:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse-hero {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .toc-links {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .toc-nav {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .toc-content {
+                padding: 2rem;
+            }
+            
+            .toc-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .toc-section {
+                padding: 3rem 0;
+            }
+            
+            .toc-content {
+                padding: 1.5rem;
+            }
+            
+            .toc-section-title {
+                font-size: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="tos-hero">
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <p>Please read these Terms of Service carefully before using Photo Flare's document and image processing tools.</p>
+            <a href="#tos-content" class="btn btn-primary">Read Terms</a>
+        </div>
+    </section>
+
+    <!-- Terms of Service Content -->
+    <section class="toc-section" id="tos-content">
+        <div class="container">
+            <div class="toc-container">
+                <div class="toc-nav">
+                    <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                    <div class="toc-links">
+                        <a href="#agreement" class="toc-link active"><i class="fas fa-chevron-right"></i> Agreement to Terms</a>
+                        <a href="#services" class="toc-link"><i class="fas fa-chevron-right"></i> Our Services</a>
+                        <a href="#accounts" class="toc-link"><i class="fas fa-chevron-right"></i> User Accounts</a>
+                        <a href="#acceptable-use" class="toc-link"><i class="fas fa-chevron-right"></i> Acceptable Use</a>
+                        <a href="#intellectual-property" class="toc-link"><i class="fas fa-chevron-right"></i> Intellectual Property</a>
+                        <a href="#privacy" class="toc-link"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                        <a href="#termination" class="toc-link"><i class="fas fa-chevron-right"></i> Termination</a>
+                        <a href="#disclaimer" class="toc-link"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                        <a href="#limitation-liability" class="toc-link"><i class="fas fa-chevron-right"></i> Limitation of Liability</a>
+                        <a href="#governing-law" class="toc-link"><i class="fas fa-chevron-right"></i> Governing Law</a>
+                        <a href="#changes" class="toc-link"><i class="fas fa-chevron-right"></i> Changes to Terms</a>
+                        <a href="#contact" class="toc-link"><i class="fas fa-chevron-right"></i> Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="toc-content">
+                    <!-- Agreement to Terms -->
+                    <div class="toc-section-item" id="agreement">
+                        <h2 class="toc-section-title"><i class="fas fa-file-signature"></i> Agreement to Terms</h2>
+                        <p class="toc-text">By accessing or using Photo Flare's website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.</p>
+                        <p class="toc-text">These Terms of Service apply to all visitors, users, and others who access or use our Service. By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.</p>
+                        
+                        <div class="highlight-box">
+                            <p><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> These Terms constitute a legally binding agreement between you and Photo Flare regarding your use of our services.</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Services -->
+                    <div class="toc-section-item" id="services">
+                        <h2 class="toc-section-title"><i class="fas fa-cogs"></i> Our Services</h2>
+                        <p class="toc-text">Photo Flare provides a collection of online tools for document and image processing, conversion, and editing. Our services include but are not limited to:</p>
+                        <ul class="toc-list">
+                            <li>PDF editing and conversion tools</li>
+                            <li>Image editing and enhancement tools</li>
+                            <li>File format conversion services</li>
+                            <li>Document compression and optimization</li>
+                            <li>Other related document and image processing utilities</li>
+                        </ul>
+                        <p class="toc-text">We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice. We are not liable to you or any third party for any modification, suspension, or discontinuance of our services.</p>
+                    </div>
+
+                    <!-- User Accounts -->
+                    <div class="toc-section-item" id="accounts">
+                        <h2 class="toc-section-title"><i class="fas fa-user-circle"></i> User Accounts</h2>
+                        <p class="toc-text">When you create an account with us, you must provide accurate, complete, and current information. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account.</p>
+                        <p class="toc-text">You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password. You agree not to disclose your password to any third party.</p>
+                        
+                        <div class="highlight-box">
+                            <p><i class="fas fa-shield-alt"></i> <strong>Security Notice:</strong> You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p>
+                        </div>
+                    </div>
+
+                    <!-- Acceptable Use -->
+                    <div class="toc-section-item" id="acceptable-use">
+                        <h2 class="toc-section-title"><i class="fas fa-check-circle"></i> Acceptable Use</h2>
+                        <p class="toc-text">You agree not to use the Service:</p>
+                        <ul class="toc-list">
+                            <li>In any way that violates any applicable national or international law or regulation</li>
+                            <li>To transmit, or procure the sending of, any advertising or promotional material</li>
+                            <li>To impersonate or attempt to impersonate Photo Flare, a Photo Flare employee, another user, or any other person or entity</li>
+                            <li>To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Service</li>
+                            <li>To process files containing malicious code, viruses, or other harmful components</li>
+                            <li>To upload or process files that infringe upon any intellectual property rights</li>
+                        </ul>
+                        <p class="toc-text">We reserve the right to refuse service, terminate accounts, or remove content at our sole discretion if we believe these terms have been violated.</p>
+                    </div>
+
+                    <!-- Intellectual Property -->
+                    <div class="toc-section-item" id="intellectual-property">
+                        <h2 class="toc-section-title"><i class="fas fa-copyright"></i> Intellectual Property</h2>
+                        <p class="toc-text">The Service and its original content, features, and functionality are and will remain the exclusive property of Photo Flare and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
+                        <p class="toc-text">Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Photo Flare.</p>
+                        <p class="toc-text">You retain all rights to the files you upload and process through our Service. We do not claim ownership of your content. However, by using our Service, you grant us a limited license to process your files solely for the purpose of providing the services you request.</p>
+                    </div>
+
+                    <!-- Privacy Policy -->
+                    <div class="toc-section-item" id="privacy">
+                        <h2 class="toc-section-title"><i class="fas fa-user-shield"></i> Privacy Policy</h2>
+                        <p class="toc-text">Your privacy is important to us. Please read our <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a> carefully as it describes how we collect, use, and protect your personal information.</p>
+                        <p class="toc-text">Our Privacy Policy explains our practices concerning the collection and use of your information, including the use of cookies and similar technologies. By using our Service, you consent to the collection and use of information in accordance with our Privacy Policy.</p>
+                    </div>
+
+                    <!-- Termination -->
+                    <div class="toc-section-item" id="termination">
+                        <h2 class="toc-section-title"><i class="fas fa-ban"></i> Termination</h2>
+                        <p class="toc-text">We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever, including but not limited to a breach of the Terms.</p>
+                        <p class="toc-text">If you wish to terminate your account, you may simply discontinue using the Service or delete your account through your account settings.</p>
+                        <p class="toc-text">All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="toc-section-item" id="disclaimer">
+                        <h2 class="toc-section-title"><i class="fas fa-exclamation-triangle"></i> Disclaimer</h2>
+                        <p class="toc-text">Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement, or course of performance.</p>
+                        <p class="toc-text">Photo Flare, its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure, or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.</p>
+                    </div>
+
+                    <!-- Limitation of Liability -->
+                    <div class="toc-section-item" id="limitation-liability">
+                        <h2 class="toc-section-title"><i class="fas fa-balance-scale"></i> Limitation of Liability</h2>
+                        <p class="toc-text">In no event shall Photo Flare, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                        <ul class="toc-list">
+                            <li>Your access to or use of or inability to access or use the Service</li>
+                            <li>Any conduct or content of any third party on the Service</li>
+                            <li>Any content obtained from the Service</li>
+                            <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                        </ul>
+                        <p class="toc-text">This limitation of liability section applies whether the alleged liability is based on contract, tort, negligence, strict liability, or any other basis, even if Photo Flare has been advised of the possibility of such damage.</p>
+                    </div>
+
+                    <!-- Governing Law -->
+                    <div class="toc-section-item" id="governing-law">
+                        <h2 class="toc-section-title"><i class="fas fa-gavel"></i> Governing Law</h2>
+                        <p class="toc-text">These Terms shall be governed and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law provisions.</p>
+                        <p class="toc-text">Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
+                    </div>
+
+                    <!-- Changes to Terms -->
+                    <div class="toc-section-item" id="changes">
+                        <h2 class="toc-section-title"><i class="fas fa-sync-alt"></i> Changes to Terms</h2>
+                        <p class="toc-text">We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                        <p class="toc-text">By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
+                    </div>
+
+                    <!-- Contact Us -->
+                    <div class="toc-section-item" id="contact">
+                        <h2 class="toc-section-title"><i class="fas fa-envelope"></i> Contact Us</h2>
+                        <p class="toc-text">If you have any questions about these Terms, please contact us:</p>
+                        <ul class="toc-list">
+                            <li>By email: legal@photoflare.com</li>
+                            <li>By visiting our <a href="contact.html" style="color: var(--primary);">Contact page</a></li>
+                            <li>By mail: Photo Flare Inc., 123 Tech Avenue, San Francisco, CA 94107</li>
+                        </ul>
+                        <p class="toc-text"><strong>Last updated:</strong> October 15, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Questions About Our Terms?</h2>
+                <p class="cta-text">If you have any questions about our Terms of Service, don't hesitate to reach out to our support team.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-white">Contact Support</a>
+                    <a href="index.html" class="btn btn-transparent">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html" class="active">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active state for TOC links
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Highlight current section in TOC on scroll
+        const sections = document.querySelectorAll('.toc-section-item');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Auto-expand TOC links when clicked on mobile
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 992) {
+                    const tocNav = document.querySelector('.toc-nav');
+                    tocNav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Smart Object Removal - Remove unwanted objects, people, text, and imperfections from photos with advanced AI technology. Part of Photo Flare's premium tools.">
+    <meta name="keywords" content="object removal, remove objects from photos, photo cleanup, content-aware fill, AI photo editing, remove people from photos, watermark removal">
+    <title>Smart Object Removal - Premium Tool | Photo Flare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #f3722c);
+            color: white;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .upload-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px dashed var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .upload-section.active {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .file-label:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .image-preview {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .preview-container {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .preview-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            background: var(--light);
+        }
+
+        .preview-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border-radius: var(--border-radius);
+            z-index: -1;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-top: 1rem;
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        #selectionCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .controls-section {
+            grid-column: 1 / -1;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .controls-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .control-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-selection {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .tool-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .brush-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .brush-size {
+            width: 100%;
+        }
+
+        .brush-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background: white;
+        }
+
+        .zoom-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .zoom-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .zoom-btn:hover {
+            background: var(--light);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+
+        .processing-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 8px solid white;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .selection-info {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .selection-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .results-section {
+            grid-column: 1 / -1;
+            margin-top: 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-value-large {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label-large {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .premium-upsell h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-feature i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .tool-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-preview {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .tool-header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .tool-selection {
+                flex-direction: column;
+            }
+            
+            .download-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .tool-header {
+                padding: 1.5rem;
+            }
+            
+            .tool-content {
+                padding: 1.5rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .controls-section {
+                padding: 1.5rem;
+            }
+            
+            .canvas-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1><i class="fas fa-eraser"></i> AI Smart Object Removal</h1>
+                <p>Remove unwanted objects, people, text, and imperfections from photos with advanced AI technology. Perfect for photo cleanup and restoration.</p>
+                <span class="premium-badge">PREMIUM TOOL</span>
+            </div>
+
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section" id="uploadSection">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <div class="upload-text">
+                        <h3>Upload Your Image</h3>
+                        <p>Drag & drop your image here or click to browse</p>
+                        <p>Supports JPG, PNG, WebP (Max: 10MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" class="file-input" accept="image/*">
+                    <label for="fileInput" class="file-label">
+                        <i class="fas fa-folder-open"></i> Choose Image
+                    </label>
+                </div>
+
+                <!-- Image Preview Section -->
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <div class="preview-container">
+                        <h3 class="preview-title">Original Image</h3>
+                        <div class="preview-background"></div>
+                        <img id="originalImage" class="preview-image" src="" alt="Original Image">
+                    </div>
+                    <div class="preview-container">
+                        <h3 class="preview-title">Object Removed</h3>
+                        <div class="preview-background"></div>
+                        <img id="processedImage" class="preview-image" src="" alt="Processed Image">
+                    </div>
+                </div>
+
+                <!-- Selection Canvas -->
+                <div class="canvas-section" id="canvasSection" style="display: none;">
+                    <h2 class="controls-title">Select Objects to Remove</h2>
+                    <p style="text-align: center; margin-bottom: 1rem; color: var(--gray);">
+                        Use the tools below to mark the objects you want to remove. The AI will intelligently fill in the removed areas.
+                    </p>
+                    
+                    <div class="canvas-container">
+                        <canvas id="selectionCanvas"></canvas>
+                    </div>
+                    
+                    <div class="selection-info">
+                        <h3>Selection Tools</h3>
+                        <div class="tool-selection">
+                            <button class="tool-btn active" id="brushTool">
+                                <i class="fas fa-paint-brush"></i> Brush Tool
+                            </button>
+                            <button class="tool-btn" id="lassoTool">
+                                <i class="fas fa-draw-polygon"></i> Lasso Tool
+                            </button>
+                            <button class="tool-btn" id="rectangleTool">
+                                <i class="fas fa-vector-square"></i> Rectangle Tool
+                            </button>
+                            <button class="tool-btn" id="eraserTool">
+                                <i class="fas fa-eraser"></i> Eraser
+                            </button>
+                        </div>
+                        
+                        <div class="controls-grid">
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <span>Brush Size</span>
+                                    <span class="control-value" id="brushSizeValue">20px</span>
+                                </div>
+                                <input type="range" min="5" max="100" value="20" class="slider brush-size" id="brushSizeSlider">
+                                
+                                <div class="brush-controls">
+                                    <div class="brush-preview" id="brushPreview">20</div>
+                                    <div style="flex: 1;">
+                                        <div class="control-label">
+                                            <span>Brush Hardness</span>
+                                            <span class="control-value" id="brushHardnessValue">50%</span>
+                                        </div>
+                                        <input type="range" min="0" max="100" value="50" class="slider" id="brushHardnessSlider">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <span>AI Precision</span>
+                                    <span class="control-value" id="precisionValue">High</span>
+                                </div>
+                                <input type="range" min="1" max="3" step="1" value="2" class="slider" id="precisionSlider">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray); margin-top: 5px;">
+                                    <span>Fast</span>
+                                    <span>Balanced</span>
+                                    <span>High Quality</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" id="zoomInBtn"><i class="fas fa-search-plus"></i></button>
+                            <button class="zoom-btn" id="zoomOutBtn"><i class="fas fa-search-minus"></i></button>
+                            <button class="zoom-btn" id="zoomResetBtn"><i class="fas fa-expand-arrows-alt"></i> Reset View</button>
+                            <button class="zoom-btn" id="clearSelectionBtn"><i class="fas fa-broom"></i> Clear Selection</button>
+                        </div>
+                        
+                        <div class="selection-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="selectedArea">0%</div>
+                                <div class="stat-label">Area Selected</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="objectsCount">0</div>
+                                <div class="stat-label">Objects Marked</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="zoomLevel">100%</div>
+                                <div class="stat-label">Zoom Level</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn btn-primary" id="removeObjectsBtn">
+                        <i class="fas fa-magic"></i> Remove Selected Objects
+                    </button>
+                    <button class="btn btn-outline" id="resetBtn">
+                        <i class="fas fa-redo"></i> Start Over
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection">
+                    <h2 class="controls-title">Object Removal Complete!</h2>
+                    <div class="results-stats">
+                        <div class="stat-card">
+                            <div class="stat-value-large" id="accuracyStat">98%</div>
+                            <div class="stat-label-large">AI Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value-large" id="timeStat">3.2s</div>
+                            <div class="stat-label-large">Processing Time</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value-large" id="objectsRemoved">5</div>
+                            <div class="stat-label-large">Objects Removed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value-large" id="seamlessnessStat">97%</div>
+                            <div class="stat-label-large">Seamlessness</div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-options">
+                        <button class="btn btn-primary" id="downloadPngBtn">
+                            <i class="fas fa-download"></i> Download PNG
+                        </button>
+                        <button class="btn btn-success" id="downloadJpgBtn">
+                            <i class="fas fa-download"></i> Download JPG
+                        </button>
+                        <button class="btn btn-outline" id="newImageBtn">
+                            <i class="fas fa-plus"></i> Process Another Image
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Upsell -->
+                <div class="premium-upsell">
+                    <h3>Unlock Professional Object Removal with Photo Flare Pro</h3>
+                    <p>Upgrade to access all premium features and remove limitations</p>
+                    
+                    <div class="premium-features">
+                        <div class="premium-feature">
+                            <i class="fas fa-bolt"></i>
+                            <div>
+                                <h4>Faster Processing</h4>
+                                <p>Priority AI processing with GPU acceleration</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Higher Resolution</h4>
+                                <p>Process images up to 8K resolution</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-infinity"></i>
+                            <div>
+                                <h4>Unlimited Removals</h4>
+                                <p>No daily limits on object removal</p>
+                            </div>
+                        </div>
+                        <div class="premium-feature">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <div>
+                                <h4>Batch Processing</h4>
+                                <p>Remove objects from multiple images at once</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="pricing.html" class="btn btn-warning">
+                        <i class="fas fa-crown"></i> Upgrade to Pro - Only $4/month
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Processing Overlay -->
+    <div class="processing-overlay" id="processingOverlay" style="display: none;">
+        <div class="processing-spinner"></div>
+        <h2>Removing Objects</h2>
+        <p>Our AI is analyzing your image and removing selected objects...</p>
+        <p id="processingProgress">Processing: 0%</p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const imagePreview = document.getElementById('imagePreview');
+        const originalImage = document.getElementById('originalImage');
+        const processedImage = document.getElementById('processedImage');
+        const canvasSection = document.getElementById('canvasSection');
+        const selectionCanvas = document.getElementById('selectionCanvas');
+        const actionButtons = document.getElementById('actionButtons');
+        const resultsSection = document.getElementById('resultsSection');
+        const processingOverlay = document.getElementById('processingOverlay');
+        const processingProgress = document.getElementById('processingProgress');
+        
+        // Tool Elements
+        const brushTool = document.getElementById('brushTool');
+        const lassoTool = document.getElementById('lassoTool');
+        const rectangleTool = document.getElementById('rectangleTool');
+        const eraserTool = document.getElementById('eraserTool');
+        
+        // Control Elements
+        const brushSizeSlider = document.getElementById('brushSizeSlider');
+        const brushSizeValue = document.getElementById('brushSizeValue');
+        const brushHardnessSlider = document.getElementById('brushHardnessSlider');
+        const brushHardnessValue = document.getElementById('brushHardnessValue');
+        const brushPreview = document.getElementById('brushPreview');
+        const precisionSlider = document.getElementById('precisionSlider');
+        const precisionValue = document.getElementById('precisionValue');
+        
+        // Zoom Controls
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+        const zoomResetBtn = document.getElementById('zoomResetBtn');
+        const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+        
+        // Stats Elements
+        const selectedArea = document.getElementById('selectedArea');
+        const objectsCount = document.getElementById('objectsCount');
+        const zoomLevel = document.getElementById('zoomLevel');
+        const accuracyStat = document.getElementById('accuracyStat');
+        const timeStat = document.getElementById('timeStat');
+        const objectsRemoved = document.getElementById('objectsRemoved');
+        const seamlessnessStat = document.getElementById('seamlessnessStat');
+        
+        // Action Buttons
+        const removeObjectsBtn = document.getElementById('removeObjectsBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const downloadPngBtn = document.getElementById('downloadPngBtn');
+        const downloadJpgBtn = document.getElementById('downloadJpgBtn');
+        const newImageBtn = document.getElementById('newImageBtn');
+        
+        // Global Variables
+        let originalImageData = null;
+        let processedImageData = null;
+        let isProcessing = false;
+        let canvasContext = null;
+        let currentTool = 'brush';
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let scale = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        let selectionMask = null;
+        let selectionData = [];
+        let objectsMarked = 0;
+        
+        // Event Listeners
+        fileInput.addEventListener('change', handleFileSelect);
+        uploadSection.addEventListener('dragover', handleDragOver);
+        uploadSection.addEventListener('drop', handleFileDrop);
+        
+        // Tool Button Event Listeners
+        brushTool.addEventListener('click', function() {
+            setActiveTool('brush');
+        });
+        
+        lassoTool.addEventListener('click', function() {
+            setActiveTool('lasso');
+        });
+        
+        rectangleTool.addEventListener('click', function() {
+            setActiveTool('rectangle');
+        });
+        
+        eraserTool.addEventListener('click', function() {
+            setActiveTool('eraser');
+        });
+        
+        // Slider Event Listeners
+        brushSizeSlider.addEventListener('input', updateBrushSize);
+        brushHardnessSlider.addEventListener('input', updateBrushHardness);
+        precisionSlider.addEventListener('input', updatePrecisionValue);
+        
+        // Zoom Button Event Listeners
+        zoomInBtn.addEventListener('click', zoomIn);
+        zoomOutBtn.addEventListener('click', zoomOut);
+        zoomResetBtn.addEventListener('click', zoomReset);
+        clearSelectionBtn.addEventListener('click', clearSelection);
+        
+        // Action Button Event Listeners
+        removeObjectsBtn.addEventListener('click', removeObjects);
+        resetBtn.addEventListener('click', resetTool);
+        downloadPngBtn.addEventListener('click', downloadPng);
+        downloadJpgBtn.addEventListener('click', downloadJpg);
+        newImageBtn.addEventListener('click', resetTool);
+        
+        // Canvas Event Listeners
+        selectionCanvas.addEventListener('mousedown', startDrawing);
+        selectionCanvas.addEventListener('mousemove', draw);
+        selectionCanvas.addEventListener('mouseup', stopDrawing);
+        selectionCanvas.addEventListener('mouseout', stopDrawing);
+        
+        selectionCanvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            selectionCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        selectionCanvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            selectionCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        selectionCanvas.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            const mouseEvent = new MouseEvent('mouseup', {});
+            selectionCanvas.dispatchEvent(mouseEvent);
+        });
+        
+        // Functions
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadSection.classList.add('active');
+        }
+        
+        function handleFileDrop(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        }
+        
+        function handleFileSelect() {
+            if (!fileInput.files.length) return;
+            
+            const file = fileInput.files[0];
+            
+            // Check file type
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPG, PNG, WebP)');
+                return;
+            }
+            
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit. Please choose a smaller image.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                originalImage.src = e.target.result;
+                originalImageData = e.target.result;
+                
+                // Show preview and controls
+                imagePreview.style.display = 'flex';
+                canvasSection.style.display = 'block';
+                actionButtons.style.display = 'flex';
+                
+                // Reset processed image
+                processedImage.src = '';
+                processedImageData = null;
+                resultsSection.style.display = 'none';
+                
+                // Initialize canvas
+                initializeCanvas();
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        function initializeCanvas() {
+            const img = new Image();
+            img.onload = function() {
+                // Set canvas dimensions to match image
+                selectionCanvas.width = img.width;
+                selectionCanvas.height = img.height;
+                canvasContext = selectionCanvas.getContext('2d');
+                
+                // Draw the image on the canvas
+                canvasContext.drawImage(img, 0, 0);
+                
+                // Initialize selection mask
+                selectionMask = canvasContext.getImageData(0, 0, selectionCanvas.width, selectionCanvas.height);
+                selectionData = [];
+                objectsMarked = 0;
+                
+                // Update stats
+                updateStats();
+                
+                // Draw the canvas with current zoom/pan
+                drawCanvas();
+            };
+            img.src = originalImageData;
+        }
+        
+        function drawCanvas() {
+            if (!canvasContext) return;
+            
+            const canvas = selectionCanvas;
+            const displayWidth = canvas.parentElement.clientWidth;
+            const displayHeight = canvas.parentElement.clientHeight;
+            
+            // Clear the canvas
+            canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Save the current context
+            canvasContext.save();
+            
+            // Apply transformations for zoom and pan
+            canvasContext.translate(offsetX, offsetY);
+            canvasContext.scale(scale, scale);
+            
+            // Draw the image
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                canvasContext.drawImage(tempImg, 0, 0);
+                
+                // Draw selection overlay
+                canvasContext.globalAlpha = 0.3;
+                canvasContext.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                
+                // Draw all selection areas
+                selectionData.forEach(area => {
+                    if (area.type === 'brush') {
+                        canvasContext.beginPath();
+                        canvasContext.arc(area.x, area.y, area.size / 2, 0, Math.PI * 2);
+                        canvasContext.fill();
+                    } else if (area.type === 'rectangle') {
+                        canvasContext.fillRect(area.x, area.y, area.width, area.height);
+                    }
+                });
+                
+                canvasContext.globalAlpha = 1;
+            };
+            tempImg.src = originalImageData;
+            
+            // Restore the context
+            canvasContext.restore();
+        }
+        
+        function setActiveTool(tool) {
+            currentTool = tool;
+            
+            // Update button states
+            brushTool.classList.remove('active');
+            lassoTool.classList.remove('active');
+            rectangleTool.classList.remove('active');
+            eraserTool.classList.remove('active');
+            
+            if (tool === 'brush') {
+                brushTool.classList.add('active');
+                selectionCanvas.style.cursor = 'crosshair';
+            } else if (tool === 'lasso') {
+                lassoTool.classList.add('active');
+                selectionCanvas.style.cursor = 'crosshair';
+            } else if (tool === 'rectangle') {
+                rectangleTool.classList.add('active');
+                selectionCanvas.style.cursor = 'crosshair';
+            } else if (tool === 'eraser') {
+                eraserTool.classList.add('active');
+                selectionCanvas.style.cursor = 'crosshair';
+            }
+        }
+        
+        function updateBrushSize() {
+            const size = brushSizeSlider.value;
+            brushSizeValue.textContent = `${size}px`;
+            brushPreview.textContent = size;
+            brushPreview.style.width = `${size}px`;
+            brushPreview.style.height = `${size}px`;
+        }
+        
+        function updateBrushHardness() {
+            brushHardnessValue.textContent = `${brushHardnessSlider.value}%`;
+        }
+        
+        function updatePrecisionValue() {
+            const value = parseInt(precisionSlider.value);
+            const labels = ['Fast', 'Balanced', 'High Quality'];
+            precisionValue.textContent = labels[value - 1];
+        }
+        
+        function zoomIn() {
+            scale = Math.min(4, scale * 1.2);
+            updateZoomDisplay();
+            drawCanvas();
+        }
+        
+        function zoomOut() {
+            scale = Math.max(0.25, scale / 1.2);
+            updateZoomDisplay();
+            drawCanvas();
+        }
+        
+        function zoomReset() {
+            scale = 1;
+            offsetX = 0;
+            offsetY = 0;
+            updateZoomDisplay();
+            drawCanvas();
+        }
+        
+        function updateZoomDisplay() {
+            zoomLevel.textContent = `${Math.round(scale * 100)}%`;
+        }
+        
+        function clearSelection() {
+            selectionData = [];
+            objectsMarked = 0;
+            updateStats();
+            drawCanvas();
+        }
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getMousePos(e);
+            
+            if (currentTool === 'rectangle') {
+                // Store starting point for rectangle
+                selectionData.push({
+                    type: 'rectangle',
+                    x: lastX / scale - offsetX / scale,
+                    y: lastY / scale - offsetY / scale,
+                    width: 0,
+                    height: 0
+                });
+                objectsMarked++;
+            }
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const [x, y] = getMousePos(e);
+            
+            if (currentTool === 'brush') {
+                canvasContext.lineJoin = 'round';
+                canvasContext.lineCap = 'round';
+                canvasContext.lineWidth = brushSizeSlider.value / scale;
+                canvasContext.strokeStyle = 'rgba(255, 0, 0, 0.7)';
+                canvasContext.globalCompositeOperation = 'source-over';
+                
+                canvasContext.beginPath();
+                canvasContext.moveTo(lastX / scale - offsetX / scale, lastY / scale - offsetY / scale);
+                canvasContext.lineTo(x / scale - offsetX / scale, y / scale - offsetY / scale);
+                canvasContext.stroke();
+                
+                // Store brush stroke for processing
+                selectionData.push({
+                    type: 'brush',
+                    x: x / scale - offsetX / scale,
+                    y: y / scale - offsetY / scale,
+                    size: brushSizeSlider.value / scale
+                });
+            } else if (currentTool === 'rectangle' && selectionData.length > 0) {
+                // Update rectangle dimensions
+                const rect = selectionData[selectionData.length - 1];
+                rect.width = (x / scale - offsetX / scale) - rect.x;
+                rect.height = (y / scale - offsetY / scale) - rect.y;
+            } else if (currentTool === 'eraser') {
+                canvasContext.lineJoin = 'round';
+                canvasContext.lineCap = 'round';
+                canvasContext.lineWidth = brushSizeSlider.value / scale;
+                canvasContext.globalCompositeOperation = 'destination-out';
+                canvasContext.strokeStyle = 'rgba(0, 0, 0, 1)';
+                
+                canvasContext.beginPath();
+                canvasContext.moveTo(lastX / scale - offsetX / scale, lastY / scale - offsetY / scale);
+                canvasContext.lineTo(x / scale - offsetX / scale, y / scale - offsetY / scale);
+                canvasContext.stroke();
+                
+                // Remove selection data in erased area (simplified)
+                // In a real implementation, this would be more sophisticated
+            }
+            
+            [lastX, lastY] = [x, y];
+            updateStats();
+            drawCanvas();
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+        }
+        
+        function getMousePos(e) {
+            const rect = selectionCanvas.getBoundingClientRect();
+            return [
+                e.clientX - rect.left,
+                e.clientY - rect.top
+            ];
+        }
+        
+        function updateStats() {
+            // Calculate selected area percentage (simplified)
+            const totalPixels = selectionCanvas.width * selectionCanvas.height;
+            const selectedPixels = selectionData.length * 100; // Simplified calculation
+            const percentage = Math.min(100, Math.round((selectedPixels / totalPixels) * 100));
+            
+            selectedArea.textContent = `${percentage}%`;
+            objectsCount.textContent = objectsMarked;
+        }
+        
+        function removeObjects() {
+            if (selectionData.length === 0 || isProcessing) {
+                alert('Please select at least one object to remove.');
+                return;
+            }
+            
+            isProcessing = true;
+            processingOverlay.style.display = 'flex';
+            
+            // Simulate AI processing with progress updates
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    finishObjectRemoval();
+                }
+                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+            }, 300);
+            
+            // In a real implementation, this would be an API call to an AI service
+            setTimeout(finishObjectRemoval, 4000);
+        }
+        
+        function finishObjectRemoval() {
+            isProcessing = false;
+            processingOverlay.style.display = 'none';
+            
+            // In a real implementation, this would be the processed image from the AI service
+            // For this demo, we'll create a canvas and apply a simple object removal simulation
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Draw original image
+                ctx.drawImage(img, 0, 0);
+                
+                // Simulate object removal by applying content-aware fill to selected areas
+                // In a real implementation, this would be done by an AI model
+                selectionData.forEach(area => {
+                    if (area.type === 'brush') {
+                        // Simple brush area fill simulation
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.fillStyle = getSurroundingColor(ctx, area.x, area.y, img.width, img.height);
+                        ctx.beginPath();
+                        ctx.arc(area.x, area.y, area.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    } else if (area.type === 'rectangle') {
+                        // Simple rectangle area fill simulation
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.fillStyle = getSurroundingColor(ctx, area.x + area.width/2, area.y + area.height/2, img.width, img.height);
+                        ctx.fillRect(area.x, area.y, area.width, area.height);
+                    }
+                });
+                
+                // Convert to data URL and set as processed image
+                processedImageData = canvas.toDataURL('image/jpeg', 0.9);
+                processedImage.src = processedImageData;
+                
+                // Show results section
+                resultsSection.style.display = 'block';
+                
+                // Calculate and display stats
+                calculateStats();
+            };
+            
+            img.src = originalImageData;
+        }
+        
+        // Helper function to get surrounding color (simplified content-aware fill)
+        function getSurroundingColor(ctx, x, y, width, height) {
+            // Sample pixels around the area to get an average color
+            // This is a simplified simulation - real AI would be much more sophisticated
+            const sampleSize = 10;
+            let r = 0, g = 0, b = 0, count = 0;
+            
+            for (let i = -sampleSize; i <= sampleSize; i++) {
+                for (let j = -sampleSize; j <= sampleSize; j++) {
+                    const sampleX = Math.max(0, Math.min(width - 1, Math.round(x + i)));
+                    const sampleY = Math.max(0, Math.min(height - 1, Math.round(y + j)));
+                    
+                    const pixel = ctx.getImageData(sampleX, sampleY, 1, 1).data;
+                    r += pixel[0];
+                    g += pixel[1];
+                    b += pixel[2];
+                    count++;
+                }
+            }
+            
+            r = Math.round(r / count);
+            g = Math.round(g / count);
+            b = Math.round(b / count);
+            
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        
+        function calculateStats() {
+            // Simulated stats - in a real implementation these would come from the AI service
+            accuracyStat.textContent = `${95 + Math.floor(Math.random() * 4)}%`;
+            timeStat.textContent = `${(3 + Math.random()).toFixed(1)}s`;
+            objectsRemoved.textContent = objectsMarked;
+            seamlessnessStat.textContent = `${96 + Math.floor(Math.random() * 3)}%`;
+        }
+        
+        function downloadPng() {
+            if (!processedImageData) return;
+            
+            const link = document.createElement('a');
+            link.download = `object-removed-${Date.now()}.png`;
+            link.href = processedImageData;
+            link.click();
+        }
+        
+        function downloadJpg() {
+            if (!processedImageData) return;
+            
+            const link = document.createElement('a');
+            link.download = `object-removed-${Date.now()}.jpg`;
+            link.href = processedImageData;
+            link.click();
+        }
+        
+        function resetTool() {
+            fileInput.value = '';
+            originalImage.src = '';
+            processedImage.src = '';
+            imagePreview.style.display = 'none';
+            canvasSection.style.display = 'none';
+            actionButtons.style.display = 'none';
+            resultsSection.style.display = 'none';
+            
+            // Reset selection data
+            selectionData = [];
+            objectsMarked = 0;
+            
+            // Reset tools
+            setActiveTool('brush');
+            
+            // Reset sliders to default values
+            brushSizeSlider.value = 20;
+            brushHardnessSlider.value = 50;
+            precisionSlider.value = 2;
+            
+            // Update slider displays
+            updateBrushSize();
+            updateBrushHardness();
+            updatePrecisionValue();
+            updateZoomDisplay();
+        }
+        
+        // Initialize slider values
+        updateBrushSize();
+        updateBrushHardness();
+        updatePrecisionValue();
+        updateZoomDisplay();
+    </script>
+</body>
+</html>
