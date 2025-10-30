@@ -61,7 +61,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
 
         .logo {
@@ -69,7 +68,6 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            z-index: 101;
         }
 
         .logo-icon {
@@ -89,12 +87,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        nav {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
         nav ul {
             display: flex;
             list-style: none;
@@ -108,7 +100,6 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
-            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -132,7 +123,6 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            white-space: nowrap;
         }
 
         .btn-primary {
@@ -169,18 +159,6 @@
         .btn-success:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
-        }
-
-        /* Mobile menu button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 101;
         }
 
         .hero {
@@ -737,6 +715,16 @@
             transform: translateY(-3px);
         }
 
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
         /* Floating Animations */
         @keyframes float-logo {
             0%, 100% {
@@ -873,24 +861,111 @@
             }
         }
 
-        /* Responsive Design - Fixed for Mobile */
-        @media (max-width: 1200px) {
+        /* Responsive Design */
+        /* Extra Large Devices (1200px and up) */
+        @media (min-width: 1200px) {
             .tools-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-template-columns: repeat(4, 1fr);
             }
             
-            .subscription-plans {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            .featured-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        @media (max-width: 992px) {
+        /* Large Devices (992px to 1199px) */
+        @media (max-width: 1199px) and (min-width: 992px) {
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* Medium Devices (768px to 991px) */
+        @media (max-width: 991px) and (min-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .subscription-plans {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.8rem;
+            }
+        }
+
+        /* Small Devices (576px to 767px) */
+        @media (max-width: 767px) and (min-width: 576px) {
             .tools-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .subscription-plans {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .search-box {
+                margin: 0 auto 1.5rem;
+            }
+            
+            .search-btn {
+                position: relative;
+                margin-top: 0.5rem;
+                width: 100%;
+                right: 0;
+                top: 0;
             }
             
             .plan-card.popular {
@@ -898,90 +973,30 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            nav {
-                order: 3;
-                width: 100%;
-                display: none;
-                margin-top: 1rem;
-            }
-            
-            nav.mobile-open {
-                display: block;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            nav a {
-                display: block;
-                padding: 0.8rem 1rem;
-                border-radius: 8px;
-                background: rgba(67, 97, 238, 0.05);
-            }
-            
-            .header-actions {
-                margin-left: auto;
-                gap: 0.5rem;
-            }
-            
-            .header-actions .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
+        /* Extra Small Devices (575px and below) */
+        @media (max-width: 575px) {
+            .container {
+                padding: 0 15px;
             }
             
             .tools-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .featured-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .subscription-plans {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .header-content {
-                gap: 0.8rem;
+                gap: 1.5rem;
             }
             
-            .logo-text {
-                font-size: 1.3rem;
-            }
-            
-            .logo-icon {
-                font-size: 1.5rem;
-            }
-            
-            .header-actions {
-                gap: 0.3rem;
-            }
-            
-            .header-actions .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.85rem;
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             .hero {
@@ -990,10 +1005,84 @@
             
             .hero h1 {
                 font-size: 1.8rem;
+                line-height: 1.3;
             }
             
-            .featured-grid {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .search-box {
+                margin-bottom: 1rem;
+            }
+            
+            .search-input {
+                padding: 0.8rem 1rem;
+            }
+            
+            .search-btn {
+                position: relative;
+                margin-top: 0.5rem;
+                width: 100%;
+                right: 0;
+                top: 0;
+            }
+            
+            .tool-category {
+                padding: 1rem;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            
+            .featured-card {
+                padding: 1.5rem;
+            }
+            
+            .featured-icon {
+                font-size: 2.5rem;
+            }
+            
+            .plan-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .plan-price {
+                font-size: 2.5rem;
+            }
+            
+            .offer-banner h3 {
+                font-size: 1.3rem;
             }
             
             .footer-links {
@@ -1002,16 +1091,57 @@
                 gap: 1rem;
             }
             
-            .search-box {
-                margin-bottom: 1.5rem;
+            .social-links {
+                gap: 1rem;
             }
             
-            .search-input {
-                padding: 0.8rem 1.2rem;
-                font-size: 0.9rem;
+            .social-link {
+                font-size: 1.3rem;
             }
             
-            .search-btn {
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+        }
+
+        /* Very Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .tool-category {
+                padding: 0.8rem;
+            }
+            
+            .featured-card {
+                padding: 1rem;
+            }
+            
+            .plan-card {
+                padding: 1rem 0.8rem;
+            }
+            
+            .plan-price {
+                font-size: 2rem;
+            }
+            
+            .btn {
                 padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
             }
@@ -1027,24 +1157,22 @@
                     <i class="fas fa-camera-retro logo-icon"></i>
                     <span class="logo-text">Photo Flare</span>
                 </a>
-                
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
-                
                 <nav id="mainNav">
                     <ul>
                         <li><a href="index.html" class="active">All Tools</a></li>
                         <li><a href="pdf-tools.html">PDF Tools</a></li>
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
-                        <li><a href="premium-tools.html">Premium</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
                     <a href="login.html" class="btn btn-outline">Log In</a>
-                    <a href="subscription.html" class="btn btn-primary">Upgrade</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
                 </div>
             </div>
         </div>
@@ -1359,15 +1487,15 @@
         // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
-
-        if (mobileMenuBtn && mainNav) {
-            mobileMenuBtn.addEventListener('click', function() {
-                mainNav.classList.toggle('mobile-open');
-                this.innerHTML = mainNav.classList.contains('mobile-open') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
-        }
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            if (mainNav.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
@@ -1384,6 +1512,7 @@
                     item.style.display = 'none';
                 }
             });
+            
             updateToolCounts();
         });
 
@@ -1481,6 +1610,22 @@
         // Example usage (replace with your actual Ad Unit IDs)
         // insertAdSense('ca-pub-1234567890123456', 'ad-top');
         // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 575 && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
     </script>
 </body>
 </html>
