@@ -155,18 +155,6 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #3a86ff);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
-        }
-
         /* Mobile Navigation */
         .mobile-nav-toggle {
             display: none;
@@ -294,7 +282,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
-            animation: float-hero 8s ease-in-out infinite;
         }
 
         .hero p {
@@ -308,7 +295,6 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             position: relative;
-            animation: float-search 5s ease-in-out infinite;
         }
 
         .search-input {
@@ -358,25 +344,11 @@
             box-shadow: var(--box-shadow);
             padding: 1.5rem;
             transition: var(--transition);
-            animation: float-card 10s ease-in-out infinite;
-        }
-
-        .tool-category:nth-child(2) {
-            animation-delay: 1s;
-        }
-
-        .tool-category:nth-child(3) {
-            animation-delay: 2s;
-        }
-
-        .tool-category:nth-child(4) {
-            animation-delay: 3s;
         }
 
         .tool-category:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            animation: none;
         }
 
         .category-header {
@@ -398,7 +370,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            animation: float-icon 6s ease-in-out infinite;
         }
 
         .category-title {
@@ -453,7 +424,6 @@
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
             margin-left: auto;
-            animation: float-badge 3s ease-in-out infinite;
         }
 
         .featured-tools {
@@ -484,19 +454,6 @@
             text-decoration: none;
             color: inherit;
             display: block;
-            animation: float-featured 9s ease-in-out infinite;
-        }
-
-        .featured-card:nth-child(2) {
-            animation-delay: 1.5s;
-        }
-
-        .featured-card:nth-child(3) {
-            animation-delay: 3s;
-        }
-
-        .featured-card:nth-child(4) {
-            animation-delay: 4.5s;
         }
 
         .featured-card:hover {
@@ -504,7 +461,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             color: inherit;
-            animation: none;
         }
 
         .featured-icon {
@@ -513,7 +469,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-featured-icon 7s ease-in-out infinite;
         }
 
         .featured-title {
@@ -546,15 +501,6 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            animation: float-plan 12s ease-in-out infinite;
-        }
-
-        .plan-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .plan-card:nth-child(3) {
-            animation-delay: 4s;
         }
 
         .plan-card.popular {
@@ -578,7 +524,6 @@
         .plan-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            animation: none;
         }
 
         .plan-name {
@@ -593,7 +538,6 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--primary);
-            animation: float-price 5s ease-in-out infinite;
         }
 
         .plan-period {
@@ -612,7 +556,6 @@
             font-weight: 600;
             margin-bottom: 1.5rem;
             display: inline-block;
-            animation: float-savings 4s ease-in-out infinite;
         }
 
         .plan-features {
@@ -647,7 +590,6 @@
             text-align: center;
             margin-bottom: 2rem;
             box-shadow: var(--box-shadow);
-            animation: float-banner 6s ease-in-out infinite;
         }
 
         .offer-banner h3 {
@@ -706,26 +648,12 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
-            animation: float-feature 11s ease-in-out infinite;
-        }
-
-        .feature-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .feature-card:nth-child(3) {
-            animation-delay: 4s;
-        }
-
-        .feature-card:nth-child(4) {
-            animation-delay: 6s;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--box-shadow);
             border-color: var(--primary-light);
-            animation: none;
         }
 
         .feature-icon {
@@ -734,7 +662,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-feature-icon 8s ease-in-out infinite;
         }
 
         .feature-title {
@@ -834,142 +761,6 @@
         .social-link:hover {
             color: white;
             transform: translateY(-3px);
-        }
-
-        /* Floating Animations */
-        @keyframes float-logo {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes float-hero {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes float-search {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-btn {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-card {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes float-icon {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-badge {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes float-featured {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes float-featured-icon {
-            0%, 100% {
-                transform: translateY(0) rotate(0);
-            }
-            50% {
-                transform: translateY(-4px) rotate(5deg);
-            }
-        }
-
-        @keyframes float-plan {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-price {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes float-savings {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-banner {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-feature {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-feature-icon {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
         }
 
         /* Responsive Design */
@@ -1228,7 +1019,7 @@
                         <li><i class="fas fa-check"></i> Priority support</li>
                         <li><i class="fas fa-check"></i> Early access to new tools</li>
                     </ul>
-                    <a href="pro-yearly.html" class="btn btn-success">Save 37%</a>
+                    <a href="pro-yearly.html" class="btn btn-primary">Save 37%</a>
                 </div>
             </div>
             
@@ -1424,13 +1215,24 @@
     <script>
         // Mobile Navigation Toggle - Fixed Version
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded - initializing mobile navigation");
+            
             const mobileNavToggle = document.getElementById('mobileNavToggle');
             const mobileNav = document.getElementById('mobileNav');
             const mobileNavOverlay = document.getElementById('mobileNavOverlay');
             const mobileNavClose = document.getElementById('mobileNavClose');
             
+            // Debug log
+            console.log("Elements found:", {
+                toggle: mobileNavToggle,
+                nav: mobileNav,
+                overlay: mobileNavOverlay,
+                close: mobileNavClose
+            });
+            
             // Function to toggle mobile navigation
             function toggleMobileNav() {
+                console.log("Toggling mobile nav");
                 mobileNav.classList.toggle('active');
                 mobileNavOverlay.classList.toggle('active');
                 document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
@@ -1439,14 +1241,20 @@
             // Event listeners for mobile navigation
             if (mobileNavToggle) {
                 mobileNavToggle.addEventListener('click', toggleMobileNav);
+            } else {
+                console.error("Mobile nav toggle button not found!");
             }
             
             if (mobileNavClose) {
                 mobileNavClose.addEventListener('click', toggleMobileNav);
+            } else {
+                console.error("Mobile nav close button not found!");
             }
             
             if (mobileNavOverlay) {
                 mobileNavOverlay.addEventListener('click', toggleMobileNav);
+            } else {
+                console.error("Mobile nav overlay not found!");
             }
             
             // Close mobile nav when clicking on a link
@@ -1550,29 +1358,6 @@
                 }
             });
         });
-
-        // Function to insert Google AdSense code
-        function insertAdSense(adUnitId, adContainerId) {
-            const adContainer = document.getElementById(adContainerId);
-            if (adContainer && adUnitId) {
-                adContainer.innerHTML = `
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adUnitId}" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="${adUnitId}"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                `;
-            }
-        }
-
-        // Example usage (replace with your actual Ad Unit IDs)
-        // insertAdSense('ca-pub-1234567890123456', 'ad-top');
-        // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
     </script>
 </body>
 </html>
