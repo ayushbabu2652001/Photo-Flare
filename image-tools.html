@@ -366,7 +366,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-logo 6s ease-in-out infinite;
         }
 
         .logo-text {
@@ -439,13 +438,11 @@
             color: white;
             border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-            animation: float-btn 4s ease-in-out infinite;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-            animation: none;
         }
 
         .btn-outline {
@@ -482,7 +479,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.3;
-            animation: float-hero 8s ease-in-out infinite;
         }
 
         .hero p {
@@ -495,7 +491,6 @@
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
-            animation: float-search 5s ease-in-out infinite;
         }
 
         .search-input {
@@ -550,26 +545,12 @@
             box-shadow: var(--box-shadow);
             padding: 1.5rem;
             transition: var(--transition);
-            animation: float-card 10s ease-in-out infinite;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .tool-category:nth-child(2) {
-            animation-delay: 1s;
-        }
-
-        .tool-category:nth-child(3) {
-            animation-delay: 2s;
-        }
-
-        .tool-category:nth-child(4) {
-            animation-delay: 3s;
         }
 
         .tool-category:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            animation: none;
         }
 
         .category-header {
@@ -591,7 +572,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            animation: float-icon 6s ease-in-out infinite;
         }
 
         .category-title {
@@ -644,6 +624,16 @@
             text-align: center;
         }
 
+        .tool-count {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
         .premium-badge {
             background: linear-gradient(135deg, var(--warning), var(--accent));
             color: white;
@@ -651,7 +641,6 @@
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
             margin-left: auto;
-            animation: float-badge 3s ease-in-out infinite;
         }
 
         .featured-tools {
@@ -682,20 +671,7 @@
             text-decoration: none;
             color: inherit;
             display: block;
-            animation: float-featured 9s ease-in-out infinite;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .featured-card:nth-child(2) {
-            animation-delay: 1.5s;
-        }
-
-        .featured-card:nth-child(3) {
-            animation-delay: 3s;
-        }
-
-        .featured-card:nth-child(4) {
-            animation-delay: 4.5s;
         }
 
         .featured-card:hover {
@@ -703,7 +679,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             color: inherit;
-            animation: none;
         }
 
         .featured-icon {
@@ -712,7 +687,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-featured-icon 7s ease-in-out infinite;
         }
 
         .featured-title {
@@ -745,16 +719,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            animation: float-plan 12s ease-in-out infinite;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .plan-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .plan-card:nth-child(3) {
-            animation-delay: 4s;
         }
 
         .plan-card.popular {
@@ -778,7 +743,6 @@
         .plan-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            animation: none;
         }
 
         .plan-name {
@@ -793,7 +757,6 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--primary);
-            animation: float-price 5s ease-in-out infinite;
         }
 
         .plan-period {
@@ -812,7 +775,6 @@
             font-weight: 600;
             margin-bottom: 1.5rem;
             display: inline-block;
-            animation: float-savings 4s ease-in-out infinite;
         }
 
         .plan-features {
@@ -847,7 +809,6 @@
             text-align: center;
             margin-bottom: 1.5rem;
             box-shadow: var(--box-shadow);
-            animation: float-banner 6s ease-in-out infinite;
         }
 
         .offer-banner h3 {
@@ -906,27 +867,13 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
-            animation: float-feature 11s ease-in-out infinite;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .feature-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .feature-card:nth-child(3) {
-            animation-delay: 4s;
-        }
-
-        .feature-card:nth-child(4) {
-            animation-delay: 6s;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--box-shadow);
             border-color: var(--primary-light);
-            animation: none;
         }
 
         .feature-icon {
@@ -935,7 +882,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-feature-icon 8s ease-in-out infinite;
         }
 
         .feature-title {
@@ -1000,16 +946,6 @@
             margin-top: 1rem;
         }
 
-        .tool-count {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-
         .external-link {
             color: var(--primary);
             text-decoration: none;
@@ -1051,7 +987,6 @@
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
-            animation: float-preview 8s ease-in-out infinite;
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -1110,7 +1045,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: float-arrow 3s ease-in-out infinite;
         }
 
         .tool-demo {
@@ -1139,158 +1073,33 @@
             box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
         }
 
-        /* Floating Animations */
-        @keyframes float-logo {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        /* Show More/Less Button */
+        .show-more-container {
+            text-align: center;
+            margin-top: 1rem;
         }
 
-        @keyframes float-hero {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
+        .show-more-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
         }
 
-        @keyframes float-search {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
+        .show-more-btn:active {
+            transform: scale(0.98);
         }
 
-        @keyframes float-btn {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-card {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes float-icon {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-badge {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes float-featured {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes float-featured-icon {
-            0%, 100% {
-                transform: translateY(0) rotate(0);
-            }
-            50% {
-                transform: translateY(-4px) rotate(5deg);
-            }
-        }
-
-        @keyframes float-plan {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-price {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes float-savings {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-banner {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-feature {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-feature-icon {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-3px);
-            }
-        }
-
-        @keyframes float-preview {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        @keyframes float-arrow {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(10px);
-            }
+        .show-more-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
         }
 
         /* Media Queries - Mobile First Approach */
@@ -1722,7 +1531,7 @@
                 <button class="search-btn"><i class="fas fa-search"></i> Search</button>
             </div>
             
-            <p>Need help? Check out our <a href="#help" class="external-link">Image Editing Guide</a> or <a href="contact.html" class="external-link">Contact Support</a></p>
+            <p>Need help? Check out our <a href="Help.html" class="external-link">Image Editing Guide</a> or <a href="contact.html" class="external-link">Contact Support</a></p>
         </div>
     </section>
 
@@ -1831,7 +1640,7 @@
                         <li><i class="fas fa-times" style="color: var(--danger);"></i> With ads</li>
                         <li><i class="fas fa-times" style="color: var(--danger);"></i> No AI tools</li>
                     </ul>
-                    <a href="#free-signup" class="btn btn-outline">Get Started Free</a>
+                    <a href="subscription.html" class="btn btn-outline">Get Started Free</a>
                 </div>
                 
                 <div class="plan-card popular">
@@ -1846,7 +1655,7 @@
                         <li><i class="fas fa-check"></i> Ad-free experience</li>
                         <li><i class="fas fa-check"></i> Priority processing</li>
                     </ul>
-                    <a href="#pro-monthly" class="btn btn-primary">Get Started</a>
+                    <a href="subscription.html" class="btn btn-primary">Get Started</a>
                 </div>
                 
                 <div class="plan-card">
@@ -1862,13 +1671,13 @@
                         <li><i class="fas fa-check"></i> Priority support</li>
                         <li><i class="fas fa-check"></i> Early access to new tools</li>
                     </ul>
-                    <a href="#pro-yearly" class="btn btn-success">Save 37%</a>
+                    <a href="subscription.html" class="btn btn-success">Save 37%</a>
                 </div>
             </div>
             
             <p style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.8);">
-                All plans include our <a href="#security" class="external-link" style="color: white; border-bottom-color: white;">security guarantee</a>. 
-                <a href="#refund-policy" class="external-link" style="color: white; border-bottom-color: white;">30-day money-back guarantee</a> on paid plans.
+                All plans include our <a href="Learn-More-Security.html" class="external-link" style="color: white; border-bottom-color: white;">security guarantee</a>. 
+                <a href="refund-policy.html" class="external-link" style="color: white; border-bottom-color: white;">30-day money-back guarantee</a> on paid plans.
             </p>
         </div>
     </section>
@@ -1895,10 +1704,15 @@
                         <li class="tool-item"><a href="sharpenimage.html" class="tool-link"><i class="fas fa-cut tool-icon"></i> Sharpen Image</a></li>
                         <li class="tool-item"><a href="blurimage.html" class="tool-link"><i class="fas fa-tint tool-icon"></i> Blur Image</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="basic-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Image Conversion -->
-                <div class="tool-category">
+                <div class="tool-category" id="image-conversion">
                     <div class="category-header">
                         <div class="category-icon">
                             <i class="fas fa-exchange-alt"></i>
@@ -1913,6 +1727,11 @@
                         <li class="tool-item"><a href="bmptojpg.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> BMP to JPG</a></li>
                         <li class="tool-item"><a href="heictojpg.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> HEIC to JPG</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="image-conversion">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Advanced Image Tools -->
@@ -1931,6 +1750,11 @@
                         <li class="tool-item"><a href="batchprocessor.html" class="tool-link"><i class="fas fa-layer-group tool-icon"></i> Batch Processor</a></li>
                         <li class="tool-item"><a href="colorpicker.html" class="tool-link"><i class="fas fa-eye-dropper tool-icon"></i> Color Picker</a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="advanced-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
 
                 <!-- AI-Powered Tools -->
@@ -1949,11 +1773,16 @@
                         <li class="tool-item"><a href="style-transfer.html" class="tool-link"><i class="fas fa-paint-brush tool-icon"></i> Style Transfer <span class="premium-badge">PRO</span></a></li>
                         <li class="tool-item"><a href="ai-upscaler.html" class="tool-link"><i class="fas fa-search-plus tool-icon"></i> AI Upscaler <span class="premium-badge">PRO</span></a></li>
                     </ul>
+                    <div class="show-more-container">
+                        <button class="show-more-btn" data-category="ai-tools">
+                            <i class="fas fa-chevron-down"></i> Show More
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <div style="text-align: center; margin-top: 2rem;">
-                <p>Can't find what you're looking for? <a href="#suggest-tool" class="external-link">Suggest a new tool</a> or check our <a href="#full-tool-list" class="external-link">complete tool list</a>.</p>
+                <p>Can't find what you're looking for? <a href="suggest-tool.html" class="external-link">Suggest a new tool</a> or check our <a href="full-tool-list.html" class="external-link">complete tool list</a>.</p>
             </div>
         </div>
     </section>
@@ -1997,7 +1826,7 @@
             </div>
             
             <div style="text-align: center; margin-top: 3rem;">
-                <p>Learn more about our <a href="#security" class="external-link">security practices</a> and <a href="privacy.html" class="external-link">privacy policy</a>.</p>
+                <p>Learn more about our <a href="Learn-More-Security.html" class="external-link">security practices</a> and <a href="Learn-More-privacy.html" class="external-link">privacy policy</a>.</p>
             </div>
         </div>
     </section>
@@ -2007,24 +1836,24 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <a href="#home" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
                         <i class="fas fa-camera-retro logo-icon"></i>
                         <span class="logo-text">Photo Flare</span>
                     </a>
                 </div>
                 
                 <div class="footer-links">
-                    <a href="#home">Home</a>
+                    <a href="index.html">Home</a>
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
-                    <a href="#careers">Careers</a>
-                    <a href="#affiliate">Affiliate Program</a>
-                    <a href="#press">Press</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="#help">Help Center</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                    <a href="#cookies">Cookie Policy</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
@@ -2036,7 +1865,7 @@
                     <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
                 
-                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="sitemap.html" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
             </div>
         </div>
     </footer>
@@ -2056,78 +1885,80 @@
         }
 
         // Sidebar functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileNavBtn = document.getElementById('mobileNavBtn');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const sidebarClose = document.getElementById('sidebarClose');
-            
-            // Check if elements exist before adding event listeners
-            if (mobileNavBtn && sidebar && sidebarOverlay && sidebarClose) {
-                // Open sidebar
-                mobileNavBtn.addEventListener('click', function() {
-                    sidebar.classList.add('active');
-                    sidebarOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-                });
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
 
-                // Close sidebar
-                function closeSidebar() {
-                    sidebar.classList.remove('active');
-                    sidebarOverlay.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore scrolling
-                }
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
 
-                sidebarClose.addEventListener('click', closeSidebar);
-                sidebarOverlay.addEventListener('click', closeSidebar);
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
 
-                // Close sidebar when clicking on a link
-                const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-                sidebarLinks.forEach(link => {
-                    link.addEventListener('click', closeSidebar);
-                });
-            } else {
-                console.error('One or more sidebar elements not found');
-            }
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
 
-            // Search functionality
-            const searchInput = document.querySelector('.search-input');
-            const toolItems = document.querySelectorAll('.tool-item');
-            
-            if (searchInput) {
-                searchInput.addEventListener('input', debounce(function() {
-                    const searchTerm = this.value.toLowerCase();
-                    
-                    toolItems.forEach(item => {
-                        const toolText = item.textContent.toLowerCase();
-                        if (toolText.includes(searchTerm)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                    
-                    updateToolCounts();
-                }, 300));
-            }
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
 
-            // Tool count update
-            function updateToolCounts() {
-                const categories = document.querySelectorAll('.tool-category');
-                categories.forEach(category => {
-                    const visibleTools = category.querySelectorAll('.tool-item:not([style*="display: none"])');
-                    const countElement = category.querySelector('.tool-count');
-                    if (countElement) {
-                        countElement.textContent = visibleTools.length;
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const toolItems = document.querySelectorAll('.tool-item');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolItems.forEach(item => {
+                    const toolText = item.textContent.toLowerCase();
+                    if (toolText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
                     }
                 });
-            }
+                
+                updateToolCounts();
+            }, 300));
+        }
 
-            // Initialize tool counts
-            updateToolCounts();
+        // Tool count update
+        function updateToolCounts() {
+            const categories = document.querySelectorAll('.tool-category');
+            categories.forEach(category => {
+                const visibleTools = category.querySelectorAll('.tool-item:not([style*="display: none"])');
+                const countElement = category.querySelector('.tool-count');
+                if (countElement) {
+                    countElement.textContent = visibleTools.length;
+                }
+            });
+        }
 
-            // Featured tools click handler
-            const featuredCards = document.querySelectorAll('.featured-card');
+        // Initialize tool counts
+        updateToolCounts();
+
+        // Featured tools click handler
+        const featuredCards = document.querySelectorAll('.featured-card');
+        if (featuredCards.length > 0) {
             featuredCards.forEach(card => {
                 card.addEventListener('click', function(e) {
                     if (this.getAttribute('href').startsWith('#')) {
@@ -2137,8 +1968,10 @@
                     }
                 });
             });
+        }
 
-            // Tool items click handler
+        // Tool items click handler
+        if (toolItems.length > 0) {
             toolItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     if (this.querySelector('a').getAttribute('href').startsWith('#')) {
@@ -2152,66 +1985,85 @@
                     }
                 });
             });
+        }
 
-            // Subscription plan selection
-            const planButtons = document.querySelectorAll('.plan-card .btn');
-            planButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const planName = this.closest('.plan-card').querySelector('.plan-name').textContent;
-                        if (planName !== "Free") {
-                            alert(`You selected the ${planName} plan. This would open the payment process in a real implementation.`);
-                        }
+        // Show More/Less functionality for tool categories
+        const showMoreButtons = document.querySelectorAll('.show-more-btn');
+        
+        if (showMoreButtons.length > 0) {
+            showMoreButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-category');
+                    const category = document.getElementById(categoryId);
+                    const toolItems = category.querySelectorAll('.tool-item');
+                    const isExpanded = this.classList.contains('expanded');
+                    
+                    if (isExpanded) {
+                        // Collapse - show only first 5 items
+                        toolItems.forEach((item, index) => {
+                            if (index >= 5) {
+                                item.style.display = 'none';
+                            }
+                        });
+                        this.innerHTML = '<i class="fas fa-chevron-down"></i> Show More';
+                        this.classList.remove('expanded');
+                    } else {
+                        // Expand - show all items
+                        toolItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                        this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                        this.classList.add('expanded');
                     }
+                    
+                    updateToolCounts();
                 });
             });
+        }
 
-            // Demo button functionality
-            const demoBtn = document.getElementById('demo-btn');
-            demoBtn.addEventListener('click', function() {
-                alert('In a real implementation, this would open a file upload dialog to let you try our image tools with your own images.');
-            });
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') !== '#') {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
+        // Subscription plan selection
+        const planButtons = document.querySelectorAll('.plan-card .btn');
+        planButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const planName = this.closest('.plan-card').querySelector('.plan-name').textContent;
+                    if (planName !== "Free") {
+                        alert(`You selected the ${planName} plan. This would open the payment process in a real implementation.`);
                     }
-                });
+                }
             });
         });
 
-        // Function to insert Google AdSense code
-        function insertAdSense(adUnitId, adContainerId) {
-            const adContainer = document.getElementById(adContainerId);
-            if (adContainer && adUnitId) {
-                adContainer.innerHTML = `
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adUnitId}" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="${adUnitId}"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                `;
+        // Demo button functionality
+        const demoBtn = document.getElementById('demo-btn');
+        if (demoBtn) {
+            demoBtn.addEventListener('click', function() {
+                alert('In a real implementation, this would open a file upload dialog to let you try our image tools with your own images.');
+            });
+        }
+
+        // Initially show only 5 items in each category on mobile
+        function initializeToolDisplay() {
+            if (window.innerWidth < 768) {
+                const categories = document.querySelectorAll('.tool-category');
+                categories.forEach(category => {
+                    const toolItems = category.querySelectorAll('.tool-item');
+                    toolItems.forEach((item, index) => {
+                        if (index >= 5) {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+                updateToolCounts();
             }
         }
 
-        // Example usage (replace with your actual Ad Unit IDs)
-        // insertAdSense('ca-pub-1234567890123456', 'ad-top');
-        // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
+        // Initialize tool display on page load
+        initializeToolDisplay();
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
     </script>
 </body>
 </html>
