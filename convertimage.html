@@ -1378,6 +1378,73 @@
                 font-size: 0.85rem;
             }
         }
+
+        /* NEW: Mobile-specific fixes for the image converter tool */
+        @media (max-width: 767px) {
+            /* Fix for upload area on mobile */
+            .upload-area {
+                padding: 1.5rem 1rem;
+            }
+            
+            /* Fix for format grid on mobile */
+            .format-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.8rem;
+            }
+            
+            /* Fix for settings panel on mobile */
+            .settings-panel {
+                padding: 1rem;
+            }
+            
+            /* Fix for toggle options on mobile */
+            .toggle-options {
+                gap: 0.8rem;
+            }
+            
+            /* Fix for action buttons on mobile */
+            .action-buttons .btn {
+                min-width: 100%;
+            }
+            
+            /* Fix for batch files grid on mobile */
+            .batch-files {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Fix for file info display on mobile */
+            .file-info p {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            
+            /* Fix for conversion arrow on mobile */
+            .conversion-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            /* Fix for image preview on mobile */
+            .image-preview {
+                max-width: 100%;
+            }
+            
+            /* Fix for loading indicator on mobile */
+            .loading {
+                padding: 1.5rem;
+            }
+        }
+
+        /* NEW: Mobile-specific fixes for very small screens */
+        @media (max-width: 400px) {
+            .format-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .batch-files {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1995,7 +2062,7 @@
             if (e.target.files && e.target.files[0]) {
                 if (isBatchMode) {
                     handleBatchFiles(e.target.files);
-                // Reset file input to allow selecting the same file again
+                    // Reset file input to allow selecting the same file again
                     e.target.value = '';
                 } else {
                     handleFile(e.target.files[0]);
