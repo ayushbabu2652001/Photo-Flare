@@ -700,24 +700,6 @@
             transform: translateY(-3px);
         }
 
-        .tool-breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .tool-breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .tool-breadcrumb i {
-            font-size: 0.8rem;
-        }
-
         .quality-indicator {
             display: flex;
             align-items: center;
@@ -742,6 +724,34 @@
         .quality-text {
             font-size: 0.8rem;
             color: var(--gray);
+        }
+
+        /* Animation for floating elements */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Enhanced tool hero section */
+        .tool-hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%234361ee" opacity="0.05"><path d="M500 50 Q 600 20, 700 50 T 900 50 L 1000 0 L 1000 100 L 0 100 L 0 0 Z"/></svg>') no-repeat bottom;
+            background-size: cover;
+            z-index: -1;
         }
 
         /* Responsive Design */
@@ -843,13 +853,6 @@
     <!-- Tool Hero Section -->
     <section class="tool-hero">
         <div class="container">
-            <div class="tool-breadcrumb">
-                <a href="index.html">All Tools</a>
-                <i class="fas fa-chevron-right"></i>
-                <a href="conversion.html">Conversion Tools</a>
-                <i class="fas fa-chevron-right"></i>
-                <span>PowerPoint to PDF</span>
-            </div>
             <h1>PowerPoint to PDF Converter</h1>
             <p>Convert your PowerPoint presentations to PDF format with preserved layouts, animations, and speaker notes. Perfect for sharing and printing.</p>
         </div>
@@ -873,7 +876,7 @@
                 <h2 class="card-title"><i class="fas fa-file-upload"></i> Upload PowerPoint Presentation</h2>
                 
                 <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-file-powerpoint upload-icon"></i>
+                    <i class="fas fa-file-powerpoint upload-icon floating"></i>
                     <p class="upload-text">Drag & Drop your PowerPoint file here</p>
                     <p class="upload-hint">or click to browse files (Max: 100MB)</p>
                     <input type="file" id="fileInput" class="file-input" accept=".ppt,.pptx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation">
