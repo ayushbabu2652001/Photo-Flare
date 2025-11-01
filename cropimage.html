@@ -1255,6 +1255,18 @@
             .dimension-controls {
                 flex-direction: column;
             }
+            
+            .rotation-controls {
+                flex-direction: column;
+            }
+            
+            .zoom-controls {
+                flex-wrap: wrap;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* Show mobile header on small screens */
@@ -1276,12 +1288,69 @@
                 border-bottom: 1px solid var(--light-gray);
             }
             
-            .result-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-            
             .editor-section {
                 min-width: 100%;
+            }
+            
+            .editor-container {
+                height: 350px;
+            }
+            
+            /* Fix for aspect ratio grid on mobile */
+            .aspect-ratio-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .aspect-option {
+                padding: 0.6rem 0.3rem;
+                font-size: 0.8rem;
+            }
+            
+            /* Fix for rotation controls on mobile */
+            .rotation-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .rotation-btn {
+                min-width: calc(50% - 0.5rem);
+            }
+            
+            /* Fix for file info on mobile */
+            .file-info p {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            
+            /* Fix for crop handles on mobile */
+            .crop-handle {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .handle-nw { top: -8px; left: -8px; }
+            .handle-ne { top: -8px; right: -8px; }
+            .handle-sw { bottom: -8px; left: -8px; }
+            .handle-se { bottom: -8px; right: -8px; }
+            .handle-n { top: -8px; }
+            .handle-s { bottom: -8px; }
+            .handle-w { left: -8px; }
+            .handle-e { right: -8px; }
+            
+            /* Ensure footer links are horizontal on mobile */
+            .footer-links {
+                flex-direction: row;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+                gap: 0.8rem;
+            }
+            
+            .footer-links a {
+                white-space: nowrap;
+                flex-shrink: 0;
             }
         }
 
@@ -1382,6 +1451,29 @@
             
             .aspect-ratio-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* NEW: Fix for very small screens */
+        @media (max-width: 320px) {
+            .tool-content {
+                padding: 1rem;
+            }
+            
+            .upload-section, .editor-section {
+                padding: 0.8rem;
+            }
+            
+            .aspect-ratio-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .rotation-controls {
+                flex-direction: column;
+            }
+            
+            .rotation-btn {
+                min-width: 100%;
             }
         }
     </style>
