@@ -427,6 +427,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -436,7 +437,6 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -1464,6 +1464,17 @@
         </div>
     </div>
 
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Tool Container -->
     <div class="container">
         <div class="tool-container">
@@ -2334,6 +2345,11 @@
         // Initialize
         updateQualityDisplay();
         updateCompressionDisplay();
+        
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
