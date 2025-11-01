@@ -175,6 +175,186 @@
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
         /* Desktop Header */
         .desktop-header {
             background: rgba(255, 255, 255, 0.95);
@@ -399,6 +579,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            min-height: 44px;
         }
 
         .upload-btn:hover {
@@ -441,6 +622,8 @@
             display: flex;
             border-bottom: 1px solid var(--light-gray);
             margin-bottom: 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .rotation-mode {
@@ -449,6 +632,8 @@
             transition: var(--transition);
             border-bottom: 3px solid transparent;
             font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .rotation-mode.active {
@@ -475,6 +660,12 @@
             padding: 1rem;
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
+        }
+
+        @media (max-width: 767px) {
+            .pages-preview {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
 
         .page-item {
@@ -546,6 +737,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            min-height: 44px;
         }
 
         .rotation-control-btn:hover {
@@ -582,6 +774,10 @@
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .batch-option:hover {
@@ -625,6 +821,10 @@
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .ai-option:hover {
@@ -997,6 +1197,21 @@
             .pages-preview {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
+            
+            .preview-controls {
+                flex-direction: column;
+            }
+            
+            .preview-controls .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 575px) {
@@ -1008,14 +1223,83 @@
                 width: 100%;
                 justify-content: center;
             }
-            
-            .preview-controls {
-                flex-direction: column;
+        }
+
+        /* Small Devices (576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
             }
             
-            .preview-controls .btn {
-                width: 100%;
-                justify-content: center;
+            .page-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Medium Devices (768px and up) */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+            
+            .main-content {
+                padding: 3rem 0 1.5rem;
+            }
+        }
+
+        /* Large Devices (992px and up) */
+        @media (min-width: 992px) {
+            .page-title {
+                font-size: 3rem;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 400px) {
+            .page-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .upload-section, .rotation-options, .preview-section {
+                padding: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1rem;
+            }
+            
+            /* For very small screens, adjust the footer links spacing */
+            .footer-links {
+                gap: 0.7rem;
+            }
+            
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 0.2rem 0.4rem;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
+            }
+            
+            .batch-option, .ai-option {
+                padding: 1rem;
             }
         }
     </style>
@@ -1069,6 +1353,40 @@
             </div>
         </div>
     </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="rotatepdf.html" class="active"><i class="fas fa-sync-alt"></i> Rotate PDF</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -1413,6 +1731,42 @@
                 timeout = setTimeout(later, wait);
             };
         }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
 
         // Tab functionality
         const rotationModes = document.querySelectorAll('.rotation-mode');
