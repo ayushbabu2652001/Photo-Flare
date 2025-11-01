@@ -474,11 +474,13 @@
             font-size: 1rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
+            max-width: 800px;
         }
 
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
+            max-width: 600px;
         }
 
         .search-input {
@@ -497,18 +499,21 @@
         }
 
         .search-btn {
-            position: relative;
-            margin-top: 0.5rem;
-            width: 100%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .search-btn:active {
@@ -846,6 +851,14 @@
             transform: translateY(-3px);
         }
 
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
         /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
@@ -860,14 +873,6 @@
             
             .search-box {
                 max-width: 500px;
-            }
-            
-            .search-btn {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                width: auto;
-                margin-top: 0;
             }
             
             .featured-grid {
@@ -1044,6 +1049,13 @@
                 white-space: nowrap;
                 flex-shrink: 0;
             }
+            
+            /* Adjust search button for mobile */
+            .search-btn {
+                position: relative;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1126,15 +1138,6 @@
             
             .header-actions {
                 margin-left: auto; /* Push buttons to the right */
-            }
-        }
-
-        /* Fix for search button on mobile */
-        @media (max-width: 575px) {
-            .search-btn {
-                width: 100%;
-                position: relative;
-                margin-top: 0.5rem;
             }
         }
 
@@ -1242,8 +1245,8 @@
             <p>All-in-one solution for PDF editing, image processing, file conversion, and more. Fast, secure, and completely free for basic use!</p>
             
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search for tools...">
-                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for tools...">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> Search</button>
             </div>
             
             <p>Need help? Check out our <a href="Help.html" class="external-link">Help Center</a> or <a href="contact.html" class="external-link">Contact Support</a></p>
@@ -1523,34 +1526,82 @@
         });
 
         // Search functionality
-        const searchInput = document.querySelector('.search-input');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
         const toolItems = document.querySelectorAll('.tool-item');
+        const toolCategories = document.querySelectorAll('.tool-category');
         
-        if (searchInput) {
-            searchInput.addEventListener('input', debounce(function() {
-                const searchTerm = this.value.toLowerCase();
+        // Function to perform search
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let hasResults = false;
+            
+            toolCategories.forEach(category => {
+                const categoryItems = category.querySelectorAll('.tool-item');
+                let categoryHasResults = false;
                 
-                toolItems.forEach(item => {
+                categoryItems.forEach(item => {
                     const toolText = item.textContent.toLowerCase();
                     if (toolText.includes(searchTerm)) {
                         item.style.display = 'block';
+                        categoryHasResults = true;
+                        hasResults = true;
                     } else {
                         item.style.display = 'none';
                     }
                 });
                 
-                updateToolCounts();
-            }, 300));
+                // Show/hide category based on results
+                if (categoryHasResults) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+            
+            // Show message if no results found
+            const existingNoResults = document.querySelector('.no-results');
+            if (existingNoResults) {
+                existingNoResults.remove();
+            }
+            
+            if (!hasResults && searchTerm) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = `<p>No tools found for "${searchTerm}". Try a different search term.</p>`;
+                document.querySelector('.tools-grid').appendChild(noResults);
+            }
+            
+            updateToolCounts();
+        }
+        
+        // Add event listeners for search
+        if (searchBtn) {
+            searchBtn.addEventListener('click', performSearch);
+        }
+        
+        if (searchInput) {
+            // Search on Enter key
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Optional: Real-time search as user types (uncomment if desired)
+            // searchInput.addEventListener('input', debounce(performSearch, 300));
         }
 
         // Tool count update
         function updateToolCounts() {
             const categories = document.querySelectorAll('.tool-category');
             categories.forEach(category => {
-                const visibleTools = category.querySelectorAll('.tool-item:not([style*="display: none"])');
-                const countElement = category.querySelector('.tool-count');
-                if (countElement) {
-                    countElement.textContent = visibleTools.length;
+                if (category.style.display !== 'none') {
+                    const visibleTools = category.querySelectorAll('.tool-item:not([style*="display: none"])');
+                    const countElement = category.querySelector('.tool-count');
+                    if (countElement) {
+                        countElement.textContent = visibleTools.length;
+                    }
                 }
             });
         }
