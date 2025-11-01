@@ -700,35 +700,6 @@
             border-bottom: 1px solid var(--primary-dark);
         }
 
-        /* Show More/Less Button */
-        .show-more-container {
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .show-more-btn {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 44px;
-        }
-
-        .show-more-btn:active {
-            transform: scale(0.98);
-        }
-
-        .show-more-btn:hover {
-            background: rgba(67, 97, 238, 0.1);
-        }
-
         /* Ad Container */
         .ad-container {
             margin: 1.5rem 0;
@@ -1343,11 +1314,6 @@
                         <li class="tool-item"><a href="rotatepdf.html" class="tool-link"><i class="fas fa-redo-alt tool-icon"></i> Rotate PDF</a></li>
                         <li class="tool-item"><a href="organizepdf.html" class="tool-link"><i class="fas fa-sort-numeric-up tool-icon"></i> Organize PDF</a></li>
                     </ul>
-                    <div class="show-more-container">
-                        <button class="show-more-btn" data-category="pdf-tools">
-                            <i class="fas fa-chevron-down"></i> Show More
-                        </button>
-                    </div>
                 </div>
 
                 <!-- PDF Conversion -->
@@ -1370,11 +1336,6 @@
                         <li class="tool-item"><a href="powerpointtopdf.html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> PowerPoint to PDF</a></li>
                         <li class="tool-item"><a href="exceltopdf.html" class="tool-link"><i class="fas fa-file-pdf tool-icon"></i> Excel to PDF</a></li>
                     </ul>
-                    <div class="show-more-container">
-                        <button class="show-more-btn" data-category="pdf-conversion">
-                            <i class="fas fa-chevron-down"></i> Show More
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Image Tools -->
@@ -1397,11 +1358,6 @@
                         <li class="tool-item"><a href="jpgtopng.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> JPG to PNG</a></li>
                         <li class="tool-item"><a href="pngtojpg.html" class="tool-link"><i class="fas fa-file-image tool-icon"></i> PNG to JPG</a></li>
                     </ul>
-                    <div class="show-more-container">
-                        <button class="show-more-btn" data-category="image-tools">
-                            <i class="fas fa-chevron-down"></i> Show More
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Premium Tools -->
@@ -1424,11 +1380,6 @@
                         <li class="tool-item"><a href="Batch-File-Processor.html" class="tool-link"><i class="fas fa-file-archive tool-icon"></i> Batch File Processor <span class="premium-badge">PRO</span></a></li>
                         <li class="tool-item"><a href="Cloud-Storage-Integration.html" class="tool-link"><i class="fas fa-cloud tool-icon"></i> Cloud Storage Integration <span class="premium-badge">PRO</span></a></li>
                     </ul>
-                    <div class="show-more-container">
-                        <button class="show-more-btn" data-category="premium-tools">
-                            <i class="fas fa-chevron-down"></i> Show More
-                        </button>
-                    </div>
                 </div>
             </div>
             
@@ -1638,58 +1589,10 @@
             });
         }
 
-        // Show More/Less functionality for tool categories
-        const showMoreButtons = document.querySelectorAll('.show-more-btn');
-        
-        if (showMoreButtons.length > 0) {
-            showMoreButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const categoryId = this.getAttribute('data-category');
-                    const category = document.getElementById(categoryId);
-                    const toolItems = category.querySelectorAll('.tool-item');
-                    const isExpanded = this.classList.contains('expanded');
-                    
-                    if (isExpanded) {
-                        // Collapse - show only first 5 items
-                        toolItems.forEach((item, index) => {
-                            if (index >= 5) {
-                                item.style.display = 'none';
-                            }
-                        });
-                        this.innerHTML = '<i class="fas fa-chevron-down"></i> Show More';
-                        this.classList.remove('expanded');
-                    } else {
-                        // Expand - show all items
-                        toolItems.forEach(item => {
-                            item.style.display = 'block';
-                        });
-                        this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
-                        this.classList.add('expanded');
-                    }
-                    
-                    updateToolCounts();
-                });
-            });
-        }
-
-        // Initially show only 5 items in each category on mobile
-        function initializeToolDisplay() {
-            if (window.innerWidth < 768) {
-                const categories = document.querySelectorAll('.tool-category');
-                categories.forEach(category => {
-                    const toolItems = category.querySelectorAll('.tool-item');
-                    toolItems.forEach((item, index) => {
-                        if (index >= 5) {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-                updateToolCounts();
-            }
-        }
-
         // Initialize tool display on page load
-        initializeToolDisplay();
+        function initializeToolDisplay() {
+            updateToolCounts();
+        }
 
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(initializeToolDisplay, 250));
