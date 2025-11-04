@@ -44,10 +44,297 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        header {
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -55,12 +342,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -68,6 +357,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -86,10 +376,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
@@ -99,6 +397,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -108,12 +407,14 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .btn {
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem 1rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -122,8 +423,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
             border: none;
-            font-size: 0.95rem;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -183,83 +491,77 @@
             box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
         }
 
-        .premium-badge {
-            background: linear-gradient(135deg, var(--warning), var(--accent));
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            margin-left: auto;
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
         }
 
-        .tool-header {
-            padding: 2rem 0;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            margin-bottom: 2rem;
-        }
-
-        .tool-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-header p {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
+        /* Tool Container */
         .tool-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .upload-section {
+            max-width: 1200px;
+            margin: 1.5rem auto;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
         }
 
-        .section-title i {
-            color: var(--primary);
+        .tool-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1.5rem;
+        }
+
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.2rem;
+            border-right: 1px solid var(--light-gray);
+        }
+
+        .processing-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.2rem;
         }
 
         .upload-area {
-            border: 2px dashed var(--light-gray);
+            border: 2px dashed var(--primary);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
-            background: var(--light);
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
+            margin-bottom: 1.5rem;
             background: rgba(67, 97, 238, 0.05);
         }
 
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
         .upload-area i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -267,20 +569,33 @@
         .upload-area h3 {
             margin-bottom: 0.5rem;
             color: var(--dark);
+            font-size: 1.2rem;
         }
 
         .upload-area p {
             color: var(--gray);
             margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .file-input {
+            display: none;
         }
 
         .file-list {
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
             padding: 1rem;
             background: var(--light);
+            margin-bottom: 1rem;
+        }
+
+        .file-list-placeholder {
+            text-align: center;
+            color: var(--gray);
+            padding: 2rem;
         }
 
         .file-item {
@@ -338,6 +653,11 @@
             transition: var(--transition);
             padding: 0.3rem;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
+            min-width: 32px;
         }
 
         .file-action-btn:hover {
@@ -345,33 +665,38 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
-        .processing-section {
-            background: white;
+        .settings-panel {
+            background: var(--light);
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
         }
 
-        .process-controls {
+        .settings-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .settings-panel h3 i {
+            color: var(--primary);
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .control-label {
             font-weight: 600;
             color: var(--dark);
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
         }
 
         .control-value {
@@ -403,20 +728,12 @@
             cursor: pointer;
         }
 
-        input[type="number"] {
-            padding: 0.5rem;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            width: 80px;
-            text-align: center;
-        }
-
-        select {
+        input[type="number"], input[type="text"], select {
             padding: 0.7rem;
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
             background: white;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .checkbox-group {
@@ -434,22 +751,84 @@
 
         .action-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
 
         .action-buttons .btn {
-            min-width: 150px;
+            flex: 1;
+            min-width: 140px;
             justify-content: center;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .premium-feature {
+            position: relative;
+        }
+
+        .premium-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .premium-feature:hover .premium-overlay {
+            opacity: 1;
+        }
+
+        .premium-overlay i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .upgrade-prompt {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            display: none;
+        }
+
+        .upgrade-prompt.active {
+            display: block;
+        }
+
+        .upgrade-prompt h3 {
+            margin-bottom: 0.5rem;
         }
 
         .progress-section {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             display: none;
         }
 
@@ -465,8 +844,9 @@
         }
 
         .progress-info {
-            display: flex;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
@@ -475,18 +855,18 @@
             padding: 1rem;
             border-radius: var(--border-radius);
             text-align: center;
-            flex: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
 
         .progress-card .value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
 
         .progress-card .label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray);
         }
 
@@ -534,8 +914,8 @@
         }
 
         .file-progress-status {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -564,8 +944,8 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             display: none;
         }
 
@@ -582,9 +962,9 @@
 
         .results-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .result-card {
@@ -592,84 +972,176 @@
             padding: 1rem;
             border-radius: var(--border-radius);
             text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
 
         .result-card .value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
         }
 
         .result-card .label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray);
         }
 
         .download-options {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
-        .premium-feature {
-            position: relative;
-        }
-
-        .premium-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .download-options .btn {
+            flex: 1;
+            min-width: 140px;
             justify-content: center;
-            color: white;
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
         }
 
-        .premium-feature:hover .premium-overlay {
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
             opacity: 1;
         }
 
-        .premium-overlay i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .upgrade-prompt {
-            background: linear-gradient(135deg, var(--warning), var(--accent));
-            color: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
+        /* Ad Container */
+        .ad-container {
+            margin: 1.5rem 0;
             text-align: center;
-            margin: 2rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
         }
 
-        .upgrade-prompt h3 {
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 2rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.7rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 2rem 0 1rem;
         }
 
         .footer-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-logo {
@@ -681,24 +1153,28 @@
         }
 
         .footer-logo .logo-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .footer-logo .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
+            padding: 0.3rem 0.5rem;
+            white-space: nowrap;
         }
 
         .footer-links a:hover {
@@ -715,13 +1191,13 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
         .social-link {
             color: #adb5bd;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: var(--transition);
         }
 
@@ -730,37 +1206,110 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .tool-container {
-                grid-template-columns: 1fr;
+        /* Media Queries - Mobile First Approach */
+
+        /* Small Devices (576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
             }
             
             .tool-header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+        /* Medium Devices (768px and up) */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
             }
             
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .desktop-header {
+                display: block;
             }
             
-            .header-actions {
-                flex-direction: column;
-                width: 100%;
+            .tool-header {
+                padding: 2rem;
             }
             
-            .header-actions .btn {
-                width: 100%;
-                justify-content: center;
+            .tool-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tool-header p {
+                font-size: 1.1rem;
+            }
+            
+            .tool-content {
+                padding: 2rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .processing-section {
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 3rem 2rem;
+            }
+            
+            .upload-area i {
+                font-size: 3rem;
+            }
+            
+            .settings-panel {
+                padding: 1.5rem;
+            }
+            
+            .progress-section {
+                padding: 2rem;
+            }
+            
+            .results-section {
+                padding: 2rem;
+            }
+            
+            .features-section {
+                padding: 3rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+        }
+
+        /* Large Devices (992px and up) */
+        @media (min-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .tool-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 1.5rem 1rem;
             }
             
             .action-buttons {
@@ -768,7 +1317,7 @@
             }
             
             .action-buttons .btn {
-                width: 100%;
+                min-width: 100%;
             }
             
             .download-options {
@@ -776,7 +1325,31 @@
             }
             
             .download-options .btn {
-                width: 100%;
+                min-width: 100%;
+            }
+            
+            .file-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
             }
             
             .progress-info, .results-info {
@@ -784,30 +1357,129 @@
             }
         }
 
-        @media (max-width: 576px) {
-            .tool-header {
-                padding: 1.5rem 0;
+        /* Special media query for when viewing desktop site on mobile */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-header {
+                padding: 0.8rem 0;
             }
             
-            .tool-header h1 {
-                font-size: 1.8rem;
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 0.7rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+            }
+        }
+
+        /* For very small desktop screens */
+        @media (min-width: 768px) and (max-width: 900px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                margin-left: auto;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
             }
             
             .progress-info, .results-info {
                 grid-template-columns: 1fr;
             }
-            
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -826,169 +1498,213 @@
                 </nav>
                 <div class="header-actions">
                     <a href="login.html" class="btn btn-outline">Log In</a>
-                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Tool Header -->
-    <section class="tool-header">
-        <div class="container">
-            <h1>Batch File Processor</h1>
-            <p>Process multiple files at once with advanced batch operations. Convert, resize, compress, and apply effects to hundreds of files simultaneously.</p>
-        </div>
-    </section>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html" class="active"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Ad Space -->
     <div class="container">
-        <!-- Upgrade Prompt for Free Users -->
-        <div class="upgrade-prompt" id="upgradePrompt">
-            <h3><i class="fas fa-crown"></i> Premium Feature</h3>
-            <p>This is a premium tool. Upgrade to unlock all features and remove limitations.</p>
-            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
         </div>
+    </div>
 
-        <!-- Main Tool Container -->
+    <!-- Tool Container -->
+    <div class="container">
         <div class="tool-container">
-            <!-- Upload Section -->
-            <div class="upload-section">
-                <h2 class="section-title"><i class="fas fa-upload"></i> Upload Files</h2>
-                
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Drag & Drop Files</h3>
-                    <p>Supported formats: Images (JPG, PNG, GIF), PDFs, Documents (DOC, DOCX)</p>
-                    <p class="file-size-limit">Max files: 10 (Free) / 100 (Pro) | Max file size: 50MB each</p>
-                    <button class="btn btn-primary">Select Files</button>
-                    <input type="file" id="fileInput" multiple style="display: none;">
-                </div>
-                
-                <div class="file-list" id="fileList">
-                    <div class="file-list-placeholder" id="fileListPlaceholder">
-                        <p style="text-align: center; color: var(--gray); padding: 2rem;">No files selected</p>
-                    </div>
-                    <!-- File items will be added here dynamically -->
-                </div>
-                
-                <div class="file-actions">
-                    <button class="btn btn-outline" id="clearAllBtn">
-                        <i class="fas fa-trash"></i> Clear All
-                    </button>
-                    <button class="btn btn-outline" id="selectAllBtn">
-                        <i class="fas fa-check-square"></i> Select All
-                    </button>
-                </div>
+            <div class="tool-header">
+                <h1>Batch File Processor</h1>
+                <p>Process multiple files at once with advanced batch operations. Convert, resize, compress, and apply effects to hundreds of files simultaneously.</p>
             </div>
             
-            <!-- Processing Section -->
-            <div class="processing-section">
-                <h2 class="section-title"><i class="fas fa-cog"></i> Processing Options</h2>
-                
-                <div class="process-controls">
-                    <div class="control-group">
-                        <label class="control-label">Operation Type</label>
-                        <select id="operationType">
-                            <option value="convert">Convert Format</option>
-                            <option value="resize">Resize Images</option>
-                            <option value="compress">Compress Files</option>
-                            <option value="watermark">Add Watermark</option>
-                            <option value="rename">Rename Files</option>
-                            <option value="pdf-merge">Merge PDFs</option>
-                        </select>
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <!-- Upgrade Prompt for Free Users -->
+                    <div class="upgrade-prompt" id="upgradePrompt">
+                        <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+                        <p>This is a premium tool. Upgrade to unlock all features and remove limitations.</p>
+                        <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
                     </div>
                     
-                    <!-- Convert Options -->
-                    <div class="control-group" id="convertOptions">
-                        <label class="control-label">Convert To</label>
-                        <select id="convertFormat">
-                            <option value="jpg">JPG</option>
-                            <option value="png">PNG</option>
-                            <option value="pdf">PDF</option>
-                            <option value="webp">WebP</option>
-                        </select>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload Your Files</h3>
+                        <p>Drag & drop your files here or click to browse</p>
+                        <p class="tooltip">Supported formats: Images (JPG, PNG, GIF), PDFs, Documents (DOC, DOCX)
+                            <span class="tooltiptext">Max files: 10 (Free) / 100 (Pro) | Max file size: 50MB each</span>
+                        </p>
+                        <input type="file" id="fileInput" class="file-input" multiple>
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
                     </div>
                     
-                    <!-- Resize Options -->
-                    <div class="control-group" id="resizeOptions" style="display: none;">
-                        <label class="control-label">Resize Dimensions</label>
-                        <div class="range-container">
-                            <input type="number" id="resizeWidth" placeholder="Width" min="100" max="4000" value="800">
-                            <span>x</span>
-                            <input type="number" id="resizeHeight" placeholder="Height" min="100" max="4000" value="600">
-                            <select id="resizeUnit">
-                                <option value="px">px</option>
-                                <option value="%">%</option>
-                            </select>
+                    <div class="file-list" id="fileList">
+                        <div class="file-list-placeholder" id="fileListPlaceholder">
+                            <p>No files selected</p>
                         </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="maintainAspect" checked>
-                            <label for="maintainAspect">Maintain aspect ratio</label>
-                        </div>
+                        <!-- File items will be added here dynamically -->
                     </div>
                     
-                    <!-- Compression Options -->
-                    <div class="control-group" id="compressOptions" style="display: none;">
-                        <label class="control-label">Compression Level <span class="control-value" id="compressionValue">Medium</span></label>
-                        <div class="range-container">
-                            <input type="range" id="compressionRange" min="1" max="3" value="2">
-                            <select id="compressionSelect">
-                                <option value="1">Low (Larger files)</option>
-                                <option value="2" selected>Medium</option>
-                                <option value="3">High (Smaller files)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- Watermark Options -->
-                    <div class="premium-feature" id="watermarkOptions" style="display: none;">
-                        <label class="control-label">Watermark Settings</label>
-                        <div class="control-group">
-                            <input type="text" id="watermarkText" placeholder="Watermark text" class="search-input" style="width: 100%; padding: 0.7rem; border-radius: var(--border-radius); border: 1px solid var(--light-gray);">
-                        </div>
-                        <div class="range-container">
-                            <input type="number" id="watermarkSize" min="10" max="100" value="24" style="width: 80px;">
-                            <span>px</span>
-                            <select id="watermarkPosition">
-                                <option value="top-left">Top Left</option>
-                                <option value="top-right">Top Right</option>
-                                <option value="bottom-left">Bottom Left</option>
-                                <option value="bottom-right" selected>Bottom Right</option>
-                                <option value="center">Center</option>
-                            </select>
-                        </div>
-                        <div class="premium-overlay">
-                            <i class="fas fa-crown"></i>
-                            <p>Watermarking is a premium feature</p>
-                            <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Rename Options -->
-                    <div class="control-group" id="renameOptions" style="display: none;">
-                        <label class="control-label">Rename Pattern</label>
-                        <div class="range-container">
-                            <input type="text" id="renamePattern" placeholder="File name pattern" value="file_{number}" style="flex: 1; padding: 0.7rem; border-radius: var(--border-radius); border: 1px solid var(--light-gray);">
-                        </div>
-                        <p class="help-text">Use {number} for sequential numbering, {name} for original name</p>
-                    </div>
-                    
-                    <!-- Output Settings -->
-                    <div class="control-group">
-                        <label class="control-label">Output Settings</label>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="preserveOriginals" checked>
-                            <label for="preserveOriginals">Keep original files</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="createZip" checked>
-                            <label for="createZip">Download as ZIP archive</label>
-                        </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-outline" id="clearAllBtn">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button class="btn btn-outline" id="selectAllBtn">
+                            <i class="fas fa-check-square"></i> Select All
+                        </button>
                     </div>
                 </div>
                 
-                <div class="action-buttons">
-                    <button class="btn btn-primary" id="processBtn"><i class="fas fa-play"></i> Start Processing</button>
-                    <button class="btn btn-outline" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                <!-- Processing Section -->
+                <div class="processing-section">
+                    <div class="settings-panel">
+                        <h3><i class="fas fa-cog"></i> Processing Options</h3>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Operation Type</label>
+                            <select id="operationType">
+                                <option value="convert">Convert Format</option>
+                                <option value="resize">Resize Images</option>
+                                <option value="compress">Compress Files</option>
+                                <option value="watermark">Add Watermark</option>
+                                <option value="rename">Rename Files</option>
+                                <option value="pdf-merge">Merge PDFs</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Convert Options -->
+                        <div class="control-group" id="convertOptions">
+                            <label class="control-label">Convert To</label>
+                            <select id="convertFormat">
+                                <option value="jpg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="pdf">PDF</option>
+                                <option value="webp">WebP</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Resize Options -->
+                        <div class="control-group" id="resizeOptions" style="display: none;">
+                            <label class="control-label">Resize Dimensions</label>
+                            <div class="range-container">
+                                <input type="number" id="resizeWidth" placeholder="Width" min="100" max="4000" value="800">
+                                <span>x</span>
+                                <input type="number" id="resizeHeight" placeholder="Height" min="100" max="4000" value="600">
+                                <select id="resizeUnit">
+                                    <option value="px">px</option>
+                                    <option value="%">%</option>
+                                </select>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="maintainAspect" checked>
+                                <label for="maintainAspect">Maintain aspect ratio</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Compression Options -->
+                        <div class="control-group" id="compressOptions" style="display: none;">
+                            <label class="control-label">Compression Level <span class="control-value" id="compressionValue">Medium</span></label>
+                            <div class="range-container">
+                                <input type="range" id="compressionRange" min="1" max="3" value="2">
+                                <select id="compressionSelect">
+                                    <option value="1">Low (Larger files)</option>
+                                    <option value="2" selected>Medium</option>
+                                    <option value="3">High (Smaller files)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Watermark Options -->
+                        <div class="premium-feature" id="watermarkOptions" style="display: none;">
+                            <label class="control-label">Watermark Settings <span class="premium-badge">PRO</span></label>
+                            <div class="control-group">
+                                <input type="text" id="watermarkText" placeholder="Watermark text" style="width: 100%;">
+                            </div>
+                            <div class="range-container">
+                                <input type="number" id="watermarkSize" min="10" max="100" value="24" style="width: 80px;">
+                                <span>px</span>
+                                <select id="watermarkPosition">
+                                    <option value="top-left">Top Left</option>
+                                    <option value="top-right">Top Right</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                    <option value="bottom-right" selected>Bottom Right</option>
+                                    <option value="center">Center</option>
+                                </select>
+                            </div>
+                            <div class="premium-overlay">
+                                <i class="fas fa-crown"></i>
+                                <p>Watermarking is a premium feature</p>
+                                <a href="pricing.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Rename Options -->
+                        <div class="control-group" id="renameOptions" style="display: none;">
+                            <label class="control-label">Rename Pattern</label>
+                            <div class="range-container">
+                                <input type="text" id="renamePattern" placeholder="File name pattern" value="file_{number}" style="flex: 1;">
+                            </div>
+                            <p class="help-text">Use {number} for sequential numbering, {name} for original name</p>
+                        </div>
+                        
+                        <!-- Output Settings -->
+                        <div class="control-group">
+                            <label class="control-label">Output Settings</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="preserveOriginals" checked>
+                                <label for="preserveOriginals">Keep original files</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="createZip" checked>
+                                <label for="createZip">Download as ZIP archive</label>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="processBtn"><i class="fas fa-play"></i> Start Processing</button>
+                            <button class="btn btn-outline" id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -996,7 +1712,7 @@
         <!-- Progress Section -->
         <div class="progress-section" id="progressSection">
             <div class="progress-header">
-                <h2 class="section-title"><i class="fas fa-tasks"></i> Processing Files</h2>
+                <h3><i class="fas fa-tasks"></i> Processing Files</h3>
                 <button class="btn btn-outline" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
             </div>
             
@@ -1029,7 +1745,7 @@
                 </div>
             </div>
             
-            <h3 class="section-title">File Progress</h3>
+            <h3><i class="fas fa-list"></i> File Progress</h3>
             <div class="file-progress-list" id="fileProgressList">
                 <!-- File progress items will be added here dynamically -->
             </div>
@@ -1038,7 +1754,7 @@
         <!-- Results Section -->
         <div class="results-section" id="resultsSection">
             <div class="results-header">
-                <h2 class="section-title"><i class="fas fa-check-circle"></i> Processing Complete!</h2>
+                <h3><i class="fas fa-check-circle"></i> Processing Complete!</h3>
                 <button class="btn btn-outline" id="newBatchBtn"><i class="fas fa-plus"></i> New Batch</button>
             </div>
             
@@ -1069,6 +1785,46 @@
         </div>
     </div>
 
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Use Our Batch File Processor?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3 class="feature-title">Save Time</h3>
+                    <p>Process hundreds of files simultaneously instead of one by one. Save hours of manual work.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Secure & Private</h3>
+                    <p>Your files are processed locally in your browser and never uploaded to our servers.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cogs feature-icon"></i>
+                    <h3 class="feature-title">Multiple Operations</h3>
+                    <p>Convert, resize, compress, watermark, rename, and merge files in a single batch.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-crown feature-icon"></i>
+                    <h3 class="feature-title">Premium Features</h3>
+                    <p>Unlock advanced options like watermarking and PDF merging with Pro subscription.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1084,28 +1840,84 @@
                     <a href="index.html">Home</a>
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
                     <a href="Help.html">Help Center</a>
-                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
                 
-                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // DOM Elements
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // DOM Elements for Batch File Processor
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
         const fileList = document.getElementById('fileList');
         const fileListPlaceholder = document.getElementById('fileListPlaceholder');
         const clearAllBtn = document.getElementById('clearAllBtn');
@@ -1119,6 +1931,7 @@
         const viewDetailsBtn = document.getElementById('viewDetailsBtn');
         const savePresetBtn = document.getElementById('savePresetBtn');
         const newBatchBtn = document.getElementById('newBatchBtn');
+        const upgradePrompt = document.getElementById('upgradePrompt');
         
         // Operation type elements
         const operationType = document.getElementById('operationType');
@@ -1143,9 +1956,6 @@
         const errorResults = document.getElementById('errorResults');
         const timeSaved = document.getElementById('timeSaved');
         
-        // Premium Features
-        const upgradePrompt = document.getElementById('upgradePrompt');
-        
         // State Variables
         let files = [];
         let isPremiumUser = false; // This would be set based on user authentication
@@ -1159,9 +1969,9 @@
             isPremiumUser = false;
             
             if (!isPremiumUser) {
-                upgradePrompt.style.display = 'block';
+                upgradePrompt.classList.add('active');
             } else {
-                upgradePrompt.style.display = 'none';
+                upgradePrompt.classList.remove('active');
             }
             
             // Set up event listeners
@@ -1175,8 +1985,9 @@
         function setupEventListeners() {
             // Upload area events
             uploadArea.addEventListener('click', () => fileInput.click());
+            browseBtn.addEventListener('click', () => fileInput.click());
             uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('drop', handleFileDrop);
+            uploadArea.addEventListener('drop', handleDrop);
             
             // File input change
             fileInput.addEventListener('change', handleFileSelect);
@@ -1201,15 +2012,15 @@
             e.preventDefault();
             e.stopPropagation();
             uploadArea.style.borderColor = 'var(--primary)';
-            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
         }
         
         // Handle file drop
-        function handleFileDrop(e) {
+        function handleDrop(e) {
             e.preventDefault();
             e.stopPropagation();
-            uploadArea.style.borderColor = 'var(--light-gray)';
-            uploadArea.style.backgroundColor = 'var(--light)';
+            uploadArea.style.borderColor = 'var(--primary)';
+            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
             
             const droppedFiles = e.dataTransfer.files;
             if (droppedFiles.length > 0) {
@@ -1634,6 +2445,11 @@
         
         // Initialize the tool when the page loads
         window.addEventListener('DOMContentLoaded', init);
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
