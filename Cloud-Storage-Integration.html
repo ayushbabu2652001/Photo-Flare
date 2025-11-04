@@ -436,6 +436,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -445,7 +446,6 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -1408,7 +1408,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-outline">Disconnect</button>
+                    <button class="btn btn-outline disconnect-btn">Disconnect</button>
                     <button class="btn btn-primary">Manage Files</button>
                 </div>
             </div>
@@ -1438,7 +1438,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-outline">Disconnect</button>
+                    <button class="btn btn-outline disconnect-btn">Disconnect</button>
                     <button class="btn btn-primary">Manage Files</button>
                 </div>
             </div>
@@ -1468,7 +1468,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-success">Connect</button>
+                    <button class="btn btn-success connect-btn">Connect</button>
                 </div>
             </div>
 
@@ -1497,7 +1497,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-success">Connect</button>
+                    <button class="btn btn-success connect-btn">Connect</button>
                 </div>
             </div>
 
@@ -1526,7 +1526,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-success">Connect</button>
+                    <button class="btn btn-success connect-btn">Connect</button>
                 </div>
             </div>
 
@@ -1555,7 +1555,7 @@
                     </div>
                 </div>
                 <div class="action-section">
-                    <button class="btn btn-success">Connect</button>
+                    <button class="btn btn-success connect-btn">Connect</button>
                 </div>
             </div>
         </div>
@@ -1565,8 +1565,8 @@
             <div class="dashboard-header">
                 <h3 class="dashboard-title">Unified File Dashboard</h3>
                 <div class="dashboard-controls">
-                    <button class="btn btn-light"><i class="fas fa-sync-alt"></i> Refresh</button>
-                    <button class="btn btn-primary"><i class="fas fa-search"></i> Smart Search</button>
+                    <button class="btn btn-light" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <button class="btn btn-primary" id="smartSearchBtn"><i class="fas fa-search"></i> Smart Search</button>
                 </div>
             </div>
             <div class="dashboard-grid">
@@ -1686,8 +1686,8 @@
                     </div>
                 </div>
                 <div class="action-section" style="margin-top: 1.5rem;">
-                    <button class="btn btn-primary">Run Organization</button>
-                    <button class="btn btn-outline">Customize Rules</button>
+                    <button class="btn btn-primary" id="runOrgBtn">Run Organization</button>
+                    <button class="btn btn-outline" id="customizeBtn">Customize Rules</button>
                 </div>
             </div>
 
@@ -1724,8 +1724,8 @@
                     </div>
                 </div>
                 <div class="action-section" style="margin-top: 1.5rem;">
-                    <button class="btn btn-primary">Try Smart Search</button>
-                    <button class="btn btn-outline">Search History</button>
+                    <button class="btn btn-primary" id="trySearchBtn">Try Smart Search</button>
+                    <button class="btn btn-outline" id="searchHistoryBtn">Search History</button>
                 </div>
             </div>
 
@@ -1762,8 +1762,8 @@
                     </div>
                 </div>
                 <div class="action-section" style="margin-top: 1.5rem;">
-                    <button class="btn btn-primary">Create Workflow</button>
-                    <button class="btn btn-outline">Manage Workflows</button>
+                    <button class="btn btn-primary" id="createWorkflowBtn">Create Workflow</button>
+                    <button class="btn btn-outline" id="manageWorkflowsBtn">Manage Workflows</button>
                 </div>
             </div>
         </div>
@@ -1982,48 +1982,45 @@
         const resetBtn = document.getElementById('resetBtn');
         const syncBtn = document.getElementById('syncBtn');
         const upgradeBtn = document.getElementById('upgradeBtn');
-        const connectBtns = document.querySelectorAll('.btn-success');
-        const disconnectBtns = document.querySelectorAll('.btn-outline');
+        const connectBtns = document.querySelectorAll('.connect-btn');
+        const disconnectBtns = document.querySelectorAll('.disconnect-btn');
         const aiOptions = document.querySelectorAll('.ai-option');
         const faqItems = document.querySelectorAll('.faq-item');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const smartSearchBtn = document.getElementById('smartSearchBtn');
+        const runOrgBtn = document.getElementById('runOrgBtn');
+        const customizeBtn = document.getElementById('customizeBtn');
+        const trySearchBtn = document.getElementById('trySearchBtn');
+        const searchHistoryBtn = document.getElementById('searchHistoryBtn');
+        const createWorkflowBtn = document.getElementById('createWorkflowBtn');
+        const manageWorkflowsBtn = document.getElementById('manageWorkflowsBtn');
+        const fileActions = document.querySelectorAll('.file-action');
 
         // Event Listeners
         resetBtn.addEventListener('click', resetSettings);
         syncBtn.addEventListener('click', syncAllServices);
         upgradeBtn.addEventListener('click', upgradeToPro);
+        refreshBtn.addEventListener('click', refreshDashboard);
+        smartSearchBtn.addEventListener('click', openSmartSearch);
+        runOrgBtn.addEventListener('click', runOrganization);
+        customizeBtn.addEventListener('click', customizeRules);
+        trySearchBtn.addEventListener('click', trySmartSearch);
+        searchHistoryBtn.addEventListener('click', showSearchHistory);
+        createWorkflowBtn.addEventListener('click', createWorkflow);
+        manageWorkflowsBtn.addEventListener('click', manageWorkflows);
         
         // Connect buttons
         connectBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                const serviceCard = this.closest('.service-card');
-                const serviceTitle = serviceCard.querySelector('.service-title').textContent;
-                const statusElement = serviceCard.querySelector('.service-status');
-                
-                // Show connecting state
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
-                this.disabled = true;
-                
-                // Simulate connection process
-                setTimeout(() => {
-                    statusElement.textContent = 'Connected';
-                    statusElement.className = 'service-status status-connected';
-                    
-                    // Update button to disconnect
-                    this.innerHTML = 'Disconnect';
-                    this.className = 'btn btn-outline';
-                    this.disabled = false;
-                    
-                    // Add event listener for disconnect
-                    this.addEventListener('click', disconnectService);
-                    
-                    alert(`${serviceTitle} has been successfully connected!`);
-                }, 2000);
+                connectService(this);
             });
         });
         
         // Disconnect buttons
         disconnectBtns.forEach(btn => {
-            btn.addEventListener('click', disconnectService);
+            btn.addEventListener('click', function() {
+                disconnectService(this);
+            });
         });
         
         // AI option toggles
@@ -2043,36 +2040,16 @@
             });
         });
 
+        // File action buttons
+        fileActions.forEach(action => {
+            action.addEventListener('click', function() {
+                const actionType = this.title;
+                const fileName = this.closest('.dashboard-item').querySelector('.file-name').textContent;
+                handleFileAction(actionType, fileName);
+            });
+        });
+
         // Functions
-        function disconnectService() {
-            const serviceCard = this.closest('.service-card');
-            const serviceTitle = serviceCard.querySelector('.service-title').textContent;
-            const statusElement = serviceCard.querySelector('.service-status');
-            
-            // Show disconnecting state
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Disconnecting...';
-            this.disabled = true;
-            
-            // Simulate disconnection process
-            setTimeout(() => {
-                statusElement.textContent = 'Not Connected';
-                statusElement.className = 'service-status status-disconnected';
-                
-                // Update button to connect
-                this.innerHTML = 'Connect';
-                this.className = 'btn btn-success';
-                this.disabled = false;
-                
-                // Remove current event listener and add connect listener
-                this.removeEventListener('click', disconnectService);
-                this.addEventListener('click', function() {
-                    connectService(this);
-                });
-                
-                alert(`${serviceTitle} has been disconnected.`);
-            }, 1500);
-        }
-        
         function connectService(button) {
             const serviceCard = button.closest('.service-card');
             const serviceTitle = serviceCard.querySelector('.service-title').textContent;
@@ -2089,15 +2066,42 @@
                 
                 // Update button to disconnect
                 button.innerHTML = 'Disconnect';
-                button.className = 'btn btn-outline';
+                button.className = 'btn btn-outline disconnect-btn';
                 button.disabled = false;
                 
                 // Remove current event listener and add disconnect listener
                 button.removeEventListener('click', function() { connectService(button); });
-                button.addEventListener('click', disconnectService);
+                button.addEventListener('click', function() { disconnectService(button); });
                 
-                alert(`${serviceTitle} has been successfully connected!`);
+                showNotification(`${serviceTitle} has been successfully connected!`, 'success');
             }, 2000);
+        }
+        
+        function disconnectService(button) {
+            const serviceCard = button.closest('.service-card');
+            const serviceTitle = serviceCard.querySelector('.service-title').textContent;
+            const statusElement = serviceCard.querySelector('.service-status');
+            
+            // Show disconnecting state
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Disconnecting...';
+            button.disabled = true;
+            
+            // Simulate disconnection process
+            setTimeout(() => {
+                statusElement.textContent = 'Not Connected';
+                statusElement.className = 'service-status status-disconnected';
+                
+                // Update button to connect
+                button.innerHTML = 'Connect';
+                button.className = 'btn btn-success connect-btn';
+                button.disabled = false;
+                
+                // Remove current event listener and add connect listener
+                button.removeEventListener('click', function() { disconnectService(button); });
+                button.addEventListener('click', function() { connectService(button); });
+                
+                showNotification(`${serviceTitle} has been disconnected.`, 'info');
+            }, 1500);
         }
         
         function resetSettings() {
@@ -2115,10 +2119,9 @@
                     });
                     
                     // Reset all buttons
-                    document.querySelectorAll('.service-card .btn-outline').forEach(btn => {
+                    document.querySelectorAll('.service-card .disconnect-btn').forEach(btn => {
                         btn.innerHTML = 'Connect';
-                        btn.className = 'btn btn-success';
-                        btn.removeEventListener('click', disconnectService);
+                        btn.className = 'btn btn-success connect-btn';
                     });
                     
                     // Reset AI options
@@ -2133,7 +2136,7 @@
                     resetBtn.innerHTML = '<i class="fas fa-undo"></i> Reset Settings';
                     resetBtn.disabled = false;
                     
-                    alert('All settings have been reset successfully.');
+                    showNotification('All settings have been reset successfully.', 'success');
                 }, 1500);
             }
         }
@@ -2149,23 +2152,175 @@
                 syncBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync All Services';
                 syncBtn.disabled = false;
                 
-                alert('All cloud services have been synchronized successfully.');
+                showNotification('All cloud services have been synchronized successfully.', 'success');
             }, 3000);
         }
         
         function upgradeToPro() {
-            alert('Redirecting to upgrade page...');
+            showNotification('Redirecting to upgrade page...', 'info');
             // In a real implementation, this would redirect to the subscription page
             // window.location.href = 'subscription.html';
         }
+        
+        function refreshDashboard() {
+            // Show refreshing state
+            refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+            refreshBtn.disabled = true;
+            
+            // Simulate refresh process
+            setTimeout(() => {
+                // Re-enable refresh button
+                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
+                refreshBtn.disabled = false;
+                
+                showNotification('Dashboard refreshed successfully.', 'success');
+            }, 1500);
+        }
+        
+        function openSmartSearch() {
+            showNotification('Opening Smart Search...', 'info');
+            // In a real implementation, this would open a search modal or page
+        }
+        
+        function runOrganization() {
+            // Show organizing state
+            runOrgBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Organizing...';
+            runOrgBtn.disabled = true;
+            
+            // Simulate organization process
+            setTimeout(() => {
+                // Re-enable button
+                runOrgBtn.innerHTML = 'Run Organization';
+                runOrgBtn.disabled = false;
+                
+                showNotification('AI organization completed successfully.', 'success');
+            }, 3000);
+        }
+        
+        function customizeRules() {
+            showNotification('Opening customization panel...', 'info');
+            // In a real implementation, this would open a customization modal
+        }
+        
+        function trySmartSearch() {
+            showNotification('Opening Smart Search interface...', 'info');
+            // In a real implementation, this would open a search interface
+        }
+        
+        function showSearchHistory() {
+            showNotification('Showing search history...', 'info');
+            // In a real implementation, this would show search history
+        }
+        
+        function createWorkflow() {
+            showNotification('Opening workflow creation wizard...', 'info');
+            // In a real implementation, this would open a workflow creation interface
+        }
+        
+        function manageWorkflows() {
+            showNotification('Opening workflow management panel...', 'info');
+            // In a real implementation, this would open a workflow management interface
+        }
+        
+        function handleFileAction(actionType, fileName) {
+            if (actionType === 'Download') {
+                showNotification(`Downloading "${fileName}"...`, 'info');
+                // In a real implementation, this would initiate a download
+            } else if (actionType === 'Share') {
+                showNotification(`Opening share options for "${fileName}"...`, 'info');
+                // In a real implementation, this would open a share dialog
+            }
+        }
+        
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span>${message}</span>
+                    <button class="notification-close">&times;</button>
+                </div>
+            `;
+            
+            // Add styles for notification
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'info' ? 'var(--primary)' : 'var(--danger)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                z-index: 10000;
+                max-width: 350px;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            // Add close button functionality
+            notification.querySelector('.notification-close').addEventListener('click', function() {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOutRight 0.3s ease-out';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        // Add keyframe animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
 
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', () => {
             // Tool is ready to use
+            console.log('Cloud Storage Integration tool initialized');
         });
 
         // Reinitialize on window resize
-        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
