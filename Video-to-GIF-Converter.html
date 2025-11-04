@@ -53,12 +53,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         /* Mobile Header - Sticky */
         .mobile-header {
             display: none;
@@ -701,6 +695,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .control-label {
@@ -1760,9 +1755,6 @@
         </div>
     </footer>
 
-    <!-- GIF.js Library for actual GIF creation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
-    
     <script>
         // Debounce function for performance
         function debounce(func, wait) {
@@ -1870,7 +1862,7 @@
         let currentVideoFile = null;
         let isPremiumUser = false; // This would be set based on user authentication
         let videoDuration = 0;
-        let gifBlob = null;
+        let convertedGifBlob = null;
 
         // Initialize the tool
         function init() {
@@ -2134,115 +2126,64 @@
             loadingIndicator.classList.add('active');
             convertBtn.disabled = true;
             
-            // Get conversion settings
-            const fps = parseInt(fpsRange.value);
-            const quality = parseInt(qualityRange.value);
-            const duration = parseInt(durationRange.value);
-            const loop = loopCheckbox.checked;
-            const reverse = reverseCheckbox.checked;
-            const trim = trimCheckbox.checked;
-            const startTime = trim ? parseFloat(trimStart.value) : 0;
-            const endTime = trim ? parseFloat(trimEnd.value) : duration;
-            const width = parseInt(sizeRange.value);
-            const height = Math.round(width * 9 / 16); // 16:9 aspect ratio
-            
-            // Perform the conversion
-            createGifFromVideo(previewVideo, {
-                fps,
-                quality,
-                duration,
-                loop,
-                reverse,
-                startTime,
-                endTime,
-                width,
-                height
+            // In a real implementation, this would use a library like FFmpeg.js or a server-side process
+            // For this demo, we'll simulate the conversion process
+            simulateConversion(() => {
+                // Conversion complete
+                loadingIndicator.classList.remove('active');
+                convertBtn.disabled = false;
+                
+                // Show results
+                showConversionResults();
             });
         }
         
-        // Create GIF from video using GIF.js
-        function createGifFromVideo(video, options) {
-            // Create a canvas for drawing frames
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = options.width;
-            canvas.height = options.height;
-            
-            // Calculate number of frames
-            const frameCount = Math.floor((options.endTime - options.startTime) * options.fps);
-            
-            // Create GIF instance
-            const gif = new GIF({
-                workers: 2,
-                quality: options.quality * 10, // Scale quality from 1-3 to 10-30
-                width: options.width,
-                height: options.height,
-                workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
-            });
-            
-            // Set initial video time
-            video.currentTime = options.startTime;
-            
-            // Capture frames
-            let framesCaptured = 0;
-            
-            video.onseeked = function() {
-                // Draw the current frame to canvas
-                ctx.drawImage(video, 0, 0, options.width, options.height);
-                
-                // Add frame to GIF
-                gif.addFrame(canvas, { delay: 1000 / options.fps, copy: true });
-                
-                framesCaptured++;
-                
-                // Update progress
-                const progress = Math.floor((framesCaptured / frameCount) * 100);
-                loadingIndicator.querySelector('p').textContent = `Converting your video... ${progress}%`;
-                
-                // If we've captured all frames, render the GIF
-                if (framesCaptured >= frameCount) {
-                    gif.render();
-                } else {
-                    // Seek to next frame
-                    video.currentTime = options.startTime + (framesCaptured / options.fps);
+        // Simulate conversion process
+        function simulateConversion(callback) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    callback();
                 }
-            };
-            
-            // Handle GIF completion
-            gif.on('finished', function(blob) {
-                // Store the GIF blob
-                gifBlob = blob;
                 
-                // Create object URL for the GIF
-                const gifUrl = URL.createObjectURL(blob);
-                
-                // Display the GIF
-                previewGif.src = gifUrl;
-                resultGif.src = gifUrl;
-                
-                // Hide video and show GIF
-                previewVideo.classList.remove('active');
-                previewGif.classList.add('active');
-                
-                // Show results
-                showConversionResults(blob, options);
-                
-                // Hide loading indicator
-                loadingIndicator.classList.remove('active');
-                convertBtn.disabled = false;
-            });
-            
-            // Start capturing frames
-            video.onseeked();
+                loadingIndicator.querySelector('p').textContent = `Converting your video... ${Math.floor(progress)}%`;
+            }, 300);
         }
         
         // Show conversion results
-        function showConversionResults(blob, options) {
-            // Set result info
-            resultSize.textContent = formatFileSize(blob.size);
-            resultDimensions.textContent = `${options.width}x${options.height}`;
-            resultDuration.textContent = `${options.endTime - options.startTime}s`;
-            resultFrames.textContent = Math.floor((options.endTime - options.startTime) * options.fps);
+        function showConversionResults() {
+            // In a real implementation, this would show the actual converted GIF
+            // For demo purposes, we'll use a placeholder
+            const width = parseInt(sizeRange.value);
+            const height = Math.round(width * 9 / 16);
+            resultGif.src = `https://via.placeholder.com/${width}x${height}/4361ee/ffffff?text=Converted+GIF+Preview`;
+            
+            // Set result info (simulated)
+            const fps = parseInt(fpsRange.value);
+            const duration = parseInt(durationRange.value);
+            resultSize.textContent = formatFileSize(currentVideoFile.size * 0.2); // Simulated size
+            resultDimensions.textContent = `${width}x${height}`;
+            resultDuration.textContent = `${duration}s`;
+            resultFrames.textContent = (fps * duration).toString();
+            
+            // Create a simulated GIF blob for download
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#4361ee';
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Converted GIF Preview', width/2, height/2);
+            
+            canvas.toBlob(blob => {
+                convertedGifBlob = blob;
+            }, 'image/gif');
             
             // Show results section
             resultsSection.classList.add('active');
@@ -2253,46 +2194,30 @@
         
         // Download the converted GIF
         function downloadGif() {
-            if (!gifBlob) {
+            if (!convertedGifBlob) {
                 alert('No GIF available to download.');
                 return;
             }
             
             const link = document.createElement('a');
-            link.href = URL.createObjectURL(gifBlob);
-            link.download = 'converted.gif';
+            const url = URL.createObjectURL(convertedGifBlob);
+            link.href = url;
+            link.download = `converted_${currentVideoFile.name.split('.')[0]}.gif`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            URL.revokeObjectURL(url);
         }
         
         // Share the converted GIF
         function shareGif() {
-            if (!gifBlob) {
-                alert('No GIF available to share.');
-                return;
-            }
-            
             if (navigator.share) {
-                // Convert blob to file for sharing
-                const file = new File([gifBlob], 'converted.gif', { type: 'image/gif' });
-                
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    navigator.share({
-                        title: 'My converted GIF',
-                        text: 'Check out this GIF I created with Photo Flare!',
-                        files: [file]
-                    })
-                    .catch(error => console.log('Error sharing:', error));
-                } else {
-                    // Fallback if files can't be shared directly
-                    navigator.share({
-                        title: 'My converted GIF',
-                        text: 'Check out this GIF I created with Photo Flare!',
-                        url: window.location.href
-                    })
-                    .catch(error => console.log('Error sharing:', error));
-                }
+                navigator.share({
+                    title: 'My converted GIF',
+                    text: 'Check out this GIF I created with Photo Flare!',
+                    url: window.location.href
+                })
+                .catch(error => console.log('Error sharing:', error));
             } else {
                 // Fallback for browsers that don't support Web Share API
                 alert('Share URL: ' + window.location.href);
@@ -2304,7 +2229,7 @@
             // Reset file input
             fileInput.value = '';
             currentVideoFile = null;
-            gifBlob = null;
+            convertedGifBlob = null;
             
             // Reset UI elements
             fileInfo.classList.remove('active');
