@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Seamlessly connect and manage your files across multiple cloud storage providers with Photo Flare's premium Cloud Storage Integration. Access, sync, and transfer files between Google Drive, Dropbox, OneDrive, and more.">
-    <meta name="keywords" content="cloud storage integration, google drive, dropbox, onedrive, cloud sync, file transfer, premium tools, photo flare">
-    <title>Cloud Storage Integration - Premium Tool | Photo Flare</title>
+    <meta name="description" content="Photo Flare - Cloud Storage Integration - Connect your cloud storage accounts for seamless file management.">
+    <meta name="keywords" content="Photo Flare, cloud storage, integration, Google Drive, Dropbox, OneDrive, file management">
+    <title>Cloud Storage Integration - Photo Flare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Reuse the CSS from the main page */
         :root {
             --primary: #4361ee;
             --primary-dark: #3a56d4;
@@ -81,8 +82,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -132,8 +133,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
             text-decoration: none;
@@ -230,8 +231,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -427,7 +428,6 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
-            border: none;
         }
 
         .btn:active {
@@ -437,6 +437,7 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
+            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -455,247 +456,26 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #3a86ff);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #ff6b6b);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #ff9e44);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
-        }
-
-        .btn-warning:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-        }
-
-        /* Tool Container */
-        .tool-container {
-            max-width: 1200px;
-            margin: 1.5rem auto;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .tool-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1.5rem;
+        /* Hero Section */
+        .hero {
+            padding: 2rem 0 1rem;
             text-align: center;
         }
 
-        .tool-header h1 {
+        .hero h1 {
             font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tool-header p {
-            font-size: 1rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .tool-content {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 1.5rem;
-        }
-
-        .connections-section {
-            flex: 1;
-            min-width: 300px;
-            padding: 1.2rem;
-            border-right: 1px solid var(--light-gray);
-        }
-
-        .sync-section {
-            flex: 1;
-            min-width: 300px;
-            padding: 1.2rem;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
         }
 
-        .section-title i {
-            color: var(--primary);
-        }
-
-        .cloud-providers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cloud-provider {
-            background: var(--light);
-            border: 2px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 1.2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .cloud-provider:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-light);
-        }
-
-        .cloud-provider.connected {
-            border-color: var(--success);
-            background: rgba(76, 201, 240, 0.05);
-        }
-
-        .cloud-provider.connecting {
-            border-color: var(--warning);
-            background: rgba(248, 150, 30, 0.05);
-        }
-
-        .cloud-provider-icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .google-drive { color: #4285F4; }
-        .dropbox { color: #0061FF; }
-        .onedrive { color: #0078D7; }
-        .box { color: #0061D5; }
-        .icloud { color: #5FC9F8; }
-
-        .provider-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .provider-status {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .connection-status {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--gray);
-        }
-
-        .connection-status.connected {
-            background: var(--success);
-        }
-
-        .connection-status.connecting {
-            background: var(--warning);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .sync-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .control-label {
-            font-weight: 600;
-            color: var(--dark);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .control-value {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        select {
-            padding: 0.7rem;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--border-radius);
-            background: white;
+        .hero p {
             font-size: 1rem;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .action-buttons .btn {
-            flex: 1;
-            min-width: 140px;
-            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--gray);
+            max-width: 800px;
         }
 
         .premium-badge {
@@ -704,331 +484,239 @@
             font-size: 0.7rem;
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
-            margin-left: 10px;
+            margin-left: auto;
         }
 
-        .premium-feature {
-            position: relative;
+        /* Tool Section */
+        .tool-section {
+            padding: 2rem 0;
         }
 
-        .premium-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+        .tool-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            text-align: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
-            z-index: 10;
+            gap: 2rem;
         }
 
-        .premium-feature:hover .premium-overlay {
-            opacity: 1;
-        }
-
-        .premium-overlay i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .upgrade-prompt {
-            background: linear-gradient(135deg, var(--warning), var(--accent));
-            color: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            margin: 1.5rem 0;
-            box-shadow: var(--box-shadow);
-            display: none;
-        }
-
-        .upgrade-prompt.active {
-            display: block;
-        }
-
-        .upgrade-prompt h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .file-explorer {
+        .tool-main {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            padding: 2rem;
             animation: fadeIn 0.5s ease-out;
         }
 
-        .explorer-header {
+        .tool-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 1rem;
             margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
         }
 
-        .breadcrumb {
+        .tool-icon-large {
+            font-size: 3rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .tool-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .tool-description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
             color: var(--gray);
         }
 
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-
-        .explorer-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 1rem;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 1rem;
-            background: var(--light);
-            border-radius: var(--border-radius);
-        }
-
-        .file-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .file-item:hover {
-            background: rgba(67, 97, 238, 0.05);
-        }
-
-        .file-item.selected {
-            background: rgba(67, 97, 238, 0.1);
-            border: 1px solid var(--primary);
-        }
-
-        .file-icon {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .file-name {
-            font-size: 0.8rem;
-            word-break: break-word;
-            max-width: 100px;
-        }
-
-        .transfer-section {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .transfer-controls {
+        .tool-features {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .source-select, .destination-select {
+        .feature-item {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
 
-        .transfer-arrow {
-            text-align: center;
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-icon {
             font-size: 1.5rem;
             color: var(--primary);
-            margin: 0;
+            background: rgba(67, 97, 238, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
         }
 
-        .sync-status {
+        .feature-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-content p {
+            color: var(--gray);
+        }
+
+        .tool-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            min-height: 60px;
+            justify-content: center;
+        }
+
+        .btn-disabled {
+            background: var(--light-gray);
+            color: var(--gray);
+            cursor: not-allowed;
+            border: none;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .tool-sidebar {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: none;
             animation: fadeIn 0.5s ease-out;
         }
 
-        .sync-status.active {
-            display: block;
-        }
-
-        .status-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .status-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .status-card {
-            background: var(--light);
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .status-card .value {
+        .sidebar-title {
             font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .status-card .label {
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-
-        .progress-bar-container {
             margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
         }
 
-        .progress-bar {
-            height: 10px;
-            background: var(--light-gray);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
+        .storage-providers {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--gray);
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .activity-log {
-            max-height: 200px;
-            overflow-y: auto;
+        .storage-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
-            padding: 1rem;
-            background: var(--light);
+            transition: var(--transition);
         }
 
-        .log-entry {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        .storage-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
         }
 
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-
-        .log-icon {
-            width: 20px;
+        .storage-icon {
+            font-size: 1.8rem;
+            width: 40px;
             text-align: center;
         }
 
-        .log-success { color: var(--success); }
-        .log-warning { color: var(--warning); }
-        .log-error { color: var(--danger); }
-        .log-info { color: var(--primary); }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 1.5rem;
+        .storage-name {
+            font-weight: 600;
+            color: var(--dark);
         }
 
-        .loading.active {
-            display: block;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(67, 97, 238, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
+        .storage-status {
+            margin-left: auto;
             font-size: 0.8rem;
-            font-weight: normal;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            background: var(--light-gray);
+            color: var(--gray);
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .storage-status.connected {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 2rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.7rem;
+            color: var(--dark);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
 
         /* Ad Container */
@@ -1058,55 +746,6 @@
             border: 1px dashed var(--light-gray);
             border-radius: 8px;
             color: var(--gray);
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 2rem 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.7rem;
-            color: var(--dark);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .feature-card {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--box-shadow);
-            border-color: var(--primary-light);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .feature-title {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
         }
 
         /* Footer */
@@ -1184,108 +823,7 @@
             transform: translateY(-3px);
         }
 
-        /* Mobile-specific fixes */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
-            }
-            
-            .desktop-header {
-                display: none;
-            }
-            
-            .tool-content {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .connections-section {
-                border-right: none;
-                border-bottom: 1px solid var(--light-gray);
-                padding: 1rem 0;
-            }
-            
-            .sync-section {
-                padding: 1rem 0;
-            }
-            
-            .file-explorer, .transfer-section, .sync-status {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-            
-            .cloud-providers {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-buttons .btn {
-                min-width: 100%;
-            }
-            
-            .explorer-header {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-            
-            .explorer-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .explorer-actions .btn {
-                flex: 1;
-                justify-content: center;
-            }
-            
-            .transfer-controls {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .transfer-arrow {
-                transform: rotate(90deg);
-                margin: 0;
-            }
-            
-            .status-info {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.8rem;
-            }
-            
-            .status-card {
-                padding: 0.8rem;
-            }
-            
-            .tool-header {
-                padding: 1.5rem 1rem;
-            }
-            
-            .tool-header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .premium-feature {
-                margin-bottom: 1rem;
-            }
-            
-            .premium-overlay {
-                padding: 0.8rem;
-            }
-            
-            .premium-overlay i {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .sidebar {
-                width: 85%;
-            }
-        }
+        /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
@@ -1293,25 +831,16 @@
                 padding: 0 20px;
             }
             
-            .tool-header h1 {
+            .hero h1 {
                 font-size: 2.2rem;
             }
             
-            .features-grid {
+            .tool-features {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .action-buttons {
-                flex-direction: row;
-            }
-            
-            .transfer-controls {
-                grid-template-columns: 1fr auto 1fr;
-            }
-            
-            .transfer-arrow {
-                margin-top: 1rem;
-                transform: none;
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1325,194 +854,82 @@
                 display: block;
             }
             
-            .tool-header {
-                padding: 2rem;
+            .hero {
+                padding: 3rem 0 1.5rem;
             }
             
-            .tool-header h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .tool-header p {
-                font-size: 1.1rem;
+            .tool-container {
+                flex-direction: row;
             }
             
-            .tool-content {
-                padding: 2rem;
+            .tool-main {
+                flex: 2;
             }
             
-            .connections-section {
-                padding: 1.5rem;
+            .tool-sidebar {
+                flex: 1;
             }
             
-            .sync-section {
-                padding: 1.5rem;
+            .tool-actions {
+                flex-direction: row;
             }
             
-            .file-explorer, .transfer-section, .sync-status {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-            
-            .cloud-providers {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            
-            .file-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-            
-            .features-section {
+            .benefits {
                 padding: 3rem 0;
             }
             
-            .features-grid {
+            .benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
             
-            .feature-card {
+            .benefit-card {
                 padding: 2rem;
             }
         }
 
         /* Large Devices (992px and up) */
         @media (min-width: 992px) {
-            .features-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .hero h1 {
+                font-size: 3rem;
             }
             
-            .status-info {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            .benefits-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
         /* Extra Small Devices (400px and below) */
         @media (max-width: 400px) {
-            .tool-header h1 {
+            .hero h1 {
                 font-size: 1.6rem;
             }
             
             .section-title {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             
-            .action-buttons {
-                flex-direction: column;
+            .tool-main {
+                padding: 1rem;
             }
             
-            .action-buttons .btn {
-                min-width: 100%;
-            }
-            
-            .cloud-providers {
-                grid-template-columns: 1fr;
-            }
-            
-            .transfer-controls {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .transfer-arrow {
-                transform: rotate(90deg);
-                margin: 0;
+            .tool-sidebar {
+                padding: 1rem;
             }
         }
 
-        /* Special media query for when viewing desktop site on mobile */
-        @media (min-width: 768px) and (max-width: 1024px) {
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
             .desktop-header {
-                padding: 0.8rem 0;
-            }
-            
-            .logo-text {
-                font-size: 1.3rem;
-            }
-            
-            nav ul {
-                gap: 0.7rem;
-            }
-            
-            nav a {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.9rem;
-            }
-            
-            .btn {
-                padding: 0.6rem 0.9rem;
-                font-size: 0.85rem;
-            }
-            
-            .header-content {
-                gap: 0.5rem;
-            }
-            
-            .header-actions {
-                flex-wrap: nowrap;
-                gap: 0.5rem;
-            }
-        }
-
-        /* For very small desktop screens */
-        @media (min-width: 768px) and (max-width: 900px) {
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            nav ul {
-                gap: 0.5rem;
-            }
-            
-            nav a {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.85rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
-            .header-actions {
-                gap: 0.3rem;
-            }
-        }
-
-        /* Special fix for buttons on very narrow desktop screens */
-        @media (min-width: 768px) and (max-width: 820px) {
-            .header-content {
-                flex-wrap: nowrap;
-            }
-            
-            nav {
-                order: 3;
-                flex-basis: 100%;
-                margin-top: 0.5rem;
-            }
-            
-            nav ul {
-                justify-content: center;
-            }
-            
-            .header-actions {
-                margin-left: auto;
-            }
-        }
-
-        /* Better footer spacing on very small screens */
-        @media (max-width: 360px) {
-            .footer-links {
-                gap: 0.5rem;
-            }
-            
-            .footer-links a {
-                padding: 0.3rem 0.3rem;
-                font-size: 0.85rem;
-            }
-            
-            .status-info {
-                grid-template-columns: 1fr;
+                display: none;
             }
         }
     </style>
@@ -1555,7 +972,7 @@
                         <li><a href="pdf-tools.html">PDF Tools</a></li>
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
-                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                     </ul>
                 </nav>
@@ -1587,7 +1004,7 @@
                 <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
                 <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
                 <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
-                <li><a href="premium-tools.html" class="active"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
                 <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
             </ul>
         </nav>
@@ -1601,6 +1018,14 @@
         </div>
     </div>
 
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Cloud Storage Integration <span class="premium-badge">PRO</span></h1>
+            <p>Seamlessly connect your cloud storage accounts for easy file management across all your Photo Flare tools.</p>
+        </div>
+    </section>
+
     <!-- Ad Space -->
     <div class="container">
         <div class="ad-container">
@@ -1612,354 +1037,129 @@
         </div>
     </div>
 
-    <!-- Tool Container -->
-    <div class="container">
-        <div class="tool-container">
-            <div class="tool-header">
-                <h1>Cloud Storage Integration <span class="premium-badge">PRO</span></h1>
-                <p>Connect and manage your files across multiple cloud storage providers. Sync, transfer, and access your files from one unified interface.</p>
-            </div>
-            
-            <div class="tool-content">
-                <!-- Connections Section -->
-                <div class="connections-section">
-                    <!-- Upgrade Prompt for Free Users -->
-                    <div class="upgrade-prompt" id="upgradePrompt">
-                        <h3><i class="fas fa-crown"></i> Premium Feature</h3>
-                        <p>This is a premium tool. Upgrade to unlock all features and remove limitations.</p>
-                        <a href="Claud-Storage-Premium-Feature.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade Now</a>
+    <!-- Tool Section -->
+    <section class="tool-section">
+        <div class="container">
+            <div class="tool-container">
+                <div class="tool-main">
+                    <div class="tool-header">
+                        <div class="tool-icon-large">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div>
+                            <h2 class="tool-title">Cloud Storage Integration</h2>
+                            <p>Connect your favorite cloud storage services to Photo Flare</p>
+                        </div>
                     </div>
                     
-                    <h2 class="section-title"><i class="fas fa-plug"></i> Cloud Connections</h2>
+                    <div class="tool-description">
+                        <p>With Cloud Storage Integration, you can directly access your files from Google Drive, Dropbox, OneDrive, and other cloud storage providers without having to download and re-upload them. This premium feature saves you time and ensures your files are always accessible when you need them.</p>
+                    </div>
                     
-                    <div class="cloud-providers">
-                        <div class="cloud-provider" id="googleDrive" data-provider="google-drive">
-                            <div class="cloud-provider-icon google-drive">
+                    <div class="tool-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Automatic Sync</h4>
+                                <p>Changes made in Photo Flare are automatically synced back to your cloud storage.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Direct Access</h4>
+                                <p>Browse and select files directly from your cloud storage accounts.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Secure Connection</h4>
+                                <p>Your data is protected with industry-standard security protocols.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Fast Processing</h4>
+                                <p>Optimized for speed even when working with large cloud-based files.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-actions">
+                        <a href="subscription.html" class="btn btn-primary btn-large">
+                            <i class="fas fa-crown"></i> Upgrade to Pro
+                        </a>
+                        <button class="btn btn-outline btn-large btn-disabled">
+                            <i class="fas fa-cloud"></i> Connect Cloud Storage
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(67, 97, 238, 0.05); border-radius: var(--border-radius);">
+                        <h4 style="margin-bottom: 1rem; color: var(--primary);"><i class="fas fa-info-circle"></i> Premium Feature</h4>
+                        <p>Cloud Storage Integration is available exclusively to Photo Flare Pro subscribers. Upgrade now to access this and other premium features.</p>
+                    </div>
+                </div>
+                
+                <div class="tool-sidebar">
+                    <h3 class="sidebar-title">Supported Providers</h3>
+                    <div class="storage-providers">
+                        <div class="storage-item">
+                            <div class="storage-icon" style="color: #4285F4;">
                                 <i class="fab fa-google-drive"></i>
                             </div>
-                            <div class="provider-name">Google Drive</div>
-                            <div class="provider-status">Not connected</div>
-                            <div class="connection-status"></div>
+                            <div class="storage-name">Google Drive</div>
+                            <div class="storage-status">Available</div>
                         </div>
                         
-                        <div class="cloud-provider" id="dropbox" data-provider="dropbox">
-                            <div class="cloud-provider-icon dropbox">
+                        <div class="storage-item">
+                            <div class="storage-icon" style="color: #0061FF;">
                                 <i class="fab fa-dropbox"></i>
                             </div>
-                            <div class="provider-name">Dropbox</div>
-                            <div class="provider-status">Not connected</div>
-                            <div class="connection-status"></div>
+                            <div class="storage-name">Dropbox</div>
+                            <div class="storage-status">Available</div>
                         </div>
                         
-                        <div class="cloud-provider" id="onedrive" data-provider="onedrive">
-                            <div class="cloud-provider-icon onedrive">
+                        <div class="storage-item">
+                            <div class="storage-icon" style="color: #0078D7;">
                                 <i class="fab fa-microsoft"></i>
                             </div>
-                            <div class="provider-name">OneDrive</div>
-                            <div class="provider-status">Not connected</div>
-                            <div class="connection-status"></div>
+                            <div class="storage-name">OneDrive</div>
+                            <div class="storage-status">Available</div>
                         </div>
                         
-                        <div class="cloud-provider premium-feature" id="box" data-provider="box">
-                            <div class="cloud-provider-icon box">
+                        <div class="storage-item">
+                            <div class="storage-icon" style="color: #FF9900;">
+                                <i class="fab fa-amazon"></i>
+                            </div>
+                            <div class="storage-name">Amazon Drive</div>
+                            <div class="storage-status">Coming Soon</div>
+                        </div>
+                        
+                        <div class="storage-item">
+                            <div class="storage-icon" style="color: #00AFF0;">
                                 <i class="fab fa-box"></i>
                             </div>
-                            <div class="provider-name">Box</div>
-                            <div class="provider-status">Premium</div>
-                            <div class="connection-status"></div>
-                            <div class="premium-overlay">
-                                <i class="fas fa-crown"></i>
-                                <p>Box integration is a premium feature</p>
-                                <a href="Box-Integration-Premium-Feature.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                            </div>
+                            <div class="storage-name">Box</div>
+                            <div class="storage-status">Coming Soon</div>
                         </div>
-                        
-                        <div class="cloud-provider premium-feature" id="icloud" data-provider="icloud">
-                            <div class="cloud-provider-icon icloud">
-                                <i class="fab fa-apple"></i>
-                            </div>
-                            <div class="provider-name">iCloud</div>
-                            <div class="provider-status">Premium</div>
-                            <div class="connection-status"></div>
-                            <div class="premium-overlay">
-                                <i class="fas fa-crown"></i>
-                                <p>iCloud integration is a premium feature</p>
-                                <a href="iCloud-Integration-Premium-Feature.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Connection Status</label>
-                        <div class="connection-summary" id="connectionSummary">
-                            <p>No cloud storage providers connected. Click on a provider to connect.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" id="connectAllBtn">
-                            <i class="fas fa-link"></i> Connect All Available
-                        </button>
-                        <button class="btn btn-outline" id="disconnectAllBtn">
-                            <i class="fas fa-unlink"></i> Disconnect All
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Sync Section -->
-                <div class="sync-section">
-                    <h2 class="section-title"><i class="fas fa-sync-alt"></i> Sync Settings</h2>
-                    
-                    <div class="sync-controls">
-                        <div class="control-group">
-                            <label class="control-label">Auto-Sync</label>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="autoSync" checked>
-                                <label for="autoSync">Automatically sync changes between connected clouds</label>
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
-                            <label class="control-label">Sync Frequency</label>
-                            <select id="syncFrequency">
-                                <option value="realtime">Real-time (Premium)</option>
-                                <option value="5min">Every 5 minutes</option>
-                                <option value="15min" selected>Every 15 minutes</option>
-                                <option value="1hour">Every hour</option>
-                                <option value="manual">Manual only</option>
-                            </select>
-                        </div>
-                        
-                        <div class="control-group">
-                            <label class="control-label">Conflict Resolution</label>
-                            <select id="conflictResolution">
-                                <option value="newest">Keep newest version</option>
-                                <option value="oldest">Keep oldest version</option>
-                                <option value="source">Keep source version</option>
-                                <option value="both">Keep both (rename)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="premium-feature">
-                            <div class="control-group">
-                                <label class="control-label">Selective Sync <span class="premium-badge">PRO</span></label>
-                                <div class="checkbox-group">
-                                    <input type="checkbox" id="selectiveSync">
-                                    <label for="selectiveSync">Sync only selected folders (Premium)</label>
-                                </div>
-                            </div>
-                            <div class="premium-overlay">
-                                <i class="fas fa-crown"></i>
-                                <p>Selective sync is a premium feature</p>
-                                <a href="Sync-Settings-Premium-Feature-Page.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                            </div>
-                        </div>
-                        
-                        <div class="premium-feature">
-                            <div class="control-group">
-                                <label class="control-label">Bandwidth Control <span class="premium-badge">PRO</span></label>
-                                <select id="bandwidthControl">
-                                    <option value="unlimited">Unlimited</option>
-                                    <option value="limited">Limit bandwidth usage</option>
-                                </select>
-                            </div>
-                            <div class="premium-overlay">
-                                <i class="fas fa-crown"></i>
-                                <p>Bandwidth control is a premium feature</p>
-                                <a href="Bandwidth-Control-Premium-Feature-Page.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-success" id="syncNowBtn">
-                            <i class="fas fa-sync"></i> Sync Now
-                        </button>
-                        <button class="btn btn-outline" id="resetSyncBtn">
-                            <i class="fas fa-redo"></i> Reset Settings
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- File Explorer -->
-        <div class="file-explorer">
-            <div class="explorer-header">
-                <div class="breadcrumb" id="breadcrumb">
-                    <a href="Enhanced-File-Explorer-for-Cloud-Storage-Integration.html" class="breadcrumb-home">Cloud Storage</a>
-                    <span>></span>
-                    <span id="current-folder">My Files</span>
-                </div>
-                <div class="explorer-actions">
-                    <button class="btn btn-outline" id="refreshBtn">
-                        <i class="fas fa-redo"></i> Refresh
-                    </button>
-                    <button class="btn btn-outline" id="uploadBtn">
-                        <i class="fas fa-upload"></i> Upload
-                    </button>
-                    <button class="btn btn-outline" id="newFolderBtn">
-                        <i class="fas fa-folder-plus"></i> New Folder
-                    </button>
-                </div>
-            </div>
-            
-            <div class="file-grid" id="fileGrid">
-                <!-- File items will be added here dynamically -->
-                <div class="file-item" data-type="folder" data-name="Documents">
-                    <div class="file-icon">
-                        <i class="fas fa-folder"></i>
-                    </div>
-                    <div class="file-name">Documents</div>
-                </div>
-                <div class="file-item" data-type="folder" data-name="Images">
-                    <div class="file-icon">
-                        <i class="fas fa-folder"></i>
-                    </div>
-                    <div class="file-name">Images</div>
-                </div>
-                <div class="file-item" data-type="folder" data-name="Videos">
-                    <div class="file-icon">
-                        <i class="fas fa-folder"></i>
-                    </div>
-                    <div class="file-name">Videos</div>
-                </div>
-                <div class="file-item" data-type="file" data-name="report.pdf">
-                    <div class="file-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="file-name">report.pdf</div>
-                </div>
-                <div class="file-item" data-type="file" data-name="photo.jpg">
-                    <div class="file-icon">
-                        <i class="fas fa-file-image"></i>
-                    </div>
-                    <div class="file-name">photo.jpg</div>
-                </div>
-                <div class="file-item" data-type="file" data-name="document.docx">
-                    <div class="file-icon">
-                        <i class="fas fa-file-word"></i>
-                    </div>
-                    <div class="file-name">document.docx</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Transfer Section -->
-        <div class="transfer-section">
-            <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Transfer Files</h2>
-            
-            <div class="transfer-controls">
-                <div class="source-select">
-                    <label class="control-label">Source</label>
-                    <select id="sourceCloud">
-                        <option value="local">Local Computer</option>
-                        <option value="google-drive">Google Drive</option>
-                        <option value="dropbox">Dropbox</option>
-                        <option value="onedrive">OneDrive</option>
-                        <option value="box" disabled>Box (Premium)</option>
-                        <option value="icloud" disabled>iCloud (Premium)</option>
-                    </select>
-                </div>
-                
-                <div class="transfer-arrow">
-                    <i class="fas fa-long-arrow-alt-right"></i>
-                </div>
-                
-                <div class="destination-select">
-                    <label class="control-label">Destination</label>
-                    <select id="destinationCloud">
-                        <option value="local">Local Computer</option>
-                        <option value="google-drive">Google Drive</option>
-                        <option value="dropbox">Dropbox</option>
-                        <option value="onedrive">OneDrive</option>
-                        <option value="box" disabled>Box (Premium)</option>
-                        <option value="icloud" disabled>iCloud (Premium)</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="control-group">
-                <label class="control-label">Transfer Options</label>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="overwriteFiles" checked>
-                    <label for="overwriteFiles">Overwrite existing files</label>
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="preserveStructure">
-                    <label for="preserveStructure">Preserve folder structure</label>
-                </div>
-                <div class="checkbox-group premium-feature">
-                    <input type="checkbox" id="encryptTransfer">
-                    <label for="encryptTransfer">Encrypt during transfer (Premium)</label>
-                    <div class="premium-overlay">
-                        <i class="fas fa-crown"></i>
-                        <p>Transfer encryption is a premium feature</p>
-                        <a href="Secure-File-Transfer-Encryption-Premium-Feature.html" class="btn btn-warning" style="margin-top: 1rem;">Upgrade to Unlock</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="transferBtn">
-                    <i class="fas fa-play"></i> Start Transfer
-                </button>
-                <button class="btn btn-outline" id="scheduleTransferBtn">
-                    <i class="fas fa-clock"></i> Schedule Transfer
-                </button>
-            </div>
-        </div>
-        
-        <!-- Sync Status -->
-        <div class="sync-status" id="syncStatus">
-            <div class="status-header">
-                <h2 class="section-title"><i class="fas fa-tasks"></i> Sync Status</h2>
-                <button class="btn btn-outline" id="pauseSyncBtn">
-                    <i class="fas fa-pause"></i> Pause
-                </button>
-            </div>
-            
-            <div class="status-info">
-                <div class="status-card">
-                    <div class="value" id="filesSynced">0</div>
-                    <div class="label">Files Synced</div>
-                </div>
-                <div class="status-card">
-                    <div class="value" id="filesRemaining">0</div>
-                    <div class="label">Files Remaining</div>
-                </div>
-                <div class="status-card">
-                    <div class="value" id="transferSpeed">0 KB/s</div>
-                    <div class="label">Transfer Speed</div>
-                </div>
-                <div class="status-card">
-                    <div class="value" id="timeRemaining">--:--</div>
-                    <div class="label">Time Remaining</div>
-                </div>
-            </div>
-            
-            <div class="progress-bar-container">
-                <div class="progress-bar">
-                    <div class="progress" id="syncProgress"></div>
-                </div>
-                <div class="progress-text">
-                    <span>Overall Progress</span>
-                    <span id="syncProgressText">0%</span>
-                </div>
-            </div>
-            
-            <h3 class="section-title">Activity Log</h3>
-            <div class="activity-log" id="activityLog">
-                <div class="log-entry">
-                    <div class="log-icon log-info">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="log-message">Sync session started</div>
-                </div>
-                <!-- Log entries will be added here dynamically -->
-            </div>
-        </div>
-    </div>
+    </section>
 
     <!-- Ad Space -->
     <div class="container">
@@ -1972,30 +1172,30 @@
         </div>
     </div>
 
-    <!-- Features Section -->
-    <section class="features-section">
+    <!-- Benefits Section -->
+    <section class="benefits">
         <div class="container">
-            <h2 class="section-title">Why Use Our Cloud Storage Integration?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-cloud feature-icon"></i>
-                    <h3 class="feature-title">Unified Access</h3>
-                    <p>Access all your cloud storage accounts from one centralized dashboard. No more switching between apps.</p>
+            <h2 class="section-title">Benefits of Cloud Integration</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-save benefit-icon"></i>
+                    <h3 class="benefit-title">Save Time</h3>
+                    <p>No need to download and re-upload files between your cloud storage and Photo Flare.</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3 class="feature-title">Secure & Encrypted</h3>
-                    <p>Your files are protected with end-to-end encryption during transfers. Your data never leaves your control.</p>
+                <div class="benefit-card">
+                    <i class="fas fa-sync-alt benefit-icon"></i>
+                    <h3 class="benefit-title">Stay Organized</h3>
+                    <p>Keep all your files in one place while accessing them from any Photo Flare tool.</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-sync-alt feature-icon"></i>
-                    <h3 class="feature-title">Smart Sync</h3>
-                    <p>Automatically sync files between different cloud providers with customizable rules and conflict resolution.</p>
+                <div class="benefit-card">
+                    <i class="fas fa-mobile-alt benefit-icon"></i>
+                    <h3 class="benefit-title">Access Anywhere</h3>
+                    <p>Access your cloud files from any device with Photo Flare's responsive interface.</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-crown feature-icon"></i>
-                    <h3 class="feature-title">Premium Features</h3>
-                    <p>Unlock advanced options like selective sync, bandwidth control, and premium provider support with Pro.</p>
+                <div class="benefit-card">
+                    <i class="fas fa-shield-alt benefit-icon"></i>
+                    <h3 class="benefit-title">Enhanced Security</h3>
+                    <p>Your files remain secure with encrypted connections to your cloud providers.</p>
                 </div>
             </div>
         </div>
@@ -2090,501 +1290,13 @@
             link.addEventListener('click', closeSidebar);
         });
 
-        // DOM Elements for Cloud Storage Integration
-        const upgradePrompt = document.getElementById('upgradePrompt');
-        const cloudProviders = document.querySelectorAll('.cloud-provider');
-        const connectionSummary = document.getElementById('connectionSummary');
-        const connectAllBtn = document.getElementById('connectAllBtn');
-        const disconnectAllBtn = document.getElementById('disconnectAllBtn');
-        const syncNowBtn = document.getElementById('syncNowBtn');
-        const resetSyncBtn = document.getElementById('resetSyncBtn');
-        const fileGrid = document.getElementById('fileGrid');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const newFolderBtn = document.getElementById('newFolderBtn');
-        const transferBtn = document.getElementById('transferBtn');
-        const scheduleTransferBtn = document.getElementById('scheduleTransferBtn');
-        const syncStatus = document.getElementById('syncStatus');
-        const pauseSyncBtn = document.getElementById('pauseSyncBtn');
-        const activityLog = document.getElementById('activityLog');
-        
-        // Status elements
-        const filesSynced = document.getElementById('filesSynced');
-        const filesRemaining = document.getElementById('filesRemaining');
-        const transferSpeed = document.getElementById('transferSpeed');
-        const timeRemaining = document.getElementById('timeRemaining');
-        const syncProgress = document.getElementById('syncProgress');
-        const syncProgressText = document.getElementById('syncProgressText');
-        
-        // State Variables
-        let isPremiumUser = false; // This would be set based on user authentication
-        let connectedProviders = [];
-        let isSyncing = false;
-        let syncInterval = null;
-        let selectedFiles = [];
-        
-        // Initialize the tool
-        function init() {
-            // Check if user is premium (in a real app, this would come from backend)
-            // For demo purposes, we'll set it to false
-            isPremiumUser = false;
-            
-            if (!isPremiumUser) {
-                upgradePrompt.classList.add('active');
-                // Disable premium features for non-premium users
-                document.querySelectorAll('.premium-feature input, .premium-feature select').forEach(element => {
-                    element.disabled = true;
-                });
-            } else {
-                upgradePrompt.classList.remove('active');
-            }
-            
-            // Set up event listeners
-            setupEventListeners();
-            
-            // Initialize UI
-            updateConnectionSummary();
+        // Initialize tool display on page load
+        function initializeToolDisplay() {
+            // Any initialization code for this specific page
         }
-        
-        // Set up event listeners
-        function setupEventListeners() {
-            // Cloud provider connections
-            cloudProviders.forEach(provider => {
-                provider.addEventListener('click', (e) => {
-                    // Don't trigger if clicking on the upgrade button inside premium overlay
-                    if (!e.target.closest('.premium-overlay a')) {
-                        connectProvider(provider);
-                    }
-                });
-            });
-            
-            // Button events
-            connectAllBtn.addEventListener('click', connectAllProviders);
-            disconnectAllBtn.addEventListener('click', disconnectAllProviders);
-            syncNowBtn.addEventListener('click', startSync);
-            resetSyncBtn.addEventListener('click', resetSyncSettings);
-            refreshBtn.addEventListener('click', refreshFileList);
-            uploadBtn.addEventListener('click', uploadFile);
-            newFolderBtn.addEventListener('click', createNewFolder);
-            transferBtn.addEventListener('click', startTransfer);
-            scheduleTransferBtn.addEventListener('click', scheduleTransfer);
-            pauseSyncBtn.addEventListener('click', togglePauseSync);
-            
-            // File selection
-            fileGrid.addEventListener('click', handleFileSelection);
-        }
-        
-        // Connect a cloud provider
-        function connectProvider(providerElement) {
-            const provider = providerElement.dataset.provider;
-            
-            // Check if provider is premium
-            if (providerElement.classList.contains('premium-feature') && !isPremiumUser) {
-                // Show premium overlay
-                const overlay = providerElement.querySelector('.premium-overlay');
-                if (overlay) {
-                    overlay.style.opacity = '1';
-                    overlay.style.pointerEvents = 'auto';
-                    
-                    // Hide overlay after a delay if user doesn't interact
-                    setTimeout(() => {
-                        if (overlay.style.opacity === '1') {
-                            overlay.style.opacity = '0';
-                            overlay.style.pointerEvents = 'none';
-                        }
-                    }, 5000);
-                }
-                return;
-            }
-            
-            // Check if already connected
-            if (connectedProviders.includes(provider)) {
-                disconnectProvider(provider);
-                return;
-            }
-            
-            // Show connecting state
-            providerElement.classList.add('connecting');
-            providerElement.querySelector('.connection-status').classList.add('connecting');
-            providerElement.querySelector('.provider-status').textContent = 'Connecting...';
-            
-            // In a real implementation, this would open OAuth flow
-            // For demo purposes, we'll simulate connection
-            simulateProviderConnection(provider, (success) => {
-                if (success) {
-                    // Connection successful
-                    connectedProviders.push(provider);
-                    providerElement.classList.remove('connecting');
-                    providerElement.classList.add('connected');
-                    providerElement.querySelector('.connection-status').classList.remove('connecting');
-                    providerElement.querySelector('.connection-status').classList.add('connected');
-                    providerElement.querySelector('.provider-status').textContent = 'Connected';
-                    
-                    updateConnectionSummary();
-                    addLogEntry(`Connected to ${getProviderName(provider)}`, 'success');
-                } else {
-                    // Connection failed
-                    providerElement.classList.remove('connecting');
-                    providerElement.querySelector('.connection-status').classList.remove('connecting');
-                    providerElement.querySelector('.provider-status').textContent = 'Connection failed';
-                    
-                    addLogEntry(`Failed to connect to ${getProviderName(provider)}`, 'error');
-                    
-                    // Reset after a delay
-                    setTimeout(() => {
-                        providerElement.querySelector('.provider-status').textContent = 'Not connected';
-                    }, 2000);
-                }
-            });
-        }
-        
-        // Disconnect a cloud provider
-        function disconnectProvider(provider) {
-            // In a real implementation, this would revoke tokens
-            // For demo purposes, we'll simulate disconnection
-            const providerElement = document.getElementById(provider);
-            if (providerElement) {
-                providerElement.classList.remove('connected');
-                providerElement.querySelector('.connection-status').classList.remove('connected');
-                providerElement.querySelector('.provider-status').textContent = 'Not connected';
-            }
-            
-            connectedProviders = connectedProviders.filter(p => p !== provider);
-            updateConnectionSummary();
-            addLogEntry(`Disconnected from ${getProviderName(provider)}`, 'info');
-        }
-        
-        // Connect all available providers
-        function connectAllProviders() {
-            cloudProviders.forEach(provider => {
-                if (!provider.classList.contains('premium-feature') || isPremiumUser) {
-                    if (!connectedProviders.includes(provider.dataset.provider)) {
-                        connectProvider(provider);
-                    }
-                }
-            });
-        }
-        
-        // Disconnect all providers
-        function disconnectAllProviders() {
-            connectedProviders.forEach(provider => {
-                disconnectProvider(provider);
-            });
-        }
-        
-        // Simulate provider connection (in a real app, this would be OAuth flow)
-        function simulateProviderConnection(provider, callback) {
-            // Simulate connection delay
-            setTimeout(() => {
-                // 90% success rate for demo purposes
-                const success = Math.random() > 0.1;
-                callback(success);
-            }, 1500);
-        }
-        
-        // Update connection summary
-        function updateConnectionSummary() {
-            if (connectedProviders.length === 0) {
-                connectionSummary.innerHTML = '<p>No cloud storage providers connected. Click on a provider to connect.</p>';
-            } else {
-                const providerNames = connectedProviders.map(p => getProviderName(p)).join(', ');
-                connectionSummary.innerHTML = `
-                    <p>Connected to: <strong>${providerNames}</strong></p>
-                    <p style="font-size: 0.9rem; color: var(--success); margin-top: 0.5rem;">
-                        <i class="fas fa-check-circle"></i> All connected providers are synced and ready.
-                    </p>
-                `;
-            }
-        }
-        
-        // Get provider display name
-        function getProviderName(providerId) {
-            const names = {
-                'google-drive': 'Google Drive',
-                'dropbox': 'Dropbox',
-                'onedrive': 'OneDrive',
-                'box': 'Box',
-                'icloud': 'iCloud'
-            };
-            return names[providerId] || providerId;
-        }
-        
-        // Start sync process
-        function startSync() {
-            if (connectedProviders.length === 0) {
-                alert('Please connect at least one cloud storage provider before syncing.');
-                return;
-            }
-            
-            isSyncing = true;
-            syncStatus.classList.add('active');
-            
-            // Initialize sync status
-            filesSynced.textContent = '0';
-            filesRemaining.textContent = '25'; // Example count
-            transferSpeed.textContent = '0 KB/s';
-            timeRemaining.textContent = '--:--';
-            syncProgress.style.width = '0%';
-            syncProgressText.textContent = '0%';
-            
-            // Clear activity log (except the first entry)
-            const initialLog = activityLog.querySelector('.log-entry');
-            activityLog.innerHTML = '';
-            if (initialLog) {
-                activityLog.appendChild(initialLog);
-            }
-            
-            addLogEntry('Sync session started', 'info');
-            
-            // Start sync simulation
-            simulateSync();
-            
-            // Scroll to sync status
-            syncStatus.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Simulate sync process (in a real app, this would be actual sync)
-        function simulateSync() {
-            let filesProcessed = 0;
-            const totalFiles = 25; // Example count
-            
-            syncInterval = setInterval(() => {
-                if (!isSyncing) return;
-                
-                // Process next file
-                if (filesProcessed < totalFiles) {
-                    filesProcessed++;
-                    
-                    // Update progress
-                    const progressPercent = Math.round((filesProcessed / totalFiles) * 100);
-                    filesSynced.textContent = filesProcessed.toString();
-                    filesRemaining.textContent = (totalFiles - filesProcessed).toString();
-                    syncProgress.style.width = `${progressPercent}%`;
-                    syncProgressText.textContent = `${progressPercent}%`;
-                    
-                    // Simulate transfer speed
-                    const speed = Math.floor(Math.random() * 500) + 100;
-                    transferSpeed.textContent = `${speed} KB/s`;
-                    
-                    // Calculate time remaining
-                    const remainingTime = Math.round((totalFiles - filesProcessed) * 2); // 2 seconds per file
-                    const minutes = Math.floor(remainingTime / 60);
-                    const seconds = remainingTime % 60;
-                    timeRemaining.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                    
-                    // Add log entry
-                    if (filesProcessed % 5 === 0 || filesProcessed === totalFiles) {
-                        const status = filesProcessed === totalFiles ? 'success' : 'info';
-                        const message = filesProcessed === totalFiles 
-                            ? 'Sync completed successfully' 
-                            : `Synced ${filesProcessed} of ${totalFiles} files`;
-                        addLogEntry(message, status);
-                    }
-                    
-                    // Check if sync is complete
-                    if (filesProcessed === totalFiles) {
-                        clearInterval(syncInterval);
-                        addLogEntry('All files synchronized across connected clouds', 'success');
-                        pauseSyncBtn.disabled = true;
-                        isSyncing = false;
-                    }
-                }
-            }, 500); // Update every 500ms
-        }
-        
-        // Toggle pause/resume sync
-        function togglePauseSync() {
-            isSyncing = !isSyncing;
-            
-            if (isSyncing) {
-                pauseSyncBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
-                pauseSyncBtn.classList.remove('btn-success');
-                pauseSyncBtn.classList.add('btn-outline');
-                addLogEntry('Sync resumed', 'info');
-            } else {
-                pauseSyncBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
-                pauseSyncBtn.classList.remove('btn-outline');
-                pauseSyncBtn.classList.add('btn-success');
-                addLogEntry('Sync paused', 'warning');
-            }
-        }
-        
-        // Reset sync settings
-        function resetSyncSettings() {
-            document.getElementById('autoSync').checked = true;
-            document.getElementById('syncFrequency').value = '15min';
-            document.getElementById('conflictResolution').value = 'newest';
-            document.getElementById('selectiveSync').checked = false;
-            document.getElementById('bandwidthControl').value = 'unlimited';
-            
-            addLogEntry('Sync settings reset to defaults', 'info');
-        }
-        
-        // Handle file selection in the file explorer
-        function handleFileSelection(e) {
-            const fileItem = e.target.closest('.file-item');
-            if (!fileItem) return;
-            
-            // Toggle selection
-            fileItem.classList.toggle('selected');
-            
-            const fileType = fileItem.dataset.type;
-            const fileName = fileItem.dataset.name;
-            
-            if (fileItem.classList.contains('selected')) {
-                selectedFiles.push({ type: fileType, name: fileName });
-            } else {
-                selectedFiles = selectedFiles.filter(file => file.name !== fileName);
-            }
-            
-            // Update UI based on selection
-            updateSelectionUI();
-        }
-        
-        // Update UI based on file selection
-        function updateSelectionUI() {
-            // In a real implementation, this would enable/disable actions
-            // based on what's selected
-            if (selectedFiles.length > 0) {
-                // Enable relevant actions
-                addLogEntry(`${selectedFiles.length} file(s) selected`, 'info');
-            }
-        }
-        
-        // Refresh file list
-        function refreshFileList() {
-            addLogEntry('Refreshing file list...', 'info');
-            
-            // Show loading state
-            const fileGrid = document.getElementById('fileGrid');
-            fileGrid.style.opacity = '0.7';
-            
-            // In a real implementation, this would fetch the latest file list
-            // For demo purposes, we'll just show a message
-            setTimeout(() => {
-                fileGrid.style.opacity = '1';
-                addLogEntry('File list updated', 'success');
-            }, 1000);
-        }
-        
-        // Upload file
-        function uploadFile() {
-            // In a real implementation, this would open a file picker
-            // For demo purposes, we'll simulate file upload
-            const fileName = `file-${Date.now()}.txt`;
-            addLogEntry(`Uploading ${fileName}...`, 'info');
-            
-            setTimeout(() => {
-                addLogEntry(`Successfully uploaded ${fileName}`, 'success');
-                
-                // Add to file grid (for demo purposes)
-                const newFile = document.createElement('div');
-                newFile.className = 'file-item';
-                newFile.dataset.type = 'file';
-                newFile.dataset.name = fileName;
-                newFile.innerHTML = `
-                    <div class="file-icon">
-                        <i class="fas fa-file"></i>
-                    </div>
-                    <div class="file-name">${fileName}</div>
-                `;
-                fileGrid.appendChild(newFile);
-            }, 1500);
-        }
-        
-        // Create new folder
-        function createNewFolder() {
-            const folderName = prompt('Enter folder name:');
-            if (folderName) {
-                // In a real implementation, this would create the folder in the cloud
-                addLogEntry(`Folder "${folderName}" created`, 'success');
-                
-                // Add to file grid (for demo purposes)
-                const newFolder = document.createElement('div');
-                newFolder.className = 'file-item';
-                newFolder.dataset.type = 'folder';
-                newFolder.dataset.name = folderName;
-                newFolder.innerHTML = `
-                    <div class="file-icon">
-                        <i class="fas fa-folder"></i>
-                    </div>
-                    <div class="file-name">${folderName}</div>
-                `;
-                fileGrid.appendChild(newFolder);
-            }
-        }
-        
-        // Start file transfer
-        function startTransfer() {
-            const source = document.getElementById('sourceCloud').value;
-            const destination = document.getElementById('destinationCloud').value;
-            
-            if (source === destination) {
-                alert('Source and destination cannot be the same.');
-                return;
-            }
-            
-            // Check if premium features are needed
-            if ((source === 'box' || source === 'icloud' || destination === 'box' || destination === 'icloud') && !isPremiumUser) {
-                alert('Transfer to/from Box or iCloud is a premium feature. Please upgrade to use these providers.');
-                return;
-            }
-            
-            addLogEntry(`Starting transfer from ${getProviderName(source)} to ${getProviderName(destination)}`, 'info');
-            
-            // Show loading state on transfer button
-            const originalText = transferBtn.innerHTML;
-            transferBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transferring...';
-            transferBtn.disabled = true;
-            
-            // In a real implementation, this would start the actual transfer
-            // For demo purposes, we'll simulate the transfer
-            setTimeout(() => {
-                transferBtn.innerHTML = originalText;
-                transferBtn.disabled = false;
-                addLogEntry('Transfer completed successfully', 'success');
-            }, 2000);
-        }
-        
-        // Schedule transfer
-        function scheduleTransfer() {
-            // In a real implementation, this would open a scheduling dialog
-            const scheduleTime = prompt('Enter schedule time (e.g., "Tomorrow 10:00 AM"):');
-            if (scheduleTime) {
-                addLogEntry(`Transfer scheduled for ${scheduleTime}`, 'info');
-            }
-        }
-        
-        // Add entry to activity log
-        function addLogEntry(message, type) {
-            const logEntry = document.createElement('div');
-            logEntry.className = 'log-entry';
-            
-            const iconClass = `log-${type}`;
-            const icon = type === 'success' ? 'check-circle' : 
-                        type === 'warning' ? 'exclamation-triangle' : 
-                        type === 'error' ? 'times-circle' : 'info-circle';
-            
-            logEntry.innerHTML = `
-                <div class="log-icon ${iconClass}">
-                    <i class="fas fa-${icon}"></i>
-                </div>
-                <div class="log-message">${message}</div>
-            `;
-            
-            activityLog.appendChild(logEntry);
-            
-            // Scroll to bottom
-            activityLog.scrollTop = activityLog.scrollHeight;
-        }
-        
-        // Initialize the tool when the page loads
-        window.addEventListener('DOMContentLoaded', init);
 
         // Reinitialize on window resize
-        window.addEventListener('resize', debounce(() => {
-            // Any responsive adjustments needed
-        }, 250));
+        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
     </script>
 </body>
 </html>
