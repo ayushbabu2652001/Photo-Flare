@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Photo Flare - Cloud Storage Integration - Connect your cloud storage accounts for seamless file management.">
-    <meta name="keywords" content="Photo Flare, cloud storage, integration, Google Drive, Dropbox, OneDrive, file management">
-    <title>Cloud Storage Integration - Photo Flare</title>
+    <meta name="description" content="Photo Flare - Advanced Cloud Storage Integration with 100+ AI Features - Connect your cloud storage accounts for AI-powered file management.">
+    <meta name="keywords" content="Photo Flare, cloud storage, integration, AI features, Google Drive, Dropbox, OneDrive, file management, artificial intelligence">
+    <title>Advanced Cloud Storage Integration - Photo Flare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reuse the CSS from the main page */
         :root {
             --primary: #4361ee;
             --primary-dark: #3a56d4;
@@ -48,293 +47,7 @@
             padding: 0 15px;
         }
 
-        /* Loading Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Header - Sticky */
-        .mobile-header {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 0.8rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-        }
-
-        .mobile-header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-nav-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .mobile-nav-btn:hover {
-            background: rgba(67, 97, 238, 0.1);
-        }
-
-        .mobile-nav-btn:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .mobile-logo-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .mobile-logo-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .mobile-header-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .mobile-header-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .mobile-header-btn:hover {
-            background: rgba(67, 97, 238, 0.1);
-        }
-
-        .mobile-header-btn:active {
-            transform: scale(0.95);
-        }
-
-        .mobile-header-btn.upgrade {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-
-        /* Slide-out Sidebar */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 85%;
-            max-width: 300px;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            overflow-y: auto;
-            transition: var(--transition);
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 1.5rem 1rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .sidebar-logo-icon {
-            font-size: 1.8rem;
-            color: var(--primary);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .sidebar-logo-text {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .sidebar-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--gray);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .sidebar-close:hover {
-            background: rgba(0, 0, 0, 0.05);
-            color: var(--dark);
-        }
-
-        .sidebar-close:active {
-            transform: scale(0.95);
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .sidebar-nav ul {
-            list-style: none;
-        }
-
-        .sidebar-nav li {
-            margin-bottom: 0.2rem;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1rem 1.5rem;
-            text-decoration: none;
-            color: var(--dark);
-            transition: var(--transition);
-            font-weight: 500;
-            min-height: 44px;
-        }
-
-        .sidebar-nav a:hover, .sidebar-nav a.active {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-        }
-
-        .sidebar-nav a:active {
-            background: rgba(67, 97, 238, 0.15);
-        }
-
-        .sidebar-nav i {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-        }
-
-        .sidebar-actions {
-            padding: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-            margin-top: 1rem;
-        }
-
-        .sidebar-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 0.9rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            margin-bottom: 0.8rem;
-            border: none;
-            font-size: 1rem;
-            min-height: 44px;
-        }
-
-        .sidebar-btn:last-child {
-            margin-bottom: 0;
-        }
-
-        .sidebar-btn:active {
-            transform: scale(0.98);
-        }
-
-        .sidebar-btn.outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .sidebar-btn.primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-
-        .sidebar-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Desktop Header */
+        /* Header Styles */
         .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -428,6 +141,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -437,7 +151,6 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -456,14 +169,43 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e00);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
+        }
+
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
         /* Hero Section */
         .hero {
-            padding: 2rem 0 1rem;
+            padding: 3rem 0 2rem;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 1.8rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -472,7 +214,7 @@
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 1.2rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
             max-width: 800px;
@@ -484,194 +226,326 @@
             font-size: 0.7rem;
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
-            margin-left: auto;
+            margin-left: 10px;
         }
 
-        /* Tool Section */
-        .tool-section {
-            padding: 2rem 0;
-        }
-
+        /* Tool Container */
         .tool-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .tool-main {
+            max-width: 1200px;
+            margin: 1.5rem auto;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            overflow: hidden;
             animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .tool-header {
-            display: flex;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ai-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--light-gray);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
 
-        .tool-icon-large {
-            font-size: 3rem;
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-            width: 80px;
-            height: 80px;
+        .tool-content {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
+            flex-wrap: wrap;
+            padding: 2rem;
         }
 
-        .tool-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
+        .connect-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            border-right: 1px solid var(--light-gray);
         }
 
-        .tool-description {
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            color: var(--gray);
+        .features-section {
+            flex: 2;
+            min-width: 300px;
+            padding: 1.5rem;
         }
 
-        .tool-features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--light);
+        .connect-area {
+            border: 2px dashed var(--primary);
             border-radius: var(--border-radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
             transition: var(--transition);
+            margin-bottom: 1.5rem;
+            background: rgba(67, 97, 238, 0.05);
         }
 
-        .feature-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
+        .connect-area:hover {
             background: rgba(67, 97, 238, 0.1);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            flex-shrink: 0;
         }
 
-        .feature-content h4 {
+        .connect-area i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .connect-area h3 {
             margin-bottom: 0.5rem;
             color: var(--dark);
+            font-size: 1.2rem;
         }
 
-        .feature-content p {
+        .connect-area p {
             color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
-        .tool-actions {
-            display: flex;
-            flex-direction: column;
+        .cloud-providers {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            min-height: 60px;
-            justify-content: center;
-        }
-
-        .btn-disabled {
-            background: var(--light-gray);
-            color: var(--gray);
-            cursor: not-allowed;
-            border: none;
-        }
-
-        .btn-disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        .tool-sidebar {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .sidebar-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            text-align: center;
-        }
-
-        .storage-providers {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .storage-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
+        .provider-card {
             border: 1px solid var(--light-gray);
             border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .storage-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .storage-icon {
-            font-size: 1.8rem;
-            width: 40px;
+            padding: 1.5rem 1rem;
             text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .storage-name {
+        .provider-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary);
+        }
+
+        .provider-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .provider-name {
             font-weight: 600;
             color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
-        .storage-status {
-            margin-left: auto;
+        .provider-status {
             font-size: 0.8rem;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             background: var(--light-gray);
             color: var(--gray);
+            display: inline-block;
         }
 
-        .storage-status.connected {
+        .provider-status.connected {
             background: rgba(76, 201, 240, 0.2);
             color: var(--success);
         }
 
+        .settings-panel {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .settings-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .settings-panel h3 i {
+            color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* AI Features Grid */
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .ai-feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .ai-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-light);
+        }
+
+        .ai-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .ai-feature-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .ai-feature-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .ai-feature-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-top: 0.8rem;
+        }
+
+        /* Tabs */
+        .features-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .features-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .features-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
         /* Benefits Section */
-        .benefits {
+        .benefits-section {
             padding: 2rem 0;
             background: white;
         }
@@ -696,7 +570,6 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
-            animation: fadeIn 0.5s ease-out;
         }
 
         .benefit-card:hover {
@@ -717,6 +590,38 @@
             font-size: 1.3rem;
             margin-bottom: 1rem;
             color: var(--dark);
+        }
+
+        /* Premium Upsell */
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .premium-upsell h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-feature i {
+            font-size: 1.5rem;
         }
 
         /* Ad Container */
@@ -823,9 +728,33 @@
             transform: translateY(-3px);
         }
 
-        /* Media Queries - Mobile First Approach */
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
 
-        /* Small Devices (576px and up) */
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Media Queries */
         @media (min-width: 576px) {
             .container {
                 padding: 0 20px;
@@ -835,50 +764,29 @@
                 font-size: 2.2rem;
             }
             
-            .tool-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* Medium Devices (768px and up) */
         @media (min-width: 768px) {
-            .mobile-header {
-                display: none;
-            }
-            
-            .desktop-header {
-                display: block;
-            }
-            
             .hero {
-                padding: 3rem 0 1.5rem;
+                padding: 4rem 0 2rem;
             }
             
             .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .tool-header {
+                padding: 3rem;
+            }
+            
+            .tool-header h1 {
                 font-size: 2.5rem;
             }
             
-            .tool-container {
-                flex-direction: row;
-            }
-            
-            .tool-main {
-                flex: 2;
-            }
-            
-            .tool-sidebar {
-                flex: 1;
-            }
-            
-            .tool-actions {
-                flex-direction: row;
-            }
-            
-            .benefits {
+            .benefits-section {
                 padding: 3rem 0;
             }
             
@@ -892,72 +800,47 @@
             }
         }
 
-        /* Large Devices (992px and up) */
         @media (min-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
+            .benefits-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
             
-            .benefits-grid {
+            .premium-features {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
 
-        /* Extra Small Devices (400px and below) */
+        @media (max-width: 767px) {
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .connect-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
         @media (max-width: 400px) {
             .hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             
             .section-title {
                 font-size: 1.5rem;
             }
             
-            .tool-main {
-                padding: 1rem;
-            }
-            
-            .tool-sidebar {
-                padding: 1rem;
-            }
-        }
-
-        /* Show mobile header on small screens */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
-            }
-            
-            .desktop-header {
-                display: none;
+            .ai-features-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <div class="container">
-            <div class="mobile-header-content">
-                <button class="mobile-nav-btn" id="mobileNavBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <a href="index.html" class="mobile-logo">
-                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
-                    <span class="mobile-logo-text">Photo Flare</span>
-                </a>
-                <div class="mobile-header-actions">
-                    <a href="login.html" class="mobile-header-btn">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <a href="subscription.html" class="mobile-header-btn upgrade">
-                        <i class="fas fa-crown"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Desktop Header -->
     <header class="desktop-header">
         <div class="container">
@@ -972,7 +855,7 @@
                         <li><a href="pdf-tools.html">PDF Tools</a></li>
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
-                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                     </ul>
                 </nav>
@@ -984,45 +867,14 @@
         </div>
     </header>
 
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="sidebar-logo">
-                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
-                <span class="sidebar-logo-text">Photo Flare</span>
-            </a>
-            <button class="sidebar-close" id="sidebarClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
-                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
-                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
-                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
-                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
-                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
-            </ul>
-        </nav>
-        <div class="sidebar-actions">
-            <a href="login.html" class="sidebar-btn outline">
-                <i class="fas fa-user"></i> Log In
-            </a>
-            <a href="subscription.html" class="sidebar-btn primary">
-                <i class="fas fa-crown"></i> Upgrade Now
-            </a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>Cloud Storage Integration <span class="premium-badge">PRO</span></h1>
-            <p>Seamlessly connect your cloud storage accounts for easy file management across all your Photo Flare tools.</p>
+            <h1>Advanced Cloud Storage Integration <span class="premium-badge">PRO</span></h1>
+            <p>Connect your cloud storage accounts with 100+ AI-powered features for intelligent file management, organization, and automation.</p>
+            <a href="subscription.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-crown"></i> Unlock All AI Features
+            </a>
         </div>
     </section>
 
@@ -1031,156 +883,398 @@
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
             <div class="ad-space" id="ad-top">
-                <!-- Google AdSense code will be inserted here -->
                 <p>Ad Space (728x90)</p>
             </div>
         </div>
     </div>
 
-    <!-- Tool Section -->
-    <section class="tool-section">
-        <div class="container">
-            <div class="tool-container">
-                <div class="tool-main">
-                    <div class="tool-header">
-                        <div class="tool-icon-large">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <div>
-                            <h2 class="tool-title">Cloud Storage Integration</h2>
-                            <p>Connect your favorite cloud storage services to Photo Flare</p>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-description">
-                        <p>With Cloud Storage Integration, you can directly access your files from Google Drive, Dropbox, OneDrive, and other cloud storage providers without having to download and re-upload them. This premium feature saves you time and ensures your files are always accessible when you need them.</p>
-                    </div>
-                    
-                    <div class="tool-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-sync-alt"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4>Automatic Sync</h4>
-                                <p>Changes made in Photo Flare are automatically synced back to your cloud storage.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-folder-open"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4>Direct Access</h4>
-                                <p>Browse and select files directly from your cloud storage accounts.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4>Secure Connection</h4>
-                                <p>Your data is protected with industry-standard security protocols.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div class="feature-content">
-                                <h4>Fast Processing</h4>
-                                <p>Optimized for speed even when working with large cloud-based files.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tool-actions">
-                        <a href="subscription.html" class="btn btn-primary btn-large">
-                            <i class="fas fa-crown"></i> Upgrade to Pro
-                        </a>
-                        <button class="btn btn-outline btn-large btn-disabled">
-                            <i class="fas fa-cloud"></i> Connect Cloud Storage
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>Cloud Storage Integration <span class="premium-badge">PRO</span></h1>
+                <p>Connect your cloud storage accounts for seamless file management across all your Photo Flare tools with AI-powered automation.</p>
+                <div class="ai-badge">
+                    <i class="fas fa-robot"></i>
+                    <span>Powered by 100+ AI Features</span>
+                </div>
+            </div>
+            
+            <div class="tool-content">
+                <!-- Connect Section -->
+                <div class="connect-section">
+                    <div class="connect-area" id="connectArea">
+                        <i class="fas fa-cloud"></i>
+                        <h3>Connect Cloud Storage</h3>
+                        <p>Select your cloud storage provider to get started</p>
+                        <button class="btn btn-primary" id="connectBtn">
+                            <i class="fas fa-plug"></i> Connect Account
                         </button>
                     </div>
                     
-                    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(67, 97, 238, 0.05); border-radius: var(--border-radius);">
-                        <h4 style="margin-bottom: 1rem; color: var(--primary);"><i class="fas fa-info-circle"></i> Premium Feature</h4>
-                        <p>Cloud Storage Integration is available exclusively to Photo Flare Pro subscribers. Upgrade now to access this and other premium features.</p>
+                    <div class="cloud-providers">
+                        <div class="provider-card" data-provider="google-drive">
+                            <div class="provider-icon" style="color: #4285F4;">
+                                <i class="fab fa-google-drive"></i>
+                            </div>
+                            <div class="provider-name">Google Drive</div>
+                            <div class="provider-status">Connect</div>
+                        </div>
+                        
+                        <div class="provider-card" data-provider="dropbox">
+                            <div class="provider-icon" style="color: #0061FF;">
+                                <i class="fab fa-dropbox"></i>
+                            </div>
+                            <div class="provider-name">Dropbox</div>
+                            <div class="provider-status">Connect</div>
+                        </div>
+                        
+                        <div class="provider-card" data-provider="onedrive">
+                            <div class="provider-icon" style="color: #0078D7;">
+                                <i class="fab fa-microsoft"></i>
+                            </div>
+                            <div class="provider-name">OneDrive</div>
+                            <div class="provider-status">Connect</div>
+                        </div>
+                        
+                        <div class="provider-card" data-provider="box">
+                            <div class="provider-icon" style="color: #00AFF0;">
+                                <i class="fab fa-box"></i>
+                            </div>
+                            <div class="provider-name">Box</div>
+                            <div class="provider-status">Connect</div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-panel">
+                        <h3><i class="fas fa-cog"></i> Integration Settings</h3>
+                        
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="autoSync" checked>
+                                <label for="autoSync">Auto-sync changes to cloud storage</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="smartOrganization">
+                                <label for="smartOrganization">AI-powered file organization</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="backupEnabled">
+                                <label for="backupEnabled">Automatic backup to cloud</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="collaborationTools">
+                                <label for="collaborationTools">Enable collaboration features</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-success" id="saveSettingsBtn">
+                            <i class="fas fa-save"></i> Save Settings
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
                     </div>
                 </div>
                 
-                <div class="tool-sidebar">
-                    <h3 class="sidebar-title">Supported Providers</h3>
-                    <div class="storage-providers">
-                        <div class="storage-item">
-                            <div class="storage-icon" style="color: #4285F4;">
-                                <i class="fab fa-google-drive"></i>
+                <!-- Features Section -->
+                <div class="features-section">
+                    <div class="features-tabs">
+                        <div class="features-tab active" data-tab="ai-features">AI Features</div>
+                        <div class="features-tab" data-tab="file-management">File Management</div>
+                        <div class="features-tab" data-tab="automation">Automation</div>
+                        <div class="features-tab" data-tab="security">Security</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="ai-features">
+                        <h3>100+ AI-Powered Features</h3>
+                        <p>Intelligent cloud storage management with advanced AI capabilities</p>
+                        
+                        <div class="ai-features-grid">
+                            <!-- AI Feature Cards -->
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Smart File Categorization</h4>
+                                <p class="ai-feature-description">AI automatically categorizes files based on content, type, and usage patterns.</p>
+                                <span class="ai-feature-badge">AI</span>
                             </div>
-                            <div class="storage-name">Google Drive</div>
-                            <div class="storage-status">Available</div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Intelligent Search</h4>
+                                <p class="ai-feature-description">Find files using natural language queries and visual search capabilities.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Auto-Tagging</h4>
+                                <p class="ai-feature-description">Automatically tag files with relevant keywords for better organization.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Usage Analytics</h4>
+                                <p class="ai-feature-description">Get insights into your storage usage and access patterns with AI analysis.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Smart Sync</h4>
+                                <p class="ai-feature-description">AI determines which files to keep locally and which to store in the cloud.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Security Monitoring</h4>
+                                <p class="ai-feature-description">AI-powered security monitoring detects suspicious activity in your cloud storage.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-magic"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Content Enhancement</h4>
+                                <p class="ai-feature-description">Automatically enhance images and documents stored in your cloud.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Duplicate Detection</h4>
+                                <p class="ai-feature-description">AI identifies and helps manage duplicate files across your cloud storage.</p>
+                                <span class="ai-feature-badge">AI</span>
+                            </div>
                         </div>
                         
-                        <div class="storage-item">
-                            <div class="storage-icon" style="color: #0061FF;">
-                                <i class="fab fa-dropbox"></i>
-                            </div>
-                            <div class="storage-name">Dropbox</div>
-                            <div class="storage-status">Available</div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <a href="ai-features.html" class="btn btn-outline">
+                                <i class="fas fa-list"></i> View All 100+ AI Features
+                            </a>
                         </div>
+                    </div>
+                    
+                    <div class="tab-content" id="file-management">
+                        <h3>Advanced File Management</h3>
+                        <p>Powerful tools for organizing and managing your cloud files</p>
                         
-                        <div class="storage-item">
-                            <div class="storage-icon" style="color: #0078D7;">
-                                <i class="fab fa-microsoft"></i>
+                        <div class="ai-features-grid">
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-folder"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Smart Folders</h4>
+                                <p class="ai-feature-description">Dynamic folders that automatically organize files based on rules and AI.</p>
                             </div>
-                            <div class="storage-name">OneDrive</div>
-                            <div class="storage-status">Available</div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Advanced Tagging</h4>
+                                <p class="ai-feature-description">Organize files with custom tags and smart tag suggestions.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Advanced Search</h4>
+                                <p class="ai-feature-description">Search across all connected cloud storage with filters and saved searches.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-sort"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Bulk Operations</h4>
+                                <p class="ai-feature-description">Perform actions on multiple files across different cloud providers.</p>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="tab-content" id="automation">
+                        <h3>Automation Features</h3>
+                        <p>Streamline your workflow with powerful automation tools</p>
                         
-                        <div class="storage-item">
-                            <div class="storage-icon" style="color: #FF9900;">
-                                <i class="fab fa-amazon"></i>
+                        <div class="ai-features-grid">
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Workflow Automation</h4>
+                                <p class="ai-feature-description">Create custom workflows that automate file processing across cloud storage.</p>
                             </div>
-                            <div class="storage-name">Amazon Drive</div>
-                            <div class="storage-status">Coming Soon</div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4 class="ai-feature-title">AI Assistant</h4>
+                                <p class="ai-feature-description">AI-powered assistant that helps organize and manage your cloud files.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-sync"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Smart Sync Rules</h4>
+                                <p class="ai-feature-description">Set up intelligent sync rules based on file type, size, and usage.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Smart Notifications</h4>
+                                <p class="ai-feature-description">Get notified about important changes and activities in your cloud storage.</p>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <div class="tab-content" id="security">
+                        <h3>Security Features</h3>
+                        <p>Enterprise-grade security for your cloud storage integration</p>
                         
-                        <div class="storage-item">
-                            <div class="storage-icon" style="color: #00AFF0;">
-                                <i class="fab fa-box"></i>
+                        <div class="ai-features-grid">
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <h4 class="ai-feature-title">End-to-End Encryption</h4>
+                                <p class="ai-feature-description">All data transferred between Photo Flare and your cloud is encrypted.</p>
                             </div>
-                            <div class="storage-name">Box</div>
-                            <div class="storage-status">Coming Soon</div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Access Controls</h4>
+                                <p class="ai-feature-description">Granular permissions for team members and collaborators.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Activity Logging</h4>
+                                <p class="ai-feature-description">Comprehensive logs of all activities across your connected cloud storage.</p>
+                            </div>
+                            
+                            <div class="ai-feature-card">
+                                <div class="ai-feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4 class="ai-feature-title">Threat Detection</h4>
+                                <p class="ai-feature-description">AI-powered threat detection monitors for suspicious activities.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">AI Features</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Cloud Providers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Storage Capacity</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">256-bit</div>
+                    <div class="stat-label">Encryption</div>
+                </div>
+            </div>
+            
+            <!-- Premium Upsell -->
+            <div class="premium-upsell">
+                <h3>Unlock Full Potential with Photo Flare Pro</h3>
+                <p>Upgrade to access all 100+ AI features and remove limitations</p>
+                
+                <div class="premium-features">
+                    <div class="premium-feature">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>Faster Processing</h4>
+                            <p>Priority queue and advanced algorithms</p>
+                        </div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-infinity"></i>
+                        <div>
+                            <h4>Unlimited Storage</h4>
+                            <p>Connect unlimited cloud storage accounts</p>
+                        </div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h4>All AI Features</h4>
+                            <p>Access to all 100+ AI-powered features</p>
+                        </div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>Priority Support</h4>
+                            <p>24/7 dedicated support team</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="pricing.html" class="btn btn-warning btn-lg">
+                    <i class="fas fa-crown"></i> Upgrade to Pro - Only $4/month
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
 
     <!-- Ad Space -->
     <div class="container">
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
             <div class="ad-space" id="ad-middle">
-                <!-- Google AdSense code will be inserted here -->
                 <p>Ad Space (728x90)</p>
             </div>
         </div>
     </div>
 
     <!-- Benefits Section -->
-    <section class="benefits">
+    <section class="benefits-section">
         <div class="container">
-            <h2 class="section-title">Benefits of Cloud Integration</h2>
+            <h2 class="section-title">Benefits of Cloud Storage Integration</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <i class="fas fa-save benefit-icon"></i>
                     <h3 class="benefit-title">Save Time</h3>
-                    <p>No need to download and re-upload files between your cloud storage and Photo Flare.</p>
+                    <p>Access files directly from cloud storage without downloading and re-uploading.</p>
                 </div>
                 <div class="benefit-card">
                     <i class="fas fa-sync-alt benefit-icon"></i>
@@ -1241,62 +1335,145 @@
     </footer>
 
     <script>
-        // Debounce function for performance
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
+        // Tab functionality
+        const featuresTabs = document.querySelectorAll('.features-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
-
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+        featuresTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                featuresTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === tabName) {
+                        content.classList.add('active');
+                    }
+                });
             });
-        }
-
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
         });
 
-        // Initialize tool display on page load
-        function initializeToolDisplay() {
-            // Any initialization code for this specific page
+        // Cloud provider connection
+        const providerCards = document.querySelectorAll('.provider-card');
+        const connectBtn = document.getElementById('connectBtn');
+        const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading';
+        loadingIndicator.innerHTML = `
+            <div class="spinner"></div>
+            <p>Connecting to cloud storage...</p>
+        `;
+
+        let selectedProvider = null;
+
+        providerCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Deselect all providers
+                providerCards.forEach(c => {
+                    c.style.borderColor = '';
+                    c.querySelector('.provider-status').textContent = 'Connect';
+                    c.querySelector('.provider-status').className = 'provider-status';
+                });
+                
+                // Select this provider
+                card.style.borderColor = 'var(--primary)';
+                card.querySelector('.provider-status').textContent = 'Selected';
+                card.querySelector('.provider-status').className = 'provider-status connected';
+                
+                selectedProvider = card.getAttribute('data-provider');
+                connectBtn.disabled = false;
+            });
+        });
+
+        connectBtn.addEventListener('click', () => {
+            if (!selectedProvider) {
+                alert('Please select a cloud storage provider first.');
+                return;
+            }
+            
+            // Show loading indicator
+            document.querySelector('.connect-area').appendChild(loadingIndicator);
+            loadingIndicator.classList.add('active');
+            connectBtn.disabled = true;
+            
+            // Simulate connection process
+            setTimeout(() => {
+                loadingIndicator.classList.remove('active');
+                loadingIndicator.remove();
+                
+                // Update UI to show connected state
+                document.querySelector(`[data-provider="${selectedProvider}"] .provider-status`).textContent = 'Connected';
+                
+                // Enable save settings button
+                saveSettingsBtn.disabled = false;
+                
+                alert(`Successfully connected to ${selectedProvider.replace('-', ' ').toUpperCase()}!`);
+            }, 2000);
+        });
+
+        saveSettingsBtn.addEventListener('click', () => {
+            // Show success message
+            const originalText = saveSettingsBtn.innerHTML;
+            saveSettingsBtn.innerHTML = '<i class="fas fa-check"></i> Settings Saved!';
+            saveSettingsBtn.disabled = true;
+            
+            setTimeout(() => {
+                saveSettingsBtn.innerHTML = originalText;
+                saveSettingsBtn.disabled = false;
+            }, 2000);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            // Reset all selections
+            providerCards.forEach(card => {
+                card.style.borderColor = '';
+                card.querySelector('.provider-status').textContent = 'Connect';
+                card.querySelector('.provider-status').className = 'provider-status';
+            });
+            
+            selectedProvider = null;
+            connectBtn.disabled = true;
+            saveSettingsBtn.disabled = true;
+            
+            // Reset checkboxes
+            document.getElementById('autoSync').checked = true;
+            document.getElementById('smartOrganization').checked = false;
+            document.getElementById('backupEnabled').checked = false;
+            document.getElementById('collaborationTools').checked = false;
+        });
+
+        // Check if user has premium access
+        function checkPremiumAccess() {
+            // In a real implementation, this would check user's subscription status
+            return false; // Default to false for demo
         }
 
-        // Reinitialize on window resize
-        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
+        // Initialize tool
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user has premium access
+            const hasPremium = checkPremiumAccess();
+            
+            if (!hasPremium) {
+                // Show premium features as available but with upsell
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'inline-block';
+                });
+                
+                // Show upsell message
+                document.querySelector('.premium-upsell').style.display = 'block';
+            } else {
+                // Hide premium badges and upsell for premium users
+                document.querySelectorAll('.premium-badge').forEach(badge => {
+                    badge.style.display = 'none';
+                });
+                document.querySelector('.premium-upsell').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
