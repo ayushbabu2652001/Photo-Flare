@@ -587,6 +587,11 @@
             background: rgba(76, 201, 240, 0.05);
         }
 
+        .cloud-provider.connecting {
+            border-color: var(--warning);
+            background: rgba(248, 150, 30, 0.05);
+        }
+
         .cloud-provider-icon {
             font-size: 2rem;
             margin-bottom: 0.8rem;
@@ -621,6 +626,17 @@
 
         .connection-status.connected {
             background: var(--success);
+        }
+
+        .connection-status.connecting {
+            background: var(--warning);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
         .sync-controls {
@@ -713,6 +729,7 @@
             opacity: 0;
             pointer-events: none;
             transition: var(--transition);
+            z-index: 10;
         }
 
         .premium-feature:hover .premium-overlay {
@@ -2053,6 +2070,10 @@
             
             if (!isPremiumUser) {
                 upgradePrompt.classList.add('active');
+                // Disable premium features for non-premium users
+                document.querySelectorAll('.premium-feature input, .premium-feature select').forEach(element => {
+                    element.disabled = true;
+                });
             } else {
                 upgradePrompt.classList.remove('active');
             }
@@ -2068,7 +2089,12 @@
         function setupEventListeners() {
             // Cloud provider connections
             cloudProviders.forEach(provider => {
-                provider.addEventListener('click', () => connectProvider(provider));
+                provider.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on the upgrade button inside premium overlay
+                    if (!e.target.closest('.premium-overlay a')) {
+                        connectProvider(provider);
+                    }
+                });
             });
             
             // Button events
@@ -2093,7 +2119,20 @@
             
             // Check if provider is premium
             if (providerElement.classList.contains('premium-feature') && !isPremiumUser) {
-                alert(`Connecting to ${provider} is a premium feature. Please upgrade to use this provider.`);
+                // Show premium overlay
+                const overlay = providerElement.querySelector('.premium-overlay');
+                if (overlay) {
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'auto';
+                    
+                    // Hide overlay after a delay if user doesn't interact
+                    setTimeout(() => {
+                        if (overlay.style.opacity === '1') {
+                            overlay.style.opacity = '0';
+                            overlay.style.pointerEvents = 'none';
+                        }
+                    }, 5000);
+                }
                 return;
             }
             
@@ -2103,17 +2142,38 @@
                 return;
             }
             
+            // Show connecting state
+            providerElement.classList.add('connecting');
+            providerElement.querySelector('.connection-status').classList.add('connecting');
+            providerElement.querySelector('.provider-status').textContent = 'Connecting...';
+            
             // In a real implementation, this would open OAuth flow
             // For demo purposes, we'll simulate connection
-            simulateProviderConnection(provider, () => {
-                // Connection successful
-                connectedProviders.push(provider);
-                providerElement.classList.add('connected');
-                providerElement.querySelector('.connection-status').classList.add('connected');
-                providerElement.querySelector('.provider-status').textContent = 'Connected';
-                
-                updateConnectionSummary();
-                addLogEntry(`Connected to ${getProviderName(provider)}`, 'success');
+            simulateProviderConnection(provider, (success) => {
+                if (success) {
+                    // Connection successful
+                    connectedProviders.push(provider);
+                    providerElement.classList.remove('connecting');
+                    providerElement.classList.add('connected');
+                    providerElement.querySelector('.connection-status').classList.remove('connecting');
+                    providerElement.querySelector('.connection-status').classList.add('connected');
+                    providerElement.querySelector('.provider-status').textContent = 'Connected';
+                    
+                    updateConnectionSummary();
+                    addLogEntry(`Connected to ${getProviderName(provider)}`, 'success');
+                } else {
+                    // Connection failed
+                    providerElement.classList.remove('connecting');
+                    providerElement.querySelector('.connection-status').classList.remove('connecting');
+                    providerElement.querySelector('.provider-status').textContent = 'Connection failed';
+                    
+                    addLogEntry(`Failed to connect to ${getProviderName(provider)}`, 'error');
+                    
+                    // Reset after a delay
+                    setTimeout(() => {
+                        providerElement.querySelector('.provider-status').textContent = 'Not connected';
+                    }, 2000);
+                }
             });
         }
         
@@ -2153,13 +2213,11 @@
         
         // Simulate provider connection (in a real app, this would be OAuth flow)
         function simulateProviderConnection(provider, callback) {
-            // Show connecting state
-            const providerElement = document.getElementById(provider);
-            providerElement.querySelector('.provider-status').textContent = 'Connecting...';
-            
             // Simulate connection delay
             setTimeout(() => {
-                callback();
+                // 90% success rate for demo purposes
+                const success = Math.random() > 0.1;
+                callback(success);
             }, 1500);
         }
         
@@ -2267,6 +2325,7 @@
                         clearInterval(syncInterval);
                         addLogEntry('All files synchronized across connected clouds', 'success');
                         pauseSyncBtn.disabled = true;
+                        isSyncing = false;
                     }
                 }
             }, 500); // Update every 500ms
@@ -2335,9 +2394,14 @@
         function refreshFileList() {
             addLogEntry('Refreshing file list...', 'info');
             
+            // Show loading state
+            const fileGrid = document.getElementById('fileGrid');
+            fileGrid.style.opacity = '0.7';
+            
             // In a real implementation, this would fetch the latest file list
             // For demo purposes, we'll just show a message
             setTimeout(() => {
+                fileGrid.style.opacity = '1';
                 addLogEntry('File list updated', 'success');
             }, 1000);
         }
@@ -2345,7 +2409,26 @@
         // Upload file
         function uploadFile() {
             // In a real implementation, this would open a file picker
-            alert('Upload dialog would open here. In a real implementation, this would allow you to select files to upload to the current cloud location.');
+            // For demo purposes, we'll simulate file upload
+            const fileName = `file-${Date.now()}.txt`;
+            addLogEntry(`Uploading ${fileName}...`, 'info');
+            
+            setTimeout(() => {
+                addLogEntry(`Successfully uploaded ${fileName}`, 'success');
+                
+                // Add to file grid (for demo purposes)
+                const newFile = document.createElement('div');
+                newFile.className = 'file-item';
+                newFile.dataset.type = 'file';
+                newFile.dataset.name = fileName;
+                newFile.innerHTML = `
+                    <div class="file-icon">
+                        <i class="fas fa-file"></i>
+                    </div>
+                    <div class="file-name">${fileName}</div>
+                `;
+                fileGrid.appendChild(newFile);
+            }, 1500);
         }
         
         // Create new folder
@@ -2388,9 +2471,16 @@
             
             addLogEntry(`Starting transfer from ${getProviderName(source)} to ${getProviderName(destination)}`, 'info');
             
+            // Show loading state on transfer button
+            const originalText = transferBtn.innerHTML;
+            transferBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Transferring...';
+            transferBtn.disabled = true;
+            
             // In a real implementation, this would start the actual transfer
             // For demo purposes, we'll simulate the transfer
             setTimeout(() => {
+                transferBtn.innerHTML = originalText;
+                transferBtn.disabled = false;
                 addLogEntry('Transfer completed successfully', 'success');
             }, 2000);
         }
@@ -2398,7 +2488,10 @@
         // Schedule transfer
         function scheduleTransfer() {
             // In a real implementation, this would open a scheduling dialog
-            alert('Scheduling dialog would open here. In a real implementation, this would allow you to schedule transfers for a specific time.');
+            const scheduleTime = prompt('Enter schedule time (e.g., "Tomorrow 10:00 AM"):');
+            if (scheduleTime) {
+                addLogEntry(`Transfer scheduled for ${scheduleTime}`, 'info');
+            }
         }
         
         // Add entry to activity log
