@@ -44,10 +44,297 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        header {
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -55,12 +342,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -68,6 +357,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -86,10 +376,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
@@ -99,6 +397,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -108,12 +407,14 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .btn {
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem 1rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -122,8 +423,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
             border: none;
-            font-size: 0.95rem;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -159,6 +467,18 @@
             box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
         }
 
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
         .btn-warning {
             background: linear-gradient(135deg, var(--warning), #ff9e00);
             color: white;
@@ -171,78 +491,77 @@
             box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
         }
 
-        .premium-badge {
-            background: linear-gradient(135deg, var(--warning), var(--accent));
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            margin-left: auto;
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
         }
 
+        /* Tool Container */
         .tool-container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .tool-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
         }
 
         .tool-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .tool-header p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
         .tool-content {
             display: flex;
             flex-wrap: wrap;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .upload-section {
             flex: 1;
             min-width: 300px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-right: 1px solid var(--light-gray);
         }
 
         .options-section {
             flex: 1;
             min-width: 300px;
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
 
         .upload-area {
             border: 2px dashed var(--primary);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
-            margin-bottom: 1.5rem;
-            transition: var(--transition);
             cursor: pointer;
-        }
-
-        .upload-area:hover {
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
             background: rgba(67, 97, 238, 0.05);
         }
 
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
         .upload-area i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -250,17 +569,23 @@
         .upload-area h3 {
             margin-bottom: 0.5rem;
             color: var(--dark);
+            font-size: 1.2rem;
         }
 
         .upload-area p {
             color: var(--gray);
             margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .file-input {
+            display: none;
         }
 
         .file-info {
             background: var(--light);
-            padding: 1rem;
             border-radius: var(--border-radius);
+            padding: 1rem;
             margin-top: 1rem;
             display: none;
         }
@@ -270,23 +595,22 @@
         }
 
         .file-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 0.5rem;
         }
 
-        .file-size {
-            color: var(--gray);
+        .file-details {
             font-size: 0.9rem;
+            color: var(--gray);
         }
 
         .progress-bar {
             height: 6px;
             background: var(--light-gray);
             border-radius: 3px;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
             overflow: hidden;
         }
 
@@ -297,20 +621,36 @@
             transition: width 0.5s ease;
         }
 
-        .option-group {
-            margin-bottom: 1.5rem;
+        .settings-panel {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            margin-top: 1.5rem;
         }
 
-        .option-group h3 {
+        .settings-panel h3 {
             margin-bottom: 1rem;
             color: var(--dark);
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.1rem;
         }
 
-        .option-group h3 i {
+        .settings-panel h3 i {
             color: var(--primary);
+        }
+
+        .setting-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .setting-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
         }
 
         .checkbox-group {
@@ -333,6 +673,7 @@
 
         .checkbox-item label {
             cursor: pointer;
+            margin-bottom: 0;
         }
 
         .radio-group {
@@ -355,6 +696,7 @@
 
         .radio-item label {
             cursor: pointer;
+            margin-bottom: 0;
         }
 
         .select-group {
@@ -379,8 +721,8 @@
 
         .action-buttons {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
         .action-buttons .btn {
@@ -389,7 +731,7 @@
         }
 
         .preview-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             display: none;
         }
 
@@ -449,9 +791,9 @@
         }
 
         .download-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background: var(--light);
             border-radius: var(--border-radius);
             display: none;
@@ -466,7 +808,7 @@
             justify-content: space-between;
             align-items: center;
             background: white;
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: var(--border-radius);
             margin-bottom: 1.5rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -486,31 +828,104 @@
             font-size: 0.9rem;
         }
 
+        .batch-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .batch-section h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .batch-section h3 i {
+            color: var(--primary);
+        }
+
+        .batch-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .batch-files {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .batch-file {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .batch-file img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            background: var(--light);
+        }
+
+        .batch-file .file-name {
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            text-align: center;
+            background: var(--light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .batch-file .remove-file {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(230, 57, 70, 0.8);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
         .features-section {
-            padding: 4rem 0;
+            padding: 2rem 0;
             background: white;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.7rem;
             color: var(--dark);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .feature-card {
             background: var(--light);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: var(--border-radius);
             text-align: center;
             transition: var(--transition);
             border: 1px solid transparent;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .feature-card:hover {
@@ -520,7 +935,7 @@
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -533,38 +948,109 @@
             color: var(--dark);
         }
 
-        .premium-upsell {
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .premium-badge {
             background: linear-gradient(135deg, var(--warning), var(--accent));
             color: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
             text-align: center;
-            margin: 2rem 0;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Ad Container */
+        .ad-container {
+            margin: 1.5rem 0;
+            text-align: center;
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
         }
 
-        .premium-upsell h2 {
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .premium-upsell p {
-            margin-bottom: 1.5rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
         }
 
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 2rem 0 1rem;
         }
 
         .footer-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-logo {
@@ -576,24 +1062,28 @@
         }
 
         .footer-logo .logo-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .footer-logo .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
+            padding: 0.3rem 0.5rem;
+            white-space: nowrap;
         }
 
         .footer-links a:hover {
@@ -610,13 +1100,13 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 1rem;
         }
 
         .social-link {
             color: #adb5bd;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: var(--transition);
         }
 
@@ -625,46 +1115,162 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .tool-content {
-                flex-direction: column;
-            }
-            
-            .upload-section {
-                border-right: none;
-                border-bottom: 1px solid var(--light-gray);
-            }
+        /* Premium Upsell */
+        .premium-upsell {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 1.5rem;
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .header-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .header-actions .btn {
-                width: 100%;
-                justify-content: center;
+        .premium-upsell h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .premium-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .premium-feature i {
+            font-size: 1.5rem;
+        }
+
+        /* Media Queries - Mobile First Approach */
+
+        /* Small Devices (576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
             }
             
             .tool-header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .premium-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Medium Devices (768px and up) */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+            
+            .tool-header {
+                padding: 2rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tool-header p {
+                font-size: 1.1rem;
+            }
+            
+            .tool-content {
+                padding: 2rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .options-section {
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 3rem 2rem;
+            }
+            
+            .upload-area i {
+                font-size: 3rem;
+            }
+            
+            .settings-panel {
+                padding: 1.5rem;
+            }
+            
+            .download-section {
+                padding: 2rem;
+            }
+            
+            .features-section {
+                padding: 3rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .premium-upsell {
+                padding: 2rem;
+            }
+            
+            .premium-upsell h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Large Devices (992px and up) */
+        @media (min-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .premium-features {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .tool-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 1.5rem 1rem;
             }
             
             .action-buttons {
                 flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                min-width: 100%;
             }
             
             .download-info {
@@ -678,32 +1284,145 @@
             }
         }
 
-        @media (max-width: 576px) {
-            .tool-header {
-                padding: 1.5rem;
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
             }
             
             .tool-content {
-                padding: 1rem;
-            }
-            
-            .upload-area {
-                padding: 2rem 1rem;
-            }
-            
-            .preview-tabs {
                 flex-direction: column;
             }
             
-            .preview-tab {
-                text-align: center;
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+        }
+
+        /* Special media query for when viewing desktop site on mobile */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-header {
+                padding: 0.8rem 0;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 0.7rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+            }
+        }
+
+        /* For very small desktop screens */
+        @media (min-width: 768px) and (max-width: 900px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                margin-left: auto;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -713,20 +1432,65 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">All Tools</a></li>
-                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="pdf-tools.html" class="active">PDF Tools</a></li>
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
-                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
                     <a href="login.html" class="btn btn-outline">Log In</a>
-                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html" class="active"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Tool Container -->
     <div class="container">
@@ -737,13 +1501,17 @@
             </div>
             
             <div class="tool-content">
+                <!-- Upload Section -->
                 <div class="upload-section">
                     <div class="upload-area" id="uploadArea">
                         <i class="fas fa-file-pdf"></i>
                         <h3>Upload PDF File</h3>
                         <p>Drag & drop your PDF file here or click to browse</p>
-                        <p class="file-types">Supports: PDF (Max: 100MB)</p>
-                        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                        <p class="tooltip">Supports: PDF (Max: 100MB)
+                            <span class="tooltiptext">Maximum file size: 10MB (Free) / 100MB (Pro)</span>
+                        </p>
+                        <input type="file" id="fileInput" class="file-input" accept=".pdf">
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
                     </div>
                     
                     <div class="file-info" id="fileInfo">
@@ -751,136 +1519,210 @@
                             <span id="fileName">document.pdf</span>
                             <i class="fas fa-times" id="removeFile" style="cursor: pointer;"></i>
                         </div>
-                        <div class="file-size" id="fileSize">0 KB</div>
+                        <div class="file-details" id="fileSize">0 KB</div>
                         <div class="progress-bar">
                             <div class="progress" id="uploadProgress"></div>
                         </div>
                     </div>
                     
-                    <div class="premium-upsell">
-                        <h2>Unlock Advanced Features</h2>
-                        <p>Upgrade to Photo Flare Pro to access OCR technology, batch processing, and advanced table detection for perfect PDF to Excel conversions.</p>
-                        <a href="pricing.html" class="btn btn-warning">Upgrade Now</a>
+                    <div class="settings-panel">
+                        <h3><i class="fas fa-cog"></i> Conversion Options</h3>
+                        
+                        <div class="setting-group">
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="ocrOption" checked>
+                                    <label for="ocrOption">Use OCR for scanned PDFs</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="detectTables" checked>
+                                    <label for="detectTables">Auto-detect tables</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="preserveFormatting">
+                                    <label for="preserveFormatting">Preserve formatting</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="extractImages">
+                                    <label for="extractImages">Extract images to separate folder</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h3><i class="fas fa-table"></i> Table Detection</h3>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" id="autoDetect" name="detectionMode" checked>
+                                    <label for="autoDetect">Auto-detect tables (Recommended)</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="manualSelect" name="detectionMode">
+                                    <label for="manualSelect">Manually select table areas</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h3><i class="fas fa-file-excel"></i> Excel Output</h3>
+                            <div class="select-group">
+                                <label for="outputFormat">Output Format</label>
+                                <select id="outputFormat">
+                                    <option value="xlsx">Excel Workbook (.xlsx)</option>
+                                    <option value="xls">Excel 97-2003 (.xls)</option>
+                                    <option value="csv">CSV (.csv)</option>
+                                </select>
+                            </div>
+                            <div class="select-group">
+                                <label for="pageRange">Page Range</label>
+                                <select id="pageRange">
+                                    <option value="all">All Pages</option>
+                                    <option value="current">Current Page Only</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="convertBtn" style="width: 100%; margin-top: 1rem;" disabled>
+                            <i class="fas fa-sync-alt"></i> Convert to Excel
+                        </button>
+                    </div>
+                    
+                    <!-- Batch Conversion Section -->
+                    <div class="batch-section">
+                        <h3><i class="fas fa-layer-group"></i> Batch Conversion <span class="premium-badge">PRO</span></h3>
+                        <div class="batch-upload">
+                            <p>Convert multiple PDF files at once (Pro feature)</p>
+                            <div class="batch-files" id="batchFiles">
+                                <!-- Batch files will be added here -->
+                            </div>
+                            <button class="btn btn-outline" id="addBatchBtn" disabled>
+                                <i class="fas fa-plus"></i> Add More PDFs
+                            </button>
+                            <button class="btn btn-success" id="convertBatchBtn" disabled>
+                                <i class="fas fa-sync-alt"></i> Convert All
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
+                <!-- Options Section -->
                 <div class="options-section">
-                    <div class="option-group">
-                        <h3><i class="fas fa-cog"></i> Conversion Options</h3>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="ocrOption" checked>
-                                <label for="ocrOption">Use OCR for scanned PDFs</label>
+                    <div class="loading" id="loadingIndicator">
+                        <div class="spinner"></div>
+                        <p>Converting your PDF to Excel...</p>
+                        <p id="processingProgress">Processing: 0%</p>
+                    </div>
+                    
+                    <div class="preview-section" id="previewSection">
+                        <div class="preview-tabs">
+                            <div class="preview-tab active" data-tab="original">Original PDF</div>
+                            <div class="preview-tab" data-tab="excel">Excel Preview</div>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-tab-content active" id="originalTab">
+                                <p>PDF preview will appear here after upload.</p>
                             </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="detectTables" checked>
-                                <label for="detectTables">Auto-detect tables</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="preserveFormatting">
-                                <label for="preserveFormatting">Preserve formatting</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="extractImages">
-                                <label for="extractImages">Extract images to separate folder</label>
+                            <div class="preview-tab-content" id="excelTab">
+                                <table class="preview-table" id="excelPreview">
+                                    <thead>
+                                        <tr>
+                                            <th>Column A</th>
+                                            <th>Column B</th>
+                                            <th>Column C</th>
+                                            <th>Column D</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sample data 1</td>
+                                            <td>Sample data 2</td>
+                                            <td>Sample data 3</td>
+                                            <td>Sample data 4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sample data 5</td>
+                                            <td>Sample data 6</td>
+                                            <td>Sample data 7</td>
+                                            <td>Sample data 8</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="option-group">
-                        <h3><i class="fas fa-table"></i> Table Detection</h3>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="autoDetect" name="detectionMode" checked>
-                                <label for="autoDetect">Auto-detect tables (Recommended)</label>
+                    <div class="download-section" id="downloadSection">
+                        <div class="download-info">
+                            <div class="file-details">
+                                <h3>Conversion Complete!</h3>
+                                <p>Your PDF has been successfully converted to Excel format.</p>
                             </div>
-                            <div class="radio-item">
-                                <input type="radio" id="manualSelect" name="detectionMode">
-                                <label for="manualSelect">Manually select table areas</label>
-                            </div>
+                            <button class="btn btn-success" id="downloadBtn">
+                                <i class="fas fa-download"></i> Download Excel File
+                            </button>
                         </div>
+                        <p>Need to convert another file? <a href="#" id="convertAnother">Convert another PDF</a></p>
                     </div>
                     
-                    <div class="option-group">
-                        <h3><i class="fas fa-file-excel"></i> Excel Output</h3>
-                        <div class="select-group">
-                            <label for="outputFormat">Output Format</label>
-                            <select id="outputFormat">
-                                <option value="xlsx">Excel Workbook (.xlsx)</option>
-                                <option value="xls">Excel 97-2003 (.xls)</option>
-                                <option value="csv">CSV (.csv)</option>
-                            </select>
-                        </div>
-                        <div class="select-group">
-                            <label for="pageRange">Page Range</label>
-                            <select id="pageRange">
-                                <option value="all">All Pages</option>
-                                <option value="current">Current Page Only</option>
-                                <option value="custom">Custom Range</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" id="convertBtn" disabled>
-                            <i class="fas fa-sync-alt"></i> Convert to Excel
-                        </button>
-                        <button class="btn btn-outline" id="resetBtn">
-                            <i class="fas fa-redo"></i> Reset
-                        </button>
+                    <div id="emptyState">
+                        <i class="fas fa-file-excel" style="font-size: 4rem; color: var(--light-gray); margin-bottom: 1rem;"></i>
+                        <h3>No PDF Uploaded</h3>
+                        <p>Upload a PDF file to see the preview and conversion results</p>
                     </div>
                 </div>
             </div>
             
-            <div class="preview-section" id="previewSection">
-                <div class="preview-tabs">
-                    <div class="preview-tab active" data-tab="original">Original PDF</div>
-                    <div class="preview-tab" data-tab="excel">Excel Preview</div>
-                </div>
-                <div class="preview-content">
-                    <div class="preview-tab-content active" id="originalTab">
-                        <p>PDF preview will appear here after upload.</p>
+            <!-- Premium Upsell -->
+            <div class="premium-upsell">
+                <h3>Unlock Full Potential with Photo Flare Pro</h3>
+                <p>Upgrade to access all premium features and remove limitations</p>
+                
+                <div class="premium-features">
+                    <div class="premium-feature">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>Faster Processing</h4>
+                            <p>Priority queue and advanced algorithms</p>
+                        </div>
                     </div>
-                    <div class="preview-tab-content" id="excelTab">
-                        <table class="preview-table" id="excelPreview">
-                            <thead>
-                                <tr>
-                                    <th>Column A</th>
-                                    <th>Column B</th>
-                                    <th>Column C</th>
-                                    <th>Column D</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Sample data 1</td>
-                                    <td>Sample data 2</td>
-                                    <td>Sample data 3</td>
-                                    <td>Sample data 4</td>
-                                </tr>
-                                <tr>
-                                    <td>Sample data 5</td>
-                                    <td>Sample data 6</td>
-                                    <td>Sample data 7</td>
-                                    <td>Sample data 8</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="premium-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <div>
+                            <h4>Advanced OCR</h4>
+                            <p>Higher accuracy text recognition</p>
+                        </div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-infinity"></i>
+                        <div>
+                            <h4>Unlimited Conversions</h4>
+                            <p>No daily limits on processing</p>
+                        </div>
+                    </div>
+                    <div class="premium-feature">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <div>
+                            <h4>Batch Processing</h4>
+                            <p>Convert multiple PDFs at once</p>
+                        </div>
                     </div>
                 </div>
+                
+                <a href="pricing.html" class="btn btn-warning">
+                    <i class="fas fa-crown"></i> Upgrade to Pro - Only $4/month
+                </a>
             </div>
-            
-            <div class="download-section" id="downloadSection">
-                <div class="download-info">
-                    <div class="file-details">
-                        <h3>Conversion Complete!</h3>
-                        <p>Your PDF has been successfully converted to Excel format.</p>
-                    </div>
-                    <button class="btn btn-success" id="downloadBtn">
-                        <i class="fas fa-download"></i> Download Excel File
-                    </button>
-                </div>
-                <p>Need to convert another file? <a href="#" id="convertAnother">Convert another PDF</a></p>
+        </div>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
             </div>
         </div>
     </div>
@@ -929,20 +1771,20 @@
                     <a href="index.html">Home</a>
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
-                    <a href="#careers">Careers</a>
-                    <a href="#affiliate">Affiliate Program</a>
-                    <a href="#press">Press</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="#help">Help Center</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                    <a href="#cookies">Cookie Policy</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
                     <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
@@ -954,55 +1796,97 @@
     </footer>
 
     <script>
-        // DOM Elements
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // DOM Elements for PDF to Excel
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
         const fileInfo = document.getElementById('fileInfo');
         const fileName = document.getElementById('fileName');
         const fileSize = document.getElementById('fileSize');
         const uploadProgress = document.getElementById('uploadProgress');
         const removeFile = document.getElementById('removeFile');
         const convertBtn = document.getElementById('convertBtn');
-        const resetBtn = document.getElementById('resetBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const processingProgress = document.getElementById('processingProgress');
         const previewSection = document.getElementById('previewSection');
         const downloadSection = document.getElementById('downloadSection');
         const downloadBtn = document.getElementById('downloadBtn');
         const convertAnother = document.getElementById('convertAnother');
         const previewTabs = document.querySelectorAll('.preview-tab');
         const previewTabContents = document.querySelectorAll('.preview-tab-content');
+        const emptyState = document.getElementById('emptyState');
+        
+        // Batch elements
+        const batchFiles = document.getElementById('batchFiles');
+        const addBatchBtn = document.getElementById('addBatchBtn');
+        const convertBatchBtn = document.getElementById('convertBatchBtn');
+
+        // Global variables
+        let uploadedFile = null;
+        let batchFilesList = [];
+        let isBatchMode = false;
 
         // Event Listeners
+        browseBtn.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = 'rgba(67, 97, 238, 0.1)';
-        });
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.background = '';
-        });
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = '';
-            if (e.dataTransfer.files.length) {
-                handleFileSelect(e.dataTransfer.files[0]);
-            }
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) {
-                handleFileSelect(e.target.files[0]);
-            }
-        });
-
-        removeFile.addEventListener('click', (e) => {
-            e.stopPropagation();
-            resetFile();
-        });
-
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        removeFile.addEventListener('click', resetFile);
         convertBtn.addEventListener('click', convertToExcel);
-        resetBtn.addEventListener('click', resetAll);
         downloadBtn.addEventListener('click', downloadExcel);
         convertAnother.addEventListener('click', resetAll);
+        addBatchBtn.addEventListener('click', () => fileInput.click());
+        convertBatchBtn.addEventListener('click', convertBatch);
 
         // Tab switching
         previewTabs.forEach(tab => {
@@ -1024,22 +1908,50 @@
         });
 
         // Functions
-        function handleFileSelect(file) {
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+            
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.dataTransfer.files);
+                } else {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            }
+        }
+
+        function handleFileSelect(e) {
+            if (e.target.files && e.target.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.target.files);
+                } else {
+                    handleFile(e.target.files[0]);
+                }
+            }
+        }
+
+        function handleFile(file) {
             if (file.type !== 'application/pdf') {
                 alert('Please select a PDF file.');
                 return;
             }
 
+            // Check file size (100MB limit for Pro users)
             if (file.size > 100 * 1024 * 1024) {
                 alert('File size exceeds 100MB limit. Please choose a smaller file.');
                 return;
             }
 
-            // Show file info
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileInfo.classList.add('active');
-            convertBtn.disabled = false;
+            uploadedFile = file;
+            updateFileInfo(file);
 
             // Simulate upload progress
             let progress = 0;
@@ -1050,9 +1962,93 @@
                     clearInterval(interval);
                     // Show preview section after upload
                     previewSection.classList.add('active');
+                    emptyState.style.display = 'none';
                 }
                 uploadProgress.style.width = `${progress}%`;
             }, 200);
+        }
+
+        function handleBatchFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (file.type !== 'application/pdf') {
+                    continue;
+                }
+                
+                // Check file size (100MB limit for Pro users)
+                if (file.size > 100 * 1024 * 1024) {
+                    alert(`File "${file.name}" exceeds 100MB limit. Please choose a smaller file.`);
+                    continue;
+                }
+                
+                // Add to batch if not already added
+                if (!batchFilesList.some(f => f.name === file.name && f.size === file.size)) {
+                    batchFilesList.push(file);
+                    addBatchFilePreview(file);
+                }
+            }
+            
+            // Update batch UI
+            updateBatchUI();
+        }
+
+        function addBatchFilePreview(file) {
+            const batchFileElement = document.createElement('div');
+            batchFileElement.className = 'batch-file';
+            batchFileElement.innerHTML = `
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234361ee'%3E%3Cpath d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z'/%3E%3C/svg%3E" alt="${file.name}">
+                <div class="file-name">${file.name}</div>
+                <div class="remove-file" data-filename="${file.name}">×</div>
+            `;
+            
+            batchFiles.appendChild(batchFileElement);
+            
+            // Add remove event listener
+            batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
+                const filename = this.getAttribute('data-filename');
+                removeBatchFile(filename);
+            });
+        }
+
+        function removeBatchFile(filename) {
+            batchFilesList = batchFilesList.filter(file => file.name !== filename);
+            
+            // Remove from UI
+            const fileElements = batchFiles.querySelectorAll('.batch-file');
+            fileElements.forEach(element => {
+                if (element.querySelector('.file-name').textContent === filename) {
+                    element.remove();
+                }
+            });
+            
+            updateBatchUI();
+        }
+
+        function updateBatchUI() {
+            if (batchFilesList.length > 0) {
+                addBatchBtn.disabled = false;
+                convertBatchBtn.disabled = false;
+                isBatchMode = true;
+                
+                // Show batch preview and hide single preview
+                previewSection.style.display = 'none';
+                emptyState.style.display = 'none';
+            } else {
+                addBatchBtn.disabled = true;
+                convertBatchBtn.disabled = true;
+                isBatchMode = false;
+                
+                // Show empty state
+                emptyState.style.display = 'block';
+            }
+        }
+
+        function updateFileInfo(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.add('active');
+            convertBtn.disabled = false;
         }
 
         function resetFile() {
@@ -1061,11 +2057,14 @@
             convertBtn.disabled = true;
             previewSection.classList.remove('active');
             uploadProgress.style.width = '0%';
+            uploadedFile = null;
+            emptyState.style.display = 'block';
         }
 
         function resetAll() {
             resetFile();
             downloadSection.classList.remove('active');
+            emptyState.style.display = 'block';
             
             // Reset form options
             document.getElementById('ocrOption').checked = true;
@@ -1078,20 +2077,55 @@
         }
 
         function convertToExcel() {
-            // Show loading state
-            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            if (!uploadedFile) {
+                alert('Please select a PDF file first');
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
             convertBtn.disabled = true;
+            
+            // Simulate conversion process with progress updates
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    finishConversion();
+                }
+                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+            }, 300);
+            
+            // Simulate conversion time
+            setTimeout(finishConversion, 3000);
+        }
 
-            // Simulate conversion process
+        function convertBatch() {
+            if (batchFilesList.length === 0) {
+                alert('Please add PDF files to convert');
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            
+            // Simulate batch conversion
             setTimeout(() => {
                 // Show download section
                 downloadSection.classList.add('active');
-                convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert to Excel';
-                convertBtn.disabled = false;
+                previewSection.style.display = 'none';
                 
-                // Scroll to download section
-                downloadSection.scrollIntoView({ behavior: 'smooth' });
-            }, 3000);
+                loadingIndicator.classList.remove('active');
+            }, 2000);
+        }
+
+        function finishConversion() {
+            // Show download section
+            downloadSection.classList.add('active');
+            previewSection.style.display = 'none';
+            
+            loadingIndicator.classList.remove('active');
+            convertBtn.disabled = false;
         }
 
         function downloadExcel() {
@@ -1139,7 +2173,15 @@
                 });
                 document.querySelector('.premium-upsell').style.display = 'none';
             }
+            
+            // Show empty state initially
+            emptyState.style.display = 'block';
         });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
