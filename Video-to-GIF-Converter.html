@@ -81,8 +81,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -132,8 +132,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
             transition: var(--transition);
             text-decoration: none;
@@ -230,8 +230,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -1139,7 +1139,95 @@
             transform: translateY(-3px);
         }
 
-        /* Media Queries - Mobile First Approach */
+        /* Mobile-specific fixes */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
+            .tool-content {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+                padding: 1rem 0;
+            }
+            
+            .preview-section {
+                padding: 1rem 0;
+            }
+            
+            .upload-area {
+                padding: 1.5rem 1rem;
+            }
+            
+            .settings-panel {
+                padding: 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                min-width: 100%;
+            }
+            
+            .trim-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            
+            .stat-card {
+                padding: 0.8rem;
+            }
+            
+            .tool-header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .range-container {
+                flex-wrap: wrap;
+            }
+            
+            .range-container input[type="number"] {
+                width: 70px;
+            }
+            
+            .premium-feature {
+                margin-bottom: 1rem;
+            }
+            
+            .premium-overlay {
+                padding: 0.8rem;
+            }
+            
+            .premium-overlay i {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .sidebar {
+                width: 85%;
+            }
+        }
 
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
@@ -1252,30 +1340,6 @@
             .trim-controls {
                 flex-direction: column;
                 align-items: flex-start;
-            }
-        }
-
-        /* Show mobile header on small screens */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
-            }
-            
-            .desktop-header {
-                display: none;
-            }
-            
-            .tool-content {
-                flex-direction: column;
-            }
-            
-            .upload-section {
-                border-right: none;
-                border-bottom: 1px solid var(--light-gray);
-            }
-            
-            .result-stats {
-                grid-template-columns: 1fr 1fr;
             }
         }
 
