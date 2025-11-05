@@ -1245,11 +1245,7 @@
                     <p>We're proud to have remained true to our core values: simplicity, security, and accessibility. Our tools work directly in your browser, ensuring your files never leave your computer unless you want them to.</p>
                 </div>
                 <div class="story-image">
-                    <!-- Placeholder for company image -->
-                    <div style="width:100%; height:400px; background:linear-gradient(135deg, var(--primary), var(--secondary)); display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem;">
-                        <i class="fas fa-users" style="font-size: 4rem; margin-right: 1rem;"></i>
-                        <span>Our Team at Work</span>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Our team collaborating in a modern office space">
                 </div>
             </div>
         </div>
@@ -1316,10 +1312,7 @@
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-image">
-                        <!-- Placeholder for team member image -->
-                        <div style="width:100%; height:100%; background:linear-gradient(135deg, var(--primary), var(--secondary)); display:flex; align-items:center; justify-content:center; color:white;">
-                            <i class="fas fa-user" style="font-size: 4rem;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Sarah Johnson - CEO & Founder">
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Sarah Johnson</h3>
@@ -1334,10 +1327,7 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        <!-- Placeholder for team member image -->
-                        <div style="width:100%; height:100%; background:linear-gradient(135deg, var(--primary), var(--accent)); display:flex; align-items:center; justify-content:center; color:white;">
-                            <i class="fas fa-user" style="font-size: 4rem;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Michael Chen - CTO">
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Michael Chen</h3>
@@ -1352,10 +1342,7 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        <!-- Placeholder for team member image -->
-                        <div style="width:100%; height:100%; background:linear-gradient(135deg, var(--secondary), var(--accent)); display:flex; align-items:center; justify-content:center; color:white;">
-                            <i class="fas fa-user" style="font-size: 4rem;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1206&q=80" alt="Emily Rodriguez - Head of Design">
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">Emily Rodriguez</h3>
@@ -1370,10 +1357,7 @@
                 </div>
                 <div class="team-card">
                     <div class="team-image">
-                        <!-- Placeholder for team member image -->
-                        <div style="width:100%; height:100%; background:linear-gradient(135deg, var(--success), var(--primary)); display:flex; align-items:center; justify-content:center; color:white;">
-                            <i class="fas fa-user" style="font-size: 4rem;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="David Kim - Lead Developer">
                     </div>
                     <div class="team-info">
                         <h3 class="team-name">David Kim</h3>
@@ -1592,6 +1576,13 @@
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+
+        // Prevent default behavior for non-existent links
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
     </script>
 </body>
 </html>
