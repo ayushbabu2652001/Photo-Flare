@@ -53,26 +53,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes progressFill {
-            from { width: 0%; }
-            to { width: 75%; }
-        }
-
-        @keyframes float-logo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
         /* Mobile Header - Sticky */
         .mobile-header {
             display: none;
@@ -488,28 +468,9 @@
             box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #ff6b6b);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-        }
-
-        /* Hero Section */
         .hero {
             padding: 2rem 0;
             text-align: center;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .hero h1 {
@@ -528,7 +489,6 @@
             color: var(--gray);
         }
 
-        /* Page Layout */
         .page-container {
             display: flex;
             flex-direction: column;
@@ -554,7 +514,6 @@
             animation: slideInRight 0.8s ease-out;
         }
 
-        /* Form Styles */
         .form-group {
             margin-bottom: 1.2rem;
             animation: fadeInUp 0.6s ease-out;
@@ -631,7 +590,6 @@
             border-radius: 3px;
         }
 
-        /* Card Styles */
         .card {
             background: white;
             border-radius: var(--border-radius);
@@ -669,9 +627,6 @@
             padding: 0.8rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             transition: var(--transition);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .tool-item:last-child {
@@ -691,7 +646,6 @@
             align-items: center;
             gap: 10px;
             transition: var(--transition);
-            flex-grow: 1;
         }
 
         .tool-link:hover {
@@ -755,7 +709,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            margin-left: 1rem;
         }
 
         .vote-btn:hover {
@@ -767,12 +720,6 @@
         .vote-count {
             margin-left: 5px;
             font-weight: 600;
-        }
-
-        .vote-btn.voted {
-            background: rgba(67, 97, 238, 0.2);
-            color: var(--primary);
-            border-color: var(--primary);
         }
 
         .success-message {
@@ -836,7 +783,6 @@
             box-shadow: var(--box-shadow);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .ai-suggestions {
@@ -871,7 +817,6 @@
             color: var(--gray);
         }
 
-        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
@@ -960,7 +905,68 @@
             border-bottom: 1px solid var(--primary-dark);
         }
 
-        /* Loading Animation */
+        /* Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes progressFill {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 75%;
+            }
+        }
+
+        /* Form Validation */
+        .form-control.error {
+            border-color: var(--danger);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
         .loading {
             display: none;
             text-align: center;
@@ -986,20 +992,34 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Form Validation */
-        .form-control.error {
-            border-color: var(--danger);
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
         }
 
-        .error-message {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-            display: none;
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
         }
 
-        .error-message.show {
-            display: block;
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
         /* Media Queries - Mobile First Approach */
@@ -1094,17 +1114,6 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 0.5rem;
-            }
-            
-            .tool-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-            
-            .vote-btn {
-                margin-left: 0;
-                align-self: flex-end;
             }
         }
 
@@ -1299,22 +1308,22 @@
             <p>Not sure what to suggest? Check out these AI-generated tool ideas based on popular user requests and industry trends:</p>
             
             <div class="ai-suggestions">
-                <div class="ai-suggestion" onclick="fillSuggestion('AI Image Upscaler', 'image-tools', 'Enhance image resolution using artificial intelligence without losing quality. This tool would use advanced neural networks to upscale images while preserving details and reducing artifacts.')">
+                <div class="ai-suggestion" onclick="fillSuggestion('AI Image Upscaler', 'image-tools', 'Enhance image resolution using artificial intelligence without losing quality.')">
                     <div class="ai-suggestion-title">AI Image Upscaler</div>
                     <div class="ai-suggestion-desc">Enhance image resolution using AI without quality loss</div>
                 </div>
                 
-                <div class="ai-suggestion" onclick="fillSuggestion('Document Translator', 'conversion', 'Translate documents between 50+ languages while preserving formatting. This tool would maintain the original layout of PDFs, Word documents, and presentations while accurately translating text content.')">
+                <div class="ai-suggestion" onclick="fillSuggestion('Document Translator', 'conversion', 'Translate documents between 50+ languages while preserving formatting.')">
                     <div class="ai-suggestion-title">Document Translator</div>
                     <div class="ai-suggestion-desc">Translate documents between 50+ languages</div>
                 </div>
                 
-                <div class="ai-suggestion" onclick="fillSuggestion('Background Remover', 'image-tools', 'Automatically remove backgrounds from images with AI precision. This tool would use advanced computer vision algorithms to accurately detect and remove backgrounds from portraits, product photos, and more.')">
+                <div class="ai-suggestion" onclick="fillSuggestion('Background Remover', 'image-tools', 'Automatically remove backgrounds from images with AI precision.')">
                     <div class="ai-suggestion-title">Background Remover</div>
                     <div class="ai-suggestion-desc">Remove backgrounds from images automatically</div>
                 </div>
                 
-                <div class="ai-suggestion" onclick="fillSuggestion('PDF Form Filler', 'pdf-tools', 'Automatically fill PDF forms using AI-powered data extraction. This tool would intelligently recognize form fields and populate them with relevant data from your inputs or connected databases.')">
+                <div class="ai-suggestion" onclick="fillSuggestion('PDF Form Filler', 'pdf-tools', 'Automatically fill PDF forms using AI-powered data extraction.')">
                     <div class="ai-suggestion-title">PDF Form Filler</div>
                     <div class="ai-suggestion-desc">Automatically fill PDF forms with AI</div>
                 </div>
@@ -1333,9 +1342,16 @@
                     <strong>Thank you for your suggestion!</strong> We've received your tool idea and will review it soon.
                 </div>
                 
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Submitting your suggestion...</p>
+                </div>
+                
                 <form id="suggestion-form">
                     <div class="form-group">
-                        <label for="tool-name">Tool Name</label>
+                        <label for="tool-name">Tool Name <span class="tooltip">(?)
+                            <span class="tooltiptext">Give your tool a clear, descriptive name</span>
+                        </span></label>
                         <input type="text" id="tool-name" class="form-control" placeholder="e.g., PDF to Word Converter" required>
                         <div class="error-message" id="tool-name-error">Please enter a tool name</div>
                     </div>
@@ -1374,7 +1390,7 @@
                         <div class="form-group">
                             <label for="your-email">Your Email (Optional)</label>
                             <input type="email" id="your-email" class="form-control" placeholder="john@example.com">
-                            <div class="error-message" id="your-email-error">Please enter a valid email address</div>
+                            <div class="error-message" id="email-error">Please enter a valid email address</div>
                         </div>
                     </div>
                     
@@ -1385,12 +1401,7 @@
                         </div>
                     </div>
                     
-                    <div class="loading" id="loadingIndicator">
-                        <div class="spinner"></div>
-                        <p>Submitting your suggestion...</p>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
                         <i class="fas fa-paper-plane"></i> Submit Suggestion
                     </button>
                 </form>
@@ -1407,7 +1418,7 @@
                                 <i class="fas fa-video tool-icon"></i> Video to PDF Converter
                                 <span class="status-badge status-review">Under Review</span>
                             </a>
-                            <button class="vote-btn" data-id="1">
+                            <button class="vote-btn">
                                 <i class="fas fa-thumbs-up"></i> <span class="vote-count">42</span>
                             </button>
                         </li>
@@ -1416,7 +1427,7 @@
                                 <i class="fas fa-language tool-icon"></i> Multi-language OCR
                                 <span class="status-badge status-pending">Pending</span>
                             </a>
-                            <button class="vote-btn" data-id="2">
+                            <button class="vote-btn">
                                 <i class="fas fa-thumbs-up"></i> <span class="vote-count">38</span>
                             </button>
                         </li>
@@ -1425,7 +1436,7 @@
                                 <i class="fas fa-file-archive tool-icon"></i> Batch File Renamer
                                 <span class="status-badge status-review">Under Review</span>
                             </a>
-                            <button class="vote-btn" data-id="3">
+                            <button class="vote-btn">
                                 <i class="fas fa-thumbs-up"></i> <span class="vote-count">29</span>
                             </button>
                         </li>
@@ -1434,7 +1445,7 @@
                                 <i class="fas fa-cloud-upload-alt tool-icon"></i> Direct Cloud Upload
                                 <span class="status-badge status-implemented">Implemented</span>
                             </a>
-                            <button class="vote-btn" data-id="4">
+                            <button class="vote-btn">
                                 <i class="fas fa-thumbs-up"></i> <span class="vote-count">56</span>
                             </button>
                         </li>
@@ -1524,9 +1535,9 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
                     <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
@@ -1589,58 +1600,65 @@
 
         // Form validation and submission
         const suggestionForm = document.getElementById('suggestion-form');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const submitBtn = document.getElementById('submitBtn');
         const successMessage = document.getElementById('success-message');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const submitBtn = document.getElementById('submit-btn');
 
-        // Form validation function
+        // Form validation
         function validateForm() {
             let isValid = true;
             
-            // Reset errors
-            document.querySelectorAll('.error-message').forEach(error => {
-                error.classList.remove('show');
-            });
-            document.querySelectorAll('.form-control').forEach(input => {
-                input.classList.remove('error');
-            });
-            
-            // Validate tool name
+            // Tool name validation
             const toolName = document.getElementById('tool-name');
+            const toolNameError = document.getElementById('tool-name-error');
             if (!toolName.value.trim()) {
-                document.getElementById('tool-name-error').classList.add('show');
                 toolName.classList.add('error');
+                toolNameError.style.display = 'block';
                 isValid = false;
+            } else {
+                toolName.classList.remove('error');
+                toolNameError.style.display = 'none';
             }
             
-            // Validate category
+            // Tool category validation
             const toolCategory = document.getElementById('tool-category');
+            const toolCategoryError = document.getElementById('tool-category-error');
             if (!toolCategory.value) {
-                document.getElementById('tool-category-error').classList.add('show');
                 toolCategory.classList.add('error');
+                toolCategoryError.style.display = 'block';
                 isValid = false;
+            } else {
+                toolCategory.classList.remove('error');
+                toolCategoryError.style.display = 'none';
             }
             
-            // Validate description
+            // Tool description validation
             const toolDescription = document.getElementById('tool-description');
+            const toolDescriptionError = document.getElementById('tool-description-error');
             if (!toolDescription.value.trim()) {
-                document.getElementById('tool-description-error').classList.add('show');
                 toolDescription.classList.add('error');
+                toolDescriptionError.style.display = 'block';
                 isValid = false;
+            } else {
+                toolDescription.classList.remove('error');
+                toolDescriptionError.style.display = 'none';
             }
             
-            // Validate email if provided
-            const yourEmail = document.getElementById('your-email');
-            if (yourEmail.value && !isValidEmail(yourEmail.value)) {
-                document.getElementById('your-email-error').classList.add('show');
-                yourEmail.classList.add('error');
+            // Email validation (if provided)
+            const email = document.getElementById('your-email');
+            const emailError = document.getElementById('email-error');
+            if (email.value && !isValidEmail(email.value)) {
+                email.classList.add('error');
+                emailError.style.display = 'block';
                 isValid = false;
+            } else {
+                email.classList.remove('error');
+                emailError.style.display = 'none';
             }
             
             return isValid;
         }
 
-        // Email validation helper
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
@@ -1651,6 +1669,11 @@
             e.preventDefault();
             
             if (!validateForm()) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
             
@@ -1674,55 +1697,59 @@
                 
                 // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 1500);
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }, 2000);
         });
 
-        // Real-time validation for email field
-        const emailField = document.getElementById('your-email');
-        if (emailField) {
-            emailField.addEventListener('blur', function() {
-                if (this.value && !isValidEmail(this.value)) {
-                    document.getElementById('your-email-error').classList.add('show');
-                    this.classList.add('error');
-                } else {
-                    document.getElementById('your-email-error').classList.remove('show');
-                    this.classList.remove('error');
-                }
-            });
-        }
+        // Real-time validation
+        document.getElementById('tool-name').addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.remove('error');
+                document.getElementById('tool-name-error').style.display = 'none';
+            }
+        });
+        
+        document.getElementById('tool-category').addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('error');
+                document.getElementById('tool-category-error').style.display = 'none';
+            }
+        });
+        
+        document.getElementById('tool-description').addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.remove('error');
+                document.getElementById('tool-description-error').style.display = 'none';
+            }
+        });
+        
+        document.getElementById('your-email').addEventListener('input', function() {
+            if (!this.value || isValidEmail(this.value)) {
+                this.classList.remove('error');
+                document.getElementById('email-error').style.display = 'none';
+            }
+        });
 
         // Vote button handler
         document.querySelectorAll('.vote-btn').forEach(button => {
             button.addEventListener('click', function() {
-                // Check if already voted
-                if (this.classList.contains('voted')) {
-                    return;
-                }
-                
                 const countElement = this.querySelector('.vote-count');
                 let count = parseInt(countElement.textContent);
                 count++;
                 countElement.textContent = count;
                 
                 // Visual feedback
-                this.classList.add('voted');
                 this.style.background = 'rgba(67, 97, 238, 0.2)';
                 this.style.color = 'var(--primary)';
                 this.style.borderColor = 'var(--primary)';
                 
-                // Store vote in localStorage to prevent multiple votes
-                const toolId = this.getAttribute('data-id');
-                localStorage.setItem(`voted-${toolId}`, 'true');
+                // Disable button after voting
+                this.disabled = true;
             });
-            
-            // Check if user already voted on page load
-            const toolId = button.getAttribute('data-id');
-            if (localStorage.getItem(`voted-${toolId}`)) {
-                button.classList.add('voted');
-                button.style.background = 'rgba(67, 97, 238, 0.2)';
-                button.style.color = 'var(--primary)';
-                button.style.borderColor = 'var(--primary)';
-            }
         });
 
         // AI suggestion fill function
@@ -1732,12 +1759,12 @@
             document.getElementById('tool-description').value = description;
             
             // Clear any validation errors
-            document.querySelectorAll('.error-message').forEach(error => {
-                error.classList.remove('show');
-            });
-            document.querySelectorAll('.form-control').forEach(input => {
-                input.classList.remove('error');
-            });
+            document.getElementById('tool-name').classList.remove('error');
+            document.getElementById('tool-category').classList.remove('error');
+            document.getElementById('tool-description').classList.remove('error');
+            document.getElementById('tool-name-error').style.display = 'none';
+            document.getElementById('tool-category-error').style.display = 'none';
+            document.getElementById('tool-description-error').style.display = 'none';
             
             // Scroll to form
             document.getElementById('suggestion-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
