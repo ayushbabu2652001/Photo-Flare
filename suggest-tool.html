@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Suggest new tools for Photo Flare - Help us improve our platform by suggesting new document and image processing tools.">
-    <meta name="keywords" content="suggest tool, feature request, Photo Flare, document tools, image tools, feedback">
-    <title>Suggest a Tool - Photo Flare</title>
+    <meta name="description" content="Complete list of all 100+ document and image tools available on Photo Flare - PDF editing, conversion, compression, and more.">
+    <meta name="keywords" content="Photo Flare, complete tool list, PDF tools, image tools, document conversion, file compression, online tools">
+    <title>Complete Tool List - Photo Flare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -42,9 +42,15 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Mobile Header - Sticky */
@@ -360,7 +366,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-logo 6s ease-in-out infinite;
         }
 
         .logo-text {
@@ -450,25 +455,13 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #3a86ff);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
-        }
-
         .hero {
-            padding: 2rem 0;
+            padding: 3rem 0 2rem;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -477,140 +470,192 @@
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
             color: var(--gray);
         }
 
-        .page-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
         }
 
-        .main-content {
-            flex: 1;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .sidebar {
+        .search-input {
             width: 100%;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
             border: 2px solid var(--light-gray);
-            border-radius: var(--border-radius);
             font-size: 1rem;
             transition: var(--transition);
         }
 
-        .form-control:focus {
+        .search-input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .form-row {
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .filter-bar {
             display: flex;
-            flex-direction: column;
-            gap: 0;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .form-row .form-group {
-            flex: 1;
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
-        .checkbox-group {
+        .filter-tab {
+            padding: 0.5rem 1.2rem;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .sort-options {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .checkbox-group input {
-            width: auto;
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
         }
 
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-weight: normal;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.2rem;
-            color: var(--dark);
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 3px;
-        }
-
-        .card {
+        .tools-overview {
+            display: flex;
+            justify-content: space-between;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
-            transition: var(--transition);
-            animation: fadeIn 0.8s ease-out;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .card:hover {
+        .overview-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .overview-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .overview-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .overview-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tool-category {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            transition: var(--transition);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .tool-category:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
+        .category-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
         }
 
-        .card-icon {
-            font-size: 1.3rem;
+        .category-icon {
+            font-size: 1.8rem;
             color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .tool-count {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
         }
 
         .tool-list {
@@ -652,94 +697,68 @@
             text-align: center;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
             margin-left: auto;
         }
 
-        .status-pending {
-            background: rgba(248, 150, 30, 0.1);
-            color: var(--warning);
+        .new-badge {
+            background: var(--success);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 5px;
         }
 
-        .status-review {
-            background: rgba(76, 201, 240, 0.1);
-            color: var(--success);
+        .tool-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            margin-left: 34px;
         }
 
-        .status-implemented {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--light-gray);
-            border-radius: 4px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            width: 75%;
-            animation: progressFill 2s ease-out;
-        }
-
-        .vote-btn {
+        .tool-action {
             background: transparent;
-            border: 1px solid var(--light-gray);
+            border: none;
             color: var(--gray);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
             cursor: pointer;
+            font-size: 0.8rem;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
         }
 
-        .vote-btn:hover {
-            background: rgba(67, 97, 238, 0.1);
+        .tool-action:hover {
             color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .vote-count {
-            margin-left: 5px;
-            font-weight: 600;
-        }
-
-        .success-message {
-            background: rgba(76, 201, 240, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1.5rem;
-            display: none;
-            animation: fadeIn 0.5s ease-out;
         }
 
         .featured-tools {
-            margin: 2rem 0;
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
         }
 
         .featured-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
 
         .featured-card {
             background: white;
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 2rem;
             text-align: center;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
@@ -757,7 +776,7 @@
         }
 
         .featured-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -765,63 +784,48 @@
         }
 
         .featured-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             color: var(--dark);
         }
 
-        /* AI Features Section */
-        .ai-assist-section {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .ai-suggestions {
+        .pagination {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+            gap: 0.5rem;
         }
 
-        .ai-suggestion {
-            background: var(--light);
-            padding: 1rem;
-            border-radius: var(--border-radius);
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: white;
+            border: 1px solid var(--light-gray);
             cursor: pointer;
             transition: var(--transition);
-            border-left: 4px solid var(--primary);
         }
 
-        .ai-suggestion:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .ai-suggestion-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .ai-suggestion-desc {
-            font-size: 0.9rem;
-            color: var(--gray);
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
-            padding: 2rem 0 1rem;
-            margin-top: 2rem;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
         }
 
         .footer-content {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .footer-logo {
@@ -833,28 +837,24 @@
         }
 
         .footer-logo .logo-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .footer-logo .logo-text {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
         }
 
         .footer-links {
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
-            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
-            padding: 0.3rem 0.5rem;
-            white-space: nowrap;
         }
 
         .footer-links a:hover {
@@ -871,13 +871,13 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 1rem;
         }
 
         .social-link {
             color: #adb5bd;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             transition: var(--transition);
         }
 
@@ -909,15 +909,6 @@
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -929,28 +920,7 @@
             }
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes progressFill {
-            from {
-                width: 0%;
-            }
-            to {
-                width: 75%;
-            }
-        }
-
         /* Media Queries - Mobile First Approach */
-
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
             .container {
@@ -961,8 +931,8 @@
                 font-size: 2.2rem;
             }
             
-            .featured-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
         }
 
@@ -976,71 +946,23 @@
                 display: block;
             }
             
-            .hero {
-                padding: 3rem 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .page-container {
-                flex-direction: row;
-            }
-            
-            .sidebar {
-                width: 300px;
-            }
-            
-            .main-content, .sidebar {
-                padding: 2rem;
-            }
-            
-            .form-row {
-                flex-direction: row;
-                gap: 1rem;
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
             
             .featured-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .ai-suggestions {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .ai-suggestion {
-                flex: 1;
-                min-width: 200px;
-            }
         }
 
         /* Large Devices (992px and up) */
         @media (min-width: 992px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
             .featured-grid {
                 grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Extra Small Devices (400px and below) */
-        @media (max-width: 400px) {
-            .hero h1 {
-                font-size: 1.6rem;
-            }
-            
-            .featured-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
             }
         }
 
@@ -1053,85 +975,51 @@
             .desktop-header {
                 display: none;
             }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .sort-options {
+                align-self: flex-end;
+            }
         }
 
-        /* Special media query for when viewing desktop site on mobile */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .desktop-header {
-                padding: 0.8rem 0;
+        /* Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.6rem;
             }
             
-            .logo-text {
-                font-size: 1.3rem;
+            .section-title {
+                font-size: 1.5rem;
             }
             
-            nav ul {
-                gap: 0.7rem;
+            .filter-tabs {
+                flex-direction: column;
+                width: 100%;
             }
             
-            nav a {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.9rem;
+            .filter-tab {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
             }
             
-            .btn {
-                padding: 0.6rem 0.9rem;
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
                 font-size: 0.85rem;
-            }
-            
-            .header-content {
-                gap: 0.5rem;
-            }
-            
-            .header-actions {
-                flex-wrap: nowrap;
-                gap: 0.5rem;
-            }
-        }
-
-        /* For very small desktop screens */
-        @media (min-width: 768px) and (max-width: 900px) {
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            nav ul {
-                gap: 0.5rem;
-            }
-            
-            nav a {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.85rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
-            .header-actions {
-                gap: 0.3rem;
-            }
-        }
-
-        /* Special fix for buttons on very narrow desktop screens */
-        @media (min-width: 768px) and (max-width: 820px) {
-            .header-content {
-                flex-wrap: nowrap;
-            }
-            
-            nav {
-                order: 3;
-                flex-basis: 100%;
-                margin-top: 0.5rem;
-            }
-            
-            nav ul {
-                justify-content: center;
-            }
-            
-            .header-actions {
-                margin-left: auto;
             }
         }
     </style>
@@ -1175,6 +1063,7 @@
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
                         <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="complete-tool-list.html" class="active">Complete Tool List</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
@@ -1206,7 +1095,7 @@
                 <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
                 <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
                 <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
-                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+                <li><a href="complete-tool-list.html" class="active"><i class="fas fa-list"></i> Complete Tool List</a></li>
             </ul>
         </nav>
         <div class="sidebar-actions">
@@ -1222,176 +1111,693 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Suggest a New Tool</h1>
-            <p>Help us improve Photo Flare by suggesting new tools and features. Your feedback helps us build the platform you need.</p>
+            <h1>Complete Tool List</h1>
+            <p>Browse our complete collection of 100+ document and image tools. Everything you need in one place.</p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for tools...">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+            </div>
         </div>
     </section>
 
-    <!-- AI Assist Section -->
+    <!-- Tools Overview -->
     <div class="container">
-        <div class="ai-assist-section">
-            <h2 class="section-title"><i class="fas fa-robot"></i> AI-Powered Tool Suggestions</h2>
-            <p>Not sure what to suggest? Check out these AI-generated tool ideas based on popular user requests and industry trends:</p>
-            
-            <div class="ai-suggestions">
-                <div class="ai-suggestion" onclick="fillSuggestion('AI Image Upscaler', 'image-tools', 'Enhance image resolution using artificial intelligence without losing quality.')">
-                    <div class="ai-suggestion-title">AI Image Upscaler</div>
-                    <div class="ai-suggestion-desc">Enhance image resolution using AI without quality loss</div>
-                </div>
-                
-                <div class="ai-suggestion" onclick="fillSuggestion('Document Translator', 'conversion', 'Translate documents between 50+ languages while preserving formatting.')">
-                    <div class="ai-suggestion-title">Document Translator</div>
-                    <div class="ai-suggestion-desc">Translate documents between 50+ languages</div>
-                </div>
-                
-                <div class="ai-suggestion" onclick="fillSuggestion('Background Remover', 'image-tools', 'Automatically remove backgrounds from images with AI precision.')">
-                    <div class="ai-suggestion-title">Background Remover</div>
-                    <div class="ai-suggestion-desc">Remove backgrounds from images automatically</div>
-                </div>
-                
-                <div class="ai-suggestion" onclick="fillSuggestion('PDF Form Filler', 'pdf-tools', 'Automatically fill PDF forms using AI-powered data extraction.')">
-                    <div class="ai-suggestion-title">PDF Form Filler</div>
-                    <div class="ai-suggestion-desc">Automatically fill PDF forms with AI</div>
-                </div>
+        <div class="tools-overview">
+            <div class="overview-item">
+                <i class="fas fa-file-pdf overview-icon"></i>
+                <div class="overview-count">25</div>
+                <div class="overview-label">PDF Tools</div>
+            </div>
+            <div class="overview-item">
+                <i class="fas fa-exchange-alt overview-icon"></i>
+                <div class="overview-count">15</div>
+                <div class="overview-label">PDF Conversion</div>
+            </div>
+            <div class="overview-item">
+                <i class="fas fa-image overview-icon"></i>
+                <div class="overview-count">20</div>
+                <div class="overview-label">Image Tools</div>
+            </div>
+            <div class="overview-item">
+                <i class="fas fa-file-contract overview-icon"></i>
+                <div class="overview-count">15</div>
+                <div class="overview-label">Document Tools</div>
+            </div>
+            <div class="overview-item">
+                <i class="fas fa-compress-arrows-alt overview-icon"></i>
+                <div class="overview-count">10</div>
+                <div class="overview-label">Compression Tools</div>
+            </div>
+            <div class="overview-item">
+                <i class="fas fa-crown overview-icon"></i>
+                <div class="overview-count">20</div>
+                <div class="overview-label">Premium Tools</div>
             </div>
         </div>
-    </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-container">
-            <div class="main-content">
-                <h2 class="section-title">Tool Suggestion Form</h2>
-                
-                <div class="success-message" id="success-message">
-                    <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
-                    <strong>Thank you for your suggestion!</strong> We've received your tool idea and will review it soon.
-                </div>
-                
-                <form id="suggestion-form">
-                    <div class="form-group">
-                        <label for="tool-name">Tool Name</label>
-                        <input type="text" id="tool-name" class="form-control" placeholder="e.g., PDF to Word Converter" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tool-category">Tool Category</label>
-                        <select id="tool-category" class="form-control" required>
-                            <option value="">Select a category</option>
-                            <option value="pdf-tools">PDF Tools</option>
-                            <option value="image-tools">Image Tools</option>
-                            <option value="conversion">Conversion Tools</option>
-                            <option value="compression">Compression Tools</option>
-                            <option value="security">Security Tools</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tool-description">Tool Description</label>
-                        <textarea id="tool-description" class="form-control" placeholder="Please describe what the tool does and how it would work..." required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="use-case">Use Case</label>
-                        <textarea id="use-case" class="form-control" placeholder="How would you use this tool? What problem does it solve?"></textarea>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="your-name">Your Name (Optional)</label>
-                            <input type="text" id="your-name" class="form-control" placeholder="John Doe">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="your-email">Your Email (Optional)</label>
-                            <input type="email" id="your-email" class="form-control" placeholder="john@example.com">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="notify-me">
-                            <label for="notify-me">Notify me if this tool gets implemented</label>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Submit Suggestion
-                    </button>
-                </form>
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">All Tools</div>
+                <div class="filter-tab" data-filter="pdf">PDF Tools</div>
+                <div class="filter-tab" data-filter="image">Image Tools</div>
+                <div class="filter-tab" data-filter="conversion">Conversion</div>
+                <div class="filter-tab" data-filter="compression">Compression</div>
+                <div class="filter-tab" data-filter="premium">Premium</div>
             </div>
-            
-            <div class="sidebar">
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="fas fa-lightbulb card-icon"></i> Popular Suggestions
-                    </h3>
-                    <ul class="tool-list">
-                        <li class="tool-item">
-                            <a href="#" class="tool-link">
-                                <i class="fas fa-video tool-icon"></i> Video to PDF Converter
-                                <span class="status-badge status-review">Under Review</span>
-                            </a>
-                            <button class="vote-btn">
-                                <i class="fas fa-thumbs-up"></i> <span class="vote-count">42</span>
-                            </button>
-                        </li>
-                        <li class="tool-item">
-                            <a href="#" class="tool-link">
-                                <i class="fas fa-language tool-icon"></i> Multi-language OCR
-                                <span class="status-badge status-pending">Pending</span>
-                            </a>
-                            <button class="vote-btn">
-                                <i class="fas fa-thumbs-up"></i> <span class="vote-count">38</span>
-                            </button>
-                        </li>
-                        <li class="tool-item">
-                            <a href="#" class="tool-link">
-                                <i class="fas fa-file-archive tool-icon"></i> Batch File Renamer
-                                <span class="status-badge status-review">Under Review</span>
-                            </a>
-                            <button class="vote-btn">
-                                <i class="fas fa-thumbs-up"></i> <span class="vote-count">29</span>
-                            </button>
-                        </li>
-                        <li class="tool-item">
-                            <a href="#" class="tool-link">
-                                <i class="fas fa-cloud-upload-alt tool-icon"></i> Direct Cloud Upload
-                                <span class="status-badge status-implemented">Implemented</span>
-                            </a>
-                            <button class="vote-btn">
-                                <i class="fas fa-thumbs-up"></i> <span class="vote-count">56</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="fas fa-chart-line card-icon"></i> Suggestion Status
-                    </h3>
-                    <p>We review suggestions weekly and implement the most requested features.</p>
-                    
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                    
-                    <p><strong>75%</strong> of popular suggestions get implemented within 3 months.</p>
-                </div>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="fas fa-question-circle card-icon"></i> How It Works
-                    </h3>
-                    <ul style="padding-left: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Submit your tool suggestion</li>
-                        <li style="margin-bottom: 0.8rem;">Our team reviews all submissions</li>
-                        <li style="margin-bottom: 0.8rem;">Popular suggestions get prioritized</li>
-                        <li>We notify you when your tool is implemented</li>
-                    </ul>
-                </div>
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <select class="sort-select" id="sortSelect">
+                    <option value="name">Name (A-Z)</option>
+                    <option value="popularity">Most Popular</option>
+                    <option value="recent">Recently Added</option>
+                </select>
             </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-grid" id="tools-container">
+            <!-- PDF Tools -->
+            <div class="tool-category" data-category="pdf">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="category-title">PDF Tools <span class="tool-count">25</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="mergepdf.html" class="tool-link">
+                            <i class="fas fa-object-group tool-icon"></i> Merge PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="splitpdf.html" class="tool-link">
+                            <i class="fas fa-cut tool-icon"></i> Split PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="compresspdf.html" class="tool-link">
+                            <i class="fas fa-compress-arrows-alt tool-icon"></i> Compress PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="protectpdf.html" class="tool-link">
+                            <i class="fas fa-lock tool-icon"></i> Protect PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="unlockpdf.html" class="tool-link">
+                            <i class="fas fa-unlock tool-icon"></i> Unlock PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="editpdf.html" class="tool-link">
+                            <i class="fas fa-edit tool-icon"></i> Edit PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="signpdf.html" class="tool-link">
+                            <i class="fas fa-signature tool-icon"></i> Sign PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="watermarkpdf.html" class="tool-link">
+                            <i class="fas fa-water tool-icon"></i> Watermark PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="rotatepdf.html" class="tool-link">
+                            <i class="fas fa-redo-alt tool-icon"></i> Rotate PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="organizepdf.html" class="tool-link">
+                            <i class="fas fa-sort-numeric-up tool-icon"></i> Organize PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PDF Conversion -->
+            <div class="tool-category" data-category="conversion">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="category-title">PDF Conversion <span class="tool-count">15</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="pdftoword.html" class="tool-link">
+                            <i class="fas fa-file-word tool-icon"></i> PDF to Word
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftopowerpoint.html" class="tool-link">
+                            <i class="fas fa-file-powerpoint tool-icon"></i> PDF to PowerPoint
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftoexcel.html" class="tool-link">
+                            <i class="fas fa-file-excel tool-icon"></i> PDF to Excel
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftojpg.html" class="tool-link">
+                            <i class="fas fa-file-image tool-icon"></i> PDF to JPG
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftopng.html" class="tool-link">
+                            <i class="fas fa-file-image tool-icon"></i> PDF to PNG
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftotext.html" class="tool-link">
+                            <i class="fas fa-file-alt tool-icon"></i> PDF to Text
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdftohtml.html" class="tool-link">
+                            <i class="fas fa-file-code tool-icon"></i> PDF to HTML
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="wordtopdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Word to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="powerpointtopdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> PowerPoint to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="exceltopdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Excel to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Image Tools -->
+            <div class="tool-category" data-category="image">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3 class="category-title">Image Tools <span class="tool-count">20</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="compressimage.html" class="tool-link">
+                            <i class="fas fa-compress-arrows-alt tool-icon"></i> Compress Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="convertimage.html" class="tool-link">
+                            <i class="fas fa-exchange-alt tool-icon"></i> Convert Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="cropimage.html" class="tool-link">
+                            <i class="fas fa-crop tool-icon"></i> Crop Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="resizeimage.html" class="tool-link">
+                            <i class="fas fa-expand-arrows-alt tool-icon"></i> Resize Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="editimage.html" class="tool-link">
+                            <i class="fas fa-edit tool-icon"></i> Edit Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="watermarkimage.html" class="tool-link">
+                            <i class="fas fa-water tool-icon"></i> Watermark Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="adjustcolor.html" class="tool-link">
+                            <i class="fas fa-adjust tool-icon"></i> Adjust Colors
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="imagefilters.html" class="tool-link">
+                            <i class="fas fa-magic tool-icon"></i> Image Filters
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="jpgtopng.html" class="tool-link">
+                            <i class="fas fa-file-image tool-icon"></i> JPG to PNG
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pngtojpg.html" class="tool-link">
+                            <i class="fas fa-file-image tool-icon"></i> PNG to JPG
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Document Tools -->
+            <div class="tool-category" data-category="conversion">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="category-title">Document Tools <span class="tool-count">15</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="word-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Word to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdf-to-word.html" class="tool-link">
+                            <i class="fas fa-file-word tool-icon"></i> PDF to Word
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="excel-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Excel to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdf-to-excel.html" class="tool-link">
+                            <i class="fas fa-file-excel tool-icon"></i> PDF to Excel
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="powerpoint-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> PowerPoint to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdf-to-powerpoint.html" class="tool-link">
+                            <i class="fas fa-file-powerpoint tool-icon"></i> PDF to PowerPoint
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="html-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> HTML to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="text-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Text to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="rtf-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> RTF to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="epub-to-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> EPUB to PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Compression Tools -->
+            <div class="tool-category" data-category="compression">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                    </div>
+                    <h3 class="category-title">Compression Tools <span class="tool-count">10</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="compress-pdf.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Compress PDF
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="compress-image.html" class="tool-link">
+                            <i class="fas fa-image tool-icon"></i> Compress Image
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="compress-video.html" class="tool-link">
+                            <i class="fas fa-file-video tool-icon"></i> Compress Video
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="compress-audio.html" class="tool-link">
+                            <i class="fas fa-file-audio tool-icon"></i> Compress Audio
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="zip-files.html" class="tool-link">
+                            <i class="fas fa-file-archive tool-icon"></i> ZIP Files
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="unzip-files.html" class="tool-link">
+                            <i class="fas fa-file-archive tool-icon"></i> Unzip Files
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="reduce-pdf-size.html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> Reduce PDF Size
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="optimize-images.html" class="tool-link">
+                            <i class="fas fa-image tool-icon"></i> Optimize Images
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="batch-compress.html" class="tool-link">
+                            <i class="fas fa-layer-group tool-icon"></i> Batch Compress
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="video-compression.html" class="tool-link">
+                            <i class="fas fa-video tool-icon"></i> Video Compression
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Premium Tools -->
+            <div class="tool-category" data-category="premium">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="category-title">Premium Tools <span class="tool-count">20</span></h3>
+                </div>
+                <ul class="tool-list">
+                    <li class="tool-item">
+                        <a href="aiimageenhancer.html" class="tool-link">
+                            <i class="fas fa-robot tool-icon"></i> AI Image Enhancer <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="backgroundremover.html" class="tool-link">
+                            <i class="fas fa-brain tool-icon"></i> Background Remover <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="smart-object-removal.html" class="tool-link">
+                            <i class="fas fa-magic tool-icon"></i> Smart Object Removal <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="pdf-to-excel-(advanced).html" class="tool-link">
+                            <i class="fas fa-file-pdf tool-icon"></i> PDF to Excel (Advanced) <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="excel-to-pdf-(advanced).html" class="tool-link">
+                            <i class="fas fa-file-excel tool-icon"></i> Excel to PDF (Advanced) <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="Advanced-PDF-Encryption.html" class="tool-link">
+                            <i class="fas fa-lock tool-icon"></i> Advanced PDF Encryption <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="OCR-Text-Recognition.html" class="tool-link">
+                            <i class="fas fa-search tool-icon"></i> OCR Text Recognition <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="Video-to-GIF-Converter.html" class="tool-link">
+                            <i class="fas fa-file-video tool-icon"></i> Video to GIF Converter <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="Batch-File-Processor.html" class="tool-link">
+                            <i class="fas fa-file-archive tool-icon"></i> Batch File Processor <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                    <li class="tool-item">
+                        <a href="Cloud-Storage-Integration.html" class="tool-link">
+                            <i class="fas fa-cloud tool-icon"></i> Cloud Storage Integration <span class="premium-badge">PRO</span>
+                        </a>
+                        <div class="tool-actions">
+                            <button class="tool-action"><i class="fas fa-star"></i> Favorite</button>
+                            <button class="tool-action"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">3</div>
+            <div class="page-btn">4</div>
+            <div class="page-btn">5</div>
         </div>
     </div>
 
@@ -1450,9 +1856,9 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
                     <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
@@ -1513,50 +1919,118 @@
             link.addEventListener('click', closeSidebar);
         });
 
-        // Form submission handler
-        document.getElementById('suggestion-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // In a real implementation, you would send the form data to a server
-            // For this demo, we'll just show a success message
-            
-            const successMessage = document.getElementById('success-message');
-            successMessage.style.display = 'block';
-            
-            // Reset form
-            this.reset();
-            
-            // Scroll to success message
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // Vote button handler
-        document.querySelectorAll('.vote-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const countElement = this.querySelector('.vote-count');
-                let count = parseInt(countElement.textContent);
-                count++;
-                countElement.textContent = count;
+        // Tool List Functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const toolCategories = document.querySelectorAll('.tool-category');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const sortSelect = document.getElementById('sortSelect');
+        const pageButtons = document.querySelectorAll('.page-btn');
+        const favoriteButtons = document.querySelectorAll('.tool-action');
+        
+        // Filter functionality
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
                 
-                // Visual feedback
-                this.style.background = 'rgba(67, 97, 238, 0.2)';
-                this.style.color = 'var(--primary)';
-                this.style.borderColor = 'var(--primary)';
+                const filter = this.getAttribute('data-filter');
                 
-                // Disable button after voting
-                this.disabled = true;
+                // Filter tools
+                toolCategories.forEach(category => {
+                    if (filter === 'all' || category.getAttribute('data-category') === filter) {
+                        category.style.display = 'block';
+                        setTimeout(() => {
+                            category.style.opacity = '1';
+                            category.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        category.style.opacity = '0';
+                        category.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            category.style.display = 'none';
+                        }, 300);
+                    }
+                });
             });
         });
 
-        // AI suggestion fill function
-        function fillSuggestion(name, category, description) {
-            document.getElementById('tool-name').value = name;
-            document.getElementById('tool-category').value = category;
-            document.getElementById('tool-description').value = description;
+        // Search functionality
+        const toolItems = document.querySelectorAll('.tool-item');
+        
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
             
-            // Scroll to form
-            document.getElementById('suggestion-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            toolItems.forEach(item => {
+                const toolText = item.textContent.toLowerCase();
+                if (toolText.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    // Highlight matching text
+                    const toolLink = item.querySelector('.tool-link');
+                    const originalText = toolLink.innerHTML;
+                    const regex = new RegExp(`(${searchTerm})`, 'gi');
+                    toolLink.innerHTML = originalText.replace(regex, '<mark>$1</mark>');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Update category visibility based on visible tools
+            toolCategories.forEach(category => {
+                const visibleTools = category.querySelectorAll('.tool-item[style="display: block"]');
+                const countElement = category.querySelector('.tool-count');
+                
+                if (countElement) {
+                    countElement.textContent = visibleTools.length;
+                }
+                
+                if (visibleTools.length === 0) {
+                    category.style.display = 'none';
+                } else {
+                    category.style.display = 'block';
+                setTimeout(() => {
+                    category.style.opacity = '1';
+                    category.style.transform = 'translateY(0)';
+                }, 10);
+                }
+            });
         }
+
+        searchInput.addEventListener('input', debounce(performSearch, 300));
+        searchBtn.addEventListener('click', performSearch);
+
+        // Tool actions
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.innerHTML.includes('fa-star')) {
+                    this.innerHTML = '<i class="fas fa-star" style="color: gold;"></i> Favorited';
+                }
+                
+                // In a real implementation, this would save to user preferences
+            });
+        });
+
+        // Sort functionality
+        sortSelect.addEventListener('change', function() {
+            const sortBy = this.value;
+            
+            // In a real implementation, this would sort the tools
+            // For this demo, we'll just show an alert
+            alert(`Tools sorted by: ${sortSelect.options[sortSelect.selectedIndex].text}`);
+        });
+
+        // Pagination
+        pageButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // In a real implementation, this would load the corresponding page
+                // For this demo, we'll just show an alert
+                alert(`Loading page ${this.textContent}`);
+            });
+        });
 
         // Animation on scroll
         const observerOptions = {
@@ -1574,7 +2048,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.form-group, .card, .featured-card, .ai-suggestion').forEach(el => {
+        document.querySelectorAll('.tool-category, .featured-card, .overview-item').forEach(el => {
             el.style.animationPlayState = 'paused';
             observer.observe(el);
         });
