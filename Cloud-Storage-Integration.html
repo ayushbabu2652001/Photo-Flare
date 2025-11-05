@@ -1320,7 +1320,6 @@
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
             <div class="ad-space" id="ad-top">
-                <!-- Google AdSense code will be inserted here -->
                 <p>Ad Space (728x90)</p>
             </div>
         </div>
@@ -1520,7 +1519,6 @@
             </div>
             
             <div class="file-grid" id="fileGrid">
-                <!-- File items will be added here dynamically -->
                 <div class="file-item" data-type="folder" data-name="Documents">
                     <div class="file-icon">
                         <i class="fas fa-folder"></i>
@@ -1671,7 +1669,6 @@
                     </div>
                     <div class="log-message">Sync session started</div>
                 </div>
-                <!-- Log entries will be added here dynamically -->
             </div>
         </div>
 
@@ -1687,7 +1684,6 @@
         <div class="ad-container">
             <div class="ad-label">Advertisement</div>
             <div class="ad-space" id="ad-middle">
-                <!-- Google AdSense code will be inserted here -->
                 <p>Ad Space (728x90)</p>
             </div>
         </div>
@@ -1751,15 +1747,15 @@
             mobileNavBtn.addEventListener('click', function() {
                 sidebar.classList.add('active');
                 sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                document.body.style.overflow = 'hidden';
             });
         }
 
-        // Close sidebar
+        // Close sidebar - FIXED VERSION
         function closeSidebar() {
             sidebar.classList.remove('active');
             sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
         if (sidebarClose) {
@@ -1767,7 +1763,7 @@
         }
         
         if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
+            sidebarOverlay.addEventListener('lclick', closeSidebar);
         }
 
         // Close sidebar when clicking on a link
@@ -1795,7 +1791,6 @@
         const activityLog = document.getElementById('activityLog');
         const loadingIndicator = document.getElementById('loadingIndicator');
         
-        // Status elements
         const filesSynced = document.getElementById('filesSynced');
         const filesRemaining = document.getElementById('filesRemaining');
         const transferSpeed = document.getElementById('transferSpeed');
@@ -1803,40 +1798,28 @@
         const syncProgress = document.getElementById('syncProgress');
         const syncProgressText = document.getElementById('syncProgressText');
         
-        // State Variables
-        let isPremiumUser = false; // This would be set based on user authentication
+        let isPremiumUser = false;
         let connectedProviders = [];
         let isSyncing = false;
         let syncInterval = null;
         let selectedFiles = [];
         
-        // Initialize the tool
         function init() {
-            // Check if user is premium (in a real app, this would come from backend)
-            // For demo purposes, we'll set it to false
             isPremiumUser = false;
-            
             if (!isPremiumUser) {
                 upgradePrompt.style.display = 'block';
             } else {
                 upgradePrompt.style.display = 'none';
             }
-            
-            // Set up event listeners
             setupEventListeners();
-            
-            // Initialize UI
             updateConnectionSummary();
         }
         
-        // Set up event listeners
         function setupEventListeners() {
-            // Cloud provider connections
             cloudProviders.forEach(provider => {
                 provider.addEventListener('click', () => connectProvider(provider));
             });
             
-            // Button events
             connectAllBtn.addEventListener('click', connectAllProviders);
             disconnectAllBtn.addEventListener('click', disconnectAllProviders);
             syncNowBtn.addEventListener('click', startSync);
@@ -1847,80 +1830,56 @@
             transferBtn.addEventListener('click', startTransfer);
             scheduleTransferBtn.addEventListener('click', scheduleTransfer);
             pauseSyncBtn.addEventListener('click', togglePauseSync);
-            
-            // File selection
             fileGrid.addEventListener('click', handleFileSelection);
         }
         
-        // Connect a cloud provider
         function connectProvider(providerElement) {
             const provider = providerElement.dataset.provider;
-            
-            // Check if provider is premium
             if (providerElement.classList.contains('premium-feature') && !isPremiumUser) {
                 alert(`Connecting to ${provider} is a premium feature. Please upgrade to use this provider.`);
                 return;
             }
-            
-            // Check if already connected
             if (connectedProviders.includes(provider)) {
                 disconnectProvider(provider);
                 return;
             }
-            
-            // Show loading state
             showLoading();
-            
-            // In a real implementation, this would open OAuth flow
-            // For demo purposes, we'll simulate connection
             simulateProviderConnection(provider, () => {
-                // Connection successful
                 connectedProviders.push(provider);
                 providerElement.classList.remove('connecting');
                 providerElement.classList.add('connected');
                 providerElement.querySelector('.connection-status').classList.add('connected');
                 providerElement.querySelector('.provider-status').textContent = 'Connected';
-                
                 updateConnectionSummary();
                 addLogEntry(`Connected to ${getProviderName(provider)}`, 'success');
                 hideLoading();
             });
         }
         
-        // Disconnect a cloud provider
         function disconnectProvider(provider) {
-            // In a real implementation, this would revoke tokens
-            // For demo purposes, we'll simulate disconnection
             const providerElement = document.getElementById(provider);
             if (providerElement) {
                 providerElement.classList.remove('connected');
                 providerElement.querySelector('.connection-status').classList.remove('connected');
                 providerElement.querySelector('.provider-status').textContent = 'Not connected';
             }
-            
             connectedProviders = connectedProviders.filter(p => p !== provider);
             updateConnectionSummary();
             addLogEntry(`Disconnected from ${getProviderName(provider)}`, 'info');
         }
         
-        // Connect all available providers
         function connectAllProviders() {
             showLoading();
-            
             let connectedCount = 0;
             const totalToConnect = Array.from(cloudProviders).filter(provider => 
                 !provider.classList.contains('premium-feature') || isPremiumUser
             ).length;
-            
             cloudProviders.forEach(provider => {
                 if (!provider.classList.contains('premium-feature') || isPremiumUser) {
                     if (!connectedProviders.includes(provider.dataset.provider)) {
-                        // Show connecting state
                         provider.classList.add('connecting');
                         provider.querySelector('.provider-status').textContent = 'Connecting...';
                         provider.querySelector('.connection-status').classList.add('connecting');
-                        
-                        // Simulate connection with different delays for realism
                         setTimeout(() => {
                             connectedProviders.push(provider.dataset.provider);
                             provider.classList.remove('connecting');
@@ -1928,46 +1887,31 @@
                             provider.querySelector('.connection-status').classList.remove('connecting');
                             provider.querySelector('.connection-status').classList.add('connected');
                             provider.querySelector('.provider-status').textContent = 'Connected';
-                            
                             connectedCount++;
                             addLogEntry(`Connected to ${getProviderName(provider.dataset.provider)}`, 'success');
-                            
                             if (connectedCount === totalToConnect) {
                                 updateConnectionSummary();
                                 hideLoading();
                             }
-                        }, Math.random() * 2000 + 1000); // Random delay between 1-3 seconds
+                        }, Math.random() * 2000 + 1000);
                     }
                 }
             });
-            
-            if (totalToConnect === 0) {
-                hideLoading();
-            }
+            if (totalToConnect === 0) hideLoading();
         }
         
-        // Disconnect all providers
         function disconnectAllProviders() {
-            connectedProviders.forEach(provider => {
-                disconnectProvider(provider);
-            });
+            connectedProviders.forEach(provider => disconnectProvider(provider));
         }
         
-        // Simulate provider connection (in a real app, this would be OAuth flow)
         function simulateProviderConnection(provider, callback) {
-            // Show connecting state
             const providerElement = document.getElementById(provider);
             providerElement.classList.add('connecting');
             providerElement.querySelector('.provider-status').textContent = 'Connecting...';
             providerElement.querySelector('.connection-status').classList.add('connecting');
-            
-            // Simulate connection delay
-            setTimeout(() => {
-                callback();
-            }, 1500);
+            setTimeout(callback, 1500);
         }
         
-        // Update connection summary
         function updateConnectionSummary() {
             if (connectedProviders.length === 0) {
                 connectionSummary.innerHTML = '<p>No cloud storage providers connected. Click on a provider to connect.</p>';
@@ -1982,7 +1926,6 @@
             }
         }
         
-        // Get provider display name
         function getProviderName(providerId) {
             const names = {
                 'google-drive': 'Google Drive',
@@ -1994,70 +1937,45 @@
             return names[providerId] || providerId;
         }
         
-        // Start sync process
         function startSync() {
             if (connectedProviders.length === 0) {
                 alert('Please connect at least one cloud storage provider before syncing.');
                 return;
             }
-            
             isSyncing = true;
             syncStatus.classList.add('active');
-            
-            // Initialize sync status
             filesSynced.textContent = '0';
-            filesRemaining.textContent = '25'; // Example count
+            filesRemaining.textContent = '25';
             transferSpeed.textContent = '0 KB/s';
             timeRemaining.textContent = '--:--';
             syncProgress.style.width = '0%';
             syncProgressText.textContent = '0%';
-            
-            // Clear activity log (except the first entry)
             const initialLog = activityLog.querySelector('.log-entry');
             activityLog.innerHTML = '';
-            if (initialLog) {
-                activityLog.appendChild(initialLog);
-            }
-            
+            if (initialLog) activityLog.appendChild(initialLog);
             addLogEntry('Sync session started', 'info');
-            
-            // Start sync simulation
             simulateSync();
-            
-            // Scroll to sync status
             syncStatus.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Simulate sync process (in a real app, this would be actual sync)
         function simulateSync() {
             let filesProcessed = 0;
-            const totalFiles = 25; // Example count
-            
+            const totalFiles = 25;
             syncInterval = setInterval(() => {
                 if (!isSyncing) return;
-                
-                // Process next file
                 if (filesProcessed < totalFiles) {
                     filesProcessed++;
-                    
-                    // Update progress
                     const progressPercent = Math.round((filesProcessed / totalFiles) * 100);
                     filesSynced.textContent = filesProcessed.toString();
                     filesRemaining.textContent = (totalFiles - filesProcessed).toString();
                     syncProgress.style.width = `${progressPercent}%`;
                     syncProgressText.textContent = `${progressPercent}%`;
-                    
-                    // Simulate transfer speed
                     const speed = Math.floor(Math.random() * 500) + 100;
                     transferSpeed.textContent = `${speed} KB/s`;
-                    
-                    // Calculate time remaining
-                    const remainingTime = Math.round((totalFiles - filesProcessed) * 2); // 2 seconds per file
+                    const remainingTime = Math.round((totalFiles - filesProcessed) * 2);
                     const minutes = Math.floor(remainingTime / 60);
                     const seconds = remainingTime % 60;
                     timeRemaining.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                    
-                    // Add log entry
                     if (filesProcessed % 5 === 0 || filesProcessed === totalFiles) {
                         const status = filesProcessed === totalFiles ? 'success' : 'info';
                         const message = filesProcessed === totalFiles 
@@ -2065,8 +1983,6 @@
                             : `Synced ${filesProcessed} of ${totalFiles} files`;
                         addLogEntry(message, status);
                     }
-                    
-                    // Check if sync is complete
                     if (filesProcessed === totalFiles) {
                         clearInterval(syncInterval);
                         addLogEntry('All files synchronized across connected clouds', 'success');
@@ -2074,13 +1990,11 @@
                         isSyncing = false;
                     }
                 }
-            }, 500); // Update every 500ms
+            }, 500);
         }
         
-        // Toggle pause/resume sync
         function togglePauseSync() {
             isSyncing = !isSyncing;
-            
             if (isSyncing) {
                 pauseSyncBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
                 pauseSyncBtn.classList.remove('btn-success');
@@ -2094,75 +2008,52 @@
             }
         }
         
-        // Reset sync settings
         function resetSyncSettings() {
             document.getElementById('autoSync').checked = true;
             document.getElementById('syncFrequency').value = '15min';
             document.getElementById('conflictResolution').value = 'newest';
             document.getElementById('selectiveSync').checked = false;
             document.getElementById('bandwidthControl').value = 'unlimited';
-            
             addLogEntry('Sync settings reset to defaults', 'info');
         }
         
-        // Handle file selection in the file explorer
         function handleFileSelection(e) {
             const fileItem = e.target.closest('.file-item');
             if (!fileItem) return;
-            
-            // Toggle selection
             fileItem.classList.toggle('selected');
-            
             const fileType = fileItem.dataset.type;
             const fileName = fileItem.dataset.name;
-            
             if (fileItem.classList.contains('selected')) {
                 selectedFiles.push({ type: fileType, name: fileName });
             } else {
                 selectedFiles = selectedFiles.filter(file => file.name !== fileName);
             }
-            
-            // Update UI based on selection
             updateSelectionUI();
         }
         
-        // Update UI based on file selection
         function updateSelectionUI() {
-            // In a real implementation, this would enable/disable actions
-            // based on what's selected
             if (selectedFiles.length > 0) {
-                // Enable relevant actions
                 addLogEntry(`${selectedFiles.length} file(s) selected`, 'info');
             }
         }
         
-        // Refresh file list
         function refreshFileList() {
             showLoading();
             addLogEntry('Refreshing file list...', 'info');
-            
-            // In a real implementation, this would fetch the latest file list
-            // For demo purposes, we'll just show a message
             setTimeout(() => {
                 addLogEntry('File list updated', 'success');
                 hideLoading();
             }, 1000);
         }
         
-        // Upload file
         function uploadFile() {
-            // In a real implementation, this would open a file picker
             alert('Upload dialog would open here. In a real implementation, this would allow you to select files to upload to the current cloud location.');
         }
         
-        // Create new folder
         function createNewFolder() {
             const folderName = prompt('Enter folder name:');
             if (folderName) {
-                // In a real implementation, this would create the folder in the cloud
                 addLogEntry(`Folder "${folderName}" created`, 'success');
-                
-                // Add to file grid (for demo purposes)
                 const newFolder = document.createElement('div');
                 newFolder.className = 'file-item';
                 newFolder.dataset.type = 'folder';
@@ -2177,79 +2068,56 @@
             }
         }
         
-        // Start file transfer
         function startTransfer() {
             const source = document.getElementById('sourceCloud').value;
             const destination = document.getElementById('destinationCloud').value;
-            
             if (source === destination) {
                 alert('Source and destination cannot be the same.');
                 return;
             }
-            
-            // Check if premium features are needed
             if ((source === 'box' || source === 'icloud' || destination === 'box' || destination === 'icloud') && !isPremiumUser) {
                 alert('Transfer to/from Box or iCloud is a premium feature. Please upgrade to use these providers.');
                 return;
             }
-            
             showLoading();
             addLogEntry(`Starting transfer from ${getProviderName(source)} to ${getProviderName(destination)}`, 'info');
-            
-            // In a real implementation, this would start the actual transfer
-            // For demo purposes, we'll simulate the transfer
             setTimeout(() => {
                 addLogEntry('Transfer completed successfully', 'success');
                 hideLoading();
             }, 2000);
         }
         
-        // Schedule transfer
         function scheduleTransfer() {
-            // In a real implementation, this would open a scheduling dialog
             alert('Scheduling dialog would open here. In a real implementation, this would allow you to schedule transfers for a specific time.');
         }
         
-        // Add entry to activity log
         function addLogEntry(message, type) {
             const logEntry = document.createElement('div');
             logEntry.className = 'log-entry';
-            
             const iconClass = `log-${type}`;
             const icon = type === 'success' ? 'check-circle' : 
                         type === 'warning' ? 'exclamation-triangle' : 
                         type === 'error' ? 'times-circle' : 'info-circle';
-            
             logEntry.innerHTML = `
                 <div class="log-icon ${iconClass}">
                     <i class="fas fa-${icon}"></i>
                 </div>
                 <div class="log-message">${message}</div>
             `;
-            
             activityLog.appendChild(logEntry);
-            
-            // Scroll to bottom
             activityLog.scrollTop = activityLog.scrollHeight;
         }
         
-        // Show loading indicator
         function showLoading() {
             loadingIndicator.classList.add('active');
         }
         
-        // Hide loading indicator
         function hideLoading() {
             loadingIndicator.classList.remove('active');
         }
 
-        // Initialize the tool when the page loads
         window.addEventListener('DOMContentLoaded', init);
-
-        // Reinitialize on window resize
-        window.addEventListener('resize', debounce(() => {
-            // Any responsive adjustments needed
-        }, 250));
+        window.addEventListener('resize', debounce(() => {}, 250));
     </script>
 </body>
 </html>
