@@ -139,6 +139,13 @@
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .user-name {
@@ -901,6 +908,7 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .modal.active {
@@ -912,6 +920,8 @@
             border-radius: var(--border-radius);
             width: 90%;
             max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
             padding: 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease;
@@ -990,6 +1000,7 @@
             gap: 0.5rem;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--light-gray);
+            overflow-x: auto;
         }
 
         .payment-tab {
@@ -1001,6 +1012,7 @@
             color: var(--gray);
             cursor: pointer;
             transition: var(--transition);
+            white-space: nowrap;
         }
 
         .payment-tab.active {
@@ -1122,6 +1134,10 @@
             .payment-options {
                 grid-template-columns: 1fr;
             }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1143,6 +1159,14 @@
                 flex: 1;
                 min-width: 120px;
                 text-align: center;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .modal-footer .btn {
+                width: 100%;
             }
         }
     </style>
@@ -1168,12 +1192,16 @@
                 </nav>
                 <div class="header-actions">
                     <div class="user-profile">
-                        <div class="user-avatar">JS</div>
+                        <div class="user-avatar">
+                            <img src="https://i.pravatar.cc/150?img=32" alt="User Avatar">
+                        </div>
                         <div class="user-name">John Smith</div>
                         <!-- Profile Dropdown -->
                         <div class="profile-dropdown">
                             <div class="profile-header">
-                                <div class="user-avatar">JS</div>
+                                <div class="user-avatar">
+                                    <img src="https://i.pravatar.cc/150?img=32" alt="User Avatar">
+                                </div>
                                 <div class="profile-info">
                                     <h3>John Smith</h3>
                                     <p>john.smith@example.com</p>
@@ -1294,7 +1322,7 @@
                             <div class="payment-name">PayPal</div>
                             <div class="payment-details">john.smith@example.com</div>
                         </div>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Set as Default</button>
+                        <button class="btn btn-outline set-default-btn" style="padding: 0.5rem 1rem;">Set as Default</button>
                     </div>
                     <div class="payment-method">
                         <div class="payment-icon crypto">
@@ -1304,7 +1332,7 @@
                             <div class="payment-name">Bitcoin Wallet</div>
                             <div class="payment-details">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
                         </div>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Set as Default</button>
+                        <button class="btn btn-outline set-default-btn" style="padding: 0.5rem 1rem;">Set as Default</button>
                     </div>
                 </div>
             </div>
@@ -1330,28 +1358,28 @@
                             <td>Pro Yearly Plan</td>
                             <td>$30.00</td>
                             <td><span class="billing-status paid">Paid</span></td>
-                            <td><a href="#" class="btn btn-outline" style="padding: 0.3rem 0.8rem;">Download</a></td>
+                            <td><a href="#" class="btn btn-outline download-invoice" style="padding: 0.3rem 0.8rem;">Download</a></td>
                         </tr>
                         <tr>
                             <td>Nov 15, 2023</td>
                             <td>Pro Yearly Plan</td>
                             <td>$30.00</td>
                             <td><span class="billing-status paid">Paid</span></td>
-                            <td><a href="#" class="btn btn-outline" style="padding: 0.3rem 0.8rem;">Download</a></td>
+                            <td><a href="#" class="btn btn-outline download-invoice" style="padding: 0.3rem 0.8rem;">Download</a></td>
                         </tr>
                         <tr>
                             <td>Oct 15, 2023</td>
                             <td>Pro Yearly Plan</td>
                             <td>$30.00</td>
                             <td><span class="billing-status paid">Paid</span></td>
-                            <td><a href="#" class="btn btn-outline" style="padding: 0.3rem 0.8rem;">Download</a></td>
+                            <td><a href="#" class="btn btn-outline download-invoice" style="padding: 0.3rem 0.8rem;">Download</a></td>
                         </tr>
                         <tr>
                             <td>Sep 15, 2023</td>
                             <td>Pro Yearly Plan</td>
                             <td>$30.00</td>
                             <td><span class="billing-status paid">Paid</span></td>
-                            <td><a href="#" class="btn btn-outline" style="padding: 0.3rem 0.8rem;">Download</a></td>
+                            <td><a href="#" class="btn btn-outline download-invoice" style="padding: 0.3rem 0.8rem;">Download</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1389,7 +1417,7 @@
                             <li><i class="fas fa-check"></i> Priority support</li>
                             <li><i class="fas fa-check"></i> Ad-free experience</li>
                         </ul>
-                        <button class="btn btn-primary" style="width: 100%;">Upgrade</button>
+                        <button class="btn btn-primary upgrade-plan-btn" style="width: 100%;">Upgrade</button>
                     </div>
                     <div class="plan-card">
                         <h3 class="plan-name">Pro Yearly</h3>
@@ -1629,7 +1657,7 @@
                     </div>
                     <h3 style="margin-bottom: 1rem;">Pay with PayPal</h3>
                     <p style="color: var(--gray); margin-bottom: 2rem;">You'll be redirected to PayPal to complete your payment securely.</p>
-                    <button class="btn btn-paypal" style="width: 100%;">
+                    <button class="btn btn-paypal" style="width: 100%;" id="paypal-connect-btn">
                         <i class="fab fa-paypal"></i> Connect with PayPal
                     </button>
                 </div>
@@ -1671,9 +1699,7 @@
                             bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
                         </div>
                         <div class="crypto-qr">
-                            <div style="width: 200px; height: 200px; background: #f0f0f0; border-radius: var(--border-radius); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: var(--gray);">
-                                [QR Code]
-                            </div>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="Bitcoin QR Code">
                         </div>
                         <p style="color: var(--gray); font-size: 0.9rem; margin-top: 1rem;">
                             Payment will be confirmed after 3 network confirmations.
@@ -1689,13 +1715,13 @@
                     <p style="color: var(--gray); margin-bottom: 2rem;">Choose your preferred digital wallet:</p>
                     
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <button class="btn btn-apple" style="width: 100%;">
+                        <button class="btn btn-apple" style="width: 100%;" id="apple-pay-btn">
                             <i class="fab fa-apple"></i> Pay with Apple Pay
                         </button>
-                        <button class="btn btn-google" style="width: 100%;">
+                        <button class="btn btn-google" style="width: 100%;" id="google-pay-btn">
                             <i class="fab fa-google"></i> Pay with Google Pay
                         </button>
-                        <button class="btn btn-primary" style="width: 100%;">
+                        <button class="btn btn-primary" style="width: 100%;" id="other-wallet-btn">
                             <i class="fas fa-wallet"></i> Other Digital Wallets
                         </button>
                     </div>
@@ -1879,7 +1905,7 @@
             });
             
             // Set default payment method
-            const setDefaultButtons = document.querySelectorAll('.payment-method .btn-outline');
+            const setDefaultButtons = document.querySelectorAll('.set-default-btn');
             setDefaultButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const paymentMethod = this.closest('.payment-method');
@@ -1904,7 +1930,7 @@
             });
             
             // Download invoice buttons
-            const downloadButtons = document.querySelectorAll('.invoice-table .btn-outline');
+            const downloadButtons = document.querySelectorAll('.download-invoice');
             downloadButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1914,7 +1940,7 @@
             });
             
             // Upgrade buttons in available plans
-            const upgradeButtons = document.querySelectorAll('.plan-card .btn-primary');
+            const upgradeButtons = document.querySelectorAll('.upgrade-plan-btn');
             upgradeButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const planName = this.closest('.plan-card').querySelector('.plan-name').textContent;
@@ -1923,18 +1949,32 @@
             });
             
             // Digital wallet buttons
-            const walletButtons = document.querySelectorAll('.btn-apple, .btn-google');
-            walletButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const walletType = this.textContent.trim();
-                    alert(`Redirecting to ${walletType}...`);
-                });
+            const applePayBtn = document.getElementById('apple-pay-btn');
+            const googlePayBtn = document.getElementById('google-pay-btn');
+            const otherWalletBtn = document.getElementById('other-wallet-btn');
+            const paypalConnectBtn = document.getElementById('paypal-connect-btn');
+            
+            applePayBtn.addEventListener('click', function() {
+                alert('Redirecting to Apple Pay...');
             });
             
-            // PayPal button
-            const paypalButton = document.querySelector('.btn-paypal');
-            paypalButton.addEventListener('click', function() {
+            googlePayBtn.addEventListener('click', function() {
+                alert('Redirecting to Google Pay...');
+            });
+            
+            otherWalletBtn.addEventListener('click', function() {
+                alert('Opening other digital wallet options...');
+            });
+            
+            paypalConnectBtn.addEventListener('click', function() {
                 alert('Redirecting to PayPal for authentication...');
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('active');
+                }
             });
         });
     </script>
