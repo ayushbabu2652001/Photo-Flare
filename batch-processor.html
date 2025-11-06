@@ -328,6 +328,18 @@
         .page-hero {
             padding: 3rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(114, 9, 183, 0.05) 100%);
+            z-index: -1;
         }
 
         .page-hero h1 {
@@ -394,6 +406,20 @@
             cursor: pointer;
             transition: var(--transition);
             margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .upload-area:hover {
@@ -405,17 +431,23 @@
             font-size: 4rem;
             color: var(--primary);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .upload-text {
             font-size: 1.2rem;
             margin-bottom: 1rem;
             color: var(--dark);
+            position: relative;
+            z-index: 1;
         }
 
         .upload-hint {
             color: var(--gray);
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         .file-list {
@@ -853,6 +885,25 @@
             }
         }
 
+        /* Image Styles */
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .option-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .batch-processor-container {
@@ -1044,9 +1095,11 @@
 
     <!-- Page Hero -->
     <section class="page-hero">
+        <div class="hero-background"></div>
         <div class="container">
             <h1>Batch Image Processor</h1>
             <p>Process multiple images simultaneously with our AI-powered tools. Enhance, resize, convert, and more - all in one go!</p>
+            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Batch Processing" class="hero-image">
             <div class="process-buttons">
                 <button class="btn btn-primary btn-large" id="start-processing"><i class="fas fa-play-circle"></i> Start Processing</button>
                 <button class="btn btn-outline btn-large" id="save-preset"><i class="fas fa-save"></i> Save Preset</button>
@@ -1074,6 +1127,8 @@
             <!-- Processing Options -->
             <div class="options-section">
                 <h2 class="section-title"><i class="fas fa-sliders-h"></i> Processing Options</h2>
+                
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Processing Options" class="option-image">
                 
                 <div class="option-group">
                     <label class="option-label">Output Format</label>
