@@ -2105,9 +2105,6 @@
             });
         });
 
-        // Initialize comparison slider
-        initComparisonSlider();
-
         // Functions
         function handleDragOver(e) {
             e.preventDefault();
@@ -2172,6 +2169,10 @@
                     // Show single preview and hide empty state
                     emptyState.style.display = 'none';
                     singlePreview.style.display = 'block';
+                    
+                    // Reset comparison slider position
+                    comparisonContainer.querySelector('.comparison-after').style.width = '50%';
+                    comparisonContainer.querySelector('.comparison-slider').style.left = '50%';
                 };
                 img.src = e.target.result;
             };
@@ -2376,6 +2377,9 @@
                 
                 loadingIndicator.classList.remove('active');
                 processingOverlay.style.display = 'none';
+                
+                // Initialize comparison slider after processing
+                initComparisonSlider();
             };
             
             img.src = originalImageData;
@@ -2498,6 +2502,7 @@
 
         function initComparisonSlider() {
             const slider = comparisonContainer.querySelector('.comparison-slider');
+            const after = comparisonContainer.querySelector('.comparison-after');
             let isResizing = false;
             
             slider.addEventListener('mousedown', startResize);
@@ -2528,7 +2533,7 @@
                 const position = ((clientX - containerRect.left) / containerRect.width) * 100;
                 const clampedPosition = Math.max(0, Math.min(100, position));
                 
-                comparisonContainer.querySelector('.comparison-after').style.width = `${100 - clampedPosition}%`;
+                after.style.width = `${100 - clampedPosition}%`;
                 slider.style.left = `${clampedPosition}%`;
             }
             
@@ -2551,6 +2556,53 @@
         updatePrecisionDisplay();
         updateSmoothingDisplay();
         updateProtectionDisplay();
+
+        // Initialize comparison slider on load
+        window.addEventListener('load', function() {
+            initComparisonSlider();
+            
+            // Load a sample image for demonstration
+            setTimeout(() => {
+                // Create a sample image with a white background and a red circle
+                const canvas = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 600;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, 800, 600);
+                ctx.fillStyle = 'red';
+                ctx.beginPath();
+                ctx.arc(400, 300, 100, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Add some text
+                ctx.fillStyle = 'blue';
+                ctx.font = '30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Sample Image', 400, 450);
+                
+                const dataURL = canvas.toDataURL('image/jpeg');
+                
+                // Set the images
+                beforeImage.src = dataURL;
+                afterImage.src = dataURL;
+                originalImageData = dataURL;
+                
+                // Update the file info
+                fileName.textContent = 'sample.jpg';
+                fileSize.textContent = formatFileSize(0); // We don't know the exact size, so we set to 0
+                fileDimensions.textContent = '800 × 600';
+                fileType.textContent = 'JPEG';
+                fileInfo.classList.add('active');
+                
+                // Show the single preview and hide the empty state
+                emptyState.style.display = 'none';
+                singlePreview.style.display = 'block';
+                
+                // Set originalFile to a dummy file
+                originalFile = new File([], 'sample.jpg', { type: 'image/jpeg' });
+            }, 500);
+        });
 
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(() => {
