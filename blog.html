@@ -1290,8 +1290,8 @@
             <h1>Photo Flare Blog</h1>
             <p>Expert tips, tutorials, and insights on document and image processing, PDF tools, and productivity enhancement.</p>
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search blog posts...">
-                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+                <input type="text" class="search-input" placeholder="Search blog posts..." id="mainSearchInput">
+                <button class="search-btn" id="mainSearchBtn"><i class="fas fa-search"></i> Search</button>
             </div>
         </div>
     </section>
@@ -1302,7 +1302,7 @@
             <main class="blog-content">
                 <h2 class="section-title">Latest Articles</h2>
                 
-                <div class="blog-grid">
+                <div class="blog-grid" id="blogGrid">
                     <!-- Blog Post 1 -->
                     <article class="blog-card">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="PDF Optimization" class="blog-card-img">
@@ -1420,8 +1420,8 @@
                 <!-- Search Widget -->
                 <div class="sidebar-widget search-widget">
                     <h3 class="widget-title">Search</h3>
-                    <form>
-                        <input type="text" placeholder="Search blog...">
+                    <form id="sidebarSearchForm">
+                        <input type="text" placeholder="Search blog..." id="sidebarSearchInput">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
@@ -1430,13 +1430,13 @@
                 <div class="sidebar-widget categories-widget">
                     <h3 class="widget-title">Categories</h3>
                     <ul class="categories-list">
-                        <li><a href="#">PDF Tools <span>15</span></a></li>
-                        <li><a href="#">Image Tools <span>12</span></a></li>
-                        <li><a href="#">Conversion <span>8</span></a></li>
-                        <li><a href="#">Security <span>5</span></a></li>
-                        <li><a href="#">Productivity <span>7</span></a></li>
-                        <li><a href="#">AI & Technology <span>4</span></a></li>
-                        <li><a href="#">Tutorials <span>10</span></a></li>
+                        <li><a href="#" data-category="all">All Categories <span>51</span></a></li>
+                        <li><a href="#" data-category="pdf">PDF Tools <span>15</span></a></li>
+                        <li><a href="#" data-category="image">Image Tools <span>12</span></a></li>
+                        <li><a href="#" data-category="conversion">Conversion <span>8</span></a></li>
+                        <li><a href="#" data-category="security">Security <span>5</span></a></li>
+                        <li><a href="#" data-category="productivity">Productivity <span>7</span></a></li>
+                        <li><a href="#" data-category="ai">AI & Technology <span>4</span></a></li>
                     </ul>
                 </div>
 
@@ -1472,16 +1472,16 @@
                 <div class="sidebar-widget tags-widget">
                     <h3 class="widget-title">Tags</h3>
                     <div class="tags-widget">
-                        <a href="#" class="tag">PDF</a>
-                        <a href="#" class="tag">Compression</a>
-                        <a href="#" class="tag">Security</a>
-                        <a href="#" class="tag">Conversion</a>
-                        <a href="#" class="tag">Image Editing</a>
-                        <a href="#" class="tag">Productivity</a>
-                        <a href="#" class="tag">AI</a>
-                        <a href="#" class="tag">Tutorial</a>
-                        <a href="#" class="tag">Tips</a>
-                        <a href="#" class="tag">Tools</a>
+                        <a href="#" class="tag" data-tag="pdf">PDF</a>
+                        <a href="#" class="tag" data-tag="compression">Compression</a>
+                        <a href="#" class="tag" data-tag="security">Security</a>
+                        <a href="#" class="tag" data-tag="conversion">Conversion</a>
+                        <a href="#" class="tag" data-tag="image">Image Editing</a>
+                        <a href="#" class="tag" data-tag="productivity">Productivity</a>
+                        <a href="#" class="tag" data-tag="ai">AI</a>
+                        <a href="#" class="tag" data-tag="tutorial">Tutorial</a>
+                        <a href="#" class="tag" data-tag="tips">Tips</a>
+                        <a href="#" class="tag" data-tag="tools">Tools</a>
                     </div>
                 </div>
 
@@ -1489,8 +1489,8 @@
                 <div class="sidebar-widget newsletter-widget">
                     <h3 class="widget-title">Newsletter</h3>
                     <p>Subscribe to get the latest updates and tips directly in your inbox.</p>
-                    <form>
-                        <input type="email" placeholder="Your email address" required>
+                    <form id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required id="newsletterEmail">
                         <button type="submit">Subscribe</button>
                     </form>
                 </div>
@@ -1524,7 +1524,7 @@
                     <a href="affiliate.html">Affiliate Program</a>
                     <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
+                    <a href="help.html">Help Center</a>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                     <a href="cookies.html">Cookie Policy</a>
@@ -1595,11 +1595,14 @@
         });
 
         // Blog search functionality
-        const blogSearchInput = document.querySelector('.blog-hero .search-input');
+        const mainSearchInput = document.getElementById('mainSearchInput');
+        const mainSearchBtn = document.getElementById('mainSearchBtn');
+        const sidebarSearchInput = document.getElementById('sidebarSearchInput');
+        const sidebarSearchForm = document.getElementById('sidebarSearchForm');
         const blogCards = document.querySelectorAll('.blog-card');
         
-        blogSearchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
+        function filterBlogCards(searchTerm) {
+            searchTerm = searchTerm.toLowerCase();
             
             blogCards.forEach(card => {
                 const cardText = card.textContent.toLowerCase();
@@ -1609,7 +1612,26 @@
                     card.style.display = 'none';
                 }
             });
-        });
+        }
+
+        if (mainSearchInput && mainSearchBtn) {
+            mainSearchInput.addEventListener('input', function() {
+                filterBlogCards(this.value);
+            });
+            
+            mainSearchBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                filterBlogCards(mainSearchInput.value);
+            });
+        }
+
+        if (sidebarSearchForm) {
+            sidebarSearchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                filterBlogCards(sidebarSearchInput.value);
+                closeSidebar();
+            });
+        }
 
         // Category filtering
         const categoryLinks = document.querySelectorAll('.categories-list a');
@@ -1617,11 +1639,11 @@
         categoryLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const category = this.textContent.split(' ')[0];
+                const category = this.getAttribute('data-category');
                 
                 blogCards.forEach(card => {
-                    const cardCategory = card.querySelector('.blog-card-category').textContent;
-                    if (cardCategory.includes(category) || category === 'All') {
+                    const cardCategory = card.querySelector('.blog-card-category').textContent.toLowerCase();
+                    if (category === 'all' || cardCategory.includes(category)) {
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
@@ -1635,13 +1657,15 @@
         });
 
         // Newsletter form submission
-        const newsletterForm = document.querySelector('.newsletter-widget form');
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            alert(`Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
-            this.reset();
-        });
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('newsletterEmail').value;
+                alert(`Thank you for subscribing with ${email}! You'll receive our latest updates soon.`);
+                this.reset();
+            });
+        }
 
         // Tag filtering
         const tagLinks = document.querySelectorAll('.tag');
@@ -1649,7 +1673,7 @@
         tagLinks.forEach(tag => {
             tag.addEventListener('click', function(e) {
                 e.preventDefault();
-                const tagText = this.textContent;
+                const tagText = this.getAttribute('data-tag');
                 
                 blogCards.forEach(card => {
                     const cardText = card.textContent.toLowerCase();
@@ -1691,10 +1715,36 @@
             blogCardObserver.observe(card);
         });
 
+        // Pagination functionality
+        const paginationLinks = document.querySelectorAll('.pagination a');
+        paginationLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                paginationLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                // In a real implementation, this would load the corresponding page
+                alert('This would load page ' + this.textContent + ' in a real implementation');
+            });
+        });
+
+        // CTA button functionality
+        const ctaButton = document.querySelector('.blog-cta .btn');
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function(e) {
+                // In a real implementation, this would redirect to the pricing page
+                console.log('Redirecting to pricing page');
+            });
+        }
+
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+
+        // Add active state to first category by default
+        if (categoryLinks.length > 0) {
+            categoryLinks[0].classList.add('active');
+        }
     </script>
 </body>
 </html>
