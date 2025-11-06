@@ -192,6 +192,15 @@
             color: var(--gray);
         }
 
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            margin: 2rem auto;
+            display: block;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
         .breadcrumb {
             display: flex;
             justify-content: center;
@@ -437,6 +446,24 @@
             border-bottom: 1px solid var(--primary-dark);
         }
 
+        /* New image styles */
+        .job-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
@@ -563,6 +590,10 @@
             .job-header, .job-content, .apply-section {
                 padding: 1.5rem;
             }
+            
+            .job-image, .team-image {
+                height: 150px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -579,6 +610,10 @@
             .job-meta {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+            
+            .job-image, .team-image {
+                height: 120px;
             }
         }
     </style>
@@ -622,6 +657,7 @@
             </div>
             <h1>Backend Engineer</h1>
             <p>Design and implement scalable backend services for our document processing pipeline and user management systems.</p>
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Backend Engineering" class="hero-image">
         </div>
     </section>
 
@@ -635,10 +671,12 @@
                         <div class="job-meta">
                             <span class="job-tag engineering">Engineering</span>
                             <span class="job-tag">Full-time</span>
+                            <span class="job-tag remote">Remote Friendly</span>
                         </div>
                     </div>
                     <a href="#apply" class="btn btn-primary">Apply Now</a>
                 </div>
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Team Collaboration" class="job-image">
                 <p>Join our backend engineering team to build the infrastructure that powers document processing for millions of users. You'll design, implement, and scale the services that handle everything from user authentication to complex document transformations.</p>
             </div>
             
@@ -731,6 +769,7 @@
                     <div class="sidebar-card">
                         <h3 class="sidebar-title"><i class="fas fa-users"></i> Team</h3>
                         <p>Backend Engineering</p>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Engineering Team" class="team-image">
                     </div>
                     
                     <div class="sidebar-card">
@@ -783,7 +822,7 @@
                     <a href="affiliate.html">Affiliate Program</a>
                     <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
+                    <a href="help.html">Help Center</a>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                     <a href="cookies.html">Cookie Policy</a>
@@ -842,6 +881,14 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Add lazy loading for images
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.setAttribute('loading', 'lazy');
+            });
         });
     </script>
 </body>
