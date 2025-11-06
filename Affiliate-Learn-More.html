@@ -842,6 +842,92 @@
             }
         }
 
+        /* Mobile Navigation */
+        .mobile-nav-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .benefits-grid {
@@ -963,10 +1049,45 @@
                 gap: 1rem;
             }
         }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            header {
+                display: none;
+            }
+            
+            .hero {
+                padding-top: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -1000,7 +1121,7 @@
             
             <div style="margin-top: 2rem;">
                 <a href="affiliate-signup.html" class="btn btn-warning" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Join Now</a>
-                <a href="benefits.html" class="btn btn-outline"><i class="fas fa-arrow-down"></i> Explore Benefits</a>
+                <a href="#benefits" class="btn btn-outline"><i class="fas fa-arrow-down"></i> Explore Benefits</a>
             </div>
         </div>
     </section>
