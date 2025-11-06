@@ -47,6 +47,107 @@
             padding: 0 20px;
         }
 
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Desktop Header */
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -712,6 +813,29 @@
             }
         }
 
+        /* Form Validation Styles */
+        .error {
+            border-color: var(--danger) !important;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1) !important;
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: block;
+        }
+
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .join-container {
@@ -743,6 +867,14 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            header {
+                display: none;
+            }
+            
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -813,7 +945,27 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -865,31 +1017,40 @@
                         <p>Complete this form to get started. We typically approve applications within 24 hours.</p>
                     </div>
                     
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> Thank you for your application! We will review it and get back to you within 24 hours.
+                    </div>
+                    
                     <form id="affiliate-signup-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first-name" class="required">First Name</label>
                                 <input type="text" id="first-name" name="first-name" required>
+                                <span class="error-message" id="firstNameError"></span>
                             </div>
                             <div class="form-group">
                                 <label for="last-name" class="required">Last Name</label>
                                 <input type="text" id="last-name" name="last-name" required>
+                                <span class="error-message" id="lastNameError"></span>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="email" class="required">Email Address</label>
                             <input type="email" id="email" name="email" required>
+                            <span class="error-message" id="emailError"></span>
                         </div>
                         
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="phone">
+                            <span class="error-message" id="phoneError"></span>
                         </div>
                         
                         <div class="form-group">
                             <label for="website">Website or Blog URL</label>
                             <input type="url" id="website" name="website" placeholder="https://">
+                            <span class="error-message" id="websiteError"></span>
                         </div>
                         
                         <div class="form-group">
@@ -902,11 +1063,13 @@
                                 <option value="email">Email Marketing</option>
                                 <option value="other">Other</option>
                             </select>
+                            <span class="error-message" id="promotionMethodsError"></span>
                         </div>
                         
                         <div class="form-group">
                             <label for="promotion-details">Tell us more about your promotion methods</label>
                             <textarea id="promotion-details" name="promotion-details" rows="4" placeholder="Describe your audience, traffic numbers, and how you plan to promote our products..."></textarea>
+                            <span class="error-message" id="promotionDetailsError"></span>
                         </div>
                         
                         <div class="form-group">
@@ -918,16 +1081,19 @@
                                 <option value="wise">Wise</option>
                                 <option value="payoneer">Payoneer</option>
                             </select>
+                            <span class="error-message" id="paymentMethodError"></span>
                         </div>
                         
                         <div class="form-group">
                             <label for="payment-details" class="required">Payment Details</label>
                             <input type="text" id="payment-details" name="payment-details" required placeholder="PayPal email, bank account details, etc.">
+                            <span class="error-message" id="paymentDetailsError"></span>
                         </div>
                         
                         <div class="checkbox-group">
                             <input type="checkbox" id="terms" name="terms" required>
                             <label for="terms">I agree to the <a href="affiliate-terms.html" target="_blank">Photo Flare Affiliate Program Terms</a> and <a href="privacy.html" target="_blank">Privacy Policy</a></label>
+                            <span class="error-message" id="termsError"></span>
                         </div>
                         
                         <div class="checkbox-group">
@@ -1198,11 +1364,34 @@
             });
         });
 
-        // Form submission
+        // Form validation and submission
         const signupForm = document.getElementById('affiliate-signup-form');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Clear error styles when user starts typing
+        const inputs = signupForm.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorElement = document.getElementById(this.id + 'Error');
+                if (errorElement) {
+                    errorElement.textContent = '';
+                }
+            });
+        });
         
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Reset all error states
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(error => {
+                error.textContent = '';
+            });
+            
+            inputs.forEach(input => {
+                input.classList.remove('error');
+            });
             
             // Basic form validation
             const requiredFields = signupForm.querySelectorAll('[required]');
@@ -1211,23 +1400,81 @@
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
                     valid = false;
-                    field.style.borderColor = 'var(--danger)';
-                } else {
-                    field.style.borderColor = '';
+                    field.classList.add('error');
+                    const errorElement = document.getElementById(field.id + 'Error');
+                    if (errorElement) {
+                        errorElement.textContent = 'This field is required';
+                    }
                 }
             });
             
+            // Validate email format
+            const emailField = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailField.value && !emailRegex.test(emailField.value)) {
+                valid = false;
+                emailField.classList.add('error');
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+            }
+            
+            // Validate website URL format if provided
+            const websiteField = document.getElementById('website');
+            if (websiteField.value && !isValidUrl(websiteField.value)) {
+                valid = false;
+                websiteField.classList.add('error');
+                document.getElementById('websiteError').textContent = 'Please enter a valid URL';
+            }
+            
+            // Validate phone number format if provided
+            const phoneField = document.getElementById('phone');
+            if (phoneField.value && !isValidPhone(phoneField.value)) {
+                valid = false;
+                phoneField.classList.add('error');
+                document.getElementById('phoneError').textContent = 'Please enter a valid phone number';
+            }
+            
             if (!valid) {
-                alert('Please fill in all required fields.');
+                // Scroll to first error
+                const firstError = document.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
             
             // In a real application, you would submit the form data to a server here
             // For this demo, we'll just show a success message
             
-            alert('Thank you for your application! We will review it and get back to you within 24 hours.');
-            signupForm.reset();
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                signupForm.reset();
+                successMessage.style.display = 'none';
+            }, 5000);
         });
+
+        // Helper functions for validation
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+        
+        function isValidPhone(phone) {
+            // Basic phone validation - accepts various formats
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            // Remove common separators
+            const cleanPhone = phone.replace(/[\s\-\(\)\.]/g, '');
+            return phoneRegex.test(cleanPhone);
+        }
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
