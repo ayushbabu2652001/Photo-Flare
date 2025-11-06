@@ -841,6 +841,21 @@
                 gap: 1rem;
             }
         }
+
+        /* Image Styles */
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .demo-image {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -897,9 +912,7 @@
             <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Premium Bandwidth Features</h2>
             <div class="feature-content">
                 <div class="feature-image">
-                    <div class="bandwidth-animation">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Bandwidth Control Dashboard" class="feature-img">
                     <div class="premium-badge">PREMIUM FEATURE</div>
                 </div>
                 <div class="feature-details">
@@ -995,6 +1008,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Bandwidth Control Interface" class="demo-image">
                         
                         <div class="premium-overlay">
                             <i class="fas fa-crown"></i>
@@ -1162,14 +1177,6 @@
                 } else {
                     icon.style.transform = 'rotate(0deg)';
                 }
-                
-                // Close other open FAQs
-                document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
-                    if (otherAnswer !== answer && otherAnswer.classList.contains('active')) {
-                        otherAnswer.classList.remove('active');
-                        otherAnswer.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
-                    }
-                });
             });
         });
 
@@ -1223,6 +1230,15 @@
                 e.stopPropagation();
                 alert('Bandwidth control is a premium feature. Upgrade to unlock this capability.');
             });
+        });
+
+        // Initialize the demo with proper state
+        document.addEventListener('DOMContentLoaded', function() {
+            // Reset all demo elements to initial state
+            document.getElementById('bandwidthControl').value = 'unlimited';
+            document.getElementById('bandwidthSliders').classList.remove('active');
+            document.getElementById('bandwidthScheduling').value = 'always';
+            document.getElementById('scheduleControls').classList.remove('active');
         });
     </script>
 </body>
