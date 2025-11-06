@@ -758,6 +758,7 @@
             cursor: pointer;
             transition: var(--transition);
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .file-upload-area:hover {
@@ -780,6 +781,8 @@
             max-height: 250px;
             margin: 0 auto;
             display: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .editor-footer {
@@ -1114,6 +1117,57 @@
         .social-link:hover {
             color: white;
             transform: translateY(-3px);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 10000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Loading indicator */
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 100;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--light-gray);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Media Queries - Mobile First Approach */
@@ -1803,35 +1857,35 @@
                         <h3 class="panel-title">Color Presets</h3>
                         <div class="preset-grid">
                             <div class="preset-item active">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Original">
                                 <div class="preset-name">Original</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #a1c4fd, #c2e9fb);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cool">
                                 <div class="preset-name">Cool</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #ffecd2, #fcb69f);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Warm">
                                 <div class="preset-name">Warm</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1522770179533-24471fcdba45?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Vibrant">
                                 <div class="preset-name">Vibrant</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #d4fc79, #96e6a1);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Natural">
                                 <div class="preset-name">Natural</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Soft">
                                 <div class="preset-name">Soft</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Dramatic">
                                 <div class="preset-name">Dramatic</div>
                             </div>
                             <div class="preset-item">
-                                <div class="preset-preview" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                                <img class="preset-preview" src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cinematic">
                                 <div class="preset-name">Cinematic</div>
                             </div>
                         </div>
@@ -1849,6 +1903,10 @@
                 </div>
 
                 <div class="editor-main">
+                    <div class="loading" id="loading-indicator">
+                        <div class="loading-spinner"></div>
+                        <p>Processing image...</p>
+                    </div>
                     <div class="canvas-container">
                         <div class="comparison-container">
                             <canvas id="editor-canvas"></canvas>
@@ -1966,6 +2024,9 @@
         </div>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <script>
         // Debounce function for performance
         function debounce(func, wait) {
@@ -1978,6 +2039,17 @@
                 clearTimeout(timeout);
                 timeout = setTimeout(later, wait);
             };
+        }
+
+        // Show toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
         }
 
         // Sidebar functionality
@@ -2036,6 +2108,7 @@
         ];
         let isDraggingCurve = false;
         let draggedPointIndex = -1;
+        let isProcessing = false;
         
         // Color adjustment values
         const adjustments = {
@@ -2076,6 +2149,16 @@
         
         // Load image to canvas
         function loadImageToCanvas(file) {
+            if (!file || !file.type.match('image.*')) {
+                showToast('Please select a valid image file.');
+                return;
+            }
+            
+            if (file.size > 10 * 1024 * 1024) {
+                showToast('File size exceeds 10MB limit. Please choose a smaller image.');
+                return;
+            }
+            
             const reader = new FileReader();
             
             reader.onload = function(e) {
@@ -2103,12 +2186,24 @@
                     
                     drawImageWithAdjustments();
                     updateHistogram();
+                    
+                    // Switch to basic adjustments panel after upload
+                    document.getElementById('basic-btn').click();
+                    
+                    showToast('Image loaded successfully!');
+                };
+                img.onerror = function() {
+                    showToast('Error loading image. Please try another file.');
                 };
                 img.src = e.target.result;
                 
                 // Show preview
                 document.getElementById('image-preview').src = e.target.result;
                 document.getElementById('image-preview').style.display = 'block';
+            };
+            
+            reader.onerror = function() {
+                showToast('Error reading file. Please try again.');
             };
             
             reader.readAsDataURL(file);
@@ -2118,6 +2213,23 @@
         function drawImageWithAdjustments() {
             if (!currentImage) return;
             
+            // Show loading indicator for large images
+            if (currentImage.width > 1000 || currentImage.height > 1000) {
+                document.getElementById('loading-indicator').style.display = 'block';
+                isProcessing = true;
+                
+                // Use setTimeout to allow UI to update before processing
+                setTimeout(() => {
+                    processImage();
+                    document.getElementById('loading-indicator').style.display = 'none';
+                    isProcessing = false;
+                }, 10);
+            } else {
+                processImage();
+            }
+        }
+        
+        function processImage() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             if (currentView === 'single') {
@@ -2126,18 +2238,19 @@
                 applyAdjustments();
             } else if (currentView === 'split') {
                 // Draw a vertical line to separate before/after
-                ctx.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
-                applyAdjustments(canvas.width / 2, 0, canvas.width / 2, canvas.height);
+                const splitX = canvas.width / 2;
                 
-                // Draw the original image on the left side
-                ctx.globalCompositeOperation = 'source-atop';
-                ctx.drawImage(originalImage, 0, 0, canvas.width / 2, canvas.height);
-                ctx.globalCompositeOperation = 'source-over';
+                // Draw original on left
+                ctx.drawImage(originalImage, 0, 0, splitX, canvas.height);
+                
+                // Draw adjusted on right
+                ctx.drawImage(currentImage, splitX, 0, canvas.width - splitX, canvas.height);
+                applyAdjustments(splitX, 0, canvas.width - splitX, canvas.height);
                 
                 // Draw divider line
                 ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, 0);
-                ctx.lineTo(canvas.width / 2, canvas.height);
+                ctx.moveTo(splitX, 0);
+                ctx.lineTo(splitX, canvas.height);
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = 2;
                 ctx.stroke();
@@ -2557,7 +2670,7 @@
         // Download image
         function downloadImage(format) {
             if (!currentImage) {
-                alert('Please upload an image first.');
+                showToast('Please upload an image first.');
                 return;
             }
             
@@ -2565,6 +2678,8 @@
             link.download = `color-adjusted-image.${format}`;
             link.href = canvas.toDataURL(`image/${format}`);
             link.click();
+            
+            showToast(`Image downloaded as ${format.toUpperCase()}!`);
         }
         
         // Auto adjust function
@@ -2584,6 +2699,8 @@
             // Redraw image
             drawImageWithAdjustments();
             updateHistogram();
+            
+            showToast('Auto adjustment applied!');
         }
         
         // Update sliders from current adjustments
@@ -2681,16 +2798,16 @@
                     // Add active class to clicked button
                     this.classList.add('active');
                     
-                    // Hide all panels except upload panel
+                    // Hide all panels
                     document.querySelectorAll('.tool-panel').forEach(panel => {
-                        if (panel.id !== 'upload-panel') {
-                            panel.classList.remove('active');
-                        }
+                        panel.classList.remove('active');
                     });
                     
                     // Show corresponding panel
                     const toolId = this.id;
-                    if (toolId === 'basic-btn') {
+                    if (toolId === 'upload-btn') {
+                        document.getElementById('upload-panel').classList.add('active');
+                    } else if (toolId === 'basic-btn') {
                         document.getElementById('basic-panel').classList.add('active');
                     } else if (toolId === 'color-btn') {
                         document.getElementById('color-panel').classList.add('active');
@@ -2779,6 +2896,7 @@
                 document.getElementById('tint-value').textContent = '0';
                 drawImageWithAdjustments();
                 updateHistogram();
+                showToast('Auto white balance applied!');
             });
             
             // Reset buttons
@@ -2790,6 +2908,7 @@
                 updateSlidersFromAdjustments();
                 drawImageWithAdjustments();
                 updateHistogram();
+                showToast('Basic adjustments reset!');
             });
             
             document.getElementById('reset-color').addEventListener('click', function() {
@@ -2804,6 +2923,7 @@
                 updateSlidersFromAdjustments();
                 drawImageWithAdjustments();
                 updateHistogram();
+                showToast('Color adjustments reset!');
             });
             
             // View options
@@ -2883,6 +3003,7 @@
                         { x: 255, y: 255 }
                     ];
                     drawToneCurve();
+                    showToast('All adjustments reset!');
                 }
             });
             
@@ -2895,6 +3016,15 @@
                     const presetName = this.querySelector('.preset-name').textContent;
                     applyColorPreset(presetName);
                 });
+            });
+            
+            // Preset management buttons
+            document.getElementById('save-preset').addEventListener('click', function() {
+                showToast('Preset saved! (Demo feature)');
+            });
+            
+            document.getElementById('manage-presets').addEventListener('click', function() {
+                showToast('Preset management opened! (Demo feature)');
             });
             
             // Tone curve interaction
@@ -3000,6 +3130,7 @@
                 drawToneCurve();
                 drawImageWithAdjustments();
                 updateHistogram();
+                showToast('Tone curve reset!');
             });
             
             document.getElementById('s-curve').addEventListener('click', function() {
@@ -3012,6 +3143,7 @@
                 drawToneCurve();
                 drawImageWithAdjustments();
                 updateHistogram();
+                showToast('S-curve applied!');
             });
             
             // Curve channel selector
@@ -3064,6 +3196,8 @@
             updateSlidersFromAdjustments();
             drawImageWithAdjustments();
             updateHistogram();
+            
+            showToast(`"${presetName}" preset applied!`);
         }
         
         // Update zoom level
