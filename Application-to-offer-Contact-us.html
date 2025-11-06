@@ -627,6 +627,34 @@
             animation: none;
         }
 
+        /* Image styles */
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            margin: 2rem auto;
+            display: block;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .cta-image {
+            max-width: 400px;
+            width: 100%;
+            margin: 2rem auto;
+            display: block;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
         /* Floating Animations */
         @keyframes float-logo {
             0%, 100% {
@@ -837,6 +865,10 @@
             .tips-grid {
                 grid-template-columns: 1fr;
             }
+
+            .timeline-image {
+                height: 150px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -852,6 +884,10 @@
             
             .timeline-content {
                 padding: 1.5rem;
+            }
+
+            .timeline-image {
+                height: 120px;
             }
         }
     </style>
@@ -888,6 +924,7 @@
         <div class="container">
             <h1>Our Hiring Process Timeline</h1>
             <p>Learn about our comprehensive 2-3 week hiring process designed to find the best talent while respecting your time and providing a positive candidate experience.</p>
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Team collaboration at Photo Flare" class="hero-image">
         </div>
     </section>
 
@@ -899,6 +936,7 @@
             <div class="timeline-container">
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Application Review" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-file-alt"></i>
                         </div>
@@ -915,6 +953,7 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1551836026-d5c88ac6c7da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Initial Screening" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-video"></i>
                         </div>
@@ -931,6 +970,7 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Skills Assessment" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -947,6 +987,7 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Team Interviews" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-users"></i>
                         </div>
@@ -963,6 +1004,7 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Final Interview" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-user-tie"></i>
                         </div>
@@ -979,6 +1021,7 @@
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Offer & Onboarding" class="timeline-image">
                         <div class="timeline-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
@@ -1007,6 +1050,7 @@
         <div class="container">
             <h2 class="cta-title">Have Questions About Our Process?</h2>
             <p class="cta-desc">We're here to help! Our talent team is available to answer any questions you might have about our hiring process, timeline, or specific roles.</p>
+            <img src="https://images.unsplash.com/photo-1551836026-d5c88ac6c7da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Contact our team" class="cta-image">
             <a href="contact.html" class="btn btn-accent">Contact Our Team</a>
         </div>
     </section>
@@ -1108,7 +1152,7 @@
                     <a href="affiliate.html">Affiliate Program</a>
                     <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
+                    <a href="help.html">Help Center</a>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                     <a href="cookies.html">Cookie Policy</a>
@@ -1136,15 +1180,15 @@
             const question = item.querySelector('.faq-question');
             
             question.addEventListener('click', () => {
-                // Close all other FAQ items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                
                 // Toggle current item
                 item.classList.toggle('active');
+                
+                // Close other FAQ items if needed (optional)
+                // faqItems.forEach(otherItem => {
+                //     if (otherItem !== item) {
+                //         otherItem.classList.remove('active');
+                //     }
+                // });
             });
         });
 
@@ -1186,6 +1230,13 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Fix for images loading
+        window.addEventListener('load', function() {
+            document.querySelectorAll('img').forEach(img => {
+                img.setAttribute('loading', 'lazy');
+            });
         });
     </script>
 </body>
