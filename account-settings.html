@@ -514,12 +514,28 @@
             font-weight: bold;
             font-size: 1.2rem;
             overflow: hidden;
+            position: relative;
         }
 
         .user-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .avatar-initials {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
         }
 
         .user-name {
@@ -802,7 +818,6 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -824,6 +839,21 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .avatar-initials-large {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
         }
 
         .avatar-actions {
@@ -1466,6 +1496,7 @@
                     <div class="user-profile">
                         <div class="user-avatar">
                             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="John Smith">
+                            <div class="avatar-initials">JS</div>
                         </div>
                         <div class="user-name">John Smith</div>
                         <!-- Profile Dropdown -->
@@ -1473,6 +1504,7 @@
                             <div class="profile-header">
                                 <div class="user-avatar">
                                     <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="John Smith">
+                                    <div class="avatar-initials">JS</div>
                                 </div>
                                 <div class="profile-info">
                                     <h3>John Smith</h3>
@@ -1587,6 +1619,7 @@
                         <div class="avatar-upload">
                             <div class="avatar-preview">
                                 <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="John Smith" id="avatar-image">
+                                <div class="avatar-initials-large" id="avatar-initials">JS</div>
                             </div>
                             <div class="avatar-actions">
                                 <button class="btn btn-outline" id="change-avatar-btn"><i class="fas fa-camera"></i> Change Avatar</button>
@@ -1626,6 +1659,222 @@
                     </div>
                     
                     <button class="btn btn-primary" id="save-profile-btn">Save Changes</button>
+                </div>
+                
+                <!-- Security Section -->
+                <div class="settings-section" id="security">
+                    <h2 class="section-title"><i class="fas fa-shield-alt"></i> Security</h2>
+                    
+                    <div class="security-alerts">
+                        <div class="alert-title">Security Alerts</div>
+                        <div class="alert-description">Receive alerts about unusual activity in your account.</div>
+                        <div class="profile-action">
+                            <div class="profile-action-label">
+                                <i class="fas fa-bell"></i>
+                                <span>Email Security Alerts</span>
+                            </div>
+                            <div class="toggle-switch active" id="security-alerts-toggle"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="two-factor-setup">
+                        <div class="two-factor-title">Two-Factor Authentication</div>
+                        <div class="two-factor-description">Add an extra layer of security to your account by enabling two-factor authentication.</div>
+                        <button class="btn btn-primary" id="enable-2fa-btn">Enable 2FA</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="current-password">Current Password</label>
+                        <input type="password" id="current-password" class="form-control" placeholder="Enter your current password">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" class="form-control" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="update-password-btn">Update Password</button>
+                </div>
+                
+                <!-- Privacy Section -->
+                <div class="settings-section" id="privacy">
+                    <h2 class="section-title"><i class="fas fa-lock"></i> Privacy</h2>
+                    
+                    <div class="privacy-options">
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Profile Visibility</div>
+                                <div class="privacy-description">Control who can see your profile and activity</div>
+                            </div>
+                            <select class="form-control" style="width: auto;">
+                                <option>Public</option>
+                                <option>Private</option>
+                                <option>Friends Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Data Sharing</div>
+                                <div class="privacy-description">Allow us to use your data to improve our services</div>
+                            </div>
+                            <div class="toggle-switch active" id="data-sharing-toggle"></div>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Personalized Ads</div>
+                                <div class="privacy-description">Show personalized ads based on your activity</div>
+                            </div>
+                            <div class="toggle-switch" id="personalized-ads-toggle"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="save-privacy-btn">Save Privacy Settings</button>
+                </div>
+                
+                <!-- Notifications Section -->
+                <div class="settings-section" id="notifications">
+                    <h2 class="section-title"><i class="fas fa-bell"></i> Notifications</h2>
+                    
+                    <div class="privacy-options">
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Email Notifications</div>
+                                <div class="privacy-description">Receive notifications via email</div>
+                            </div>
+                            <div class="toggle-switch active" id="email-notifications-toggle"></div>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Push Notifications</div>
+                                <div class="privacy-description">Receive push notifications on your devices</div>
+                            </div>
+                            <div class="toggle-switch active" id="push-notifications-toggle"></div>
+                        </div>
+                        
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Marketing Emails</div>
+                                <div class="privacy-description">Receive marketing and promotional emails</div>
+                            </div>
+                            <div class="toggle-switch" id="marketing-emails-toggle"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="save-notifications-btn">Save Notification Settings</button>
+                </div>
+                
+                <!-- Connected Accounts Section -->
+                <div class="settings-section" id="connected-accounts">
+                    <h2 class="section-title"><i class="fas fa-link"></i> Connected Accounts</h2>
+                    
+                    <div class="connected-accounts">
+                        <div class="connected-account">
+                            <div class="account-info">
+                                <div class="account-icon google">
+                                    <i class="fab fa-google"></i>
+                                </div>
+                                <div class="account-details">
+                                    <h4>Google</h4>
+                                    <p>Connected to john.smith@gmail.com</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" id="disconnect-google-btn">Disconnect</button>
+                        </div>
+                        
+                        <div class="connected-account">
+                            <div class="account-info">
+                                <div class="account-icon facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div class="account-details">
+                                    <h4>Facebook</h4>
+                                    <p>Not connected</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" id="connect-facebook-btn">Connect</button>
+                        </div>
+                        
+                        <div class="connected-account">
+                            <div class="account-info">
+                                <div class="account-icon apple">
+                                    <i class="fab fa-apple"></i>
+                                </div>
+                                <div class="account-details">
+                                    <h4>Apple</h4>
+                                    <p>Not connected</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" id="connect-apple-btn">Connect</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Section -->
+                <div class="settings-section" id="billing">
+                    <h2 class="section-title"><i class="fas fa-credit-card"></i> Billing & Plans</h2>
+                    
+                    <div class="form-group">
+                        <div class="privacy-option" style="background: rgba(67, 97, 238, 0.05);">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Current Plan: Pro Yearly</div>
+                                <div class="privacy-description">Your plan renews on January 15, 2024</div>
+                            </div>
+                            <button class="btn btn-primary" id="manage-plan-btn">Manage Plan</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="payment-method">Payment Method</label>
+                        <div class="privacy-option">
+                            <div class="account-info">
+                                <div class="account-icon" style="background: #6c757d;">
+                                    <i class="far fa-credit-card"></i>
+                                </div>
+                                <div class="account-details">
+                                    <h4>Visa ending in 4242</h4>
+                                    <p>Expires 12/2025</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" id="update-payment-btn">Update</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="billing-history">Billing History</label>
+                        <div class="privacy-option">
+                            <div class="privacy-info">
+                                <div class="privacy-title">Last payment: $99.00 on December 15, 2023</div>
+                                <div class="privacy-description">Pro Yearly Plan</div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" id="view-invoice-btn">View Invoice</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Danger Zone Section -->
+                <div class="settings-section" id="danger-zone">
+                    <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Danger Zone</h2>
+                    
+                    <div class="danger-zone">
+                        <div class="danger-title">Delete Account</div>
+                        <div class="danger-description">Once you delete your account, there is no going back. Please be certain.</div>
+                        <button class="btn btn-danger" id="delete-account-btn">Delete Account</button>
+                    </div>
+                    
+                    <div class="danger-zone" style="margin-top: 1.5rem; border-color: var(--warning);">
+                        <div class="danger-title" style="color: var(--warning);">Deactivate Account</div>
+                        <div class="danger-description">Temporarily deactivate your account. You can reactivate it anytime.</div>
+                        <button class="btn btn-outline" id="deactivate-account-btn">Deactivate Account</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1782,21 +2031,31 @@
         // Toggle switches functionality
         const notificationToggle = document.getElementById('notification-toggle');
         const darkmodeToggle = document.getElementById('darkmode-toggle');
+        const securityAlertsToggle = document.getElementById('security-alerts-toggle');
+        const dataSharingToggle = document.getElementById('data-sharing-toggle');
+        const personalizedAdsToggle = document.getElementById('personalized-ads-toggle');
+        const emailNotificationsToggle = document.getElementById('email-notifications-toggle');
+        const pushNotificationsToggle = document.getElementById('push-notifications-toggle');
+        const marketingEmailsToggle = document.getElementById('marketing-emails-toggle');
         
-        if (notificationToggle) {
-            notificationToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                showToast('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
-            });
+        function setupToggleSwitch(toggleElement) {
+            if (toggleElement) {
+                toggleElement.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const toggleName = this.id.replace('-toggle', '').replace(/-/g, ' ');
+                    showToast(`${toggleName} ${this.classList.contains('active') ? 'enabled' : 'disabled'}`);
+                });
+            }
         }
         
-        if (darkmodeToggle) {
-            darkmodeToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                // In a real implementation, this would toggle dark mode
-                showToast('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
-            });
-        }
+        setupToggleSwitch(notificationToggle);
+        setupToggleSwitch(darkmodeToggle);
+        setupToggleSwitch(securityAlertsToggle);
+        setupToggleSwitch(dataSharingToggle);
+        setupToggleSwitch(personalizedAdsToggle);
+        setupToggleSwitch(emailNotificationsToggle);
+        setupToggleSwitch(pushNotificationsToggle);
+        setupToggleSwitch(marketingEmailsToggle);
 
         // Avatar upload functionality
         const changeAvatarBtn = document.getElementById('change-avatar-btn');
@@ -1807,11 +2066,15 @@
         const avatarUploadInput = document.getElementById('avatar-upload-input');
         const saveAvatarBtn = document.getElementById('save-avatar-btn');
         const avatarImage = document.getElementById('avatar-image');
+        const avatarInitials = document.getElementById('avatar-initials');
         const headerAvatar = document.querySelector('.user-avatar img');
+        const headerAvatarInitials = document.querySelector('.user-avatar .avatar-initials');
         const profileHeaderAvatar = document.querySelector('.profile-header .user-avatar img');
+        const profileHeaderAvatarInitials = document.querySelector('.profile-header .user-avatar .avatar-initials');
         const modalCloses = document.querySelectorAll('.modal-close, .modal-cancel');
         
         let selectedAvatar = avatarImage.src;
+        let hasAvatar = true;
         
         if (changeAvatarBtn) {
             changeAvatarBtn.addEventListener('click', function() {
@@ -1822,15 +2085,13 @@
         if (removeAvatarBtn) {
             removeAvatarBtn.addEventListener('click', function() {
                 // Reset to default avatar (initials)
-                avatarImage.src = '';
                 avatarImage.style.display = 'none';
-                avatarImage.parentElement.innerHTML = 'JS';
-                headerAvatar.src = '';
+                avatarInitials.style.display = 'flex';
                 headerAvatar.style.display = 'none';
-                headerAvatar.parentElement.innerHTML = 'JS';
-                profileHeaderAvatar.src = '';
+                headerAvatarInitials.style.display = 'flex';
                 profileHeaderAvatar.style.display = 'none';
-                profileHeaderAvatar.parentElement.innerHTML = 'JS';
+                profileHeaderAvatarInitials.style.display = 'flex';
+                hasAvatar = false;
                 showToast('Avatar removed successfully!');
             });
         }
@@ -1875,22 +2136,17 @@
                 if (selectedAvatar) {
                     avatarImage.src = selectedAvatar;
                     avatarImage.style.display = 'block';
-                    if (avatarImage.parentElement.textContent === 'JS') {
-                        avatarImage.parentElement.textContent = '';
-                    }
+                    avatarInitials.style.display = 'none';
                     
                     headerAvatar.src = selectedAvatar;
                     headerAvatar.style.display = 'block';
-                    if (headerAvatar.parentElement.textContent === 'JS') {
-                        headerAvatar.parentElement.textContent = '';
-                    }
+                    headerAvatarInitials.style.display = 'none';
                     
                     profileHeaderAvatar.src = selectedAvatar;
                     profileHeaderAvatar.style.display = 'block';
-                    if (profileHeaderAvatar.parentElement.textContent === 'JS') {
-                        profileHeaderAvatar.parentElement.textContent = '';
-                    }
+                    profileHeaderAvatarInitials.style.display = 'none';
                     
+                    hasAvatar = true;
                     avatarModal.classList.remove('active');
                     showToast('Avatar updated successfully!');
                 }
@@ -1933,6 +2189,95 @@
                 }
             });
         });
+
+        // Additional buttons functionality
+        const enable2faBtn = document.getElementById('enable-2fa-btn');
+        if (enable2faBtn) {
+            enable2faBtn.addEventListener('click', function() {
+                showToast('Two-factor authentication setup initiated!');
+            });
+        }
+        
+        const updatePasswordBtn = document.getElementById('update-password-btn');
+        if (updatePasswordBtn) {
+            updatePasswordBtn.addEventListener('click', function() {
+                showToast('Password updated successfully!');
+            });
+        }
+        
+        const savePrivacyBtn = document.getElementById('save-privacy-btn');
+        if (savePrivacyBtn) {
+            savePrivacyBtn.addEventListener('click', function() {
+                showToast('Privacy settings saved successfully!');
+            });
+        }
+        
+        const saveNotificationsBtn = document.getElementById('save-notifications-btn');
+        if (saveNotificationsBtn) {
+            saveNotificationsBtn.addEventListener('click', function() {
+                showToast('Notification settings saved successfully!');
+            });
+        }
+        
+        const disconnectGoogleBtn = document.getElementById('disconnect-google-btn');
+        if (disconnectGoogleBtn) {
+            disconnectGoogleBtn.addEventListener('click', function() {
+                showToast('Google account disconnected!');
+            });
+        }
+        
+        const connectFacebookBtn = document.getElementById('connect-facebook-btn');
+        if (connectFacebookBtn) {
+            connectFacebookBtn.addEventListener('click', function() {
+                showToast('Facebook account connected!');
+            });
+        }
+        
+        const connectAppleBtn = document.getElementById('connect-apple-btn');
+        if (connectAppleBtn) {
+            connectAppleBtn.addEventListener('click', function() {
+                showToast('Apple account connected!');
+            });
+        }
+        
+        const managePlanBtn = document.getElementById('manage-plan-btn');
+        if (managePlanBtn) {
+            managePlanBtn.addEventListener('click', function() {
+                showToast('Redirecting to plan management...');
+            });
+        }
+        
+        const updatePaymentBtn = document.getElementById('update-payment-btn');
+        if (updatePaymentBtn) {
+            updatePaymentBtn.addEventListener('click', function() {
+                showToast('Redirecting to payment update...');
+            });
+        }
+        
+        const viewInvoiceBtn = document.getElementById('view-invoice-btn');
+        if (viewInvoiceBtn) {
+            viewInvoiceBtn.addEventListener('click', function() {
+                showToast('Opening invoice...');
+            });
+        }
+        
+        const deleteAccountBtn = document.getElementById('delete-account-btn');
+        if (deleteAccountBtn) {
+            deleteAccountBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                    showToast('Account deletion initiated. Check your email for confirmation.', true);
+                }
+            });
+        }
+        
+        const deactivateAccountBtn = document.getElementById('deactivate-account-btn');
+        if (deactivateAccountBtn) {
+            deactivateAccountBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to deactivate your account? You can reactivate it anytime.')) {
+                    showToast('Account deactivation initiated. Check your email for confirmation.');
+                }
+            });
+        }
 
         // Toast notification function
         function showToast(message, isError = false) {
