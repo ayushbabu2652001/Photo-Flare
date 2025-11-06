@@ -177,6 +177,18 @@
         .hero {
             padding: 4rem 0 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(114, 9, 183, 0.05) 100%);
+            z-index: -1;
         }
 
         .hero h1 {
@@ -724,6 +736,25 @@
             border-bottom: 1px solid var(--primary-dark);
         }
 
+        /* Image Styles */
+        .hero-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .benefit-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
         /* Floating Animations */
         @keyframes float-logo {
             0%, 100% {
@@ -994,9 +1025,12 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-background"></div>
         <div class="container">
             <h1>Affiliate Program Benefits</h1>
             <p>Discover the comprehensive advantages of joining the Photo Flare Affiliate Program and how you can maximize your earnings potential.</p>
+            
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Affiliate Program Benefits" class="hero-image">
             
             <div style="margin-top: 2rem;">
                 <a href="affiliate-signup.html" class="btn btn-warning" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Join Now</a>
@@ -1047,7 +1081,7 @@
             
             <div class="benefit-detail">
                 <div class="benefit-image">
-                    <i class="fas fa-chart-pie"></i>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Analytics Dashboard">
                 </div>
                 <div class="benefit-content">
                     <h3>Advanced Analytics Dashboard</h3>
@@ -1064,7 +1098,7 @@
             
             <div class="benefit-detail">
                 <div class="benefit-image">
-                    <i class="fas fa-palette"></i>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Marketing Resources">
                 </div>
                 <div class="benefit-content">
                     <h3>Extensive Marketing Resources</h3>
@@ -1081,7 +1115,7 @@
             
             <div class="benefit-detail">
                 <div class="benefit-image">
-                    <i class="fas fa-users"></i>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Affiliate Manager">
                 </div>
                 <div class="benefit-content">
                     <h3>Dedicated Affiliate Manager</h3>
@@ -1243,50 +1277,50 @@
             
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         How much can I earn as a Photo Flare affiliate?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         Our commission structure starts at 20% and goes up to 30% for top performers. With our recurring commission model, you earn month after month for every customer you refer. Many of our affiliates earn hundreds to thousands of dollars per month.
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         How and when do I get paid?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         We process affiliate payments monthly around the 15th of each month for the previous month's commissions. Payments are made via PayPal, bank transfer, or other methods depending on your location. The minimum payout threshold is $50.
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         What is your cookie duration?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         We use a 90-day cookie duration. This means if someone clicks your affiliate link and makes a purchase within 90 days, you'll receive credit for that sale.
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Can I promote Photo Flare on social media?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         Absolutely! We encourage promotion on all social media platforms. We provide social media-friendly banners, pre-written posts, and other assets to make promotion easy and effective.
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Is there a cost to join the affiliate program?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         No, joining our affiliate program is completely free. There are no hidden fees or charges. We believe in creating a mutually beneficial partnership with our affiliates.
                     </div>
