@@ -177,6 +177,13 @@
         .hero {
             padding: 4rem 0 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -194,6 +201,21 @@
             max-width: 700px;
             margin: 0 auto 2rem;
             color: var(--gray);
+        }
+
+        .hero-image {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            animation: float-hero-image 10s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .section-title {
@@ -556,6 +578,45 @@
             opacity: 0.9;
         }
 
+        .stats-section {
+            background: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            background: var(--light);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
@@ -655,6 +716,15 @@
             }
             50% {
                 transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-hero-image {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
 
@@ -788,6 +858,10 @@
             .cta-content h2 {
                 font-size: 2rem;
             }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 576px) {
@@ -808,6 +882,10 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -842,12 +920,45 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Join Our Affiliate Program</h1>
-            <p>Start earning up to 30% recurring commission by promoting the world's most comprehensive document and image processing platform.</p>
+            <div class="hero-content">
+                <h1>Join Our Affiliate Program</h1>
+                <p>Start earning up to 30% recurring commission by promoting the world's most comprehensive document and image processing platform.</p>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="#signup-form" class="btn btn-warning" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Apply Now</a>
+                    <a href="#benefits" class="btn btn-outline"><i class="fas fa-info-circle"></i> Learn More</a>
+                </div>
+            </div>
             
-            <div style="margin-top: 2rem;">
-                <a href="Affiliate-Sign-up-form.html" class="btn btn-warning" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Apply Now</a>
-                <a href="#benefits" class="btn btn-outline"><i class="fas fa-info-circle"></i> Learn More</a>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Affiliate Program Benefits">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Why Affiliates Love Photo Flare</h2>
+            <p class="section-subtitle">Join thousands of successful affiliates who are earning recurring income with our program.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">30%</div>
+                    <div class="stat-label">Recurring Commission</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">90</div>
+                    <div class="stat-label">Day Cookie Duration</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$50</div>
+                    <div class="stat-label">Minimum Payout</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24h</div>
+                    <div class="stat-label">Approval Time</div>
+                </div>
             </div>
         </div>
     </section>
