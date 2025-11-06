@@ -1234,6 +1234,18 @@
             }
         }
 
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .feature-detail {
@@ -1474,6 +1486,8 @@
                         <li><a href="conversion.html">Conversion</a></li>
                         <li><a href="premium-tools.html">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="pro.html">Pro Plan</a></li>
+                        <li><a href="business.html" class="active">Business Plan</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
@@ -1536,7 +1550,7 @@
     <!-- Pricing Card -->
     <section id="pricing">
         <div class="container">
-            <div class="pricing-card">
+            <div class="pricing-card scroll-animate">
                 <div class="enterprise-badge">ENTERPRISE</div>
                 <h3 class="plan-name">Business</h3>
                 <p class="plan-description">For teams and organizations with advanced needs</p>
@@ -1566,11 +1580,11 @@
     <!-- Team Collaboration Features -->
     <section class="features-section">
         <div class="container">
-            <h2 class="section-title" style="color: var(--dark); text-align: center; margin-bottom: 1rem;">Built for Teams and Organizations</h2>
+            <h2 class="section-title scroll-animate" style="color: var(--dark); text-align: center; margin-bottom: 1rem;">Built for Teams and Organizations</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--gray);">Advanced collaboration tools and enterprise features designed to streamline team workflows.</p>
             
             <div class="team-features">
-                <div class="team-feature">
+                <div class="team-feature scroll-animate">
                     <div class="team-feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -1578,7 +1592,7 @@
                     <p>Share projects, assign tasks, and collaborate in real-time with your team members. Manage permissions and access levels for different team roles.</p>
                 </div>
                 
-                <div class="team-feature">
+                <div class="team-feature scroll-animate">
                     <div class="team-feature-icon">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
@@ -1586,7 +1600,7 @@
                     <p>Process hundreds of files simultaneously with our unlimited batch processing. Apply the same edits to multiple files or automate repetitive tasks.</p>
                 </div>
                 
-                <div class="team-feature">
+                <div class="team-feature scroll-animate">
                     <div class="team-feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -1594,7 +1608,7 @@
                     <p>Protect sensitive documents with advanced PDF encryption and secure sharing options. Control access and track document usage across your organization.</p>
                 </div>
                 
-                <div class="team-feature">
+                <div class="team-feature scroll-animate">
                     <div class="team-feature-icon">
                         <i class="fas fa-headset"></i>
                     </div>
@@ -1608,11 +1622,11 @@
     <!-- Feature Details -->
     <section class="features-section" style="background: var(--light);">
         <div class="container">
-            <h2 class="section-title" style="color: var(--dark); text-align: center; margin-bottom: 1rem;">Enterprise-Grade Features</h2>
+            <h2 class="section-title scroll-animate" style="color: var(--dark); text-align: center; margin-bottom: 1rem;">Enterprise-Grade Features</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--gray);">Powerful tools designed to meet the demands of growing teams and organizations.</p>
             
             <!-- Feature 1 -->
-            <div class="feature-detail">
+            <div class="feature-detail scroll-animate">
                 <div class="feature-detail-image">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Advanced Security Features">
                 </div>
@@ -1629,7 +1643,7 @@
             </div>
             
             <!-- Feature 2 -->
-            <div class="feature-detail reverse">
+            <div class="feature-detail reverse scroll-animate">
                 <div class="feature-detail-image">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Batch Processing">
                 </div>
@@ -1646,7 +1660,7 @@
             </div>
             
             <!-- Feature 3 -->
-            <div class="feature-detail">
+            <div class="feature-detail scroll-animate">
                 <div class="feature-detail-image">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Team Collaboration">
                 </div>
@@ -1667,10 +1681,10 @@
     <!-- Plan Comparison -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title" style="color: var(--dark); text-align: center;">Compare Plans</h2>
+            <h2 class="section-title scroll-animate" style="color: var(--dark); text-align: center;">Compare Plans</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: var(--gray);">See how the Business plan compares to our other offerings.</p>
             
-            <table class="comparison-table">
+            <table class="comparison-table scroll-animate">
                 <thead>
                     <tr>
                         <th class="feature-name">Feature</th>
@@ -1748,11 +1762,11 @@
     <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title" style="color: var(--dark); text-align: center;">What Business Users Say</h2>
+            <h2 class="section-title scroll-animate" style="color: var(--dark); text-align: center;">What Business Users Say</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: var(--gray);">Hear from organizations that have transformed their workflows with Photo Flare Business.</p>
             
             <div class="testimonial-grid">
-                <div class="testimonial-card">
+                <div class="testimonial-card scroll-animate">
                     <div class="testimonial-content">
                         Our marketing team uses the Business plan for all our design projects. The batch processing feature alone has cut our production time in half, and the team collaboration tools have streamlined our workflow.
                     </div>
@@ -1765,7 +1779,7 @@
                     </div>
                 </div>
                 
-                <div class="testimonial-card">
+                <div class="testimonial-card scroll-animate">
                     <div class="testimonial-content">
                         The unlimited batch processing and 500MB file limit have been game-changers for our architectural firm. We can now process hundreds of high-resolution project images simultaneously.
                     </div>
@@ -1778,7 +1792,7 @@
                     </div>
                 </div>
                 
-                <div class="testimonial-card">
+                <div class="testimonial-card scroll-animate">
                     <div class="testimonial-content">
                         The advanced PDF encryption and team collaboration features make the Business plan perfect for our legal practice. We can securely share and edit documents while maintaining client confidentiality.
                     </div>
@@ -1797,11 +1811,11 @@
     <!-- FAQ Section -->
     <section class="faq-section">
         <div class="container">
-            <h2 class="section-title" style="color: var(--dark); text-align: center;">Frequently Asked Questions</h2>
+            <h2 class="section-title scroll-animate" style="color: var(--dark); text-align: center;">Frequently Asked Questions</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--gray);">Find answers to common questions about the Business plan.</p>
             
             <div class="faq-container">
-                <div class="faq-item">
+                <div class="faq-item scroll-animate">
                     <div class="faq-question">
                         How many team members can I add to the Business plan?
                         <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -1811,7 +1825,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item scroll-animate">
                     <div class="faq-question">
                         Is there a free trial for the Business plan?
                         <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -1821,7 +1835,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item scroll-animate">
                     <div class="faq-question">
                         Can I upgrade from Pro to Business?
                         <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -1831,7 +1845,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item scroll-animate">
                     <div class="faq-question">
                         Do you offer volume discounts for larger teams?
                         <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -1841,7 +1855,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item scroll-animate">
                     <div class="faq-question">
                         What kind of dedicated support is included?
                         <i class="fas fa-chevron-down" style="margin-left: auto;"></i>
@@ -1857,19 +1871,19 @@
     <!-- CTA Section -->
     <section class="cta-section" id="cta">
         <div class="container">
-            <h2 class="cta-title">Ready for Business?</h2>
-            <p class="cta-subtitle">Join organizations that use Photo Flare Business to streamline team workflows and increase productivity.</p>
+            <h2 class="cta-title scroll-animate">Ready for Business?</h2>
+            <p class="cta-subtitle scroll-animate">Join organizations that use Photo Flare Business to streamline team workflows and increase productivity.</p>
             
             <div class="cta-buttons">
-                <a href="#pricing" class="btn btn-business" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                <a href="#pricing" class="btn btn-business scroll-animate" style="font-size: 1.1rem; padding: 1rem 2rem;">
                     <i class="fas fa-building"></i> Start Free Trial
                 </a>
-                <a href="pricing.html" class="btn btn-outline" style="color: white; border-color: white; font-size: 1.1rem; padding: 1rem 2rem;">
+                <a href="pricing.html" class="btn btn-outline scroll-animate" style="color: white; border-color: white; font-size: 1.1rem; padding: 1rem 2rem;">
                     <i class="fas fa-list"></i> View All Plans
                 </a>
             </div>
             
-            <p style="margin-top: 2rem; opacity: 0.8;">No credit card required • 14-day free trial • Cancel anytime</p>
+            <p style="margin-top: 2rem; opacity: 0.8;" class="scroll-animate">No credit card required • 14-day free trial • Cancel anytime</p>
         </div>
     </section>
 
@@ -2028,10 +2042,29 @@
             button.addEventListener('click', (e) => {
                 if (button.classList.contains('plan-btn-business')) {
                     e.preventDefault();
-                    alert('This would open the signup flow for the Business plan in a real implementation.');
+                    // Simulate trial signup
+                    document.querySelector('.loading')?.classList.add('active');
+                    setTimeout(() => {
+                        document.querySelector('.loading')?.classList.remove('active');
+                        alert('Thank you for your interest! Your 14-day free trial has been activated. Check your email for setup instructions.');
+                    }, 1500);
                 }
             });
         });
+
+        // Scroll animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
 
         // Initialize page elements with fade-in animation
         document.addEventListener('DOMContentLoaded', function() {
@@ -2041,12 +2074,58 @@
                 element.style.animationDelay = `${index * 0.1}s`;
                 element.classList.add('fade-in');
             });
+
+            // Initial check for scroll animations
+            checkScroll();
         });
+
+        // Check scroll position for animations
+        window.addEventListener('scroll', debounce(checkScroll, 10));
 
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+
+        // Add loading indicator for trial signup
+        const loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading';
+        loadingIndicator.innerHTML = `
+            <div class="spinner"></div>
+            <p>Setting up your free trial...</p>
+        `;
+        loadingIndicator.style.display = 'none';
+        loadingIndicator.style.position = 'fixed';
+        loadingIndicator.style.top = '50%';
+        loadingIndicator.style.left = '50%';
+        loadingIndicator.style.transform = 'translate(-50%, -50%)';
+        loadingIndicator.style.background = 'rgba(255, 255, 255, 0.95)';
+        loadingIndicator.style.padding = '2rem';
+        loadingIndicator.style.borderRadius = '12px';
+        loadingIndicator.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+        loadingIndicator.style.zIndex = '9999';
+        loadingIndicator.style.textAlign = 'center';
+        loadingIndicator.style.width = '300px';
+        
+        // Add spinner styles
+        const spinnerStyle = document.createElement('style');
+        spinnerStyle.textContent = `
+            .spinner {
+                width: 50px;
+                height: 50px;
+                border: 5px solid rgba(67, 97, 238, 0.2);
+                border-radius: 50%;
+                border-top-color: var(--primary);
+                animation: spin 1s linear infinite;
+                margin: 0 auto 1rem;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(spinnerStyle);
+        document.body.appendChild(loadingIndicator);
     </script>
 </body>
 </html>
