@@ -280,6 +280,52 @@
             left: 29px;
         }
 
+        /* Toggle Switch Styles for Enhancement Controls */
+        .enhancement-toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .enhancement-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .enhancement-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .enhancement-toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .enhancement-toggle input:checked + .enhancement-toggle-slider {
+            background-color: var(--primary);
+        }
+
+        .enhancement-toggle input:checked + .enhancement-toggle-slider:before {
+            transform: translateX(26px);
+        }
+
         .btn {
             padding: 0.7rem 1.5rem;
             border-radius: 50px;
@@ -684,6 +730,10 @@
             align-items: center;
             font-weight: 600;
             color: var(--dark);
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
         }
 
         .faq-answer {
@@ -902,11 +952,11 @@
                     </ul>
                 </nav>
                 <div class="header-actions">
-                    <div class="user-profile">
+                    <div class="user-profile" id="userProfile">
                         <div class="user-avatar">JS</div>
                         <div class="user-name">John Smith</div>
                         <!-- Profile Dropdown -->
-                        <div class="profile-dropdown">
+                        <div class="profile-dropdown" id="profileDropdown">
                             <div class="profile-header">
                                 <div class="user-avatar">JS</div>
                                 <div class="profile-info">
@@ -1047,18 +1097,18 @@
                             <div class="control-label">
                                 <span>Face Enhancement</span>
                             </div>
-                            <label class="switch">
+                            <label class="enhancement-toggle">
                                 <input type="checkbox" id="faceEnhancement" checked>
-                                <span class="slider round"></span>
+                                <span class="enhancement-toggle-slider"></span>
                             </label>
                         </div>
                         <div style="flex: 1;">
                             <div class="control-label">
                                 <span>Background Fix</span>
                             </div>
-                            <label class="switch">
+                            <label class="enhancement-toggle">
                                 <input type="checkbox" id="backgroundFix">
-                                <span class="slider round"></span>
+                                <span class="enhancement-toggle-slider"></span>
                             </label>
                         </div>
                     </div>
@@ -1211,37 +1261,37 @@
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         What image formats are supported?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         We support JPG, PNG, and WebP formats. The maximum file size is 10MB for free users and 100MB for Pro users.
                     </div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         How does the AI enhancement work?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         Our AI uses deep learning models trained on millions of images. It analyzes your image content and applies targeted enhancements to improve resolution, colors, and details while reducing noise.
                     </div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Is my data secure?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         Yes, all image processing happens securely on our servers. We do not store your images after processing, and we use encryption to protect your data during transfer.
                     </div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Can I use this for commercial purposes?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         Yes, you can use enhanced images for commercial purposes. However, please ensure you have the rights to the original images you're enhancing.
                     </div>
@@ -1282,7 +1332,7 @@
                     <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
                 
-                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
             </div>
         </div>
     </footer>
@@ -1313,16 +1363,12 @@
         const noiseValue = document.getElementById('noiseValue');
         const sharpnessValue = document.getElementById('sharpnessValue');
         
-        // Toggles
-        const faceEnhancement = document.getElementById('faceEnhancement');
-        const backgroundFix = document.getElementById('backgroundFix');
+        // Profile dropdown functionality
+        const userProfile = document.getElementById('userProfile');
+        const profileDropdown = document.getElementById('profileDropdown');
         
         // FAQ items
         const faqItems = document.querySelectorAll('.faq-item');
-        
-        // Profile dropdown functionality
-        const userProfile = document.querySelector('.user-profile');
-        const profileDropdown = document.querySelector('.profile-dropdown');
         
         // Event Listeners
         userProfile.addEventListener('click', function(e) {
@@ -1341,12 +1387,10 @@
         
         notificationToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            alert('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
         });
         
         darkmodeToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
         });
         
         uploadButton.addEventListener('click', () => fileInput.click());
@@ -1395,7 +1439,16 @@
         
         // FAQ toggle
         faqItems.forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', () => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close all other FAQ items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current FAQ item
                 item.classList.toggle('active');
             });
         });
