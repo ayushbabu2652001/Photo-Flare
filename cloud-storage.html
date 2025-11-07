@@ -328,10 +328,6 @@
         .storage-hero {
             padding: 2rem 0;
             text-align: center;
-            background: linear-gradient(rgba(67, 97, 238, 0.05), rgba(114, 9, 183, 0.05)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center;
-            background-size: cover;
-            border-radius: var(--border-radius);
-            margin: 1rem 0;
         }
 
         .storage-hero h1 {
@@ -347,10 +343,7 @@
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 2rem;
-            color: var(--dark);
-            background: rgba(255, 255, 255, 0.7);
-            padding: 1rem;
-            border-radius: var(--border-radius);
+            color: var(--gray);
         }
 
         .cloud-badge {
@@ -507,30 +500,11 @@
             text-align: center;
             transition: var(--transition);
             margin-bottom: 1.5rem;
-            background: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        .upload-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--border-radius);
         }
 
         .upload-area.active {
             border-color: var(--primary);
-            background-color: rgba(67, 97, 238, 0.05);
-        }
-
-        .upload-area > * {
-            position: relative;
-            z-index: 1;
+            background: rgba(67, 97, 238, 0.05);
         }
 
         .upload-icon {
@@ -577,13 +551,11 @@
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
-            border: 1px solid transparent;
         }
 
         .quick-action:hover {
             background: rgba(67, 97, 238, 0.1);
             transform: translateY(-3px);
-            border-color: var(--primary);
         }
 
         .quick-action-icon {
@@ -719,8 +691,7 @@
         }
 
         .upgrade-section {
-            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(114, 9, 183, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center;
-            background-size: cover;
+            background: var(--gradient-primary);
             color: white;
             padding: 3rem 0;
             margin: 3rem 0;
@@ -840,25 +811,6 @@
             text-align: center;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
-            background: linear-gradient(white, white), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--border-radius);
-        }
-
-        .feature-card > * {
-            position: relative;
-            z-index: 1;
         }
 
         .feature-card:hover {
@@ -949,35 +901,6 @@
         .social-link:hover {
             color: white;
             transform: translateY(-3px);
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--dark);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: var(--transition);
-            z-index: 10000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            background: var(--success);
-        }
-
-        .toast.error {
-            background: var(--danger);
         }
 
         /* Animations */
@@ -1212,7 +1135,7 @@
                         <span class="usage-value">3.2 GB of 5 GB</span>
                     </div>
                     <div class="usage-bar">
-                        <div class="usage-progress" style="width: 0%;"></div>
+                        <div class="usage-progress" style="width: 64%;"></div>
                     </div>
                 </div>
                 
@@ -1257,7 +1180,7 @@
                 <div class="actions-header">
                     <h3 class="actions-title">File Management</h3>
                     <div class="action-buttons">
-                        <button class="btn btn-outline" id="searchBtn">
+                        <button class="btn btn-outline">
                             <i class="fas fa-search"></i> Search
                         </button>
                         <button class="btn btn-primary" id="newFolderBtn">
@@ -1414,7 +1337,7 @@
             <div class="upgrade-content">
                 <h2 class="upgrade-title">Need More Storage?</h2>
                 <p class="upgrade-text">Upgrade to a premium plan and get more storage space, larger file uploads, and advanced sharing options.</p>
-                <button class="btn btn-success" id="upgradeNowBtn">
+                <button class="btn btn-success">
                     <i class="fas fa-crown"></i> Upgrade Now
                 </button>
                 
@@ -1429,7 +1352,7 @@
                             <li><i class="fas fa-check"></i> Basic Sharing</li>
                             <li><i class="fas fa-check"></i> 30-Day Version History</li>
                         </ul>
-                        <button class="btn btn-outline select-plan-btn">Select Plan</button>
+                        <button class="btn btn-outline">Select Plan</button>
                     </div>
                     
                     <div class="storage-plan popular">
@@ -1443,7 +1366,7 @@
                             <li><i class="fas fa-check"></i> 90-Day Version History</li>
                             <li><i class="fas fa-check"></i> Priority Support</li>
                         </ul>
-                        <button class="btn btn-primary select-plan-btn">Select Plan</button>
+                        <button class="btn btn-primary">Select Plan</button>
                     </div>
                     
                     <div class="storage-plan">
@@ -1458,7 +1381,7 @@
                             <li><i class="fas fa-check"></i> Priority Support</li>
                             <li><i class="fas fa-check"></i> Team Collaboration</li>
                         </ul>
-                        <button class="btn btn-outline select-plan-btn">Select Plan</button>
+                        <button class="btn btn-outline">Select Plan</button>
                     </div>
                 </div>
             </div>
@@ -1529,25 +1452,18 @@
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-
     <script>
         // DOM Elements
         const uploadArea = document.getElementById('uploadArea');
         const uploadButton = document.getElementById('uploadButton');
         const fileInput = document.getElementById('fileInput');
         const newFolderBtn = document.getElementById('newFolderBtn');
-        const searchBtn = document.getElementById('searchBtn');
         const recentFilesBtn = document.getElementById('recentFiles');
         const sharedFilesBtn = document.getElementById('sharedFiles');
         const favoritesBtn = document.getElementById('favorites');
         const trashBtn = document.getElementById('trash');
         const fileActions = document.querySelectorAll('.file-action');
-        const upgradeNowBtn = document.getElementById('upgradeNowBtn');
-        const selectPlanButtons = document.querySelectorAll('.select-plan-btn');
-        const syncButton = document.querySelector('.storage-stats .btn');
-        const toast = document.getElementById('toast');
+        const upgradeButtons = document.querySelectorAll('.storage-plan .btn');
         
         // Profile dropdown functionality
         const userProfile = document.querySelector('.user-profile');
@@ -1570,12 +1486,12 @@
         
         notificationToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            showToast('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            alert('Notifications ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
         });
         
         darkmodeToggle.addEventListener('click', function() {
             this.classList.toggle('active');
-            showToast('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
+            alert('Dark mode ' + (this.classList.contains('active') ? 'enabled' : 'disabled'));
         });
         
         uploadButton.addEventListener('click', () => fileInput.click());
@@ -1603,44 +1519,30 @@
         
         newFolderBtn.addEventListener('click', createNewFolder);
         
-        searchBtn.addEventListener('click', () => {
-            showToast('Search functionality would open here');
-        });
-        
         recentFilesBtn.addEventListener('click', () => {
-            showToast('Showing recent files...');
+            alert('Showing recent files...');
         });
         
         sharedFilesBtn.addEventListener('click', () => {
-            showToast('Showing shared files...');
+            alert('Showing shared files...');
         });
         
         favoritesBtn.addEventListener('click', () => {
-            showToast('Showing favorite files...');
+            alert('Showing favorite files...');
         });
         
         trashBtn.addEventListener('click', () => {
-            showToast('Showing trash folder...');
+            alert('Showing trash folder...');
         });
         
         fileActions.forEach(action => {
             action.addEventListener('click', handleFileAction);
         });
         
-        upgradeNowBtn.addEventListener('click', () => {
-            showToast('Redirecting to upgrade page...');
-        });
-        
-        selectPlanButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const plan = e.target.closest('.storage-plan');
-                const storage = plan.querySelector('.plan-storage').textContent;
-                showToast(`Selected the ${storage} plan`);
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Redirecting to upgrade page...');
             });
-        });
-        
-        syncButton.addEventListener('click', () => {
-            showToast('Syncing your files...', 'success');
         });
         
         // Functions
@@ -1653,7 +1555,7 @@
                     fileNames.push(files[i].name);
                 }
                 
-                showToast(`Uploading ${files.length} file(s): ${fileNames.join(', ')}`, 'success');
+                alert(`Uploading ${files.length} file(s):\n${fileNames.join('\n')}`);
                 
                 // Reset file input
                 fileInput.value = '';
@@ -1664,7 +1566,7 @@
             const folderName = prompt('Enter folder name:');
             
             if (folderName) {
-                showToast(`Creating folder: "${folderName}"`, 'success');
+                alert(`Creating folder: "${folderName}"`);
                 // In a real application, this would create the folder via API
             }
         }
@@ -1676,26 +1578,15 @@
             const fileName = fileItem.querySelector('h4').textContent;
             
             if (actionType.includes('fa-download')) {
-                showToast(`Downloading: ${fileName}`, 'success');
+                alert(`Downloading: ${fileName}`);
             } else if (actionType.includes('fa-share-alt')) {
-                showToast(`Sharing: ${fileName}`, 'success');
+                alert(`Sharing: ${fileName}`);
             } else if (actionType.includes('fa-trash')) {
                 if (confirm(`Are you sure you want to move "${fileName}" to trash?`)) {
-                    showToast(`Moved "${fileName}" to trash`, 'success');
+                    alert(`Moved "${fileName}" to trash`);
                     // In a real application, this would move the file to trash via API
                 }
             }
-        }
-        
-        function showToast(message, type = 'default') {
-            toast.textContent = message;
-            toast.className = 'toast';
-            toast.classList.add(type);
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         }
         
         // Initialize the page
