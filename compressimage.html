@@ -484,6 +484,36 @@
             font-size: 0.85rem;
         }
 
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 10000;
+            max-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
         /* Tool Container */
         .tool-container {
             max-width: 1200px;
@@ -493,6 +523,24 @@
             box-shadow: var(--box-shadow);
             overflow: hidden;
             animation: fadeIn 0.5s ease-out;
+            background: linear-gradient(white, white), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .tool-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .tool-container > * {
+            position: relative;
+            z-index: 1;
         }
 
         .tool-header {
@@ -542,10 +590,29 @@
             transition: var(--transition);
             margin-bottom: 1.5rem;
             background: rgba(67, 97, 238, 0.05);
+            background: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: var(--border-radius);
+        }
+
+        .upload-area > * {
+            position: relative;
+            z-index: 1;
         }
 
         .upload-area:hover {
-            background: rgba(67, 97, 238, 0.1);
+            background-color: rgba(67, 97, 238, 0.1);
         }
 
         .upload-area i {
@@ -930,6 +997,25 @@
             transition: var(--transition);
             border: 1px solid transparent;
             animation: fadeIn 0.5s ease-out;
+            background: linear-gradient(white, white), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .feature-card:hover {
@@ -1360,6 +1446,9 @@
     </style>
 </head>
 <body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <!-- Mobile Header -->
     <div class="mobile-header">
         <div class="container">
@@ -1742,6 +1831,23 @@
             };
         }
 
+        // Toast notification function
+        function showToast(message, type = 'default') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            if (type === 'success') {
+                toast.classList.add('success');
+            } else if (type === 'error') {
+                toast.classList.add('error');
+            }
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         // Sidebar functionality
         const mobileNavBtn = document.getElementById('mobileNavBtn');
         const sidebar = document.getElementById('sidebar');
@@ -1855,6 +1961,7 @@
             option.addEventListener('click', () => {
                 formatOptions.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
+                showToast(`Output format set to ${option.getAttribute('data-format').toUpperCase()}`, 'success');
             });
         });
 
@@ -1894,13 +2001,13 @@
 
         function handleFile(file) {
             if (!file.type.match('image.*')) {
-                alert('Please select an image file (JPG, PNG, WebP, GIF, BMP)');
+                showToast('Please select an image file (JPG, PNG, WebP, GIF, BMP)', 'error');
                 return;
             }
             
             // Check file size (10MB limit for free users)
             if (file.size > 10 * 1024 * 1024) {
-                alert('File size exceeds 10MB limit. Please upgrade to Pro for larger files.');
+                showToast('File size exceeds 10MB limit. Please upgrade to Pro for larger files.', 'error');
                 return;
             }
             
@@ -1933,6 +2040,8 @@
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
+            
+            showToast('Image uploaded successfully!', 'success');
         }
 
         function handleBatchFiles(files) {
@@ -1945,7 +2054,7 @@
                 
                 // Check file size (10MB limit for free users)
                 if (file.size > 10 * 1024 * 1024) {
-                    alert(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`);
+                    showToast(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`, 'error');
                     continue;
                 }
                 
@@ -1958,6 +2067,10 @@
             
             // Update batch UI
             updateBatchUI();
+            
+            if (batchFilesList.length > 0) {
+                showToast(`${batchFilesList.length} images added to batch`, 'success');
+            }
         }
 
         function addBatchFilePreview(file) {
@@ -1994,6 +2107,8 @@
             });
             
             updateBatchUI();
+            
+            showToast('Image removed from batch', 'success');
         }
 
         function updateBatchUI() {
@@ -2079,7 +2194,7 @@
 
         function compressImage() {
             if (!originalFile) {
-                alert('Please select an image first');
+                showToast('Please select an image first', 'error');
                 return;
             }
             
@@ -2129,12 +2244,13 @@
                 afterImage.src = compressedFile;
                 
                 loadingIndicator.classList.remove('active');
+                showToast('Image compressed successfully!', 'success');
             }, 1500);
         }
 
         function compressBatch() {
             if (batchFilesList.length === 0) {
-                alert('Please add images to compress');
+                showToast('Please add images to compress', 'error');
                 return;
             }
             
@@ -2153,12 +2269,13 @@
                 totalSize.textContent = formatFileSize(totalOriginalSize - totalCompressedSize);
                 
                 loadingIndicator.classList.remove('active');
+                showToast(`Batch compression completed! Average savings: ${averageSavings}%`, 'success');
             }, 2000);
         }
 
         function downloadCompressedImage() {
             if (!compressedFile) {
-                alert('No compressed image available');
+                showToast('No compressed image available', 'error');
                 return;
             }
             
@@ -2166,16 +2283,18 @@
             link.download = `compressed_${originalFile.name.split('.')[0]}.${getFileExtension()}`;
             link.href = compressedFile;
             link.click();
+            
+            showToast('Download started!', 'success');
         }
 
         function downloadBatch() {
             if (batchFilesList.length === 0) {
-                alert('No compressed images available');
+                showToast('No compressed images available', 'error');
                 return;
             }
             
             // In a real implementation, this would download a ZIP file with all compressed images
-            alert('Batch download would start in a real implementation. This is a demo.');
+            showToast('Batch download would start in a real implementation. This is a demo.', 'success');
         }
 
         function getFileExtension() {
@@ -2201,22 +2320,26 @@
             // Reset format selection to original
             formatOptions.forEach(opt => opt.classList.remove('selected'));
             document.querySelector('.format-option[data-format="original"]').classList.add('selected');
+            
+            showToast('Tool reset. Ready for a new image!', 'success');
         }
 
         function resetBatch() {
             batchFilesList = [];
             batchFiles.innerHTML = '';
             updateBatchUI();
+            
+            showToast('Batch reset', 'success');
         }
 
         function shareResults() {
             if (!compressedFile) {
-                alert('No compressed image available to share');
+                showToast('No compressed image available to share', 'error');
                 return;
             }
             
             // In a real implementation, this would open a share dialog
-            alert('Share functionality would open in a real implementation. This is a demo.');
+            showToast('Share functionality would open in a real implementation. This is a demo.', 'success');
         }
 
         function initComparisonSlider() {
@@ -2277,6 +2400,47 @@
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+
+        // Add event listeners for buttons in header and sidebar
+        document.querySelectorAll('.btn, .sidebar-btn, .mobile-header-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href && this.href.includes('#')) return; // Skip anchor links
+                
+                if (this.textContent.includes('Upgrade Now') || this.classList.contains('upgrade')) {
+                    showToast('Redirecting to upgrade page...', 'success');
+                } else if (this.textContent.includes('Log In')) {
+                    showToast('Redirecting to login page...', 'success');
+                }
+                
+                // Prevent default to allow toast to show (in a real app, this would redirect)
+                if (!this.href) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
