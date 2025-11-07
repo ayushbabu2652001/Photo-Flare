@@ -336,10 +336,67 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Premium Demo Section */
+        .premium-demo {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .demo-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .demo-content p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .demo-image {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .demo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
         /* Pricing Section */
         .pricing {
             padding: 5rem 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: white;
         }
 
         .pricing-grid {
@@ -425,6 +482,71 @@
 
         .plan-features li i {
             color: var(--success);
+        }
+
+        .plan-features li i.fa-times {
+            color: var(--danger);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
         }
 
         /* CTA Section */
@@ -595,6 +717,10 @@
             .pricing-card.popular:hover {
                 transform: translateY(-10px);
             }
+            
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -641,7 +767,7 @@
                 font-size: 1.8rem;
             }
             
-            .features-grid, .pricing-grid {
+            .features-grid, .pricing-grid, .testimonials-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -757,6 +883,26 @@
         </div>
     </section>
 
+    <!-- Premium Demo Section -->
+    <section class="premium-demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h2>Experience the Premium Difference</h2>
+                    <p>See how Photo Flare Premium transforms your workflow with advanced features and enhanced capabilities. Our premium users enjoy a seamless experience with powerful tools that make complex tasks simple.</p>
+                    <p>From batch processing to advanced editing options, Photo Flare Premium gives you the tools you need to work more efficiently and effectively.</p>
+                    <a href="#pricing" class="btn btn-primary">See Pricing Plans</a>
+                </div>
+                <div class="demo-image">
+                    <div class="demo-overlay">
+                        <i class="fas fa-play-circle" style="font-size: 3rem; margin-right: 10px;"></i>
+                        Premium Interface Preview
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="container">
@@ -804,6 +950,53 @@
                         <li><i class="fas fa-check"></i> Dedicated account manager</li>
                     </ul>
                     <a href="checkout.html?plan=team" class="btn btn-outline">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-comments"></i> What Our Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Photo Flare Premium has completely transformed my workflow. The unlimited conversions and batch processing save me hours every week!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davis</h4>
+                            <p>Graphic Designer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The cloud integration is a game-changer. I can now seamlessly work between my devices without any file transfer hassles."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah Roberts</h4>
+                            <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Worth every penny! The premium tools are incredibly powerful and the customer support is responsive and helpful."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Freelance Photographer</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -894,9 +1087,9 @@
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
                     <a href="contact.html">Contact</a>
-                    <a href="#help">Help Center</a>
+                    <a href="help.html">Help Center</a>
                     <a href="privacy.html">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
                 
                 <div class="social-links">
@@ -954,6 +1147,30 @@
                     });
                 }
             });
+        });
+
+        // Add animation to elements on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply initial styles for animation
+        document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
