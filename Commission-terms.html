@@ -177,6 +177,10 @@
         .hero {
             padding: 4rem 0 2rem;
             text-align: center;
+            background: linear-gradient(rgba(67, 97, 238, 0.1), rgba(114, 9, 183, 0.1)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
         }
 
         .hero h1 {
@@ -193,7 +197,10 @@
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 2rem;
-            color: var(--gray);
+            color: var(--dark);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            border-radius: var(--border-radius);
         }
 
         .section-title {
@@ -212,12 +219,30 @@
         }
 
         .commission-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--secondary)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
             color: white;
             padding: 4rem 0;
             margin: 3rem 0;
             border-radius: var(--border-radius);
             text-align: center;
+            position: relative;
+        }
+
+        .commission-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(67, 97, 238, 0.85);
+            border-radius: var(--border-radius);
+        }
+
+        .commission-section > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .commission-tiers {
@@ -313,6 +338,24 @@
             position: relative;
             overflow: hidden;
             animation: float-benefit 10s ease-in-out infinite;
+            background: linear-gradient(white, white), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60') no-repeat center center;
+            background-size: cover;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .feature-card:nth-child(2) {
@@ -353,6 +396,25 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            background: linear-gradient(white, white), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .calculator-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius);
+        }
+
+        .calculator-section > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .calculator-form {
@@ -403,17 +465,32 @@
         }
 
         .cta-section {
-            background: linear-gradient(135deg, var(--warning), var(--accent));
+            background: linear-gradient(135deg, var(--warning), var(--accent)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+            background-size: cover;
             color: white;
             padding: 4rem 0;
             margin: 3rem 0;
             border-radius: var(--border-radius);
             text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 150, 30, 0.8);
+            border-radius: var(--border-radius);
         }
 
         .cta-content {
             max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-content h2 {
@@ -508,6 +585,31 @@
         .external-link:hover {
             color: var(--primary-dark);
             border-bottom: 1px solid var(--primary-dark);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 10000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: var(--success);
         }
 
         /* Floating Animations */
@@ -708,7 +810,7 @@
     <section class="commission-section" id="commission">
         <div class="container">
             <h2 class="section-title" style="color: white;">Commission Tiers</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: rgba(255,255,255,0.8);">
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: rgba(255,255,255,0.9);">
                 Our tiered commission structure rewards performance. The more you refer, the more you earn.
             </p>
             
@@ -753,7 +855,7 @@
                 </div>
             </div>
             
-            <p style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.8);">
+            <p style="text-align: center; margin-top: 2rem; color: rgba(255,255,255,0.9);">
                 All commissions are recurring for the lifetime of the customer. <a href="Recurring-Commission-Terms-Affiliate-Program.html" class="external-link" style="color: white; border-bottom-color: white;">See full terms</a>.
             </p>
         </div>
@@ -813,7 +915,7 @@
             <div class="calculator-result">
                 <h3 style="margin-bottom: 1rem;">Your Estimated Monthly Earnings</h3>
                 <div class="result-amount" id="result-amount">$50</div>
-                <p>Based on your current tier and referral volume</p>
+                <p id="tier-info">Based on your current tier and referral volume</p>
             </div>
         </div>
     </section>
@@ -868,11 +970,15 @@
         </div>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <script>
         // Commission Calculator
         const referralsInput = document.getElementById('monthly-referrals');
         const averageValueSelect = document.getElementById('average-value');
         const resultAmount = document.getElementById('result-amount');
+        const tierInfo = document.getElementById('tier-info');
         
         function calculateCommission() {
             const referrals = parseInt(referralsInput.value) || 0;
@@ -880,12 +986,16 @@
             
             // Determine commission rate based on tier
             let commissionRate;
+            let tierName;
             if (referrals <= 10) {
                 commissionRate = 0.20; // Starter tier
+                tierName = "Starter";
             } else if (referrals <= 25) {
                 commissionRate = 0.25; // Professional tier
+                tierName = "Professional";
             } else {
                 commissionRate = 0.30; // Elite tier
+                tierName = "Elite";
             }
             
             // Calculate monthly earnings
@@ -893,6 +1003,7 @@
             
             // Update result
             resultAmount.textContent = `$${monthlyEarnings.toFixed(2)}`;
+            tierInfo.textContent = `Based on ${tierName} tier (${commissionRate*100}% commission)`;
         }
         
         // Add event listeners
@@ -916,6 +1027,62 @@
                     }
                 }
             });
+        });
+
+        // Toast notification function
+        function showToast(message, type = 'default') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            if (type === 'success') {
+                toast.classList.add('success');
+            }
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Add event listeners for buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.href && this.href.includes('#')) return; // Skip anchor links
+                
+                if (this.textContent.includes('Join Now')) {
+                    showToast('Redirecting to affiliate signup page...', 'success');
+                } else if (this.textContent.includes('Upgrade Now')) {
+                    showToast('Redirecting to subscription page...', 'success');
+                } else if (this.textContent.includes('Log In')) {
+                    showToast('Redirecting to login page...', 'success');
+                }
+                
+                // Prevent default to allow toast to show (in a real app, this would redirect)
+                e.preventDefault();
+            });
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.tier-card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
         });
     </script>
 </body>
