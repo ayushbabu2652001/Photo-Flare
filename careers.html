@@ -483,6 +483,18 @@
         .hero {
             padding: 4rem 0 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(114, 9, 183, 0.05) 100%);
+            z-index: -1;
         }
 
         .hero h1 {
@@ -579,11 +591,16 @@
         }
 
         .culture-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
         }
 
         .culture-title {
@@ -1265,6 +1282,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-bg"></div>
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.html">Home</a>
@@ -1289,22 +1307,30 @@
                 
                 <div class="culture-grid">
                     <div class="culture-card">
-                        <i class="fas fa-users culture-icon"></i>
+                        <div class="culture-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
                         <h3 class="culture-title">Collaborative Environment</h3>
                         <p>We work together across teams to solve complex problems and deliver exceptional products.</p>
                     </div>
                     <div class="culture-card">
-                        <i class="fas fa-rocket culture-icon"></i>
+                        <div class="culture-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
                         <h3 class="culture-title">Innovation Focused</h3>
                         <p>We encourage experimentation and reward creative solutions that push boundaries.</p>
                     </div>
                     <div class="culture-card">
-                        <i class="fas fa-heart culture-icon"></i>
+                        <div class="culture-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
                         <h3 class="culture-title">User-Centric Approach</h3>
                         <p>Everything we build starts with understanding and addressing our users' needs.</p>
                     </div>
                     <div class="culture-card">
-                        <i class="fas fa-globe culture-icon"></i>
+                        <div class="culture-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
                         <h3 class="culture-title">Global Impact</h3>
                         <p>Our tools are used by millions worldwide to simplify their document workflows.</p>
                     </div>
@@ -1376,7 +1402,7 @@
                     <p class="job-description">
                         Create intuitive, user-centered designs for our document tools, from concept to implementation.
                     </p>
-                    <a href="Product Designer-Apply.html" class="btn btn-primary">Apply Now</a>
+                    <a href="Product-Designer-Apply.html" class="btn btn-primary">Apply Now</a>
                 </div>
                 
                 <!-- Marketing Jobs -->
@@ -1561,8 +1587,8 @@
             <div class="cta-section">
                 <h2 class="cta-title">Ready to Join Our Team?</h2>
                 <p class="cta-desc">We're always looking for passionate, talented individuals who want to make an impact. If you don't see the perfect role but believe you'd be a great fit, we'd still love to hear from you.</p>
-                <a href="Ready to-Join-Our-Team-contact-us.html" class="btn btn-accent">Contact Us</a>
-                <p style="margin-top: 1.5rem;">Or check out our <a href="Ready to-Join-Our-Team-About-Page.html" class="external-link">About page</a> to learn more about our mission and values.</p>
+                <a href="Ready-to-Join-Our-Team-contact-us.html" class="btn btn-accent">Contact Us</a>
+                <p style="margin-top: 1.5rem;">Or check out our <a href="Ready-to-Join-Our-Team-About-Page.html" class="external-link">About page</a> to learn more about our mission and values.</p>
             </div>
         </div>
     </section>
@@ -1732,6 +1758,9 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Fix for broken link
+        document.querySelector('a[href="Product Designer-Apply.html"]').setAttribute('href', 'Product-Designer-Apply.html');
     </script>
 </body>
 </html>
