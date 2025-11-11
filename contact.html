@@ -553,6 +553,40 @@
             box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
         }
 
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 10;
+            margin-top: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -705,6 +739,58 @@
             font-size: 0.9rem;
             color: var(--gray);
             max-width: 100%;
+        }
+
+        .form-error {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error .form-input,
+        .form-group.error .form-textarea,
+        .form-group.error .form-select {
+            border-color: var(--danger);
+        }
+
+        .form-group.error .form-error {
+            display: block;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: none;
+        }
+
+        .file-info.active {
+            display: block;
         }
 
         .team-section {
@@ -869,6 +955,108 @@
 
         .faq-toggle {
             transition: var(--transition);
+        }
+
+        /* Live Chat Modal */
+        .chat-modal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .chat-modal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+        }
+
+        .message.agent {
+            align-self: flex-start;
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 
         .ad-container {
@@ -1173,6 +1361,11 @@
             .contact-form-container {
                 padding: 1.2rem;
             }
+            
+            .chat-modal {
+                width: 300px;
+                height: 450px;
+            }
         }
 
         /* Show mobile header on small screens */
@@ -1370,8 +1563,11 @@
             <p>We're here to help you with any questions or issues. Reach out to our team through any of the methods below.</p>
             
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search for help articles...">
-                <button class="search-btn"><i class="fas fa-search"></i> Search</button>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for help articles...">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will be dynamically populated here -->
+                </div>
             </div>
             
             <p>Need immediate assistance? <a href="#contact-form" class="external-link">Send us a message</a> or check our <a href="Help.html" class="external-link">Help Center</a></p>
@@ -1498,22 +1694,25 @@
                     <h3 class="form-title">Send us a Message</h3>
                     <form class="contact-form" id="support-form">
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group" id="firstNameGroup">
                                 <label class="form-label" for="first-name">First Name *</label>
                                 <input type="text" id="first-name" class="form-input" placeholder="Enter your first name" required>
+                                <div class="form-error">Please enter your first name</div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="lastNameGroup">
                                 <label class="form-label" for="last-name">Last Name *</label>
                                 <input type="text" id="last-name" class="form-input" placeholder="Enter your last name" required>
+                                <div class="form-error">Please enter your last name</div>
                             </div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="emailGroup">
                             <label class="form-label" for="email">Email Address *</label>
                             <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                            <div class="form-error">Please enter a valid email address</div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="subjectGroup">
                             <label class="form-label" for="subject">Subject *</label>
                             <select id="subject" class="form-select" required>
                                 <option value="" disabled selected>Select a topic</option>
@@ -1523,17 +1722,27 @@
                                 <option value="partnership">Partnership Inquiry</option>
                                 <option value="other">Other</option>
                             </select>
+                            <div class="form-error">Please select a subject</div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="descriptionGroup">
                             <label class="form-label" for="description">Description *</label>
                             <textarea id="description" class="form-textarea" placeholder="Please describe your issue or question in detail" required></textarea>
+                            <div class="form-error">Please enter a description</div>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label" for="attachment">Attachment</label>
-                            <input type="file" id="attachment" class="form-input">
-                            <small style="color: var(--gray); margin-top: 0.5rem;">You can attach screenshots or documents (max 10MB)</small>
+                            <label class="form-label">Attachment</label>
+                            <div class="file-upload" id="fileUpload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload or drag and drop</p>
+                                <p>Maximum file size: 10MB</p>
+                                <input type="file" id="attachment" class="file-input">
+                            </div>
+                            <div class="file-info" id="fileInfo">
+                                <p>File: <span id="fileName">-</span></p>
+                                <p>Size: <span id="fileSize">-</span></p>
+                            </div>
                         </div>
                         
                         <div class="form-footer">
@@ -1688,6 +1897,27 @@
         </div>
     </section>
 
+    <!-- Live Chat Modal -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header">
+            <div class="chat-title">Live Chat Support</div>
+            <button class="chat-close" id="chatClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message agent">
+                Hi there! How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type your message...">
+            <button class="chat-send" id="chatSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1741,187 +1971,394 @@
             };
         }
 
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
-
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-            });
-        }
-
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-
-        // FAQ toggle functionality
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
+        // Sidebar functionality - Fixed hamburger menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
             
-            question.addEventListener('click', () => {
-                // Close all other FAQ items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
+            console.log('DOM loaded - Elements:', {
+                mobileNavBtn: !!mobileNavBtn,
+                sidebar: !!sidebar,
+                sidebarOverlay: !!sidebarOverlay,
+                sidebarClose: !!sidebarClose
+            });
+
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Mobile nav button clicked');
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                });
+            }
+
+            // Close sidebar
+            function closeSidebar() {
+                console.log('Closing sidebar');
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeSidebar();
+                });
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', function(e) {
+                    if (e.target === sidebarOverlay) {
+                        closeSidebar();
+                    }
+                });
+            }
+
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't prevent default to allow navigation
+                    closeSidebar();
+                });
+            });
+
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                }
+            });
+
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Contact form validation and submission
+            const contactForm = document.getElementById('support-form');
+            const formGroups = document.querySelectorAll('.form-group');
+            
+            // Form validation function
+            function validateForm() {
+                let isValid = true;
+                
+                formGroups.forEach(group => {
+                    const input = group.querySelector('input, textarea, select');
+                    const error = group.querySelector('.form-error');
+                    
+                    if (input.hasAttribute('required') && !input.value.trim()) {
+                        group.classList.add('error');
+                        isValid = false;
+                    } else if (input.type === 'email' && input.value.trim()) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.value)) {
+                            group.classList.add('error');
+                            isValid = false;
+                        } else {
+                            group.classList.remove('error');
+                        }
+                    } else {
+                        group.classList.remove('error');
                     }
                 });
                 
-                // Toggle current item
-                item.classList.toggle('active');
+                return isValid;
+            }
+            
+            // Real-time validation
+            formGroups.forEach(group => {
+                const input = group.querySelector('input, textarea, select');
+                
+                input.addEventListener('blur', () => {
+                    if (input.hasAttribute('required') && !input.value.trim()) {
+                        group.classList.add('error');
+                    } else if (input.type === 'email' && input.value.trim()) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.value)) {
+                            group.classList.add('error');
+                        } else {
+                            group.classList.remove('error');
+                        }
+                    } else {
+                        group.classList.remove('error');
+                    }
+                });
+                
+                input.addEventListener('input', () => {
+                    if (input.value.trim()) {
+                        group.classList.remove('error');
+                    }
+                });
             });
-        });
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (validateForm()) {
+                        // Get form values
+                        const firstName = document.getElementById('first-name').value;
+                        const lastName = document.getElementById('last-name').value;
+                        const email = document.getElementById('email').value;
+                        const subject = document.getElementById('subject').value;
+                        const description = document.getElementById('description').value;
+                        
+                        // Show success message
+                        alert(`Thank you, ${firstName}! Your support request has been submitted. We'll get back to you at ${email} as soon as possible.`);
+                        
+                        // Reset form
+                        contactForm.reset();
+                        fileInfo.classList.remove('active');
+                    }
+                });
+            }
 
-        // Contact form submission
-        const contactForm = document.getElementById('support-form');
-        
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            // File upload functionality
+            const fileUpload = document.getElementById('fileUpload');
+            const fileInput = document.getElementById('attachment');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            
+            if (fileUpload && fileInput) {
+                fileUpload.addEventListener('click', () => fileInput.click());
                 
-                // Get form values
-                const firstName = document.getElementById('first-name').value;
-                const lastName = document.getElementById('last-name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const description = document.getElementById('description').value;
+                fileUpload.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    fileUpload.style.borderColor = 'var(--primary)';
+                    fileUpload.style.background = 'rgba(67, 97, 238, 0.1)';
+                });
                 
-                // Simple validation
-                if (!firstName || !lastName || !email || !subject || !description) {
-                    alert('Please fill in all required fields');
+                fileUpload.addEventListener('dragleave', () => {
+                    fileUpload.style.borderColor = 'var(--light-gray)';
+                    fileUpload.style.background = '';
+                });
+                
+                fileUpload.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    fileUpload.style.borderColor = 'var(--light-gray)';
+                    fileUpload.style.background = '';
+                    
+                    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                        handleFile(e.dataTransfer.files[0]);
+                    }
+                });
+                
+                fileInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        handleFile(e.target.files[0]);
+                    }
+                });
+            }
+            
+            function handleFile(file) {
+                // Check file size (10MB limit)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size exceeds 10MB limit. Please choose a smaller file.');
                     return;
                 }
                 
-                // In a real implementation, this would send the data to a server
-                alert(`Thank you, ${firstName}! Your support request has been submitted. We'll get back to you at ${email} as soon as possible.`);
+                // Update file info
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileInfo.classList.add('active');
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
                 
-                // Reset form
-                contactForm.reset();
-            });
-        }
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
 
-        // Live chat button functionality
-        const liveChatBtns = document.querySelectorAll('.live-chat-btn');
-        
-        liveChatBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('This would open a live chat window in a real implementation.');
-            });
-        });
-
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        const searchBtn = document.querySelector('.search-btn');
-        
-        if (searchInput && searchBtn) {
-            // Search button click
-            searchBtn.addEventListener('click', function() {
-                performSearch();
+            // Live chat functionality
+            const liveChatBtns = document.querySelectorAll('.live-chat-btn');
+            const chatModal = document.getElementById('chatModal');
+            const chatClose = document.getElementById('chatClose');
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const chatSend = document.getElementById('chatSend');
+            
+            liveChatBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    chatModal.classList.add('active');
+                });
             });
             
-            // Enter key in search input
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
+            if (chatClose) {
+                chatClose.addEventListener('click', () => {
+                    chatModal.classList.remove('active');
+                });
+            }
+            
+            if (chatSend && chatInput) {
+                chatSend.addEventListener('click', sendMessage);
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.textContent = message;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate agent response after a delay
+                    setTimeout(() => {
+                        const agentMessage = document.createElement('div');
+                        agentMessage.className = 'message agent';
+                        agentMessage.textContent = getAgentResponse(message);
+                        chatMessages.appendChild(agentMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
                 }
-            });
+            }
+            
+            function getAgentResponse(message) {
+                const responses = [
+                    "I understand your concern. Let me check that for you.",
+                    "Thanks for reaching out! I can help with that.",
+                    "That's a great question. Let me provide some information about that.",
+                    "I'll need to check with our technical team about this issue.",
+                    "I can assist you with that. Could you provide more details?",
+                    "We appreciate your feedback. I'll forward this to our product team."
+                ];
+                
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchResults = document.getElementById('searchResults');
+            const searchBox = document.querySelector('.search-box');
+            
+            // Sample help articles
+            const helpArticles = [
+                { title: "How to compress images", category: "Image Tools", url: "Help.html" },
+                { title: "Troubleshooting PDF conversion", category: "PDF Tools", url: "Help.html" },
+                { title: "Managing your subscription", category: "Billing", url: "Help.html" },
+                { title: "File size limits and restrictions", category: "General", url: "Help.html" },
+                { title: "Browser compatibility issues", category: "Technical", url: "Help.html" },
+                { title: "How to convert images to PDF", category: "Conversion", url: "Help.html" },
+                { title: "Premium features overview", category: "Premium", url: "Help.html" },
+                { title: "Account and login issues", category: "Account", url: "Help.html" }
+            ];
+            
+            if (searchInput && searchBtn && searchResults) {
+                // Search button click
+                searchBtn.addEventListener('click', performSearch);
+                
+                // Enter key in search input
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+                
+                // Show results on input
+                searchInput.addEventListener('input', debounce(performSearch, 300));
+                
+                // Close results when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!searchBox.contains(e.target)) {
+                        searchResults.classList.remove('active');
+                    }
+                });
+            }
             
             function performSearch() {
-                const searchTerm = searchInput.value.toLowerCase();
-                if (searchTerm.trim() === '') {
-                    alert('Please enter a search term');
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    searchResults.classList.remove('active');
                     return;
                 }
                 
-                // In a real implementation, this would search through help articles
-                alert(`Searching for: ${searchTerm}`);
+                // Filter articles
+                const filteredArticles = helpArticles.filter(article => 
+                    article.title.toLowerCase().includes(searchTerm) || 
+                    article.category.toLowerCase().includes(searchTerm)
+                );
                 
-                // For demo purposes, highlight matching FAQ items
-                const faqQuestions = document.querySelectorAll('.faq-question span');
-                
-                faqItems.forEach((item, index) => {
-                    const questionText = faqQuestions[index].textContent.toLowerCase();
-                    if (questionText.includes(searchTerm)) {
-                        item.style.display = 'block';
-                        item.classList.add('active'); // Open matching FAQ items
-                    } else {
-                        item.style.display = 'block'; // Keep all items visible
+                // Display results
+                if (filteredArticles.length > 0) {
+                    searchResults.innerHTML = '';
+                    filteredArticles.forEach(article => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'search-result-item';
+                        resultItem.innerHTML = `
+                            <div style="font-weight: 600;">${article.title}</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">${article.category}</div>
+                        `;
+                        resultItem.addEventListener('click', () => {
+                            window.location.href = article.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.classList.add('active');
+                } else {
+                    searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                    searchResults.classList.add('active');
+                }
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') !== '#' && this.getAttribute('href') !== '') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
                     }
                 });
-            }
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#' && this.getAttribute('href') !== '') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
             });
-        });
 
-        // Function to insert Google AdSense code
-        function insertAdSense(adUnitId, adContainerId) {
-            const adContainer = document.getElementById(adContainerId);
-            if (adContainer && adUnitId) {
-                adContainer.innerHTML = `
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adUnitId}" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="${adUnitId}"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                `;
-            }
-        }
-
-        // Example usage (replace with your actual Ad Unit IDs)
-        // insertAdSense('ca-pub-1234567890123456', 'ad-top');
-        // insertAdSense('ca-pub-1234567890123456', 'ad-middle');
-
-        // Reinitialize on window resize
-        window.addEventListener('resize', debounce(() => {
-            // Any responsive adjustments needed
-        }, 250));
-        
-        // Initialize page with any needed setup
-        document.addEventListener('DOMContentLoaded', function() {
             // Set current year for copyright
             const yearElement = document.querySelector('.copyright');
             if (yearElement) {
@@ -1929,6 +2366,11 @@
                 yearElement.innerHTML = yearElement.innerHTML.replace('2023', currentYear);
             }
         });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
