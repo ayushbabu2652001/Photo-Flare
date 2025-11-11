@@ -483,6 +483,7 @@
             display: flex;
             flex-direction: column;
             transition: var(--transition);
+            z-index: 99;
         }
 
         .user-profile {
@@ -590,7 +591,7 @@
 
         .dashboard-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
@@ -1005,14 +1006,21 @@
             .dashboard-sidebar {
                 width: 100%;
                 display: none;
+                position: fixed;
+                height: 100%;
+                z-index: 1001;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
             
             .dashboard-sidebar.active {
                 display: flex;
+                transform: translateX(0);
             }
             
             .dashboard-main {
                 padding: 1rem;
+                width: 100%;
             }
             
             .dashboard-grid {
@@ -1264,7 +1272,7 @@
                     <button class="btn btn-outline" id="toggleSidebar">
                         <i class="fas fa-bars"></i> Menu
                     </button>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" id="newProjectBtn">
                         <i class="fas fa-plus"></i> New Project
                     </button>
                 </div>
@@ -1342,7 +1350,7 @@
                     <div class="chart-header">
                         <h3 class="chart-title">Usage Analytics</h3>
                         <div class="chart-actions">
-                            <button class="chart-btn"><i class="fas fa-sync-alt"></i></button>
+                            <button class="chart-btn" id="refreshUsageChart"><i class="fas fa-sync-alt"></i></button>
                             <button class="chart-btn"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
@@ -1356,7 +1364,7 @@
                     <div class="chart-header">
                         <h3 class="chart-title">Storage Usage</h3>
                         <div class="chart-actions">
-                            <button class="chart-btn"><i class="fas fa-sync-alt"></i></button>
+                            <button class="chart-btn" id="refreshStorageChart"><i class="fas fa-sync-alt"></i></button>
                             <button class="chart-btn"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
                     </div>
@@ -1478,6 +1486,9 @@
         const sidebarClose = document.getElementById('sidebarClose');
         const toggleSidebar = document.getElementById('toggleSidebar');
         const dashboardSidebar = document.getElementById('dashboardSidebar');
+        const newProjectBtn = document.getElementById('newProjectBtn');
+        const refreshUsageChart = document.getElementById('refreshUsageChart');
+        const refreshStorageChart = document.getElementById('refreshStorageChart');
 
         // Open sidebar
         if (mobileNavBtn) {
@@ -1507,8 +1518,18 @@
         if (toggleSidebar) {
             toggleSidebar.addEventListener('click', function() {
                 dashboardSidebar.classList.toggle('active');
+                if (dashboardSidebar.classList.contains('active')) {
+                    sidebarOverlay.classList.add('active');
+                } else {
+                    sidebarOverlay.classList.remove('active');
+                }
             });
         }
+
+        // Close dashboard sidebar when overlay is clicked
+        sidebarOverlay.addEventListener('click', function() {
+            dashboardSidebar.classList.remove('active');
+        });
 
         // Close sidebar when clicking on a link
         const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
@@ -1516,11 +1537,35 @@
             link.addEventListener('click', closeSidebar);
         });
 
+        // Close dashboard sidebar when clicking on a link (mobile)
+        const dashboardLinks = document.querySelectorAll('.dashboard-nav a');
+        dashboardLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 767) {
+                    dashboardSidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                }
+            });
+        });
+
+        // New Project Button
+        if (newProjectBtn) {
+            newProjectBtn.addEventListener('click', function() {
+                alert('New Project functionality would open in a real implementation. This is a demo.');
+            });
+        }
+
+        // Chart instances
+        let usageChart, storageChart;
+
         // Initialize charts
         function initializeCharts() {
             // Usage Chart
             const usageCtx = document.getElementById('usageChart').getContext('2d');
-            const usageChart = new Chart(usageCtx, {
+            if (usageChart) {
+                usageChart.destroy();
+            }
+            usageChart = new Chart(usageCtx, {
                 type: 'line',
                 data: {
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -1560,7 +1605,10 @@
 
             // Storage Chart
             const storageCtx = document.getElementById('storageChart').getContext('2d');
-            const storageChart = new Chart(storageCtx, {
+            if (storageChart) {
+                storageChart.destroy();
+            }
+            storageChart = new Chart(storageCtx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Images', 'PDFs', 'Other Documents', 'Free Space'],
@@ -1584,6 +1632,36 @@
                         }
                     }
                 }
+            });
+        }
+
+        // Refresh charts
+        if (refreshUsageChart) {
+            refreshUsageChart.addEventListener('click', function() {
+                // Simulate data refresh
+                usageChart.data.datasets[0].data = [15, 22, 10, 18, 25, 12, 20];
+                usageChart.data.datasets[1].data = [8, 14, 7, 12, 18, 9, 15];
+                usageChart.update();
+                
+                // Show loading state
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i>';
+                }, 1000);
+            });
+        }
+
+        if (refreshStorageChart) {
+            refreshStorageChart.addEventListener('click', function() {
+                // Simulate data refresh
+                storageChart.data.datasets[0].data = [40, 20, 15, 25];
+                storageChart.update();
+                
+                // Show loading state
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i>';
+                }, 1000);
             });
         }
 
