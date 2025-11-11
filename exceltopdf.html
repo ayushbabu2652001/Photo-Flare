@@ -427,6 +427,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -477,6 +478,18 @@
         .btn-danger:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning), #ff9e00);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(248, 150, 30, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 150, 30, 0.4);
         }
 
         /* Tool Hero Section */
@@ -662,6 +675,7 @@
         .checkbox-item input, .radio-item input {
             width: 18px;
             height: 18px;
+            accent-color: var(--primary);
         }
 
         .checkbox-item label, .radio-item label {
@@ -1731,6 +1745,10 @@
             };
         }
 
+        // Variables for upload progress
+        let progressInterval;
+        let currentFile = null;
+
         // Sidebar functionality
         const mobileNavBtn = document.getElementById('mobileNavBtn');
         const sidebar = document.getElementById('sidebar');
@@ -1814,13 +1832,13 @@
             e.preventDefault();
             uploadArea.classList.remove('active');
             
-            if (e.dataTransfer.files.length) {
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                 handleFile(e.dataTransfer.files[0]);
             }
         });
 
         fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) {
+            if (e.target.files && e.target.files[0]) {
                 handleFile(e.target.files[0]);
             }
         });
@@ -1860,6 +1878,9 @@
                 return;
             }
             
+            // Store the current file
+            currentFile = file;
+            
             fileName.textContent = file.name;
             fileSize.textContent = formatFileSize(file.size);
             
@@ -1896,6 +1917,12 @@
             previewSection.classList.remove('active');
             downloadSection.classList.remove('active');
             sheetSelection.classList.remove('active');
+            currentFile = null;
+            
+            // Clear any existing interval
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
         }
 
         function formatFileSize(bytes) {
@@ -1946,7 +1973,7 @@
 
         // Conversion process
         convertBtn.addEventListener('click', () => {
-            if (!fileInput.files.length) {
+            if (!currentFile) {
                 alert('Please select an Excel file first.');
                 return;
             }
@@ -1956,13 +1983,18 @@
             progressBar.style.width = '0%';
             progressText.textContent = 'Initializing conversion...';
             
+            // Clear any existing interval
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
             // Simulate conversion progress
             let progress = 0;
-            const interval = setInterval(() => {
+            progressInterval = setInterval(() => {
                 progress += Math.random() * 10;
                 if (progress >= 100) {
                     progress = 100;
-                    clearInterval(interval);
+                    clearInterval(progressInterval);
                     completeConversion();
                 }
                 
