@@ -44,10 +44,297 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        header {
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -55,12 +342,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -68,6 +357,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -76,7 +366,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-logo 6s ease-in-out infinite;
         }
 
         .logo-text {
@@ -87,10 +376,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
@@ -100,6 +397,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -109,12 +407,14 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .btn {
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem 1rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -123,31 +423,26 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
             border: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-            animation: float-btn 4s ease-in-out infinite;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-            animation: none;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #3a86ff);
-            color: white;
-            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
         }
 
         .btn-outline {
@@ -160,6 +455,36 @@
             background: rgba(67, 97, 238, 0.1);
         }
 
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger), #ff6b6b);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Hero Section */
         .hero {
             padding: 2rem 0;
             text-align: center;
@@ -172,7 +497,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
-            animation: float-hero 8s ease-in-out infinite;
         }
 
         .hero p {
@@ -182,102 +506,86 @@
             color: var(--gray);
         }
 
-        .tool-section {
-            margin: 3rem 0;
-        }
-
+        /* Tool Container */
         .tool-container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-out;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .tool-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
         }
 
-        .tool-icon-large {
-            font-size: 2.5rem;
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            animation: float-icon 6s ease-in-out infinite;
-        }
-
-        .tool-title {
+        .tool-header h1 {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
-        .conversion-interface {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 2rem;
+        .tool-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .conversion-option {
-            text-align: center;
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1.5rem;
         }
 
-        .conversion-arrow {
-            font-size: 2rem;
-            color: var(--primary);
-            animation: pulse 2s infinite;
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.2rem;
+            border-right: 1px solid var(--light-gray);
         }
 
-        .file-input-container {
-            margin-bottom: 2rem;
-            text-align: center;
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.2rem;
         }
 
-        .file-input-area {
-            border: 2px dashed var(--light-gray);
+        .upload-area {
+            border: 2px dashed var(--primary);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
-            background: var(--light);
-            margin-bottom: 1rem;
-        }
-
-        .file-input-area:hover {
-            border-color: var(--primary);
+            margin-bottom: 1.5rem;
             background: rgba(67, 97, 238, 0.05);
         }
 
-        .file-input-area i {
-            font-size: 3rem;
+        .upload-area:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .upload-area i {
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
-            animation: float-featured-icon 7s ease-in-out infinite;
         }
 
-        .file-input-area h3 {
-            font-size: 1.3rem;
+        .upload-area h3 {
             margin-bottom: 0.5rem;
             color: var(--dark);
+            font-size: 1.2rem;
         }
 
-        .file-input-area p {
+        .upload-area p {
             color: var(--gray);
             margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .file-input {
@@ -294,13 +602,60 @@
 
         .file-info.active {
             display: block;
-            animation: slideDown 0.5s ease-out;
+        }
+
+        .file-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .file-info span {
+            font-weight: 600;
+        }
+
+        .conversion-interface {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .conversion-option {
+            text-align: center;
+        }
+
+        .file-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            color: var(--dark);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .file-type-badge i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .conversion-arrow {
+            font-size: 2rem;
+            color: var(--primary);
         }
 
         .conversion-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
             margin-bottom: 2rem;
         }
 
@@ -312,26 +667,12 @@
             cursor: pointer;
             transition: var(--transition);
             border: 2px solid transparent;
-            animation: float-card 10s ease-in-out infinite;
-        }
-
-        .conversion-option-card:nth-child(2) {
-            animation-delay: 1s;
-        }
-
-        .conversion-option-card:nth-child(3) {
-            animation-delay: 2s;
-        }
-
-        .conversion-option-card:nth-child(4) {
-            animation-delay: 3s;
         }
 
         .conversion-option-card:hover, .conversion-option-card.active {
             border-color: var(--primary);
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            animation: none;
         }
 
         .conversion-option-card i {
@@ -353,45 +694,165 @@
             margin-top: 1rem;
         }
 
-        .tool-features {
-            margin: 3rem 0;
+        .results-panel {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            width: 100%;
+            display: none;
+        }
+
+        .results-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .results-panel h3 i {
+            color: var(--primary);
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .savings {
+            color: var(--success);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 2rem 0;
+            background: white;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.7rem;
             color: var(--dark);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .feature-card {
-            background: white;
-            padding: 2rem;
+            background: var(--light);
+            padding: 1.5rem;
             border-radius: var(--border-radius);
             text-align: center;
             transition: var(--transition);
-            box-shadow: var(--box-shadow);
-            animation: float-feature 11s ease-in-out infinite;
-        }
-
-        .feature-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .feature-card:nth-child(3) {
-            animation-delay: 4s;
+            border: 1px solid transparent;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            animation: none;
+            box-shadow: var(--box-shadow);
+            border-color: var(--primary-light);
         }
 
         .feature-icon {
@@ -400,7 +861,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-feature-icon 8s ease-in-out infinite;
         }
 
         .feature-title {
@@ -409,6 +869,7 @@
             color: var(--dark);
         }
 
+        /* How-to Section */
         .how-to-section {
             margin: 3rem 0;
         }
@@ -427,21 +888,11 @@
             box-shadow: var(--box-shadow);
             position: relative;
             transition: var(--transition);
-            animation: float-card 12s ease-in-out infinite;
-        }
-
-        .step-card:nth-child(2) {
-            animation-delay: 2s;
-        }
-
-        .step-card:nth-child(3) {
-            animation-delay: 4s;
         }
 
         .step-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            animation: none;
         }
 
         .step-number {
@@ -460,7 +911,6 @@
             font-weight: 700;
             font-size: 1.2rem;
             box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-            animation: pulse 2s infinite;
         }
 
         .step-icon {
@@ -469,6 +919,7 @@
             color: var(--primary);
         }
 
+        /* FAQ Section */
         .faq-section {
             margin: 3rem 0;
         }
@@ -523,11 +974,12 @@
             transform: rotate(180deg);
         }
 
+        /* Ad Container */
         .ad-container {
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             text-align: center;
             background: white;
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
         }
@@ -551,6 +1003,7 @@
             color: var(--gray);
         }
 
+        /* Related Tools Section */
         .related-tools {
             margin: 3rem 0;
         }
@@ -572,19 +1025,6 @@
             text-decoration: none;
             color: inherit;
             display: block;
-            animation: float-featured 9s ease-in-out infinite;
-        }
-
-        .tool-link-card:nth-child(2) {
-            animation-delay: 1.5s;
-        }
-
-        .tool-link-card:nth-child(3) {
-            animation-delay: 3s;
-        }
-
-        .tool-link-card:nth-child(4) {
-            animation-delay: 4.5s;
         }
 
         .tool-link-card:hover {
@@ -592,7 +1032,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             color: inherit;
-            animation: none;
         }
 
         .tool-link-icon {
@@ -601,7 +1040,6 @@
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: float-featured-icon 7s ease-in-out infinite;
         }
 
         .tool-link-title {
@@ -610,17 +1048,17 @@
             color: var(--dark);
         }
 
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark), #1a1a2e);
             color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 3rem;
+            padding: 2rem 0 1rem;
         }
 
         .footer-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .footer-logo {
@@ -632,46 +1070,32 @@
         }
 
         .footer-logo .logo-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .footer-logo .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
         }
 
         .footer-links a {
             color: #adb5bd;
             text-decoration: none;
             transition: var(--transition);
+            padding: 0.3rem 0.5rem;
+            white-space: nowrap;
         }
 
         .footer-links a:hover {
             color: white;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            color: #adb5bd;
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            color: white;
-            transform: translateY(-3px);
         }
 
         .copyright {
@@ -681,157 +1105,295 @@
             margin-top: 1rem;
         }
 
-        .external-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px dotted var(--primary);
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.3rem;
             transition: var(--transition);
         }
 
-        .external-link:hover {
-            color: var(--primary-dark);
-            border-bottom: 1px solid var(--primary-dark);
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
         }
 
-        /* Floating Animations */
-        @keyframes float-logo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* Media Queries - Mobile First Approach */
+
+        /* Small Devices (576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .tool-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        @keyframes float-hero {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        /* Medium Devices (768px and up) */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+            
+            .tool-header {
+                padding: 2rem;
+            }
+            
+            .tool-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tool-header p {
+                font-size: 1.1rem;
+            }
+            
+            .tool-content {
+                padding: 2rem;
+            }
+            
+            .upload-section {
+                padding: 1.5rem;
+            }
+            
+            .preview-section {
+                padding: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 3rem 2rem;
+            }
+            
+            .upload-area i {
+                font-size: 3rem;
+            }
+            
+            .results-panel {
+                padding: 1.5rem;
+            }
+            
+            .features-section {
+                padding: 3rem 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
         }
 
-        @keyframes float-btn {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+        /* Large Devices (992px and up) */
+        @media (min-width: 992px) {
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
-        @keyframes float-icon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        @keyframes float-card {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        @keyframes float-featured {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @keyframes float-featured-icon {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-4px) rotate(5deg); }
-        }
-
-        @keyframes float-feature {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        @keyframes float-feature-icon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
-        /* Other Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 200px; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
+        /* Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .tool-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .upload-area {
+                padding: 1.5rem 1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .action-buttons .btn {
+                min-width: 100%;
+            }
+            
             .conversion-interface {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 0.5rem;
             }
             
             .conversion-arrow {
                 transform: rotate(90deg);
             }
+        }
+
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
             
-            .hero h1 {
-                font-size: 2rem;
+            .desktop-header {
+                display: none;
+            }
+            
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .conversion-options {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+        /* Special media query for when viewing desktop site on mobile */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-header {
+                padding: 0.8rem 0;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
             }
             
             nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
+                gap: 0.7rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+            }
+        }
+
+        /* For very small desktop screens */
+        @media (min-width: 768px) and (max-width: 900px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
                 justify-content: center;
             }
             
             .header-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .header-actions .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .tool-container {
-                padding: 1.5rem;
-            }
-            
-            .tool-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .conversion-options {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .features-grid, .steps-container {
-                grid-template-columns: 1fr;
+                margin-left: auto;
             }
         }
 
-        @media (max-width: 576px) {
-            .conversion-options {
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
+            }
+            
+            .result-stats {
                 grid-template-columns: 1fr;
             }
             
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .tools-grid {
+            .conversion-options {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -841,9 +1403,9 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">All Tools</a></li>
-                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="pdf-tools.html" class="active">PDF Tools</a></li>
                         <li><a href="image-tools.html">Image Tools</a></li>
-                        <li><a href="conversion.html" class="active">Conversion</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
                         <li><a href="premium-tools.html">Premium Tools</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
                     </ul>
@@ -855,6 +1417,40 @@
             </div>
         </div>
     </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html" class="active"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -875,103 +1471,207 @@
         </div>
     </div>
 
-    <!-- Tool Section -->
-    <section class="tool-section">
-        <div class="container">
-            <div class="tool-container">
-                <div class="tool-header">
-                    <div class="tool-icon-large">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <div>
-                        <h1 class="tool-title">Convert PDF</h1>
-                        <p>Convert your PDF files to various formats quickly and easily</p>
-                    </div>
-                </div>
-
-                <div class="conversion-interface">
-                    <div class="conversion-option">
-                        <h3>From</h3>
-                        <div class="file-type-badge">
-                            <i class="fas fa-file-pdf"></i>
-                            <span>PDF</span>
-                        </div>
-                    </div>
-                    
-                    <div class="conversion-arrow">
-                        <i class="fas fa-long-arrow-alt-right"></i>
-                    </div>
-                    
-                    <div class="conversion-option">
-                        <h3>To</h3>
-                        <div class="file-type-badge" id="target-format">
-                            <i class="fas fa-file-word"></i>
-                            <span>Word</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="file-input-container">
-                    <div class="file-input-area" id="file-drop-area">
+    <!-- Tool Container -->
+    <div class="container">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>Convert PDF</h1>
+                <p>Transform your PDF documents into various formats with our fast and secure conversion tool</p>
+            </div>
+            
+            <div class="tool-content">
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
                         <i class="fas fa-cloud-upload-alt"></i>
-                        <h3>Upload your PDF file</h3>
-                        <p>Drag & drop your file here or click to browse</p>
-                        <button class="btn btn-primary" id="browse-btn">Browse Files</button>
-                        <input type="file" class="file-input" id="file-input" accept=".pdf">
+                        <h3>Upload Your PDF</h3>
+                        <p>Drag & drop your PDF file here or click to browse</p>
+                        <p class="tooltip">Maximum file size: 10MB (Free) / 100MB (Pro)
+                            <span class="tooltiptext">Upgrade to Pro for larger file sizes and batch processing</span>
+                        </p>
+                        <input type="file" id="fileInput" class="file-input" accept=".pdf">
+                        <button class="btn btn-primary" id="browseBtn">Browse Files</button>
                     </div>
                     
-                    <div class="file-info" id="file-info">
-                        <div class="file-details">
-                            <i class="fas fa-file-pdf"></i>
-                            <span id="file-name">document.pdf</span>
-                            <span id="file-size">(2.4 MB)</span>
+                    <div class="file-info" id="fileInfo">
+                        <p>File: <span id="fileName">-</span></p>
+                        <p>Size: <span id="fileSize">-</span></p>
+                        <p>Pages: <span id="filePages">-</span></p>
+                        <p>Type: <span id="fileType">-</span></p>
+                    </div>
+                    
+                    <div class="conversion-interface">
+                        <div class="conversion-option">
+                            <h3>From</h3>
+                            <div class="file-type-badge">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>PDF</span>
+                            </div>
                         </div>
-                        <button class="btn btn-outline" id="remove-file">Remove</button>
+                        
+                        <div class="conversion-arrow">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </div>
+                        
+                        <div class="conversion-option">
+                            <h3>To</h3>
+                            <div class="file-type-badge" id="targetFormat">
+                                <i class="fas fa-file-word"></i>
+                                <span>Word</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversion-options">
+                        <div class="conversion-option-card active" data-format="word">
+                            <i class="fas fa-file-word"></i>
+                            <h3>PDF to Word</h3>
+                            <p>Convert to editable DOCX</p>
+                        </div>
+                        <div class="conversion-option-card" data-format="jpg">
+                            <i class="fas fa-file-image"></i>
+                            <h3>PDF to JPG</h3>
+                            <p>Convert pages to images</p>
+                        </div>
+                        <div class="conversion-option-card" data-format="png">
+                            <i class="fas fa-file-image"></i>
+                            <h3>PDF to PNG</h3>
+                            <p>Convert with transparency</p>
+                        </div>
+                        <div class="conversion-option-card" data-format="powerpoint">
+                            <i class="fas fa-file-powerpoint"></i>
+                            <h3>PDF to PowerPoint</h3>
+                            <p>Convert to editable PPTX</p>
+                        </div>
+                        <div class="conversion-option-card" data-format="excel">
+                            <i class="fas fa-file-excel"></i>
+                            <h3>PDF to Excel</h3>
+                            <p>Extract tables to XLSX</p>
+                        </div>
+                        <div class="conversion-option-card" data-format="text">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>PDF to Text</h3>
+                            <p>Extract text content</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success convert-btn" id="convertBtn" disabled>
+                        <i class="fas fa-sync-alt"></i> Convert Now
+                    </button>
+                    
+                    <!-- Batch Conversion Section -->
+                    <div class="batch-section">
+                        <h3><i class="fas fa-layer-group"></i> Batch Conversion <span class="premium-badge">PRO</span></h3>
+                        <div class="batch-upload">
+                            <p>Convert multiple PDFs at once (Pro feature)</p>
+                            <div class="batch-files" id="batchFiles">
+                                <!-- Batch files will be added here -->
+                            </div>
+                            <button class="btn btn-outline" id="addBatchBtn" disabled>
+                                <i class="fas fa-plus"></i> Add More PDFs
+                            </button>
+                            <button class="btn btn-success" id="convertBatchBtn" disabled>
+                                <i class="fas fa-sync-alt"></i> Convert All
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="conversion-options">
-                    <div class="conversion-option-card active" data-format="word">
-                        <i class="fas fa-file-word"></i>
-                        <h3>PDF to Word</h3>
-                        <p>Convert to editable DOCX</p>
-                    </div>
-                    <div class="conversion-option-card" data-format="jpg">
-                        <i class="fas fa-file-image"></i>
-                        <h3>PDF to JPG</h3>
-                        <p>Convert pages to images</p>
-                    </div>
-                    <div class="conversion-option-card" data-format="png">
-                        <i class="fas fa-file-image"></i>
-                        <h3>PDF to PNG</h3>
-                        <p>Convert with transparency</p>
-                    </div>
-                    <div class="conversion-option-card" data-format="powerpoint">
-                        <i class="fas fa-file-powerpoint"></i>
-                        <h3>PDF to PowerPoint</h3>
-                        <p>Convert to editable PPTX</p>
-                    </div>
-                    <div class="conversion-option-card" data-format="excel">
-                        <i class="fas fa-file-excel"></i>
-                        <h3>PDF to Excel</h3>
-                        <p>Extract tables to XLSX</p>
-                    </div>
-                    <div class="conversion-option-card" data-format="text">
-                        <i class="fas fa-file-alt"></i>
-                        <h3>PDF to Text</h3>
-                        <p>Extract text content</p>
+                
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-container">
+                        <div class="loading" id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <p>Converting your PDF...</p>
+                        </div>
+                        
+                        <div id="conversionResults" style="display: none;">
+                            <h3>Conversion Results</h3>
+                            
+                            <div class="results-panel">
+                                <h3><i class="fas fa-chart-bar"></i> Conversion Summary</h3>
+                                <div class="result-stats">
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="originalFileSize">-</div>
+                                        <div class="stat-label">Original Size</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="convertedFileSize">-</div>
+                                        <div class="stat-label">Converted Size</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value savings" id="conversionTime">-</div>
+                                        <div class="stat-label">Conversion Time</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-success" id="downloadBtn">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                    <button class="btn btn-outline" id="convertAnotherBtn">
+                                        <i class="fas fa-redo"></i> Convert Another
+                                    </button>
+                                    <button class="btn btn-primary" id="shareBtn">
+                                        <i class="fas fa-share-alt"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="batchResults" style="display: none;">
+                            <h3>Batch Results</h3>
+                            <div class="results-panel">
+                                <div class="result-stats">
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="totalFiles">0</div>
+                                        <div class="stat-label">Total Files</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value savings" id="successfulConversions">0</div>
+                                        <div class="stat-label">Successful</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-value" id="failedConversions">0</div>
+                                        <div class="stat-label">Failed</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-success" id="downloadAllBtn">
+                                        <i class="fas fa-download"></i> Download All
+                                    </button>
+                                    <button class="btn btn-outline" id="newBatchBtn">
+                                        <i class="fas fa-plus"></i> New Batch
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="emptyState">
+                            <i class="fas fa-file-pdf" style="font-size: 4rem; color: var(--light-gray); margin-bottom: 1rem;"></i>
+                            <h3>No PDF Uploaded</h3>
+                            <p>Upload a PDF to see the conversion results</p>
+                        </div>
                     </div>
                 </div>
-
-                <button class="btn btn-success convert-btn" id="convert-btn">
-                    <i class="fas fa-sync-alt"></i> Convert Now
-                </button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Features Section -->
-    <section class="tool-features">
+    <section class="features-section">
         <div class="container">
             <h2 class="section-title">Why Use Our PDF Converter?</h2>
             <div class="features-grid">
@@ -989,6 +1689,11 @@
                     <i class="fas fa-chart-line feature-icon"></i>
                     <h3 class="feature-title">High Quality</h3>
                     <p>Maintain formatting, images, and layout during conversion for best results.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3 class="feature-title">Multi-Format Support</h3>
+                    <p>Convert PDF to Word, JPG, PNG, PowerPoint, Excel, and text formats.</p>
                 </div>
             </div>
         </div>
@@ -1066,17 +1771,6 @@
         </div>
     </section>
 
-    <!-- Ad Space -->
-    <div class="container">
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-space" id="ad-middle">
-                <!-- Google AdSense code will be inserted here -->
-                <p>Ad Space (728x90)</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Related Tools Section -->
     <section class="related-tools">
         <div class="container">
@@ -1122,10 +1816,13 @@
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
                     <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
                     <a href="Help.html">Help Center</a>
                     <a href="Learn-More-privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
@@ -1133,122 +1830,276 @@
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
                 
-                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // File upload functionality
-        const fileInput = document.getElementById('file-input');
-        const fileDropArea = document.getElementById('file-drop-area');
-        const fileInfo = document.getElementById('file-info');
-        const fileName = document.getElementById('file-name');
-        const fileSize = document.getElementById('file-size');
-        const removeFileBtn = document.getElementById('remove-file');
-        const browseBtn = document.getElementById('browse-btn');
-        const convertBtn = document.getElementById('convert-btn');
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
 
-        // Conversion options
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // DOM Elements for PDF Converter
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const browseBtn = document.getElementById('browseBtn');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const filePages = document.getElementById('filePages');
+        const fileType = document.getElementById('fileType');
         const conversionCards = document.querySelectorAll('.conversion-option-card');
-        const targetFormat = document.getElementById('target-format');
+        const targetFormat = document.getElementById('targetFormat');
+        const convertBtn = document.getElementById('convertBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const conversionResults = document.getElementById('conversionResults');
+        const batchResults = document.getElementById('batchResults');
+        const emptyState = document.getElementById('emptyState');
+        const originalFileSize = document.getElementById('originalFileSize');
+        const convertedFileSize = document.getElementById('convertedFileSize');
+        const conversionTime = document.getElementById('conversionTime');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const convertAnotherBtn = document.getElementById('convertAnotherBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const batchFiles = document.getElementById('batchFiles');
+        const addBatchBtn = document.getElementById('addBatchBtn');
+        const convertBatchBtn = document.getElementById('convertBatchBtn');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
+        const newBatchBtn = document.getElementById('newBatchBtn');
+        const totalFiles = document.getElementById('totalFiles');
+        const successfulConversions = document.getElementById('successfulConversions');
+        const failedConversions = document.getElementById('failedConversions');
 
-        // Browse button click
-        browseBtn.addEventListener('click', () => {
-            fileInput.click();
+        // Global variables
+        let originalFile = null;
+        let convertedFile = null;
+        let batchFilesList = [];
+        let isBatchMode = false;
+        let selectedFormat = 'word';
+
+        // Event Listeners
+        browseBtn.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        convertBtn.addEventListener('click', convertPDF);
+        downloadBtn.addEventListener('click', downloadConvertedFile);
+        convertAnotherBtn.addEventListener('click', resetTool);
+        shareBtn.addEventListener('click', shareResults);
+        addBatchBtn.addEventListener('click', () => fileInput.click());
+        convertBatchBtn.addEventListener('click', convertBatch);
+        downloadAllBtn.addEventListener('click', downloadBatch);
+        newBatchBtn.addEventListener('click', resetBatch);
+
+        // Conversion option selection
+        conversionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                conversionCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                selectedFormat = card.getAttribute('data-format');
+                updateTargetFormat(selectedFormat);
+            });
         });
 
-        // File input change
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileSelection(e.target.files[0]);
-            }
-        });
-
-        // Drag and drop functionality
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
+        // Functions
+        function handleDragOver(e) {
             e.preventDefault();
             e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
         }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, highlight, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, unhighlight, false);
-        });
-
-        function highlight() {
-            fileDropArea.style.borderColor = 'var(--primary)';
-            fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
-        }
-
-        function unhighlight() {
-            fileDropArea.style.borderColor = 'var(--light-gray)';
-            fileDropArea.style.backgroundColor = 'var(--light)';
-        }
-
-        fileDropArea.addEventListener('drop', handleDrop, false);
 
         function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
             
-            if (files.length > 0) {
-                handleFileSelection(files[0]);
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.dataTransfer.files);
+                } else {
+                    handleFile(e.dataTransfer.files[0]);
+                }
             }
         }
 
-        function handleFileSelection(file) {
-            // Check if file is PDF
+        function handleFileSelect(e) {
+            if (e.target.files && e.target.files[0]) {
+                if (isBatchMode) {
+                    handleBatchFiles(e.target.files);
+                } else {
+                    handleFile(e.target.files[0]);
+                }
+            }
+        }
+
+        function handleFile(file) {
             if (file.type !== 'application/pdf') {
                 alert('Please select a PDF file.');
                 return;
             }
-
-            // Update file info
-            fileName.textContent = file.name;
             
-            // Format file size
-            const fileSizeBytes = file.size;
-            const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
-            fileSize.textContent = `(${fileSizeMB} MB)`;
+            // Check file size (10MB limit for free users)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size exceeds 10MB limit. Please upgrade to Pro for larger files.');
+                return;
+            }
             
-            // Show file info
-            fileInfo.classList.add('active');
+            originalFile = file;
+            updateFileInfo(file);
+            
+            // Show conversion results area and hide empty state
+            emptyState.style.display = 'none';
+            conversionResults.style.display = 'block';
             
             // Enable convert button
             convertBtn.disabled = false;
         }
 
-        // Remove file
-        removeFileBtn.addEventListener('click', () => {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            convertBtn.disabled = true;
-        });
+        function handleBatchFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (file.type !== 'application/pdf') {
+                    continue;
+                }
+                
+                // Check file size (10MB limit for free users)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`);
+                    continue;
+                }
+                
+                // Add to batch if not already added
+                if (!batchFilesList.some(f => f.name === file.name && f.size === file.size)) {
+                    batchFilesList.push(file);
+                    addBatchFilePreview(file);
+                }
+            }
+            
+            // Update batch UI
+            updateBatchUI();
+        }
 
-        // Conversion option selection
-        conversionCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Remove active class from all cards
-                conversionCards.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked card
-                card.classList.add('active');
-                
-                // Update target format display
-                const format = card.getAttribute('data-format');
-                updateTargetFormat(format);
+        function addBatchFilePreview(file) {
+            const batchFileElement = document.createElement('div');
+            batchFileElement.className = 'batch-file';
+            batchFileElement.innerHTML = `
+                <div class="file-preview">
+                    <i class="fas fa-file-pdf" style="font-size: 2rem; color: var(--primary);"></i>
+                </div>
+                <div class="file-name">${file.name}</div>
+                <div class="remove-file" data-filename="${file.name}">×</div>
+            `;
+            
+            batchFiles.appendChild(batchFileElement);
+            
+            // Add remove event listener
+            batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
+                const filename = this.getAttribute('data-filename');
+                removeBatchFile(filename);
             });
-        });
+        }
+
+        function removeBatchFile(filename) {
+            batchFilesList = batchFilesList.filter(file => file.name !== filename);
+            
+            // Remove from UI
+            const fileElements = batchFiles.querySelectorAll('.batch-file');
+            fileElements.forEach(element => {
+                if (element.querySelector('.file-name').textContent === filename) {
+                    element.remove();
+                }
+            });
+            
+            updateBatchUI();
+        }
+
+        function updateBatchUI() {
+            if (batchFilesList.length > 0) {
+                addBatchBtn.disabled = false;
+                convertBatchBtn.disabled = false;
+                isBatchMode = true;
+                
+                // Show batch results and hide single conversion
+                conversionResults.style.display = 'none';
+                emptyState.style.display = 'none';
+                batchResults.style.display = 'block';
+                
+                totalFiles.textContent = batchFilesList.length;
+            } else {
+                addBatchBtn.disabled = true;
+                convertBatchBtn.disabled = true;
+                isBatchMode = false;
+                
+                // Show empty state
+                batchResults.style.display = 'none';
+                conversionResults.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+        }
+
+        function updateFileInfo(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileType.textContent = file.type.split('/')[1].toUpperCase();
+            
+            // Simulate page count (in a real app, this would be calculated)
+            const pageCount = Math.max(1, Math.round(file.size / 5000));
+            filePages.textContent = pageCount;
+            
+            fileInfo.classList.add('active');
+        }
 
         function updateTargetFormat(format) {
             const formatIcons = {
@@ -1269,81 +2120,149 @@
                 'text': 'Text'
             };
             
-            targetFormat.innerHTML = `
-                <i class="${formatIcons[format]}"></i>
-                <span>${formatNames[format]}</span>
-            `;
+            if (targetFormat) {
+                targetFormat.innerHTML = `
+                    <i class="${formatIcons[format]}"></i>
+                    <span>${formatNames[format]}</span>
+                `;
+            }
         }
 
-        // Convert button click
-        convertBtn.addEventListener('click', () => {
-            if (!fileInput.files.length) {
-                alert('Please select a PDF file to convert.');
+        function convertPDF() {
+            if (!originalFile) {
+                alert('Please select a PDF file first');
                 return;
             }
             
-            // Get selected format
-            const activeCard = document.querySelector('.conversion-option-card.active');
-            const format = activeCard.getAttribute('data-format');
-            
-            // Simulate conversion process
-            simulateConversion(format);
-        });
-
-        function simulateConversion(format) {
-            // Show loading state
-            convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            loadingIndicator.classList.add('active');
             convertBtn.disabled = true;
             
-            // Simulate processing time
+            // Simulate conversion process
             setTimeout(() => {
-                // Show success message
-                convertBtn.innerHTML = '<i class="fas fa-check"></i> Conversion Complete!';
-                convertBtn.classList.remove('btn-success');
-                convertBtn.classList.add('btn-primary');
+                // Calculate conversion stats (simulated)
+                const originalSizeValue = originalFile.size;
+                const convertedSizeValue = Math.round(originalSizeValue * (selectedFormat === 'jpg' || selectedFormat === 'png' ? 1.2 : 0.8));
+                const conversionTimeValue = Math.round(originalSizeValue / 100000) + 's';
                 
-                // Create download button
-                const downloadBtn = document.createElement('a');
-                downloadBtn.href = '#';
-                downloadBtn.className = 'btn btn-success';
-                downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Result';
-                downloadBtn.style.marginTop = '1rem';
-                downloadBtn.style.width = '100%';
+                // Update UI with results
+                originalFileSize.textContent = formatFileSize(originalSizeValue);
+                convertedFileSize.textContent = formatFileSize(convertedSizeValue);
+                conversionTime.textContent = conversionTimeValue;
                 
-                // Add download button after convert button
-                convertBtn.parentNode.insertBefore(downloadBtn, convertBtn.nextSibling);
+                loadingIndicator.classList.remove('active');
+                convertBtn.disabled = false;
                 
-                // Reset button after 5 seconds
-                setTimeout(() => {
-                    convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert Now';
-                    convertBtn.classList.remove('btn-primary');
-                    convertBtn.classList.add('btn-success');
-                    convertBtn.disabled = false;
-                    
-                    // Remove download button
-                    if (downloadBtn.parentNode) {
-                        downloadBtn.parentNode.removeChild(downloadBtn);
-                    }
-                }, 5000);
+                // Show results panel
+                document.querySelector('.results-panel').style.display = 'block';
             }, 2000);
+        }
+
+        function convertBatch() {
+            if (batchFilesList.length === 0) {
+                alert('Please add PDF files to convert');
+                return;
+            }
+            
+            loadingIndicator.classList.add('active');
+            convertBatchBtn.disabled = true;
+            
+            // Simulate batch conversion
+            setTimeout(() => {
+                // Calculate batch results (simulated)
+                const successful = Math.round(batchFilesList.length * 0.9);
+                const failed = batchFilesList.length - successful;
+                
+                // Update batch results
+                totalFiles.textContent = batchFilesList.length;
+                successfulConversions.textContent = successful;
+                failedConversions.textContent = failed;
+                
+                loadingIndicator.classList.remove('active');
+                convertBatchBtn.disabled = false;
+            }, 3000);
+        }
+
+        function downloadConvertedFile() {
+            if (!originalFile) {
+                alert('No converted file available');
+                return;
+            }
+            
+            // In a real implementation, this would download the converted file
+            alert('Download would start in a real implementation. This is a demo.');
+        }
+
+        function downloadBatch() {
+            if (batchFilesList.length === 0) {
+                alert('No converted files available');
+                return;
+            }
+            
+            // In a real implementation, this would download a ZIP file with all converted files
+            alert('Batch download would start in a real implementation. This is a demo.');
+        }
+
+        function resetTool() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            conversionResults.style.display = 'none';
+            emptyState.style.display = 'block';
+            originalFile = null;
+            convertBtn.disabled = true;
+            
+            // Hide results panel
+            document.querySelector('.results-panel').style.display = 'none';
+        }
+
+        function resetBatch() {
+            batchFilesList = [];
+            batchFiles.innerHTML = '';
+            updateBatchUI();
+        }
+
+        function shareResults() {
+            if (!originalFile) {
+                alert('No converted file available to share');
+                return;
+            }
+            
+            // In a real implementation, this would open a share dialog
+            alert('Share functionality would open in a real implementation. This is a demo.');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
         // FAQ toggle functionality
         const faqQuestions = document.querySelectorAll('.faq-question');
         
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const toggle = question.querySelector('.faq-toggle');
-                
-                // Toggle active class
-                answer.classList.toggle('active');
-                toggle.classList.toggle('active');
+        if (faqQuestions.length > 0) {
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const toggle = question.querySelector('.faq-toggle');
+                    
+                    // Toggle active class
+                    answer.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
             });
-        });
+        }
 
         // Initialize the page with Word as default format
         updateTargetFormat('word');
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
