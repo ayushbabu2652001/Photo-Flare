@@ -1840,6 +1840,23 @@
             }, 300));
         }
 
+        // Search button functionality
+        const searchBtn = document.querySelector('.search-btn');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                conversionCards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    if (cardText.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
         // Initialize all converter sections
         document.addEventListener('DOMContentLoaded', function() {
             initializeConverter('pdf');
@@ -1871,29 +1888,42 @@
             }
 
             // Event listeners
-            uploadBtn.addEventListener('click', () => {
-                fileInput.click();
-            });
+            if (uploadBtn) {
+                uploadBtn.addEventListener('click', () => {
+                    fileInput.click();
+                });
+            }
 
-            fileInput.addEventListener('change', () => handleFileSelect(type));
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.classList.add('dragover');
-            });
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.classList.remove('dragover');
-            });
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.classList.remove('dragover');
-                if (e.dataTransfer.files.length) {
-                    fileInput.files = e.dataTransfer.files;
-                    handleFileSelect(type);
-                }
-            });
+            if (fileInput) {
+                fileInput.addEventListener('change', () => handleFileSelect(type));
+            }
+            
+            if (uploadArea) {
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    if (e.dataTransfer.files.length) {
+                        fileInput.files = e.dataTransfer.files;
+                        handleFileSelect(type);
+                    }
+                });
+            }
 
-            convertBtn.addEventListener('click', () => convertFile(type));
-            resetBtn.addEventListener('click', () => resetConverter(type));
+            if (convertBtn) {
+                convertBtn.addEventListener('click', () => convertFile(type));
+            }
+            
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => resetConverter(type));
+            }
+            
             if (downloadBtn) {
                 downloadBtn.addEventListener('click', () => downloadResult(type));
             }
@@ -1991,6 +2021,35 @@
                             block: 'start'
                         });
                     }
+                }
+            });
+        });
+
+        // Fix for conversion cards scrolling
+        const conversionCardLinks = document.querySelectorAll('.conversion-tools .conversion-card');
+        conversionCardLinks.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Fix for external links
+        const externalLinks = document.querySelectorAll('.external-link');
+        externalLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    alert('This is a demo. In a real application, this would navigate to: ' + this.getAttribute('href'));
                 }
             });
         });
