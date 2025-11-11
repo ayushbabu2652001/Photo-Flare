@@ -851,6 +851,21 @@
             line-height: 1.5;
         }
 
+        .tool-cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
         .ai-demo {
             background: white;
             border-radius: var(--border-radius);
@@ -1752,11 +1767,11 @@
                         
                         <div class="editor-controls">
                             <div class="page-controls">
-                                <button class="btn btn-outline">
+                                <button class="btn btn-outline" id="prev-page">
                                     <i class="fas fa-chevron-left"></i> Previous
                                 </button>
                                 <span class="page-info">Page 1 of 1</span>
-                                <button class="btn btn-outline">
+                                <button class="btn btn-outline" id="next-page">
                                     Next <i class="fas fa-chevron-right"></i>
                                 </button>
                             </div>
@@ -1802,7 +1817,7 @@
                         Automatically detect and make text editable in scanned PDFs with advanced OCR technology.
                     </p>
                     <div class="tool-cta">
-                        <a href="#" class="btn btn-primary">Try AI OCR</a>
+                        <a href="#" class="btn btn-primary" id="ai-ocr-btn">Try AI OCR</a>
                         <span class="premium-badge">PRO</span>
                     </div>
                 </div>
@@ -1820,7 +1835,7 @@
                         Apply edits to multiple PDF files simultaneously with consistent formatting and styles.
                     </p>
                     <div class="tool-cta">
-                        <a href="#" class="btn btn-primary">Try Batch Edit</a>
+                        <a href="#" class="btn btn-primary" id="batch-edit-btn">Try Batch Edit</a>
                         <span class="premium-badge">PRO</span>
                     </div>
                 </div>
@@ -1838,7 +1853,7 @@
                         Full control over fonts, colors, spacing, and layout with professional publishing tools.
                     </p>
                     <div class="tool-cta">
-                        <a href="#" class="btn btn-primary">Try Formatting</a>
+                        <a href="#" class="btn btn-primary" id="formatting-btn">Try Formatting</a>
                         <span class="premium-badge">PRO</span>
                     </div>
                 </div>
@@ -1873,7 +1888,7 @@
                 </div>
                 
                 <div style="text-align: center; margin-top: 1.5rem;">
-                    <a href="#" class="btn btn-primary" style="background: linear-gradient(135deg, #3a86ff, #8338ec);">
+                    <a href="#" class="btn btn-primary" id="ai-editing-btn" style="background: linear-gradient(135deg, #3a86ff, #8338ec);">
                         <i class="fas fa-magic"></i> Try AI Editing
                     </a>
                 </div>
@@ -2070,58 +2085,66 @@
         const saveBtn = document.getElementById('save-btn');
         const downloadBtn = document.getElementById('download-btn');
         const resetBtn = document.getElementById('reset-btn');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
 
         // Tool buttons
         const toolButtons = document.querySelectorAll('.tool-btn');
 
         // Browse button click
-        browseBtn.addEventListener('click', () => {
-            fileInput.click();
-        });
+        if (browseBtn) {
+            browseBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
+        }
 
         // File input change
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileSelection(e.target.files[0]);
-            }
-        });
+        if (fileInput) {
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFileSelection(e.target.files[0]);
+                }
+            });
+        }
 
         // Drag and drop functionality
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, preventDefaults, false);
-        });
+        if (fileDropArea) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, preventDefaults, false);
+            });
 
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
 
-        ['dragenter', 'dragover'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, highlight, false);
-        });
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, highlight, false);
+            });
 
-        ['dragleave', 'drop'].forEach(eventName => {
-            fileDropArea.addEventListener(eventName, unhighlight, false);
-        });
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileDropArea.addEventListener(eventName, unhighlight, false);
+            });
 
-        function highlight() {
-            fileDropArea.style.borderColor = 'var(--primary)';
-            fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
-        }
+            function highlight() {
+                fileDropArea.style.borderColor = 'var(--primary)';
+                fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+            }
 
-        function unhighlight() {
-            fileDropArea.style.borderColor = 'var(--light-gray)';
-            fileDropArea.style.backgroundColor = 'var(--light)';
-        }
+            function unhighlight() {
+                fileDropArea.style.borderColor = 'var(--light-gray)';
+                fileDropArea.style.backgroundColor = 'var(--light)';
+            }
 
-        fileDropArea.addEventListener('drop', handleDrop, false);
+            fileDropArea.addEventListener('drop', handleDrop, false);
 
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            
-            if (files.length > 0) {
-                handleFileSelection(files[0]);
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                
+                if (files.length > 0) {
+                    handleFileSelection(files[0]);
+                }
             }
         }
 
@@ -2158,18 +2181,20 @@
         }
 
         // Remove file
-        removeFileBtn.addEventListener('click', () => {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            
-            // Reset PDF preview
-            const pdfPreview = document.querySelector('.pdf-preview');
-            pdfPreview.innerHTML = `
-                <i class="fas fa-file-pdf"></i>
-                <h3>PDF Editor Ready</h3>
-                <p>Upload a PDF file to start editing</p>
-            `;
-        });
+        if (removeFileBtn) {
+            removeFileBtn.addEventListener('click', () => {
+                fileInput.value = '';
+                fileInfo.classList.remove('active');
+                
+                // Reset PDF preview
+                const pdfPreview = document.querySelector('.pdf-preview');
+                pdfPreview.innerHTML = `
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>PDF Editor Ready</h3>
+                    <p>Upload a PDF file to start editing</p>
+                `;
+            });
+        }
 
         // Tool button selection
         toolButtons.forEach(button => {
@@ -2194,11 +2219,24 @@
                     };
                     
                     if (toolMessages[toolName]) {
-                        pdfPreview.innerHTML += `
-                            <div style="margin-top: 1rem; padding: 1rem; background: rgba(67, 97, 238, 0.1); border-radius: 8px; border-left: 3px solid var(--primary);">
-                                <p><strong>${toolMessages[toolName]}</strong></p>
-                            </div>
-                        `;
+                        // Create message element
+                        const messageElement = document.createElement('div');
+                        messageElement.style.marginTop = '1rem';
+                        messageElement.style.padding = '1rem';
+                        messageElement.style.background = 'rgba(67, 97, 238, 0.1)';
+                        messageElement.style.borderRadius = '8px';
+                        messageElement.style.borderLeft = '3px solid var(--primary)';
+                        messageElement.innerHTML = `<p><strong>${toolMessages[toolName]}</strong></p>`;
+                        
+                        // Add message to preview
+                        pdfPreview.appendChild(messageElement);
+                        
+                        // Remove message after 3 seconds
+                        setTimeout(() => {
+                            if (pdfPreview.contains(messageElement)) {
+                                pdfPreview.removeChild(messageElement);
+                            }
+                        }, 3000);
                     }
                     
                     // For premium tools, show upgrade prompt
@@ -2210,93 +2248,112 @@
         });
 
         // Save button click
-        saveBtn.addEventListener('click', () => {
-            if (!fileInput.files.length) {
-                alert('Please upload a PDF file first.');
-                return;
-            }
-            
-            // Show saving animation
-            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-            saveBtn.disabled = true;
-            
-            // Simulate saving process
-            setTimeout(() => {
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                saveBtn.classList.remove('btn-warning');
-                saveBtn.classList.add('btn-success');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', () => {
+                if (!fileInput.files.length) {
+                    alert('Please upload a PDF file first.');
+                    return;
+                }
                 
-                // Reset button after 3 seconds
+                // Show saving animation
+                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                saveBtn.disabled = true;
+                
+                // Simulate saving process
                 setTimeout(() => {
-                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
-                    saveBtn.classList.remove('btn-success');
-                    saveBtn.classList.add('btn-warning');
-                    saveBtn.disabled = false;
-                }, 3000);
-            }, 1500);
-        });
+                    saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                    saveBtn.classList.remove('btn-warning');
+                    saveBtn.classList.add('btn-success');
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                        saveBtn.classList.remove('btn-success');
+                        saveBtn.classList.add('btn-warning');
+                        saveBtn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        }
 
         // Download button click
-        downloadBtn.addEventListener('click', () => {
-            if (!fileInput.files.length) {
-                alert('Please upload and edit a PDF file first.');
-                return;
-            }
-            
-            // Show downloading animation
-            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
-            downloadBtn.disabled = true;
-            
-            // Simulate download process
-            setTimeout(() => {
-                downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => {
+                if (!fileInput.files.length) {
+                    alert('Please upload and edit a PDF file first.');
+                    return;
+                }
                 
-                // Create download link
-                const downloadLink = document.createElement('a');
-                downloadLink.href = '#';
-                downloadLink.className = 'btn btn-primary';
-                downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
-                downloadLink.style.marginLeft = '1rem';
+                // Show downloading animation
+                downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+                downloadBtn.disabled = true;
                 
-                // Add download link after button
-                downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
-                
-                // Reset button after 5 seconds
+                // Simulate download process
                 setTimeout(() => {
-                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
-                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
                     
-                    // Remove download link
-                    if (downloadLink.parentNode) {
-                        downloadLink.parentNode.removeChild(downloadLink);
-                    }
-                }, 5000);
-            }, 2000);
-        });
+                    // Create download link
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = '#';
+                    downloadLink.className = 'btn btn-primary';
+                    downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
+                    downloadLink.style.marginLeft = '1rem';
+                    
+                    // Add download link after button
+                    downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
+                    
+                    // Reset button after 5 seconds
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                        downloadBtn.disabled = false;
+                        
+                        // Remove download link
+                        if (downloadLink.parentNode) {
+                            downloadLink.parentNode.removeChild(downloadLink);
+                        }
+                    }, 5000);
+                }, 2000);
+            });
+        }
 
         // Reset button click
-        resetBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to reset all changes?')) {
-                // Reset UI
-                toolButtons.forEach(btn => btn.classList.remove('active'));
-                document.querySelector('[data-tool="text-edit"]').classList.add('active');
-                
-                // Show reset message
-                const pdfPreview = document.querySelector('.pdf-preview');
-                if (pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
-                    pdfPreview.innerHTML = `
-                        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                            <h3>Changes Reset</h3>
-                            <p>All edits have been reset. Your original file is unchanged.</p>
-                            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
-                                <p><strong>File:</strong> ${fileName.textContent}</p>
-                                <p><strong>Size:</strong> ${fileSize.textContent}</p>
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset all changes?')) {
+                    // Reset UI
+                    toolButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-tool="text-edit"]').classList.add('active');
+                    
+                    // Show reset message
+                    const pdfPreview = document.querySelector('.pdf-preview');
+                    if (pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
+                        pdfPreview.innerHTML = `
+                            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                                <h3>Changes Reset</h3>
+                                <p>All edits have been reset. Your original file is unchanged.</p>
+                                <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
+                                    <p><strong>File:</strong> ${fileName.textContent}</p>
+                                    <p><strong>Size:</strong> ${fileSize.textContent}</p>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        // Page navigation buttons
+        if (prevPageBtn) {
+            prevPageBtn.addEventListener('click', () => {
+                alert('Previous page functionality would be implemented here');
+            });
+        }
+
+        if (nextPageBtn) {
+            nextPageBtn.addEventListener('click', () => {
+                alert('Next page functionality would be implemented here');
+            });
+        }
 
         // FAQ toggle functionality
         const faqQuestions = document.querySelectorAll('.faq-question');
@@ -2313,12 +2370,30 @@
         });
 
         // Advanced feature buttons
-        const advancedFeatureButtons = document.querySelectorAll('.feature-card .btn');
+        const advancedFeatureButtons = [
+            document.getElementById('ai-ocr-btn'),
+            document.getElementById('batch-edit-btn'),
+            document.getElementById('formatting-btn'),
+            document.getElementById('ai-editing-btn')
+        ];
         
         advancedFeatureButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert("This is a premium feature. Upgrade to Pro to access all advanced editing tools.");
+            if (button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert("This is a premium feature. Upgrade to Pro to access all advanced editing tools.");
+                });
+            }
+        });
+
+        // Tool link cards
+        const toolLinkCards = document.querySelectorAll('.tool-link-card');
+        toolLinkCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    alert(`This tool would navigate to: ${this.querySelector('.tool-link-title').textContent}`);
+                }
             });
         });
     </script>
