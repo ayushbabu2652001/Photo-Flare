@@ -2005,7 +2005,7 @@
         imageCanvas.addEventListener('mouseup', endDrag);
         imageCanvas.addEventListener('mouseleave', endDrag);
         
-        // Touch events for mobile
+        // Touch events for mobile - FIXED: Added proper touch event handling
         imageCanvas.addEventListener('touchstart', handleTouchStart, { passive: false });
         imageCanvas.addEventListener('touchmove', handleTouchMove, { passive: false });
         imageCanvas.addEventListener('touchend', handleTouchEnd);
@@ -2124,7 +2124,8 @@
             canvasContext.save();
             
             // Apply transformations (rotation, flip)
-            canvasContext.translate(imageCanvas.width / 2, imageCanvas.height / 2);
+            canvasContext.translate(canvasOffset.x + originalImage.width * canvasScale / 2, 
+                                   canvasOffset.y + originalImage.height * canvasScale / 2);
             
             if (cropData.flipHorizontal) {
                 canvasContext.scale(-1, 1);
@@ -2139,8 +2140,8 @@
             // Draw image
             canvasContext.drawImage(
                 originalImage,
-                -originalImage.width * canvasScale / 2 + canvasOffset.x,
-                -originalImage.height * canvasScale / 2 + canvasOffset.y,
+                -originalImage.width * canvasScale / 2,
+                -originalImage.height * canvasScale / 2,
                 originalImage.width * canvasScale,
                 originalImage.height * canvasScale
             );
@@ -2276,8 +2277,8 @@
         function startDrag(e) {
             e.preventDefault();
             const rect = imageCanvas.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / canvasScale;
-            const y = (e.clientY - rect.top) / canvasScale;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
             // Convert to image coordinates
             const imgX = (x - canvasOffset.x) / canvasScale;
@@ -2304,8 +2305,8 @@
             
             e.preventDefault();
             const rect = imageCanvas.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / canvasScale;
-            const y = (e.clientY - rect.top) / canvasScale;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
             // Convert to image coordinates
             const imgX = (x - canvasOffset.x) / canvasScale;
@@ -2338,8 +2339,8 @@
             if (e.touches.length === 1) {
                 const touch = e.touches[0];
                 const rect = imageCanvas.getBoundingClientRect();
-                const x = (touch.clientX - rect.left) / canvasScale;
-                const y = (touch.clientY - rect.top) / canvasScale;
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
                 
                 // Convert to image coordinates
                 const imgX = (x - canvasOffset.x) / canvasScale;
@@ -2369,8 +2370,8 @@
             if (e.touches.length === 1) {
                 const touch = e.touches[0];
                 const rect = imageCanvas.getBoundingClientRect();
-                const x = (touch.clientX - rect.left) / canvasScale;
-                const y = (touch.clientY - rect.top) / canvasScale;
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
                 
                 // Convert to image coordinates
                 const imgX = (x - canvasOffset.x) / canvasScale;
@@ -2537,6 +2538,9 @@
 
         function rotateImage(degrees) {
             cropData.rotation += degrees;
+            // Update the slider and value display
+            rotationSlider.value = cropData.rotation;
+            rotationValue.textContent = `${cropData.rotation}°`;
             drawCanvas();
         }
 
@@ -2652,6 +2656,7 @@
             fileInfo.classList.remove('active');
             previewContainer.style.display = 'none';
             emptyState.style.display = 'flex';
+            cropArea.style.display = 'none';
             originalFile = null;
             
             // Reset crop data
@@ -2672,6 +2677,9 @@
             dimensionControls.style.display = 'none';
             rotationSlider.value = 0;
             rotationValue.textContent = '0°';
+            
+            // Clear canvas
+            canvasContext.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
         }
 
         function shareResults() {
