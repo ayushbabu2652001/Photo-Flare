@@ -1981,61 +1981,101 @@
         let originalHeight = 0;
 
         // Event Listeners
-        browseBtn.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', handleDragOver);
-        uploadArea.addEventListener('drop', handleDrop);
-        fileInput.addEventListener('change', handleFileSelect);
-        qualitySlider.addEventListener('input', updateQualityDisplay);
-        compressionLevel.addEventListener('input', updateCompressionDisplay);
-        convertBtn.addEventListener('click', convertImage);
-        downloadBtn.addEventListener('click', downloadConvertedImage);
-        convertAnotherBtn.addEventListener('click', resetTool);
-        shareBtn.addEventListener('click', shareResults);
-        addBatchBtn.addEventListener('click', () => fileInput.click());
-        convertBatchBtn.addEventListener('click', convertBatch);
-        downloadAllBtn.addEventListener('click', downloadBatch);
-        newBatchBtn.addEventListener('click', resetBatch);
+        if (browseBtn) {
+            browseBtn.addEventListener('click', () => fileInput.click());
+        }
+        
+        if (uploadArea) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('drop', handleDrop);
+        }
+        
+        if (fileInput) {
+            fileInput.addEventListener('change', handleFileSelect);
+        }
+        
+        if (qualitySlider) {
+            qualitySlider.addEventListener('input', updateQualityDisplay);
+        }
+        
+        if (compressionLevel) {
+            compressionLevel.addEventListener('input', updateCompressionDisplay);
+        }
+        
+        if (convertBtn) {
+            convertBtn.addEventListener('click', convertImage);
+        }
+        
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', downloadConvertedImage);
+        }
+        
+        if (convertAnotherBtn) {
+            convertAnotherBtn.addEventListener('click', resetTool);
+        }
+        
+        if (shareBtn) {
+            shareBtn.addEventListener('click', shareResults);
+        }
+        
+        if (addBatchBtn) {
+            addBatchBtn.addEventListener('click', () => fileInput.click());
+        }
+        
+        if (convertBatchBtn) {
+            convertBatchBtn.addEventListener('click', convertBatch);
+        }
+        
+        if (downloadAllBtn) {
+            downloadAllBtn.addEventListener('click', downloadBatch);
+        }
+        
+        if (newBatchBtn) {
+            newBatchBtn.addEventListener('click', resetBatch);
+        }
 
         // Format selection
-        formatOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                // Don't allow selection of premium formats for free users
-                const format = option.getAttribute('data-format');
-                if (format === 'avif') {
-                    alert('AVIF conversion is a Pro feature. Please upgrade to access this format.');
-                    return;
-                }
-                
-                formatOptions.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-                selectedFormat = format;
-                
-                // Show/hide relevant settings
-                if (format === 'png') {
-                    pngSettings.style.display = 'block';
-                } else {
-                    pngSettings.style.display = 'none';
-                }
-                
-                // Adjust quality slider for different formats
-                if (format === 'jpg' || format === 'webp') {
-                    qualitySlider.disabled = false;
-                } else if (format === 'gif') {
-                    qualitySlider.value = 80;
-                    updateQualityDisplay();
-                    qualitySlider.disabled = true;
-                } else {
-                    // PNG, BMP, TIFF - lossless formats
-                    qualitySlider.value = 100;
-                    updateQualityDisplay();
-                    qualitySlider.disabled = true;
-                }
+        if (formatOptions.length > 0) {
+            formatOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Don't allow selection of premium formats for free users
+                    const format = option.getAttribute('data-format');
+                    if (format === 'avif') {
+                        alert('AVIF conversion is a Pro feature. Please upgrade to access this format.');
+                        return;
+                    }
+                    
+                    formatOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    selectedFormat = format;
+                    
+                    // Show/hide relevant settings
+                    if (format === 'png') {
+                        pngSettings.style.display = 'block';
+                    } else {
+                        pngSettings.style.display = 'none';
+                    }
+                    
+                    // Adjust quality slider for different formats
+                    if (format === 'jpg' || format === 'webp') {
+                        qualitySlider.disabled = false;
+                    } else if (format === 'gif') {
+                        qualitySlider.value = 80;
+                        updateQualityDisplay();
+                        qualitySlider.disabled = true;
+                    } else {
+                        // PNG, BMP, TIFF - lossless formats
+                        qualitySlider.value = 100;
+                        updateQualityDisplay();
+                        qualitySlider.disabled = true;
+                    }
+                });
             });
-        });
 
-        // Initialize with JPG selected
-        document.querySelector('.format-option[data-format="jpg"]').classList.add('selected');
+            // Initialize with JPG selected
+            document.querySelector('.format-option[data-format="jpg"]').classList.add('selected');
+        }
 
         // Functions
         function handleDragOver(e) {
@@ -2111,6 +2151,9 @@
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
+            
+            // Reset the file input to allow selecting the same file again
+            fileInput.value = '';
         }
 
         function handleBatchFiles(files) {
@@ -2276,8 +2319,8 @@
                 // Create converted image data URL (simulated)
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                canvas.width = beforeImage.naturalWidth;
-                canvas.height = beforeImage.naturalHeight;
+                canvas.width = originalWidth;
+                canvas.height = originalHeight;
                 ctx.drawImage(beforeImage, 0, 0);
                 
                 // Apply format-specific conversion
@@ -2371,16 +2414,22 @@
             emptyState.style.display = 'block';
             originalFile = null;
             convertedFile = null;
-            qualitySlider.value = 90;
-            updateQualityDisplay();
-            compressionLevel.value = 6;
-            updateCompressionDisplay();
+            if (qualitySlider) {
+                qualitySlider.value = 90;
+                updateQualityDisplay();
+            }
+            if (compressionLevel) {
+                compressionLevel.value = 6;
+                updateCompressionDisplay();
+            }
             
             // Reset format selection to JPG
-            formatOptions.forEach(opt => opt.classList.remove('selected'));
-            document.querySelector('.format-option[data-format="jpg"]').classList.add('selected');
-            selectedFormat = 'jpg';
-            pngSettings.style.display = 'none';
+            if (formatOptions.length > 0) {
+                formatOptions.forEach(opt => opt.classList.remove('selected'));
+                document.querySelector('.format-option[data-format="jpg"]').classList.add('selected');
+                selectedFormat = 'jpg';
+                pngSettings.style.display = 'none';
+            }
         }
 
         function resetBatch() {
@@ -2410,13 +2459,32 @@
         }
 
         // Initialize
-        updateQualityDisplay();
-        updateCompressionDisplay();
+        if (qualitySlider) {
+            updateQualityDisplay();
+        }
+        
+        if (compressionLevel) {
+            updateCompressionDisplay();
+        }
         
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+        
+        // Fix for tooltip positioning
+        document.addEventListener('mousemove', function(e) {
+            const tooltips = document.querySelectorAll('.tooltip');
+            tooltips.forEach(tooltip => {
+                const tooltipText = tooltip.querySelector('.tooltiptext');
+                if (tooltipText) {
+                    // Update tooltip position based on mouse position
+                    const rect = tooltip.getBoundingClientRect();
+                    tooltipText.style.left = '50%';
+                    tooltipText.style.transform = 'translateX(-50%)';
+                }
+            });
+        });
     </script>
 </body>
 </html>
