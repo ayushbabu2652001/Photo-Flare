@@ -1738,6 +1738,10 @@
             };
         }
 
+        // Variables for upload progress
+        let progressInterval;
+        let currentFile = null;
+
         // Sidebar functionality
         const mobileNavBtn = document.getElementById('mobileNavBtn');
         const sidebar = document.getElementById('sidebar');
@@ -1798,8 +1802,9 @@
         browseBtn.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
         uploadArea.addEventListener('drop', handleDrop);
-        fileInput.addEventListener('change', handleFileSelect);
+        fileInput.addEventListener('change', handleFileInputChange);
         removeFile.addEventListener('click', resetFile);
         convertBtn.addEventListener('click', convertToPdf);
         resetBtn.addEventListener('click', resetAll);
@@ -1837,19 +1842,34 @@
             e.preventDefault();
             e.stopPropagation();
             uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
+            uploadArea.style.borderColor = 'var(--primary-dark)';
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+            uploadArea.style.borderColor = 'var(--primary)';
         }
 
         function handleDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+            uploadArea.style.borderColor = 'var(--primary)';
             
             if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                handleFileSelect(e.dataTransfer.files[0]);
+                handleFile(e.dataTransfer.files[0]);
             }
         }
 
-        function handleFileSelect(file) {
+        function handleFileInputChange(e) {
+            if (e.target.files && e.target.files[0]) {
+                handleFile(e.target.files[0]);
+            }
+        }
+
+        function handleFile(file) {
             const validTypes = [
                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                 'application/vnd.ms-excel',
@@ -1866,19 +1886,29 @@
                 return;
             }
 
+            // Store the current file
+            currentFile = file;
+
             // Show file info
             fileName.textContent = file.name;
             fileSize.textContent = formatFileSize(file.size);
             fileInfo.classList.add('active');
             convertBtn.disabled = false;
 
+            // Clear any existing interval
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
             // Simulate upload progress
             let progress = 0;
-            const interval = setInterval(() => {
+            uploadProgress.style.width = '0%';
+            
+            progressInterval = setInterval(() => {
                 progress += Math.random() * 10;
                 if (progress >= 100) {
                     progress = 100;
-                    clearInterval(interval);
+                    clearInterval(progressInterval);
                     // Show preview section after upload
                     previewSection.classList.add('active');
                     
@@ -1917,6 +1947,12 @@
             convertBtn.disabled = true;
             previewSection.classList.remove('active');
             uploadProgress.style.width = '0%';
+            currentFile = null;
+            
+            // Clear any existing interval
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
         }
 
         function resetAll() {
@@ -1932,9 +1968,23 @@
             document.getElementById('pageSize').value = 'a4';
             document.getElementById('marginSize').value = 'normal';
             document.getElementById('scale').value = '100';
+            
+            // Reset preview tabs to Excel
+            previewTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-tab="excel"]').classList.add('active');
+            previewTabContents.forEach(c => c.classList.remove('active'));
+            document.getElementById('excelTab').classList.add('active');
+            
+            // Reset download button text
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF File';
         }
 
         function convertToPdf() {
+            if (!currentFile) {
+                alert('Please select a file first.');
+                return;
+            }
+
             // Show loading state
             loadingIndicator.classList.add('active');
             convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
