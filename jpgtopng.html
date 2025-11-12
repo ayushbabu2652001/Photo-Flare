@@ -1773,519 +1773,528 @@
             };
         }
 
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
+        // DOM ready function
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar functionality
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
 
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                });
+            }
+
+            // Close sidebar
+            function closeSidebar() {
+                if (sidebar) sidebar.classList.remove('active');
+                if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
             });
-        }
 
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
+            // DOM Elements for JPG to PNG Converter
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const browseBtn = document.getElementById('browseBtn');
+            const sampleBtn = document.getElementById('sampleBtn');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const fileDimensions = document.getElementById('fileDimensions');
+            const fileType = document.getElementById('fileType');
+            const qualitySlider = document.getElementById('qualitySlider');
+            const qualityDisplay = document.getElementById('qualityDisplay');
+            const qualityValue = document.getElementById('qualityValue');
+            const backgroundColor = document.getElementById('backgroundColor');
+            const preserveTransparency = document.getElementById('preserveTransparency');
+            const removeMetadata = document.getElementById('removeMetadata');
+            const optimizeSize = document.getElementById('optimizeSize');
+            const convertBtn = document.getElementById('convertBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const singlePreview = document.getElementById('singlePreview');
+            const batchPreview = document.getElementById('batchPreview');
+            const emptyState = document.getElementById('emptyState');
+            const comparisonContainer = document.getElementById('comparisonContainer');
+            const beforeImage = document.getElementById('beforeImage');
+            const afterImage = document.getElementById('afterImage');
+            const originalSize = document.getElementById('originalSize');
+            const convertedSize = document.getElementById('convertedSize');
+            const savingsPercent = document.getElementById('savingsPercent');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const convertAnotherBtn = document.getElementById('convertAnotherBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const batchFiles = document.getElementById('batchFiles');
+            const addBatchBtn = document.getElementById('addBatchBtn');
+            const convertBatchBtn = document.getElementById('convertBatchBtn');
+            const downloadAllBtn = document.getElementById('downloadAllBtn');
+            const newBatchBtn = document.getElementById('newBatchBtn');
+            const totalFiles = document.getElementById('totalFiles');
+            const totalSavings = document.getElementById('totalSavings');
+            const totalSize = document.getElementById('totalSize');
 
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
+            // Global variables
+            let originalFile = null;
+            let convertedFile = null;
+            let originalImageData = null;
+            let batchFilesList = [];
+            let isBatchMode = false;
+            let originalWidth = 0;
+            let originalHeight = 0;
 
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-
-        // DOM Elements for JPG to PNG Converter
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const browseBtn = document.getElementById('browseBtn');
-        const sampleBtn = document.getElementById('sampleBtn');
-        const fileInfo = document.getElementById('fileInfo');
-        const fileName = document.getElementById('fileName');
-        const fileSize = document.getElementById('fileSize');
-        const fileDimensions = document.getElementById('fileDimensions');
-        const fileType = document.getElementById('fileType');
-        const qualitySlider = document.getElementById('qualitySlider');
-        const qualityDisplay = document.getElementById('qualityDisplay');
-        const qualityValue = document.getElementById('qualityValue');
-        const backgroundColor = document.getElementById('backgroundColor');
-        const preserveTransparency = document.getElementById('preserveTransparency');
-        const removeMetadata = document.getElementById('removeMetadata');
-        const optimizeSize = document.getElementById('optimizeSize');
-        const convertBtn = document.getElementById('convertBtn');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const singlePreview = document.getElementById('singlePreview');
-        const batchPreview = document.getElementById('batchPreview');
-        const emptyState = document.getElementById('emptyState');
-        const comparisonContainer = document.getElementById('comparisonContainer');
-        const beforeImage = document.getElementById('beforeImage');
-        const afterImage = document.getElementById('afterImage');
-        const originalSize = document.getElementById('originalSize');
-        const convertedSize = document.getElementById('convertedSize');
-        const savingsPercent = document.getElementById('savingsPercent');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const convertAnotherBtn = document.getElementById('convertAnotherBtn');
-        const shareBtn = document.getElementById('shareBtn');
-        const batchFiles = document.getElementById('batchFiles');
-        const addBatchBtn = document.getElementById('addBatchBtn');
-        const convertBatchBtn = document.getElementById('convertBatchBtn');
-        const downloadAllBtn = document.getElementById('downloadAllBtn');
-        const newBatchBtn = document.getElementById('newBatchBtn');
-        const totalFiles = document.getElementById('totalFiles');
-        const totalSavings = document.getElementById('totalSavings');
-        const totalSize = document.getElementById('totalSize');
-
-        // Global variables
-        let originalFile = null;
-        let convertedFile = null;
-        let originalImageData = null;
-        let batchFilesList = [];
-        let isBatchMode = false;
-        let originalWidth = 0;
-        let originalHeight = 0;
-
-        // Event Listeners
-        browseBtn.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', handleDragOver);
-        uploadArea.addEventListener('drop', handleDrop);
-        fileInput.addEventListener('change', handleFileSelect);
-        sampleBtn.addEventListener('click', loadSampleImage);
-        qualitySlider.addEventListener('input', updateQualityDisplay);
-        convertBtn.addEventListener('click', convertToPNG);
-        downloadBtn.addEventListener('click', downloadPNG);
-        convertAnotherBtn.addEventListener('click', resetTool);
-        shareBtn.addEventListener('click', shareResults);
-        addBatchBtn.addEventListener('click', () => fileInput.click());
-        convertBatchBtn.addEventListener('click', convertBatch);
-        downloadAllBtn.addEventListener('click', downloadBatch);
-        newBatchBtn.addEventListener('click', resetBatch);
-
-        // Initialize comparison slider
-        initComparisonSlider();
-
-        // Functions
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
-            
-            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                if (isBatchMode) {
-                    handleBatchFiles(e.dataTransfer.files);
-                } else {
-                    handleFile(e.dataTransfer.files[0]);
-                }
+            // Event Listeners
+            if (browseBtn) browseBtn.addEventListener('click', () => fileInput.click());
+            if (uploadArea) {
+                uploadArea.addEventListener('click', () => fileInput.click());
+                uploadArea.addEventListener('dragover', handleDragOver);
+                uploadArea.addEventListener('drop', handleDrop);
             }
-        }
+            if (fileInput) fileInput.addEventListener('change', handleFileSelect);
+            if (sampleBtn) sampleBtn.addEventListener('click', loadSampleImage);
+            if (qualitySlider) qualitySlider.addEventListener('input', updateQualityDisplay);
+            if (convertBtn) convertBtn.addEventListener('click', convertToPNG);
+            if (downloadBtn) downloadBtn.addEventListener('click', downloadPNG);
+            if (convertAnotherBtn) convertAnotherBtn.addEventListener('click', resetTool);
+            if (shareBtn) shareBtn.addEventListener('click', shareResults);
+            if (addBatchBtn) addBatchBtn.addEventListener('click', () => fileInput.click());
+            if (convertBatchBtn) convertBatchBtn.addEventListener('click', convertBatch);
+            if (downloadAllBtn) downloadAllBtn.addEventListener('click', downloadBatch);
+            if (newBatchBtn) newBatchBtn.addEventListener('click', resetBatch);
 
-        function handleFileSelect(e) {
-            if (e.target.files && e.target.files[0]) {
-                if (isBatchMode) {
-                    handleBatchFiles(e.target.files);
-                } else {
-                    handleFile(e.target.files[0]);
-                }
+            // Initialize comparison slider
+            initComparisonSlider();
+
+            // Functions
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
             }
-        }
 
-        function handleFile(file) {
-            if (!isValidJPG(file)) {
-                alert('Please select a valid JPG file (JPG, JPEG, JPE, JIF, JFIF, JFI).');
-                return;
-            }
-            
-            // Check file size (10MB limit for free users)
-            if (file.size > 10 * 1024 * 1024) {
-                alert('File size exceeds 10MB limit. Please upgrade to Pro for larger files.');
-                return;
-            }
-            
-            originalFile = file;
-            updateFileInfo(file);
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    originalWidth = img.width;
-                    originalHeight = img.height;
-                    fileDimensions.textContent = `${img.width} × ${img.height}`;
-                    
-                    // Store original image data for conversion
-                    originalImageData = e.target.result;
-                    
-                    // Show preview
-                    beforeImage.src = e.target.result;
-                    afterImage.src = e.target.result;
-                    
-                    // Show single preview and hide empty state
-                    emptyState.style.display = 'none';
-                    singlePreview.style.display = 'block';
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function loadSampleImage() {
-            // Create a sample JPG image using canvas
-            const canvas = document.createElement('canvas');
-            canvas.width = 800;
-            canvas.height = 600;
-            const ctx = canvas.getContext('2d');
-            
-            // Create gradient background
-            const gradient = ctx.createLinearGradient(0, 0, 800, 600);
-            gradient.addColorStop(0, '#4361ee');
-            gradient.addColorStop(0.5, '#7209b7');
-            gradient.addColorStop(1, '#f72585');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 800, 600);
-            
-            // Draw some shapes
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-            ctx.beginPath();
-            ctx.arc(200, 200, 100, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.beginPath();
-            ctx.arc(600, 400, 80, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-            ctx.fillRect(300, 150, 300, 150);
-            
-            // Add text
-            ctx.fillStyle = '#212529';
-            ctx.font = 'bold 40px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Photo Flare', 400, 350);
-            ctx.font = '20px Arial';
-            ctx.fillText('JPG to PNG Converter', 400, 380);
-            
-            // Convert to JPG data URL
-            canvas.toBlob(function(blob) {
-                const file = new File([blob], 'sample-image.jpg', { type: 'image/jpeg' });
-                handleFile(file);
-            }, 'image/jpeg', 0.9);
-        }
-
-        function isValidJPG(file) {
-            const validTypes = ['image/jpeg', 'image/jpg', 'image/jpe', 'image/jif', 'image/jfif', 'image/jfi'];
-            return validTypes.includes(file.type);
-        }
-
-        function handleBatchFiles(files) {
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
+            function handleDrop(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
                 
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    if (isBatchMode) {
+                        handleBatchFiles(e.dataTransfer.files);
+                    } else {
+                        handleFile(e.dataTransfer.files[0]);
+                    }
+                }
+            }
+
+            function handleFileSelect(e) {
+                if (e.target.files && e.target.files[0]) {
+                    if (isBatchMode) {
+                        handleBatchFiles(e.target.files);
+                    } else {
+                        handleFile(e.target.files[0]);
+                    }
+                }
+            }
+
+            function handleFile(file) {
                 if (!isValidJPG(file)) {
-                    continue;
+                    alert('Please select a valid JPG file (JPG, JPEG, JPE, JIF, JFIF, JFI).');
+                    return;
                 }
                 
                 // Check file size (10MB limit for free users)
                 if (file.size > 10 * 1024 * 1024) {
-                    alert(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`);
-                    continue;
+                    alert('File size exceeds 10MB limit. Please upgrade to Pro for larger files.');
+                    return;
                 }
                 
-                // Add to batch if not already added
-                if (!batchFilesList.some(f => f.name === file.name && f.size === file.size)) {
-                    batchFilesList.push(file);
-                    addBatchFilePreview(file);
+                originalFile = file;
+                updateFileInfo(file);
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        originalWidth = img.width;
+                        originalHeight = img.height;
+                        fileDimensions.textContent = `${img.width} × ${img.height}`;
+                        
+                        // Store original image data for conversion
+                        originalImageData = e.target.result;
+                        
+                        // Show preview
+                        beforeImage.src = e.target.result;
+                        afterImage.src = e.target.result;
+                        
+                        // Show single preview and hide empty state
+                        emptyState.style.display = 'none';
+                        singlePreview.style.display = 'block';
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function loadSampleImage() {
+                // Create a sample JPG image using canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 600;
+                const ctx = canvas.getContext('2d');
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+                gradient.addColorStop(0, '#4361ee');
+                gradient.addColorStop(0.5, '#7209b7');
+                gradient.addColorStop(1, '#f72585');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 800, 600);
+                
+                // Draw some shapes
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.beginPath();
+                ctx.arc(200, 200, 100, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(600, 400, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.fillRect(300, 150, 300, 150);
+                
+                // Add text
+                ctx.fillStyle = '#212529';
+                ctx.font = 'bold 40px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Photo Flare', 400, 350);
+                ctx.font = '20px Arial';
+                ctx.fillText('JPG to PNG Converter', 400, 380);
+                
+                // Convert to JPG data URL
+                canvas.toBlob(function(blob) {
+                    const file = new File([blob], 'sample-image.jpg', { type: 'image/jpeg' });
+                    handleFile(file);
+                }, 'image/jpeg', 0.9);
+            }
+
+            function isValidJPG(file) {
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/jpe', 'image/jif', 'image/jfif', 'image/jfi'];
+                return validTypes.includes(file.type);
+            }
+
+            function handleBatchFiles(files) {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    if (!isValidJPG(file)) {
+                        continue;
+                    }
+                    
+                    // Check file size (10MB limit for free users)
+                    if (file.size > 10 * 1024 * 1024) {
+                        alert(`File "${file.name}" exceeds 10MB limit. Please upgrade to Pro for larger files.`);
+                        continue;
+                    }
+                    
+                    // Add to batch if not already added
+                    if (!batchFilesList.some(f => f.name === file.name && f.size === file.size)) {
+                        batchFilesList.push(file);
+                        addBatchFilePreview(file);
+                    }
+                }
+                
+                // Update batch UI
+                updateBatchUI();
+            }
+
+            function addBatchFilePreview(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const batchFileElement = document.createElement('div');
+                    batchFileElement.className = 'batch-file';
+                    batchFileElement.innerHTML = `
+                        <img src="${e.target.result}" alt="${file.name}">
+                        <div class="file-name">${file.name}</div>
+                        <div class="remove-file" data-filename="${file.name}">×</div>
+                    `;
+                    
+                    batchFiles.appendChild(batchFileElement);
+                    
+                    // Add remove event listener
+                    batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
+                        const filename = this.getAttribute('data-filename');
+                        removeBatchFile(filename);
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function removeBatchFile(filename) {
+                batchFilesList = batchFilesList.filter(file => file.name !== filename);
+                
+                // Remove from UI
+                const fileElements = batchFiles.querySelectorAll('.batch-file');
+                fileElements.forEach(element => {
+                    if (element.querySelector('.file-name').textContent === filename) {
+                        element.remove();
+                    }
+                });
+                
+                updateBatchUI();
+            }
+
+            function updateBatchUI() {
+                if (batchFilesList.length > 0) {
+                    addBatchBtn.disabled = false;
+                    convertBatchBtn.disabled = false;
+                    isBatchMode = true;
+                    
+                    // Show batch preview and hide single preview
+                    singlePreview.style.display = 'none';
+                    emptyState.style.display = 'none';
+                    batchPreview.style.display = 'block';
+                    
+                    totalFiles.textContent = batchFilesList.length;
+                } else {
+                    addBatchBtn.disabled = true;
+                    convertBatchBtn.disabled = true;
+                    isBatchMode = false;
+                    
+                    // Show empty state
+                    batchPreview.style.display = 'none';
+                    singlePreview.style.display = 'none';
+                    emptyState.style.display = 'block';
                 }
             }
-            
-            // Update batch UI
-            updateBatchUI();
-        }
 
-        function addBatchFilePreview(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const batchFileElement = document.createElement('div');
-                batchFileElement.className = 'batch-file';
-                batchFileElement.innerHTML = `
-                    <img src="${e.target.result}" alt="${file.name}">
-                    <div class="file-name">${file.name}</div>
-                    <div class="remove-file" data-filename="${file.name}">×</div>
-                `;
-                
-                batchFiles.appendChild(batchFileElement);
-                
-                // Add remove event listener
-                batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
-                    const filename = this.getAttribute('data-filename');
-                    removeBatchFile(filename);
-                });
-            };
-            reader.readAsDataURL(file);
-        }
+            function updateFileInfo(file) {
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileType.textContent = file.type.split('/')[1].toUpperCase();
+                fileInfo.classList.add('active');
+            }
 
-        function removeBatchFile(filename) {
-            batchFilesList = batchFilesList.filter(file => file.name !== filename);
-            
-            // Remove from UI
-            const fileElements = batchFiles.querySelectorAll('.batch-file');
-            fileElements.forEach(element => {
-                if (element.querySelector('.file-name').textContent === filename) {
-                    element.remove();
+            function updateQualityDisplay() {
+                const value = qualitySlider.value;
+                qualityDisplay.textContent = `${value}%`;
+                qualityValue.textContent = `${value}%`;
+            }
+
+            function convertToPNG() {
+                if (!originalFile) {
+                    alert('Please select an image first');
+                    return;
                 }
-            });
-            
-            updateBatchUI();
-        }
+                
+                loadingIndicator.classList.add('active');
+                
+                // Simulate conversion process
+                setTimeout(() => {
+                    const quality = parseInt(qualitySlider.value) / 100;
+                    
+                    // Create canvas for conversion
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = beforeImage.naturalWidth;
+                    canvas.height = beforeImage.naturalHeight;
+                    
+                    // Apply background color if transparency is not preserved
+                    if (!preserveTransparency.checked) {
+                        ctx.fillStyle = backgroundColor.value;
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    }
+                    
+                    // Draw the image
+                    ctx.drawImage(beforeImage, 0, 0);
+                    
+                    // Get PNG data URL
+                    convertedFile = canvas.toDataURL('image/png', quality);
+                    
+                    // Calculate file sizes (simulated)
+                    const originalSizeValue = originalFile.size;
+                    const convertedSizeValue = Math.round(originalSizeValue * 1.2); // PNG is typically larger than JPG
+                    const savings = Math.round((1 - convertedSizeValue / originalSizeValue) * 100);
+                    
+                    // Update UI with results
+                    originalSize.textContent = formatFileSize(originalSizeValue);
+                    convertedSize.textContent = formatFileSize(convertedSizeValue);
+                    savingsPercent.textContent = `${savings > 0 ? '+' : ''}${savings}%`;
+                    if (savings > 0) {
+                        savingsPercent.style.color = 'var(--danger)';
+                    } else {
+                        savingsPercent.style.color = 'var(--success)';
+                    }
+                    
+                    afterImage.src = convertedFile;
+                    
+                    loadingIndicator.classList.remove('active');
+                }, 1500);
+            }
 
-        function updateBatchUI() {
-            if (batchFilesList.length > 0) {
-                addBatchBtn.disabled = false;
-                convertBatchBtn.disabled = false;
-                isBatchMode = true;
+            function convertBatch() {
+                if (batchFilesList.length === 0) {
+                    alert('Please add images to convert');
+                    return;
+                }
                 
-                // Show batch preview and hide single preview
-                singlePreview.style.display = 'none';
-                emptyState.style.display = 'none';
-                batchPreview.style.display = 'block';
+                loadingIndicator.classList.add('active');
                 
-                totalFiles.textContent = batchFilesList.length;
-            } else {
-                addBatchBtn.disabled = true;
-                convertBatchBtn.disabled = true;
-                isBatchMode = false;
+                // Simulate batch conversion
+                setTimeout(() => {
+                    // Calculate batch results (simulated)
+                    const totalOriginalSize = batchFilesList.reduce((sum, file) => sum + file.size, 0);
+                    const totalConvertedSize = Math.round(totalOriginalSize * 1.2); // PNG is typically larger than JPG
+                    const averageSavings = Math.round((1 - totalConvertedSize / totalOriginalSize) * 100);
+                    
+                    // Update batch results
+                    totalFiles.textContent = batchFilesList.length;
+                    totalSavings.textContent = `${averageSavings > 0 ? '+' : ''}${averageSavings}%`;
+                    if (averageSavings > 0) {
+                        totalSavings.style.color = 'var(--danger)';
+                    } else {
+                        totalSavings.style.color = 'var(--success)';
+                    }
+                    totalSize.textContent = formatFileSize(Math.abs(totalOriginalSize - totalConvertedSize));
+                    
+                    loadingIndicator.classList.remove('active');
+                }, 2000);
+            }
+
+            function downloadPNG() {
+                if (!convertedFile) {
+                    alert('No converted image available');
+                    return;
+                }
                 
-                // Show empty state
-                batchPreview.style.display = 'none';
+                const link = document.createElement('a');
+                link.download = `converted_${originalFile.name.split('.')[0]}.png`;
+                link.href = convertedFile;
+                link.click();
+            }
+
+            function downloadBatch() {
+                if (batchFilesList.length === 0) {
+                    alert('No converted images available');
+                    return;
+                }
+                
+                // In a real implementation, this would download a ZIP file with all converted images
+                alert('Batch download would start in a real implementation. This is a demo.');
+            }
+
+            function resetTool() {
+                fileInput.value = '';
+                fileInfo.classList.remove('active');
                 singlePreview.style.display = 'none';
                 emptyState.style.display = 'block';
+                originalFile = null;
+                convertedFile = null;
+                qualitySlider.value = 80;
+                updateQualityDisplay();
+                backgroundColor.value = '#ffffff';
+                preserveTransparency.checked = true;
+                removeMetadata.checked = false;
+                optimizeSize.checked = false;
             }
-        }
 
-        function updateFileInfo(file) {
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileType.textContent = file.type.split('/')[1].toUpperCase();
-            fileInfo.classList.add('active');
-        }
-
-        function updateQualityDisplay() {
-            const value = qualitySlider.value;
-            qualityDisplay.textContent = `${value}%`;
-            qualityValue.textContent = `${value}%`;
-        }
-
-        function convertToPNG() {
-            if (!originalFile) {
-                alert('Please select an image first');
-                return;
+            function resetBatch() {
+                batchFilesList = [];
+                batchFiles.innerHTML = '';
+                updateBatchUI();
             }
-            
-            loadingIndicator.classList.add('active');
-            
-            // Simulate conversion process
-            setTimeout(() => {
-                const quality = parseInt(qualitySlider.value) / 100;
-                
-                // Create canvas for conversion
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = beforeImage.naturalWidth;
-                canvas.height = beforeImage.naturalHeight;
-                
-                // Apply background color if transparency is not preserved
-                if (!preserveTransparency.checked) {
-                    ctx.fillStyle = backgroundColor.value;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            function shareResults() {
+                if (!convertedFile) {
+                    alert('No converted image available to share');
+                    return;
                 }
                 
-                // Draw the image
-                ctx.drawImage(beforeImage, 0, 0);
+                // In a real implementation, this would open a share dialog
+                alert('Share functionality would open in a real implementation. This is a demo.');
+            }
+
+            function initComparisonSlider() {
+                if (!comparisonContainer) return;
                 
-                // Get PNG data URL
-                convertedFile = canvas.toDataURL('image/png', quality);
+                const slider = comparisonContainer.querySelector('.comparison-slider');
+                if (!slider) return;
                 
-                // Calculate file sizes (simulated)
-                const originalSizeValue = originalFile.size;
-                const convertedSizeValue = Math.round(originalSizeValue * 1.2); // PNG is typically larger than JPG
-                const savings = Math.round((1 - convertedSizeValue / originalSizeValue) * 100);
+                let isResizing = false;
                 
-                // Update UI with results
-                originalSize.textContent = formatFileSize(originalSizeValue);
-                convertedSize.textContent = formatFileSize(convertedSizeValue);
-                savingsPercent.textContent = `${savings > 0 ? '+' : ''}${savings}%`;
-                if (savings > 0) {
-                    savingsPercent.style.color = 'var(--danger)';
-                } else {
-                    savingsPercent.style.color = 'var(--success)';
+                slider.addEventListener('mousedown', startResize);
+                document.addEventListener('mousemove', resize);
+                document.addEventListener('mouseup', stopResize);
+                
+                // Touch events for mobile
+                slider.addEventListener('touchstart', startResize);
+                document.addEventListener('touchmove', resize);
+                document.addEventListener('touchend', stopResize);
+                
+                function startResize(e) {
+                    isResizing = true;
+                    e.preventDefault();
                 }
                 
-                afterImage.src = convertedFile;
-                
-                loadingIndicator.classList.remove('active');
-            }, 1500);
-        }
-
-        function convertBatch() {
-            if (batchFilesList.length === 0) {
-                alert('Please add images to convert');
-                return;
-            }
-            
-            loadingIndicator.classList.add('active');
-            
-            // Simulate batch conversion
-            setTimeout(() => {
-                // Calculate batch results (simulated)
-                const totalOriginalSize = batchFilesList.reduce((sum, file) => sum + file.size, 0);
-                const totalConvertedSize = Math.round(totalOriginalSize * 1.2); // PNG is typically larger than JPG
-                const averageSavings = Math.round((1 - totalConvertedSize / totalOriginalSize) * 100);
-                
-                // Update batch results
-                totalFiles.textContent = batchFilesList.length;
-                totalSavings.textContent = `${averageSavings > 0 ? '+' : ''}${averageSavings}%`;
-                if (averageSavings > 0) {
-                    totalSavings.style.color = 'var(--danger)';
-                } else {
-                    totalSavings.style.color = 'var(--success)';
+                function resize(e) {
+                    if (!isResizing) return;
+                    
+                    let clientX;
+                    if (e.type === 'touchmove') {
+                        clientX = e.touches[0].clientX;
+                    } else {
+                        clientX = e.clientX;
+                    }
+                    
+                    const containerRect = comparisonContainer.getBoundingClientRect();
+                    const position = ((clientX - containerRect.left) / containerRect.width) * 100;
+                    const clampedPosition = Math.max(0, Math.min(100, position));
+                    
+                    comparisonContainer.querySelector('.comparison-after').style.width = `${100 - clampedPosition}%`;
+                    slider.style.left = `${clampedPosition}%`;
                 }
-                totalSize.textContent = formatFileSize(Math.abs(totalOriginalSize - totalConvertedSize));
                 
-                loadingIndicator.classList.remove('active');
-            }, 2000);
-        }
-
-        function downloadPNG() {
-            if (!convertedFile) {
-                alert('No converted image available');
-                return;
+                function stopResize() {
+                    isResizing = false;
+                }
             }
-            
-            const link = document.createElement('a');
-            link.download = `converted_${originalFile.name.split('.')[0]}.png`;
-            link.href = convertedFile;
-            link.click();
-        }
 
-        function downloadBatch() {
-            if (batchFilesList.length === 0) {
-                alert('No converted images available');
-                return;
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
             }
-            
-            // In a real implementation, this would download a ZIP file with all converted images
-            alert('Batch download would start in a real implementation. This is a demo.');
-        }
 
-        function resetTool() {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            singlePreview.style.display = 'none';
-            emptyState.style.display = 'block';
-            originalFile = null;
-            convertedFile = null;
-            qualitySlider.value = 80;
+            // Initialize
             updateQualityDisplay();
-            backgroundColor.value = '#ffffff';
-            preserveTransparency.checked = true;
-            removeMetadata.checked = false;
-            optimizeSize.checked = false;
-        }
 
-        function resetBatch() {
-            batchFilesList = [];
-            batchFiles.innerHTML = '';
-            updateBatchUI();
-        }
-
-        function shareResults() {
-            if (!convertedFile) {
-                alert('No converted image available to share');
-                return;
-            }
-            
-            // In a real implementation, this would open a share dialog
-            alert('Share functionality would open in a real implementation. This is a demo.');
-        }
-
-        function initComparisonSlider() {
-            const slider = comparisonContainer.querySelector('.comparison-slider');
-            let isResizing = false;
-            
-            slider.addEventListener('mousedown', startResize);
-            document.addEventListener('mousemove', resize);
-            document.addEventListener('mouseup', stopResize);
-            
-            // Touch events for mobile
-            slider.addEventListener('touchstart', startResize);
-            document.addEventListener('touchmove', resize);
-            document.addEventListener('touchend', stopResize);
-            
-            function startResize(e) {
-                isResizing = true;
-                e.preventDefault();
-            }
-            
-            function resize(e) {
-                if (!isResizing) return;
-                
-                let clientX;
-                if (e.type === 'touchmove') {
-                    clientX = e.touches[0].clientX;
-                } else {
-                    clientX = e.clientX;
-                }
-                
-                const containerRect = comparisonContainer.getBoundingClientRect();
-                const position = ((clientX - containerRect.left) / containerRect.width) * 100;
-                const clampedPosition = Math.max(0, Math.min(100, position));
-                
-                comparisonContainer.querySelector('.comparison-after').style.width = `${100 - clampedPosition}%`;
-                slider.style.left = `${clampedPosition}%`;
-            }
-            
-            function stopResize() {
-                isResizing = false;
-            }
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // Initialize
-        updateQualityDisplay();
-
-        // Reinitialize on window resize
-        window.addEventListener('resize', debounce(() => {
-            // Any responsive adjustments needed
-        }, 250));
+            // Reinitialize on window resize
+            window.addEventListener('resize', debounce(() => {
+                // Any responsive adjustments needed
+            }, 250));
+        });
     </script>
 </body>
 </html>
