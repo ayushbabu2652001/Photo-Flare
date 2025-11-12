@@ -2135,8 +2135,21 @@
             uploadSection.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+                const droppedFiles = Array.from(e.dataTransfer.files);
+                const pdfFiles = droppedFiles.filter(file => file.type === 'application/pdf');
+                
+                if (pdfFiles.length === 0) {
+                    alert('Please drop PDF files only.');
+                    return;
+                }
+                
+                files = [...files, ...pdfFiles];
+                updateFileList();
+                updateFileInfo();
+                analyzeBtn.disabled = files.length === 0;
+                
+                // Show file info section
+                fileInfo.classList.add('active');
             }
         });
 
@@ -2291,6 +2304,12 @@
             analyzeBtn.disabled = files.length === 0;
             convertBtn.disabled = true;
             tablePreview.classList.remove('active');
+            
+            // Also reset conversion results if no files
+            if (files.length === 0) {
+                resultsSection.classList.remove('active');
+                conversionResults = [];
+            }
         }
         
         function analyzePDF() {
@@ -2321,6 +2340,12 @@
         }
         
         function generateTablePreview() {
+            if (tables.length === 0) {
+                // If no tables, show a message and return
+                tablePreview.classList.remove('active');
+                return;
+            }
+
             // Generate mock table data for demonstration
             tables = [{
                 name: "Financial Data",
