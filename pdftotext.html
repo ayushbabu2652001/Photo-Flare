@@ -678,6 +678,11 @@
             transition: var(--transition);
             padding: 0.3rem;
             border-radius: 4px;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .file-action:hover {
@@ -768,6 +773,7 @@
             font-size: 0.95rem;
             color: var(--dark);
             transition: var(--transition);
+            min-height: 44px;
         }
 
         .select-input:focus {
@@ -1023,6 +1029,7 @@
             align-items: center;
             font-weight: 600;
             color: var(--dark);
+            min-height: 44px;
         }
 
         .faq-answer {
@@ -1254,6 +1261,7 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            min-height: 44px;
         }
 
         .text-action:hover {
@@ -2172,6 +2180,7 @@
         const resultsGrid = document.getElementById('resultsGrid');
         const optionCards = document.querySelectorAll('.option-card');
         const textOptions = document.querySelectorAll('.text-option');
+        const faqItems = document.querySelectorAll('.faq-item');
 
         // State variables
         let files = [];
@@ -2228,8 +2237,7 @@ Note: Some formatting elements like complex tables or images with text may requi
             uploadSection.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+                handleDroppedFiles(e.dataTransfer.files);
             }
         });
 
@@ -2255,7 +2263,11 @@ Note: Some formatting elements like complex tables or images with text may requi
             option.addEventListener('click', () => {
                 textOptions.forEach(o => o.classList.remove('active'));
                 option.classList.add('active');
-                extractionMethod = option.querySelector('input').id;
+                const radioInput = option.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = true;
+                    extractionMethod = radioInput.id;
+                }
                 
                 // Show premium feature alerts
                 if (extractionMethod === 'extractStructured' || extractionMethod === 'extractSelective') {
@@ -2279,20 +2291,27 @@ Note: Some formatting elements like complex tables or images with text may requi
         resetBtn.addEventListener('click', resetTool);
 
         // FAQ functionality
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
+                item.classList.toggle('active');
             });
         });
 
         // Functions
         function handleFileSelect() {
             const newFiles = Array.from(fileInput.files);
-            
+            handleFiles(newFiles);
+        }
+        
+        function handleDroppedFiles(droppedFiles) {
+            const newFiles = Array.from(droppedFiles);
+            handleFiles(newFiles);
+        }
+        
+        function handleFiles(newFiles) {
             // Filter for PDF files only
-            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf');
+            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
             
             if (pdfFiles.length === 0) {
                 alert('Please select PDF files only.');
@@ -2388,7 +2407,9 @@ Note: Some formatting elements like complex tables or images with text may requi
             updateFileInfo();
             analyzeBtn.disabled = files.length === 0;
             convertBtn.disabled = true;
+            downloadBtn.disabled = true;
             textPreview.classList.remove('active');
+            resultsSection.classList.remove('active');
         }
         
         function analyzePDF() {
@@ -2526,6 +2547,9 @@ Note: Some formatting elements like complex tables or images with text may requi
                 textContent.style.border = 'none';
                 textContent.style.padding = '0';
                 textContent.style.background = 'transparent';
+                
+                // Update extracted text with edited content
+                extractedText = textContent.textContent;
             } else {
                 // Switch to edit mode
                 textContent.contentEditable = true;
@@ -2661,13 +2685,22 @@ Note: Some formatting elements like complex tables or images with text may requi
                 textOptions[0].click(); // Reset to extract all text
                 textContent.contentEditable = false;
                 editTextBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Text';
+                textContent.style.border = 'none';
+                textContent.style.padding = '0';
+                textContent.style.background = 'transparent';
             }
         }
 
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', () => {
             // Tool is ready to use
+            console.log('PDF to Text Converter initialized');
         });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(function() {
+            // Any responsive adjustments can go here
+        }, 250));
     </script>
 </body>
 </html>
