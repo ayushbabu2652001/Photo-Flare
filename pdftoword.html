@@ -47,6 +47,7 @@
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -435,6 +436,8 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
+            outline: none;
         }
 
         .btn:active {
@@ -1414,7 +1417,7 @@
     <div class="tool-container">
         <div class="tool-header">
             <h1>PDF to Word Converter</h1>
-            <p>Convert PDF files to editable Word documents with advanced OCR technology. Preserve formatting, images, and layout perfectly.</p>
+            <p>Convert PDF files to editable Word documents with advanced OCR technology. Preserve formatting, tables, and images perfectly.</p>
         </div>
 
         <!-- File Info Section -->
@@ -1811,73 +1814,93 @@
         let conversionResults = [];
 
         // Event Listeners
-        uploadButton.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', handleFileSelect);
+        if (uploadButton) {
+            uploadButton.addEventListener('click', () => fileInput.click());
+        }
+        
+        if (fileInput) {
+            fileInput.addEventListener('change', handleFileSelect);
+        }
         
         // Drag and drop functionality
-        uploadSection.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadSection.classList.add('drag-over');
-        });
-        
-        uploadSection.addEventListener('dragleave', () => {
-            uploadSection.classList.remove('drag-over');
-        });
-        
-        uploadSection.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadSection.classList.remove('drag-over');
+        if (uploadSection) {
+            uploadSection.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadSection.classList.add('drag-over');
+            });
             
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
-            }
-        });
-
-        // Conversion option selection
-        optionCards.forEach(card => {
-            card.addEventListener('click', () => {
-                optionCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                conversionOption = card.getAttribute('data-option');
+            uploadSection.addEventListener('dragleave', () => {
+                uploadSection.classList.remove('drag-over');
+            });
+            
+            uploadSection.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadSection.classList.remove('drag-over');
                 
-                // Show premium feature alerts
-                if (conversionOption === 'ocr' || conversionOption === 'advanced') {
-                    if (!confirm('This is a premium feature. Would you like to learn more about our Pro plan?')) {
-                        // Reset to standard if user cancels
-                        optionCards[0].click();
-                    }
+                if (e.dataTransfer.files.length) {
+                    handleFiles(e.dataTransfer.files);
                 }
             });
-        });
+        }
 
-        // FAQ functionality
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close all other FAQ items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
+        // Conversion option selection
+        if (optionCards) {
+            optionCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    optionCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    conversionOption = card.getAttribute('data-option');
+                    
+                    // Show premium feature alerts
+                    if (conversionOption === 'ocr' || conversionOption === 'advanced') {
+                        if (!confirm('This is a premium feature. Would you like to learn more about our Pro plan?')) {
+                            // Reset to standard if user cancels
+                            optionCards[0].click();
+                        }
                     }
                 });
-                
-                // Toggle current item
-                item.classList.toggle('active');
             });
-        });
+        }
+
+        // FAQ functionality
+        if (faqItems) {
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        // Close all other FAQ items
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+                        
+                        // Toggle current item
+                        item.classList.toggle('active');
+                    });
+                }
+            });
+        }
 
         // Control buttons
-        convertBtn.addEventListener('click', convertToWord);
-        downloadBtn.addEventListener('click', downloadAllFiles);
-        resetBtn.addEventListener('click', resetTool);
+        if (convertBtn) {
+            convertBtn.addEventListener('click', convertToWord);
+        }
+        
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', downloadAllFiles);
+        }
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', resetTool);
+        }
 
         // Functions
-        function handleFileSelect() {
-            const newFiles = Array.from(fileInput.files);
+        function handleFiles(fileList) {
+            const newFiles = Array.from(fileList);
             
             // Filter for PDF files only
-            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf');
+            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
             
             if (pdfFiles.length === 0) {
                 alert('Please select PDF files only.');
@@ -1890,15 +1913,25 @@
             // Update UI
             updateFileList();
             updateFileInfo();
-            convertBtn.disabled = files.length === 0;
+            if (convertBtn) convertBtn.disabled = files.length === 0;
             
             // Show file info section
-            fileInfo.classList.add('active');
+            if (fileInfo) fileInfo.classList.add('active');
+        }
+        
+        function handleFileSelect() {
+            if (fileInput.files) {
+                handleFiles(fileInput.files);
+            }
         }
         
         function updateFileList() {
+            if (!fileList) return;
+            
             fileList.innerHTML = '';
-            previewPlaceholder.style.display = files.length === 0 ? 'flex' : 'none';
+            if (previewPlaceholder) {
+                previewPlaceholder.style.display = files.length === 0 ? 'flex' : 'none';
+            }
             
             files.forEach((file, index) => {
                 const fileItem = document.createElement('li');
@@ -1939,18 +1972,22 @@
                 });
             });
             
-            fileCount.textContent = `${files.length} file${files.length !== 1 ? 's' : ''}`;
+            if (fileCount) {
+                fileCount.textContent = `${files.length} file${files.length !== 1 ? 's' : ''}`;
+            }
         }
         
         function updateFileInfo() {
+            if (!fileInfo) return;
+            
             if (files.length === 0) {
                 fileInfo.classList.remove('active');
                 return;
             }
             
             const totalSize = files.reduce((sum, file) => sum + file.size, 0);
-            fileName.textContent = files.length === 1 ? files[0].name : `${files.length} files`;
-            fileSize.textContent = formatFileSize(totalSize);
+            if (fileName) fileName.textContent = files.length === 1 ? files[0].name : `${files.length} files`;
+            if (fileSize) fileSize.textContent = formatFileSize(totalSize);
         }
         
         function formatFileSize(bytes) {
@@ -1971,16 +2008,16 @@
             files.splice(index, 1);
             updateFileList();
             updateFileInfo();
-            convertBtn.disabled = files.length === 0;
+            if (convertBtn) convertBtn.disabled = files.length === 0;
         }
         
         function convertToWord() {
             if (files.length === 0) return;
             
             // Show processing state
-            statusMessage.textContent = 'Converting PDF to Word...';
-            uploadProgress.style.width = '0%';
-            fileInfo.classList.add('active');
+            if (statusMessage) statusMessage.textContent = 'Converting PDF to Word...';
+            if (uploadProgress) uploadProgress.style.width = '0%';
+            if (fileInfo) fileInfo.classList.add('active');
             
             // Simulate conversion process
             let progress = 0;
@@ -1989,19 +2026,21 @@
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(interval);
-                    uploadProgress.style.width = '100%';
-                    statusMessage.textContent = 'Conversion completed successfully!';
+                    if (uploadProgress) uploadProgress.style.width = '100%';
+                    if (statusMessage) statusMessage.textContent = 'Conversion completed successfully!';
                     
                     // Generate conversion results
                     generateConversionResults();
-                    downloadBtn.disabled = false;
+                    if (downloadBtn) downloadBtn.disabled = false;
                 } else {
-                    uploadProgress.style.width = `${progress}%`;
+                    if (uploadProgress) uploadProgress.style.width = `${progress}%`;
                 }
             }, 300);
         }
         
         function generateConversionResults() {
+            if (!resultsGrid) return;
+            
             conversionResults = [];
             resultsGrid.innerHTML = '';
             
@@ -2043,17 +2082,25 @@
                 });
             });
             
-            resultsCount.textContent = `${conversionResults.length} file${conversionResults.length !== 1 ? 's' : ''} converted`;
-            resultsSection.classList.add('active');
+            if (resultsCount) {
+                resultsCount.textContent = `${conversionResults.length} file${conversionResults.length !== 1 ? 's' : ''} converted`;
+            }
+            
+            if (resultsSection) {
+                resultsSection.classList.add('active');
+                
+                // Scroll to results section
+                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
         
         function downloadSingleFile(index) {
             const result = conversionResults[index];
-            statusMessage.textContent = `Downloading ${result.convertedName}...`;
+            if (statusMessage) statusMessage.textContent = `Downloading ${result.convertedName}...`;
             
             // Simulate download
             setTimeout(() => {
-                statusMessage.textContent = 'Download completed!';
+                if (statusMessage) statusMessage.textContent = 'Download completed!';
                 
                 // Create a fake download link
                 const link = document.createElement('a');
@@ -2065,17 +2112,17 @@
                 
                 // Reset status message after a delay
                 setTimeout(() => {
-                    statusMessage.textContent = 'Conversion completed successfully!';
+                    if (statusMessage) statusMessage.textContent = 'Conversion completed successfully!';
                 }, 2000);
             }, 1000);
         }
         
         function downloadAllFiles() {
-            statusMessage.textContent = 'Preparing all files for download...';
+            if (statusMessage) statusMessage.textContent = 'Preparing all files for download...';
             
             // Simulate preparing files
             setTimeout(() => {
-                statusMessage.textContent = 'Downloading all files...';
+                if (statusMessage) statusMessage.textContent = 'Downloading all files...';
                 
                 // In a real implementation, this would download a zip file
                 // For this demo, we'll simulate downloading the first file
@@ -2094,24 +2141,25 @@
         
         function resetTool() {
             if (confirm('Are you sure you want to reset? All files and conversion results will be lost.')) {
-                fileInput.value = '';
+                if (fileInput) fileInput.value = '';
                 files = [];
                 conversionResults = [];
-                fileInfo.classList.remove('active');
-                resultsSection.classList.remove('active');
+                if (fileInfo) fileInfo.classList.remove('active');
+                if (resultsSection) resultsSection.classList.remove('active');
                 updateFileList();
                 updateFileInfo();
-                convertBtn.disabled = true;
-                downloadBtn.disabled = true;
-                uploadProgress.style.width = '0%';
-                statusMessage.textContent = 'Processing your file...';
-                optionCards[0].click(); // Reset to standard conversion
+                if (convertBtn) convertBtn.disabled = true;
+                if (downloadBtn) downloadBtn.disabled = true;
+                if (uploadProgress) uploadProgress.style.width = '0%';
+                if (statusMessage) statusMessage.textContent = 'Processing your file...';
+                if (optionCards.length > 0) optionCards[0].click(); // Reset to standard conversion
             }
         }
 
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', () => {
             // Tool is ready to use
+            console.log('PDF to Word Converter initialized');
         });
     </script>
 </body>
