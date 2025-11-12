@@ -2235,8 +2235,7 @@
             uploadSection.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+                handleDroppedFiles(e.dataTransfer.files);
             }
         });
 
@@ -2262,7 +2261,11 @@
             option.addEventListener('click', () => {
                 pngOptions.forEach(o => o.classList.remove('active'));
                 option.classList.add('active');
-                compressionOption = option.querySelector('input').id;
+                const radioInput = option.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = true;
+                    compressionOption = radioInput.id;
+                }
             });
         });
 
@@ -2284,9 +2287,17 @@
         // Functions
         function handleFileSelect() {
             const newFiles = Array.from(fileInput.files);
-            
+            handleFiles(newFiles);
+        }
+        
+        function handleDroppedFiles(droppedFiles) {
+            const newFiles = Array.from(droppedFiles);
+            handleFiles(newFiles);
+        }
+        
+        function handleFiles(newFiles) {
             // Filter for PDF files only
-            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf');
+            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
             
             if (pdfFiles.length === 0) {
                 alert('Please select PDF files only.');
@@ -2382,7 +2393,9 @@
             updateFileInfo();
             analyzeBtn.disabled = files.length === 0;
             convertBtn.disabled = true;
+            downloadBtn.disabled = true;
             imagePreview.classList.remove('active');
+            resultsSection.classList.remove('active');
         }
         
         function analyzePDF() {
@@ -2465,6 +2478,15 @@
                 `;
                 
                 imageThumb.addEventListener('click', () => {
+                    document.querySelectorAll('.image-thumbnail').forEach(t => t.classList.remove('active'));
+                    imageThumb.classList.add('active');
+                    showImagePreview(image);
+                });
+                
+                // Add event listener for preview button
+                const previewBtn = imageThumb.querySelector('.preview-image-btn');
+                previewBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     document.querySelectorAll('.image-thumbnail').forEach(t => t.classList.remove('active'));
                     imageThumb.classList.add('active');
                     showImagePreview(image);
@@ -2685,10 +2707,13 @@
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', () => {
             // Tool is ready to use
+            console.log('PDF to PNG Converter initialized');
         });
 
         // Reinitialize on window resize
-        window.addEventListener('resize', debounce(initializeToolDisplay, 250));
+        window.addEventListener('resize', debounce(function() {
+            // Any responsive adjustments can go here
+        }, 250));
     </script>
 </body>
 </html>
