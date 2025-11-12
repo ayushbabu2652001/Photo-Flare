@@ -1782,6 +1782,9 @@
         const slidesPerPageSelect = document.getElementById('slidesPerPage');
         const slideThumbnails = document.getElementById('slideThumbnails');
 
+        // Store current file
+        let currentFile = null;
+
         // File handling
         uploadArea.addEventListener('click', () => {
             fileInput.click();
@@ -1846,6 +1849,7 @@
                 return;
             }
             
+            currentFile = file;
             fileName.textContent = file.name;
             fileSize.textContent = formatFileSize(file.size);
             
@@ -1878,6 +1882,7 @@
 
         function resetFile() {
             fileInput.value = '';
+            currentFile = null;
             fileInfo.classList.remove('active');
             convertBtn.disabled = true;
             previewSection.classList.remove('active');
@@ -1918,7 +1923,7 @@
 
         // Conversion process
         convertBtn.addEventListener('click', () => {
-            if (!fileInput.files.length) {
+            if (!currentFile) {
                 alert('Please select a PowerPoint file first.');
                 return;
             }
