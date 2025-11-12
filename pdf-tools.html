@@ -449,6 +449,8 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
+            outline: none;
         }
 
         .btn:active {
@@ -458,7 +460,6 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -516,6 +517,7 @@
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
+            max-width: 500px;
         }
 
         .search-input {
@@ -534,13 +536,13 @@
         }
 
         .search-btn {
-            position: relative;
-            margin-top: 0.5rem;
-            width: 100%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -914,14 +916,6 @@
                 max-width: 500px;
             }
             
-            .search-btn {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                width: auto;
-                margin-top: 0;
-            }
-            
             .pdf-tools-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1215,6 +1209,8 @@
                 width: 100%;
                 position: relative;
                 margin-top: 0.5rem;
+                right: 0;
+                top: 0;
             }
         }
 
@@ -1496,50 +1492,50 @@
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Are my PDF files secure?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         <p>Yes, absolutely. All PDF processing happens locally in your browser. Your files never leave your computer and are not stored on our servers.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Is there a file size limit?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         <p>Free users can process PDF files up to 10MB. Pro users can process files up to 500MB depending on their subscription plan.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Do I need to install any software?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         <p>No installation required. All our PDF tools work directly in your web browser on any device.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         What PDF formats are supported?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         <p>We support all standard PDF formats including PDF/A for archiving and encrypted PDFs.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item">
-                    <div class="faq-question">
+                    <button class="faq-question">
                         Can I use these tools on mobile devices?
                         <i class="fas fa-chevron-down faq-toggle"></i>
-                    </div>
+                    </button>
                     <div class="faq-answer">
                         <p>Yes, our PDF tools are fully responsive and work perfectly on smartphones and tablets.</p>
                     </div>
@@ -1563,14 +1559,14 @@
                     <a href="index.html">Home</a>
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
-                    <a href="careers.html">Careers</a>
-                    <a href="affiliate.html">Affiliate Program</a>
-                    <a href="press.html">Press</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#affiliate">Affiliate Program</a>
+                    <a href="#press">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
-                    <a href="Learn-More-privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="cookies.html">Cookie Policy</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
@@ -1639,35 +1635,49 @@
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
         const toolCards = document.querySelectorAll('.pdf-tool-card');
+        
+        function filterTools(searchTerm) {
+            toolCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
         
         if (searchInput) {
             searchInput.addEventListener('input', debounce(function() {
                 const searchTerm = this.value.toLowerCase();
-                
-                toolCards.forEach(card => {
-                    const cardText = card.textContent.toLowerCase();
-                    if (cardText.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                filterTools(searchTerm);
             }, 300));
+        }
+        
+        if (searchBtn) {
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                filterTools(searchTerm);
+            });
         }
 
         // Tool cards click handler
         if (toolCards.length > 0) {
             toolCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // If the link is just a placeholder (#), prevent default and show alert
-                    const link = this.querySelector('a');
-                    if (link && link.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const toolName = this.querySelector('h3').textContent;
-                        alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
-                    }
-                });
+                const toolLink = card.querySelector('a');
+                if (toolLink) {
+                    toolLink.addEventListener('click', function(e) {
+                        // If the link is just a placeholder, prevent default and show alert
+                        if (this.getAttribute('href') === '#' || 
+                            !this.getAttribute('href').endsWith('.html')) {
+                            e.preventDefault();
+                            const toolName = card.querySelector('h3').textContent;
+                            alert(`You selected: ${toolName}. This would open the tool in a real implementation.`);
+                        }
+                    });
+                }
             });
         }
 
