@@ -7,12 +7,12 @@
     <meta name="keywords" content="PDF to PowerPoint, PDF to PPT, convert PDF to PowerPoint, PDF converter, OCR PDF, editable PowerPoint, online PDF tool, presentation converter">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="PDF to PowerPoint Converter - Advanced Online Tool | Photo Flare">
-    <meta property="og:description" content="Convert PDF to editable PowerPoint presentations with advanced layout detection. Preserve formatting, images, and slide structure perfectly.">
+    <meta property="og:description" content="Convert PDF to editable PowerPoint presentations with advanced slide detection. Preserve formatting, images, and slide structure perfectly.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://photoflare.com/pdf-to-powerpoint.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PDF to PowerPoint Converter - Advanced Online Tool | Photo Flare">
-    <meta name="twitter:description" content="Convert PDF to editable PowerPoint presentations with advanced layout detection. Preserve formatting, images, and slide structure perfectly.">
+    <meta name="twitter:description" content="Convert PDF to editable PowerPoint presentations with advanced slide detection. Preserve formatting, images, and slide structure perfectly.">
     <title>PDF to PowerPoint Converter - Advanced Online Tool | Photo Flare</title>
     <link rel="canonical" href="https://photoflare.com/pdf-to-powerpoint.html">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -680,6 +680,11 @@
             transition: var(--transition);
             padding: 0.3rem;
             border-radius: 4px;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .file-action:hover {
@@ -771,6 +776,7 @@
             font-size: 0.95rem;
             color: var(--dark);
             transition: var(--transition);
+            min-height: 44px;
         }
 
         .select-input:focus {
@@ -1034,6 +1040,7 @@
             align-items: center;
             font-weight: 600;
             color: var(--dark);
+            min-height: 44px;
         }
 
         .faq-answer {
@@ -2084,8 +2091,7 @@
             uploadSection.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+                handleDroppedFiles(e.dataTransfer.files);
             }
         });
 
@@ -2111,7 +2117,11 @@
             option.addEventListener('click', () => {
                 slideOptions.forEach(o => o.classList.remove('active'));
                 option.classList.add('active');
-                detectionMethod = option.querySelector('input').id;
+                const radioInput = option.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = true;
+                    detectionMethod = radioInput.id;
+                }
                 
                 // Show premium feature alerts
                 if (detectionMethod === 'manualDetect' || detectionMethod === 'smartDetect') {
@@ -2140,9 +2150,17 @@
         // Functions
         function handleFileSelect() {
             const newFiles = Array.from(fileInput.files);
-            
+            handleFiles(newFiles);
+        }
+        
+        function handleDroppedFiles(droppedFiles) {
+            const newFiles = Array.from(droppedFiles);
+            handleFiles(newFiles);
+        }
+        
+        function handleFiles(newFiles) {
             // Filter for PDF files only
-            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf');
+            const pdfFiles = newFiles.filter(file => file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
             
             if (pdfFiles.length === 0) {
                 alert('Please select PDF files only.');
@@ -2238,7 +2256,9 @@
             updateFileInfo();
             analyzeBtn.disabled = files.length === 0;
             convertBtn.disabled = true;
+            downloadBtn.disabled = true;
             slidePreview.classList.remove('active');
+            resultsSection.classList.remove('active');
         }
         
         function analyzePDF() {
@@ -2468,7 +2488,13 @@
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', () => {
             // Tool is ready to use
+            console.log('PDF to PowerPoint Converter initialized');
         });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(function() {
+            // Any responsive adjustments can go here
+        }, 250));
     </script>
 </body>
 </html>
