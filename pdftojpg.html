@@ -435,6 +435,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -2170,8 +2171,27 @@
             uploadSection.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect();
+                const droppedFiles = Array.from(e.dataTransfer.files);
+                const pdfFiles = droppedFiles.filter(file => file.type === 'application/pdf');
+                
+                if (pdfFiles.length === 0) {
+                    alert('Please drop PDF files only.');
+                    return;
+                }
+                
+                files = [...files, ...pdfFiles];
+                updateFileList();
+                updateFileInfo();
+                analyzeBtn.disabled = files.length === 0;
+                
+                // Show file info section
+                fileInfo.classList.add('active');
+                
+                // Reset conversion results when new files are added
+                resultsSection.classList.remove('active');
+                imagePreview.classList.remove('active');
+                convertBtn.disabled = true;
+                downloadBtn.disabled = true;
             }
         });
 
@@ -2257,6 +2277,12 @@
             
             // Show file info section
             fileInfo.classList.add('active');
+            
+            // Reset conversion results when new files are added
+            resultsSection.classList.remove('active');
+            imagePreview.classList.remove('active');
+            convertBtn.disabled = true;
+            downloadBtn.disabled = true;
         }
         
         function updateFileList() {
@@ -2337,6 +2363,14 @@
             analyzeBtn.disabled = files.length === 0;
             convertBtn.disabled = true;
             imagePreview.classList.remove('active');
+            resultsSection.classList.remove('active');
+            downloadBtn.disabled = true;
+            
+            // Also reset conversion results if no files
+            if (files.length === 0) {
+                resultsSection.classList.remove('active');
+                conversionResults = [];
+            }
         }
         
         function analyzePDF() {
@@ -2346,6 +2380,12 @@
             statusMessage.textContent = 'Analyzing PDF structure and extracting pages...';
             uploadProgress.style.width = '0%';
             fileInfo.classList.add('active');
+            
+            // Hide previous results during analysis
+            imagePreview.classList.remove('active');
+            resultsSection.classList.remove('active');
+            convertBtn.disabled = true;
+            downloadBtn.disabled = true;
             
             // Simulate analysis process
             let progress = 0;
@@ -2472,6 +2512,10 @@
             uploadProgress.style.width = '0%';
             fileInfo.classList.add('active');
             
+            // Hide results during conversion
+            resultsSection.classList.remove('active');
+            downloadBtn.disabled = true;
+            
             // Simulate conversion process
             let progress = 0;
             const interval = setInterval(() => {
@@ -2485,6 +2529,11 @@
                     // Generate conversion results
                     generateConversionResults();
                     downloadBtn.disabled = false;
+                    
+                    // Scroll to results
+                    setTimeout(() => {
+                        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
                 } else {
                     uploadProgress.style.width = `${progress}%`;
                 }
@@ -2613,13 +2662,56 @@
                 optionCards[0].click(); // Reset to standard conversion
                 qualityOptions[0].click(); // Reset to high quality
                 customQualitySlider.style.display = 'none';
+                
+                // Reset all checkboxes and selects to default values
+                document.getElementById('preserveAspect').checked = true;
+                document.getElementById('enhanceImages').checked = false;
+                document.getElementById('removeBackground').checked = false;
+                document.getElementById('addWatermark').checked = false;
+                document.getElementById('batchProcess').checked = false;
+                document.getElementById('createZip').checked = false;
+                document.getElementById('outputFormat').value = 'jpg';
+                document.getElementById('pageRange').value = 'all';
+                document.getElementById('imageSize').value = 'medium';
+                document.getElementById('colorMode').value = 'color';
             }
         }
 
         // Initialize the tool
-        document.addEventListener('DOMContentLoaded', () => {
-            // Tool is ready to use
+        document.addEventListener('DOMContentLoaded', function() {
+            analyzeBtn.disabled = true;
+            convertBtn.disabled = true;
+            downloadBtn.disabled = true;
+            
+            // Ensure all buttons have proper cursor styling
+            const allButtons = document.querySelectorAll('button, .btn, .sidebar-btn, .mobile-header-btn, .file-action, .image-action, .quality-option, .option-card');
+            allButtons.forEach(button => {
+                button.style.cursor = 'pointer';
+            });
+            
+            // Initialize tooltips for better UX
+            initializeTooltips();
         });
+
+        function initializeTooltips() {
+            // Add title attributes for better UX on buttons without text
+            const mobileHeaderBtns = document.querySelectorAll('.mobile-header-btn');
+            mobileHeaderBtns.forEach((btn, index) => {
+                if (index === 0) btn.setAttribute('title', 'Login');
+                if (index === 1) btn.setAttribute('title', 'Upgrade to Premium');
+            });
+            
+            const fileActions = document.querySelectorAll('.file-action');
+            fileActions.forEach((btn, index) => {
+                if (index % 2 === 0) btn.setAttribute('title', 'Preview File');
+                else btn.setAttribute('title', 'Remove File');
+            });
+        }
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(function() {
+            // Any responsive adjustments can go here
+        }, 250));
     </script>
 </body>
 </html>
