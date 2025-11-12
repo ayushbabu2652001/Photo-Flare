@@ -427,6 +427,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            border: none;
         }
 
         .btn:active {
@@ -1757,6 +1758,10 @@
             fileSize.textContent = formatFileSize(file.size);
             fileInfo.classList.add('active');
             convertBtn.disabled = false;
+            
+            // Hide preview and download sections when new file is selected
+            previewSection.classList.remove('active');
+            downloadSection.classList.remove('active');
         }
 
         function resetFile() {
@@ -1786,6 +1791,10 @@
             progressContainer.classList.add('active');
             progressBar.style.width = '0%';
             progressText.textContent = 'Initializing conversion...';
+            
+            // Hide preview and download sections during conversion
+            previewSection.classList.remove('active');
+            downloadSection.classList.remove('active');
             
             // Simulate conversion progress
             let progress = 0;
@@ -1821,7 +1830,7 @@
                 downloadSection.classList.add('active');
                 
                 // Scroll to results
-                previewSection.scrollIntoView({ behavior: 'smooth' });
+                previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 1000);
         }
 
@@ -1876,6 +1885,14 @@
 
         downloadZipBtn.addEventListener('click', () => {
             alert('In a real implementation, this would download a ZIP file containing the HTML and any extracted images. For this demo, the functionality is simulated.');
+            
+            // Simulate ZIP download
+            const a = document.createElement('a');
+            a.href = '#';
+            a.download = 'converted-document.zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         });
 
         newConversionBtn.addEventListener('click', () => {
@@ -1884,7 +1901,32 @@
         });
 
         // Initialize
-        convertBtn.disabled = true;
+        document.addEventListener('DOMContentLoaded', function() {
+            convertBtn.disabled = true;
+            
+            // Ensure all buttons have proper cursor styling
+            const allButtons = document.querySelectorAll('button, .btn, .sidebar-btn, .mobile-header-btn, .file-action, .preview-tab');
+            allButtons.forEach(button => {
+                button.style.cursor = 'pointer';
+            });
+            
+            // Initialize tooltips for better UX
+            initializeTooltips();
+        });
+
+        function initializeTooltips() {
+            // Add title attributes for better UX on buttons without text
+            const mobileHeaderBtns = document.querySelectorAll('.mobile-header-btn');
+            mobileHeaderBtns.forEach((btn, index) => {
+                if (index === 0) btn.setAttribute('title', 'Login');
+                if (index === 1) btn.setAttribute('title', 'Upgrade to Premium');
+            });
+        }
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(function() {
+            // Any responsive adjustments can go here
+        }, 250));
     </script>
 </body>
 </html>
