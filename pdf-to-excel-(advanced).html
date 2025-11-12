@@ -428,6 +428,7 @@
             flex-shrink: 0;
             min-height: 44px;
             border: none;
+            outline: none;
         }
 
         .btn:active {
@@ -1771,14 +1772,14 @@
                     <a href="index.html">Home</a>
                     <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
-                    <a href="careers.html">Careers</a>
-                    <a href="affiliate.html">Affiliate Program</a>
-                    <a href="press.html">Press</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#affiliate">Affiliate Program</a>
+                    <a href="#press">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
-                    <a href="Learn-More-privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="cookies.html">Cookie Policy</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
                 </div>
                 
                 <div class="social-links">
@@ -1879,13 +1880,17 @@
         browseBtn.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('dragover', handleDragOver);
+        uploadArea.addEventListener('dragleave', handleDragLeave);
         uploadArea.addEventListener('drop', handleDrop);
         fileInput.addEventListener('change', handleFileSelect);
         removeFile.addEventListener('click', resetFile);
         convertBtn.addEventListener('click', convertToExcel);
         downloadBtn.addEventListener('click', downloadExcel);
         convertAnother.addEventListener('click', resetAll);
-        addBatchBtn.addEventListener('click', () => fileInput.click());
+        addBatchBtn.addEventListener('click', () => {
+            isBatchMode = true;
+            fileInput.click();
+        });
         convertBatchBtn.addEventListener('click', convertBatch);
 
         // Tab switching
@@ -1914,15 +1919,22 @@
             uploadArea.style.background = 'rgba(67, 97, 238, 0.15)';
         }
 
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
+        }
+
         function handleDrop(e) {
             e.preventDefault();
             e.stopPropagation();
             uploadArea.style.background = 'rgba(67, 97, 238, 0.05)';
             
             if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                if (isBatchMode) {
+                if (e.dataTransfer.files.length > 1 || isBatchMode) {
                     handleBatchFiles(e.dataTransfer.files);
                 } else {
+                    isBatchMode = false;
                     handleFile(e.dataTransfer.files[0]);
                 }
             }
@@ -1930,9 +1942,10 @@
 
         function handleFileSelect(e) {
             if (e.target.files && e.target.files[0]) {
-                if (isBatchMode) {
+                if (e.target.files.length > 1 || isBatchMode) {
                     handleBatchFiles(e.target.files);
                 } else {
+                    isBatchMode = false;
                     handleFile(e.target.files[0]);
                 }
             }
@@ -1969,6 +1982,8 @@
         }
 
         function handleBatchFiles(files) {
+            isBatchMode = true;
+            
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 
@@ -2034,6 +2049,7 @@
                 // Show batch preview and hide single preview
                 previewSection.style.display = 'none';
                 emptyState.style.display = 'none';
+                fileInfo.classList.remove('active');
             } else {
                 addBatchBtn.disabled = true;
                 convertBatchBtn.disabled = true;
@@ -2061,10 +2077,16 @@
             emptyState.style.display = 'block';
         }
 
-        function resetAll() {
+        function resetAll(e) {
+            if (e) e.preventDefault();
             resetFile();
             downloadSection.classList.remove('active');
             emptyState.style.display = 'block';
+            
+            // Reset batch files
+            batchFilesList = [];
+            batchFiles.innerHTML = '';
+            updateBatchUI();
             
             // Reset form options
             document.getElementById('ocrOption').checked = true;
@@ -2074,10 +2096,12 @@
             document.getElementById('autoDetect').checked = true;
             document.getElementById('outputFormat').value = 'xlsx';
             document.getElementById('pageRange').value = 'all';
+            
+            isBatchMode = false;
         }
 
         function convertToExcel() {
-            if (!uploadedFile) {
+            if (!uploadedFile && !isBatchMode) {
                 alert('Please select a PDF file first');
                 return;
             }
@@ -2096,9 +2120,6 @@
                 }
                 processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
             }, 300);
-            
-            // Simulate conversion time
-            setTimeout(finishConversion, 3000);
         }
 
         function convertBatch() {
@@ -2108,15 +2129,19 @@
             }
             
             loadingIndicator.classList.add('active');
+            convertBatchBtn.disabled = true;
             
             // Simulate batch conversion
-            setTimeout(() => {
-                // Show download section
-                downloadSection.classList.add('active');
-                previewSection.style.display = 'none';
-                
-                loadingIndicator.classList.remove('active');
-            }, 2000);
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    finishBatchConversion();
+                }
+                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+            }, 300);
         }
 
         function finishConversion() {
@@ -2126,6 +2151,15 @@
             
             loadingIndicator.classList.remove('active');
             convertBtn.disabled = false;
+        }
+
+        function finishBatchConversion() {
+            // Show download section
+            downloadSection.classList.add('active');
+            previewSection.style.display = 'none';
+            
+            loadingIndicator.classList.remove('active');
+            convertBatchBtn.disabled = false;
         }
 
         function downloadExcel() {
@@ -2172,6 +2206,9 @@
                     badge.style.display = 'none';
                 });
                 document.querySelector('.premium-upsell').style.display = 'none';
+                
+                // Enable batch features for premium users
+                addBatchBtn.disabled = false;
             }
             
             // Show empty state initially
