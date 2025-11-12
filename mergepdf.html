@@ -427,6 +427,7 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            justify-content: center;
         }
 
         .btn:active {
@@ -607,6 +608,8 @@
 
         .file-list {
             margin-top: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .file-item {
@@ -937,6 +940,11 @@
             color: #adb5bd;
             font-size: 1.3rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
 
         .social-link:hover {
@@ -1610,13 +1618,35 @@
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
         
-        if (searchInput) {
+        if (searchInput && searchBtn) {
+            // Search on button click
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    // In a real implementation, this would search for tools
+                    alert(`Searching for: ${searchTerm}`);
+                    // Redirect to search results page
+                    // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+                } else {
+                    searchInput.focus();
+                }
+            });
+            
+            // Search on Enter key
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+            
+            // Search with debounce on input
             searchInput.addEventListener('input', debounce(function() {
                 const searchTerm = this.value.toLowerCase();
                 
                 if (searchTerm.length > 2) {
-                    // In a real implementation, this would search for tools
+                    // In a real implementation, this would show search suggestions
                     console.log(`Searching for: ${searchTerm}`);
                 }
             }, 300));
@@ -1802,6 +1832,22 @@
         // Initialize
         updateMergeButton();
         renderFileList();
+
+        // Add touch device support
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
