@@ -1337,29 +1337,48 @@
 
         // Demo credentials helper (remove in production)
         document.addEventListener('DOMContentLoaded', function() {
-            const demoHelper = document.createElement('div');
-            demoHelper.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: var(--primary);
-                color: white;
-                padding: 10px 15px;
-                border-radius: 5px;
-                font-size: 12px;
-                cursor: pointer;
-                z-index: 1000;
-                box-shadow: var(--box-shadow);
-            `;
-            demoHelper.innerHTML = 'Demo: Click to fill credentials';
-            demoHelper.addEventListener('click', function() {
-                document.getElementById('email').value = 'demo@photoflare.com';
-                document.getElementById('password').value = 'demo123';
-                document.getElementById('rememberMe').checked = true;
-                this.style.display = 'none';
-            });
-            document.body.appendChild(demoHelper);
+            // Check if we're on the login page before adding the demo helper
+            if (document.getElementById('loginForm')) {
+                const demoHelper = document.createElement('div');
+                demoHelper.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--primary);
+                    color: white;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    cursor: pointer;
+                    z-index: 1000;
+                    box-shadow: var(--box-shadow);
+                `;
+                demoHelper.innerHTML = 'Demo: Click to fill credentials';
+                demoHelper.addEventListener('click', function() {
+                    document.getElementById('email').value = 'demo@photoflare.com';
+                    document.getElementById('password').value = 'demo123';
+                    document.getElementById('rememberMe').checked = true;
+                    this.style.display = 'none';
+                });
+                document.body.appendChild(demoHelper);
+            }
         });
+
+        // Fix for touch devices - prevent zoom on double tap
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
 
         // Initialize page on load
         function initializePage() {
