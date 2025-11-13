@@ -123,12 +123,14 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -333,12 +335,16 @@
         .checkbox-group input {
             margin-top: 5px;
             flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
 
         .checkbox-label {
             font-size: 0.95rem;
             color: var(--gray);
             line-height: 1.5;
+            cursor: pointer;
         }
 
         .required {
@@ -841,89 +847,104 @@
             const saveBtn = document.getElementById('saveBtn');
             
             // Form submission
-            consentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Validate required fields
-                const requiredFields = consentForm.querySelectorAll('[required]');
-                let isValid = true;
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        isValid = false;
-                        field.style.borderColor = 'var(--danger)';
-                    } else {
-                        field.style.borderColor = '';
+            if (consentForm) {
+                consentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate required fields
+                    const requiredFields = consentForm.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = 'var(--danger)';
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        alert('Please fill in all required fields marked with *');
+                        return;
                     }
+                    
+                    // Check if privacy consent is given
+                    const privacyConsent = document.getElementById('privacyConsent');
+                    if (!privacyConsent.checked) {
+                        alert('You must agree to the Privacy Policy to proceed');
+                        return;
+                    }
+                    
+                    // Show success message
+                    alert('Thank you for providing your consent. Your application will now be processed.');
+                    
+                    // In a real application, you would submit the form data to a server here
+                    console.log('Form submitted with data:', {
+                        fullName: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        position: document.getElementById('position').value,
+                        privacyConsent: document.getElementById('privacyConsent').checked,
+                        dataRetention: document.getElementById('dataRetention').checked,
+                        communications: document.getElementById('communications').checked,
+                        signature: document.getElementById('signature').value
+                    });
+                    
+                    // Clear saved data from localStorage
+                    localStorage.removeItem('consentFormData');
+                    
+                    // Reset form
+                    consentForm.reset();
                 });
-                
-                if (!isValid) {
-                    alert('Please fill in all required fields marked with *');
-                    return;
-                }
-                
-                // Check if privacy consent is given
-                const privacyConsent = document.getElementById('privacyConsent');
-                if (!privacyConsent.checked) {
-                    alert('You must agree to the Privacy Policy to proceed');
-                    return;
-                }
-                
-                // Show success message
-                alert('Thank you for providing your consent. Your application will now be processed.');
-                
-                // In a real application, you would submit the form data to a server here
-                console.log('Form submitted with data:', {
-                    fullName: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    position: document.getElementById('position').value,
-                    privacyConsent: document.getElementById('privacyConsent').checked,
-                    dataRetention: document.getElementById('dataRetention').checked,
-                    communications: document.getElementById('communications').checked,
-                    signature: document.getElementById('signature').value
-                });
-                
-                // Reset form
-                consentForm.reset();
-            });
+            }
             
             // Decline button
-            declineBtn.addEventListener('click', function() {
-                if (confirm('Are you sure you want to decline? Without consent, we cannot process your application.')) {
-                    alert('Your application cannot be processed without consent. If you change your mind, you can return to this page later.');
-                    // Redirect to careers page or previous page
-                    window.location.href = 'careers.html';
-                }
-            });
+            if (declineBtn) {
+                declineBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to decline? Without consent, we cannot process your application.')) {
+                        alert('Your application cannot be processed without consent. If you change your mind, you can return to this page later.');
+                        // Clear saved data
+                        localStorage.removeItem('consentFormData');
+                        // Redirect to careers page or previous page
+                        window.location.href = 'careers.html';
+                    }
+                });
+            }
             
             // Save for later button
-            saveBtn.addEventListener('click', function() {
-                // Save form data to localStorage
-                const formData = {
-                    fullName: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    position: document.getElementById('position').value,
-                    privacyConsent: document.getElementById('privacyConsent').checked,
-                    dataRetention: document.getElementById('dataRetention').checked,
-                    communications: document.getElementById('communications').checked,
-                    signature: document.getElementById('signature').value
-                };
-                
-                localStorage.setItem('consentFormData', JSON.stringify(formData));
-                alert('Your progress has been saved. You can return to complete this form later.');
-            });
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function() {
+                    // Save form data to localStorage
+                    const formData = {
+                        fullName: document.getElementById('fullName').value,
+                        email: document.getElementById('email').value,
+                        position: document.getElementById('position').value,
+                        privacyConsent: document.getElementById('privacyConsent').checked,
+                        dataRetention: document.getElementById('dataRetention').checked,
+                        communications: document.getElementById('communications').checked,
+                        signature: document.getElementById('signature').value
+                    };
+                    
+                    localStorage.setItem('consentFormData', JSON.stringify(formData));
+                    alert('Your progress has been saved. You can return to complete this form later.');
+                });
+            }
             
             // Load saved form data if available
             const savedData = localStorage.getItem('consentFormData');
             if (savedData) {
-                const formData = JSON.parse(savedData);
-                document.getElementById('fullName').value = formData.fullName || '';
-                document.getElementById('email').value = formData.email || '';
-                document.getElementById('position').value = formData.position || '';
-                document.getElementById('privacyConsent').checked = formData.privacyConsent || false;
-                document.getElementById('dataRetention').checked = formData.dataRetention || false;
-                document.getElementById('communications').checked = formData.communications || false;
-                document.getElementById('signature').value = formData.signature || '';
+                try {
+                    const formData = JSON.parse(savedData);
+                    if (document.getElementById('fullName')) document.getElementById('fullName').value = formData.fullName || '';
+                    if (document.getElementById('email')) document.getElementById('email').value = formData.email || '';
+                    if (document.getElementById('position')) document.getElementById('position').value = formData.position || '';
+                    if (document.getElementById('privacyConsent')) document.getElementById('privacyConsent').checked = formData.privacyConsent || false;
+                    if (document.getElementById('dataRetention')) document.getElementById('dataRetention').checked = formData.dataRetention || false;
+                    if (document.getElementById('communications')) document.getElementById('communications').checked = formData.communications || false;
+                    if (document.getElementById('signature')) document.getElementById('signature').value = formData.signature || '';
+                } catch (e) {
+                    console.error('Error loading saved form data:', e);
+                }
             }
             
             // Animation on scroll
@@ -953,15 +974,26 @@
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') !== '#') {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href !== '') {
                         e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
+                        const target = document.querySelector(href);
                         if (target) {
                             target.scrollIntoView({
                                 behavior: 'smooth',
                                 block: 'start'
                             });
                         }
+                    }
+                });
+            });
+            
+            // Make checkbox labels clickable
+            document.querySelectorAll('.checkbox-group label').forEach(label => {
+                label.addEventListener('click', function() {
+                    const checkbox = document.getElementById(this.getAttribute('for'));
+                    if (checkbox) {
+                        checkbox.checked = !checkbox.checked;
                     }
                 });
             });
