@@ -123,12 +123,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            border: none;
+            outline: none;
+            text-align: center;
+            justify-content: center;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -196,6 +199,7 @@
             display: flex;
             justify-content: center;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .breadcrumb a {
@@ -520,6 +524,7 @@
             color: #adb5bd;
             font-size: 1.5rem;
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .social-link:hover {
@@ -654,6 +659,10 @@
             .job-header, .job-content, .apply-section {
                 padding: 1.5rem;
             }
+            
+            .breadcrumb {
+                justify-content: flex-start;
+            }
         }
 
         @media (max-width: 576px) {
@@ -674,6 +683,10 @@
             
             .tools-tags {
                 justify-content: center;
+            }
+            
+            .job-title-section .btn {
+                width: 100%;
             }
         }
     </style>
@@ -906,7 +919,7 @@
                     <a href="affiliate.html">Affiliate Program</a>
                     <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
+                    <a href="help.html">Help Center</a>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                     <a href="cookies.html">Cookie Policy</a>
@@ -930,9 +943,10 @@
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const target = document.querySelector(targetId);
                     if (target) {
                         target.scrollIntoView({
                             behavior: 'smooth',
@@ -965,6 +979,31 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Ensure all buttons have proper cursor and focus states
+        document.querySelectorAll('.btn, .social-link, nav a, .footer-links a, .external-link').forEach(element => {
+            element.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            element.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+            
+            // Add focus styles for accessibility
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid var(--primary)';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = '';
+            });
         });
     </script>
 </body>
