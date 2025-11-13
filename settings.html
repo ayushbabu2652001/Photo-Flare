@@ -1399,7 +1399,7 @@
     <div class="mobile-header">
         <div class="container">
             <div class="mobile-header-content">
-                <button class="mobile-nav-btn" id="mobileNavBtn">
+                <button type="button" class="mobile-nav-btn" id="mobileNavBtn">
                     <i class="fas fa-bars"></i>
                 </button>
                 <a href="index.html" class="mobile-logo">
@@ -1506,7 +1506,7 @@
                 <i class="fas fa-camera-retro sidebar-logo-icon"></i>
                 <span class="sidebar-logo-text">Photo Flare</span>
             </a>
-            <button class="sidebar-close" id="sidebarClose">
+            <button type="button" class="sidebar-close" id="sidebarClose">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -1610,13 +1610,13 @@
                     </div>
 
                     <div class="avatar-container">
-                        <div class="avatar-preview" id="avatar-preview">JS</div>
+                        <div class="avatar-preview" id="avatar-preview" aria-label="User avatar">JS</div>
                         <div class="avatar-actions">
                             <input type="file" id="avatar-input" class="avatar-input" accept="image/*">
-                            <button class="btn btn-outline" id="change-avatar-btn">
+                            <button type="button" class="btn btn-outline" id="change-avatar-btn">
                                 <i class="fas fa-camera"></i> Change Avatar
                             </button>
-                            <button class="btn btn-outline" id="remove-avatar-btn">
+                            <button type="button" class="btn btn-outline" id="remove-avatar-btn">
                                 <i class="fas fa-trash"></i> Remove Avatar
                             </button>
                         </div>
@@ -1643,7 +1643,7 @@
                         <input type="text" class="form-control" id="location" value="San Francisco, CA">
                     </div>
 
-                    <button class="btn btn-primary" id="save-profile">Save Changes</button>
+                    <button type="button" class="btn btn-primary" id="save-profile">Save Changes</button>
                 </div>
 
                 <!-- Account Section -->
@@ -1691,7 +1691,7 @@
                     <h3 style="margin: 2rem 0 1rem;">Data & Storage</h3>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="autoSave">
                             <input type="checkbox" checked id="autoSave">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1699,14 +1699,14 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="compressImages">
                             <input type="checkbox" id="compressImages">
                             <span class="toggle-slider"></span>
                         </label>
                         <span class="checkbox-label">Compress images when uploading to save space</span>
                     </div>
 
-                    <button class="btn btn-primary" id="save-account">Save Preferences</button>
+                    <button type="button" class="btn btn-primary" id="save-account">Save Preferences</button>
                 </div>
 
                 <!-- Security Section -->
@@ -1720,7 +1720,7 @@
                             <h4>Password</h4>
                             <p>Last changed 3 months ago</p>
                         </div>
-                        <button class="btn btn-outline" id="change-password">Change Password</button>
+                        <button type="button" class="btn btn-outline" id="change-password">Change Password</button>
                     </div>
 
                     <div class="security-item">
@@ -1728,8 +1728,8 @@
                             <h4>Two-Factor Authentication</h4>
                             <p>Add an extra layer of security to your account</p>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="twoFactor">
+                        <label class="toggle-switch" for="twoFactorAuth">
+                            <input type="checkbox" id="twoFactorAuth">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -1739,7 +1739,7 @@
                             <h4>Login Alerts</h4>
                             <p>Get notified when someone logs into your account from a new device</p>
                         </div>
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="loginAlerts">
                             <input type="checkbox" checked id="loginAlerts">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1756,7 +1756,7 @@
                                     <p>San Francisco, CA • Current session</p>
                                 </div>
                             </div>
-                            <button class="btn btn-outline" disabled>Current Device</button>
+                            <button type="button" class="btn btn-outline" disabled>Current Device</button>
                         </div>
 
                         <div class="device-item">
@@ -1767,7 +1767,7 @@
                                     <p>San Francisco, CA • 2 days ago</p>
                                 </div>
                             </div>
-                            <button class="btn btn-outline" data-device="iphone">Log Out</button>
+                            <button type="button" class="btn btn-outline" data-device="iphone">Log Out</button>
                         </div>
 
                         <div class="device-item">
@@ -1778,7 +1778,7 @@
                                     <p>San Francisco, CA • 1 week ago</p>
                                 </div>
                             </div>
-                            <button class="btn btn-outline" data-device="ipad">Log Out</button>
+                            <button type="button" class="btn btn-outline" data-device="ipad">Log Out</button>
                         </div>
                     </div>
                 </div>
@@ -1816,9 +1816,9 @@
                         </div>
 
                         <div class="action-buttons" style="display: flex; gap: 1rem;">
-                            <button class="btn btn-primary" id="upgrade-plan">Upgrade Plan</button>
-                            <button class="btn btn-outline" id="change-payment">Change Payment Method</button>
-                            <button class="btn btn-outline" id="cancel-subscription">Cancel Subscription</button>
+                            <button type="button" class="btn btn-primary" id="upgrade-plan">Upgrade Plan</button>
+                            <button type="button" class="btn btn-outline" id="change-payment">Change Payment Method</button>
+                            <button type="button" class="btn btn-outline" id="cancel-subscription">Cancel Subscription</button>
                         </div>
                     </div>
 
@@ -1866,7 +1866,7 @@
                     <h3 style="margin-bottom: 1rem;">Email Notifications</h3>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="productUpdates">
                             <input type="checkbox" checked id="productUpdates">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1874,7 +1874,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="tipsTutorials">
                             <input type="checkbox" checked id="tipsTutorials">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1882,7 +1882,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="marketingEmails">
                             <input type="checkbox" id="marketingEmails">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1892,7 +1892,7 @@
                     <h3 style="margin: 2rem 0 1rem;">Push Notifications</h3>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="fileProcessing">
                             <input type="checkbox" checked id="fileProcessing">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1900,7 +1900,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="newTools">
                             <input type="checkbox" id="newTools">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1908,14 +1908,14 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="securityAlerts">
                             <input type="checkbox" checked id="securityAlerts">
                             <span class="toggle-slider"></span>
                         </label>
                         <span class="checkbox-label">Security alerts</span>
                     </div>
 
-                    <button class="btn btn-primary" id="save-notifications">Save Preferences</button>
+                    <button type="button" class="btn btn-primary" id="save-notifications">Save Preferences</button>
                 </div>
 
                 <!-- Appearance Section -->
@@ -1956,7 +1956,7 @@
                         </select>
                     </div>
 
-                    <button class="btn btn-primary" id="save-appearance">Apply Changes</button>
+                    <button type="button" class="btn btn-primary" id="save-appearance">Apply Changes</button>
                 </div>
 
                 <!-- Privacy Section -->
@@ -1966,7 +1966,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="searchIndex">
                             <input type="checkbox" checked id="searchIndex">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1974,7 +1974,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="onlineStatus">
                             <input type="checkbox" id="onlineStatus">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1982,7 +1982,7 @@
                     </div>
 
                     <div class="checkbox-group">
-                        <label class="toggle-switch">
+                        <label class="toggle-switch" for="dataCollection">
                             <input type="checkbox" checked id="dataCollection">
                             <span class="toggle-slider"></span>
                         </label>
@@ -1992,7 +1992,7 @@
                     <h3 style="margin: 2rem 0 1rem;">Data Management</h3>
 
                     <div class="form-group">
-                        <button class="btn btn-outline" id="export-data">
+                        <button type="button" class="btn btn-outline" id="export-data">
                             <i class="fas fa-download"></i> Export My Data
                         </button>
                         <p class="form-text">Download a copy of all your data stored on Photo Flare.</p>
@@ -2001,7 +2001,7 @@
                     <div class="danger-zone">
                         <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
                         <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
-                        <button class="btn btn-danger" id="delete-account">Delete My Account</button>
+                        <button type="button" class="btn btn-danger" id="delete-account">Delete My Account</button>
                     </div>
                 </div>
             </div>
