@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Flare Affiliate Program Commission Terms - Lifetime recurring commissions, tier structure, payment terms, and program policies.">
+    <meta name="keywords" content="Photo Flare affiliate terms, recurring commission terms, affiliate program policies, commission structure">
+    <title>Recurring Commission Terms | Photo Flare Affiliate Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+        }
+
+        .btn {
+            padding: 0.7rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
+            border: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .terms-section {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 3rem 0;
+            animation: fadeIn 0.5s ease-out 0.2s both;
+        }
+
+        .terms-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .terms-heading {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+            animation: float-heading 10s ease-in-out infinite;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .terms-heading:hover {
+            transform: translateX(5px);
+        }
+
+        .terms-heading:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .terms-heading:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        .terms-heading::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .terms-heading.active::before {
+            background: var(--success);
+            transform: scale(1.2);
+        }
+
+        .terms-list {
+            list-style-type: none;
+            margin: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        .terms-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--dark);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .terms-list li:hover {
+            background-color: rgba(67, 97, 238, 0.03);
+            transform: translateX(5px);
+        }
+
+        .terms-list li:last-child {
+            border-bottom: none;
+        }
+
+        .terms-list i {
+            color: var(--success);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+            animation: float-icon 8s ease-in-out infinite;
+        }
+
+        .terms-list li:nth-child(odd) i {
+            animation-delay: 1s;
+        }
+
+        .terms-list li:nth-child(even) i {
+            animation-delay: 2s;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            animation: float-box 12s ease-in-out infinite;
+            transition: var(--transition);
+        }
+
+        .highlight-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .highlight-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out 0.4s both;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted var(--primary);
+            transition: var(--transition);
+        }
+
+        .external-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .toast.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Quick navigation */
+        .quick-nav {
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            z-index: 90;
+        }
+
+        .quick-nav h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .quick-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quick-nav-link {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .quick-nav-link:hover, .quick-nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes float-heading {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-5px);
+            }
+        }
+
+        @keyframes float-icon {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-3px) rotate(5deg);
+            }
+        }
+
+        @keyframes float-box {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .terms-content {
+                max-width: 900px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .terms-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .quick-nav {
+                position: static;
+                margin-bottom: 1.5rem;
+            }
+
+            .quick-nav-links {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0 1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .terms-section {
+                padding: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Special media query for when viewing desktop site on mobile */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-header {
+                padding: 0.8rem 0;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 0.7rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+            }
+        }
+
+        /* For very small desktop screens */
+        @media (min-width: 768px) and (max-width: 900px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                margin-left: auto;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Recurring Commission Terms</h1>
+            <p>Detailed terms and conditions for our lifetime recurring commission structure in the Photo Flare Affiliate Program.</p>
+            
+            <div style="margin-top: 2rem;">
+                <a href="affiliate-signup.html" class="btn btn-success" style="margin-right: 1rem;"><i class="fas fa-rocket"></i> Join Affiliate Program</a>
+                <a href="affiliate-program.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back to Program</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <div class="container">
+        <div class="quick-nav">
+            <h3>Quick Navigation</h3>
+            <div class="quick-nav-links">
+                <a href="#commission-structure" class="quick-nav-link active">Commission Structure</a>
+                <a href="#eligibility" class="quick-nav-link">Eligibility</a>
+                <a href="#payment-terms" class="quick-nav-link">Payment Terms</a>
+                <a href="#subscription-changes" class="quick-nav-link">Subscription Changes</a>
+                <a href="#program-changes" class="quick-nav-link">Program Changes</a>
+                <a href="#marketing-guidelines" class="quick-nav-link">Marketing Guidelines</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Section -->
+    <section class="terms-section">
+        <div class="container">
+            <div class="terms-content">
+                <h2 class="section-title">Recurring Commission Terms & Conditions</h2>
+                <p class="section-subtitle">Last Updated: November 15, 2023</p>
+                
+                <div class="highlight-box">
+                    <h3>Important Note</h3>
+                    <p>All commissions in the Photo Flare Affiliate Program are recurring for the lifetime of the referred customer's subscription. This document outlines the complete terms and conditions governing our recurring commission structure.</p>
+                </div>
+                
+                <h3 class="terms-heading" id="commission-structure">1. Commission Structure</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Lifetime Recurring Commissions:</strong> Affiliates earn commissions for as long as the referred customer maintains an active subscription with Photo Flare.</li>
+                    <li><i class="fas fa-check"></i> <strong>Tier-Based Rates:</strong> Commission rates are determined by your performance tier (Starter: 20%, Professional: 25%, Elite: 30%).</li>
+                    <li><i class="fas fa-check"></i> <strong>Tier Evaluation:</strong> Your commission tier is evaluated monthly based on the number of successful referrals in the previous month.</li>
+                    <li><i class="fas fa-check"></i> <strong>Commission Calculation:</strong> Commissions are calculated based on the subscription price at the time of payment, excluding any taxes or additional fees.</li>
+                </ul>
+                
+                <h3 class="terms-heading" id="eligibility">2. Eligibility & Qualification</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Qualified Referrals:</strong> Only customers who sign up through your unique affiliate link and maintain an active paid subscription qualify for recurring commissions.</li>
+                    <li><i class="fas fa-check"></i> <strong>Cookie Duration:</strong> The referral tracking cookie lasts for 90 days. If a customer signs up within this period, you'll receive credit.</li>
+                    <li><i class="fas fa-check"></i> <strong>Self-Referrals:</strong> Affiliates cannot refer themselves or immediate family members to earn commissions.</li>
+                    <li><i class="fas fa-check"></i> <strong>Fraud Prevention:</strong> We reserve the right to withhold commissions from referrals that appear fraudulent or violate our terms of service.</li>
+                </ul>
+                
+                <h3 class="terms-heading" id="payment-terms">3. Payment Terms</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Payment Schedule:</strong> Commissions are paid monthly, around the 15th of each month for the previous month's earnings.</li>
+                    <li><i class="fas fa-check"></i> <strong>Minimum Payout:</strong> A minimum balance of $50 is required for payment. Unpaid balances roll over to subsequent months.</li>
+                    <li><i class="fas fa-check"></i> <strong>Payment Methods:</strong> We support payments via PayPal, bank transfer, and Wise. Additional fees may apply for certain payment methods.</li>
+                    <li><i class="fas fa-check"></i> <strong>Tax Documentation:</strong> Affiliates are responsible for providing necessary tax documentation if required by law.</li>
+                </ul>
+                
+                <h3 class="terms-heading" id="subscription-changes">4. Subscription Changes & Cancellations</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Subscription Upgrades/Downgrades:</strong> Your commission adjusts automatically based on the customer's current subscription level.</li>
+                    <li><i class="fas fa-check"></i> <strong>Subscription Cancellations:</strong> If a customer cancels their subscription, your recurring commissions for that customer cease immediately.</li>
+                    <li><i class="fas fa-check"></i> <strong>Subscription Pauses:</strong> During subscription pauses, commissions are temporarily suspended until the subscription resumes.</li>
+                    <li><i class="fas fa-check"></i> <strong>Refunds:</strong> If a customer receives a refund, corresponding commissions will be deducted from your future earnings.</li>
+                </ul>
+                
+                <h3 class="terms-heading" id="program-changes">5. Program Changes & Termination</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Program Modifications:</strong> Photo Flare reserves the right to modify the affiliate program terms, commission rates, or payment structure with 30 days' notice.</li>
+                    <li><i class="fas fa-check"></i> <strong>Grandfathering:</strong> Changes to commission rates typically apply prospectively, but we reserve the right to adjust rates for existing referrals if necessary.</li>
+                    <li><i class="fas fa-check"></i> <strong>Termination:</strong> Either party may terminate the affiliate relationship at any time with written notice.</li>
+                    <li><i class="fas fa-check"></i> <strong>Post-Termination Commissions:</strong> After termination, you will continue to receive commissions for existing qualified referrals for up to 90 days.</li>
+                </ul>
+                
+                <h3 class="terms-heading" id="marketing-guidelines">6. Marketing Guidelines</h3>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check"></i> <strong>Brand Compliance:</strong> All marketing materials must comply with our brand guidelines and cannot misrepresent Photo Flare products or services.</li>
+                    <li><i class="fas fa-check"></i> <strong>Prohibited Practices:</strong> Spam, false advertising, trademark bidding, or any deceptive marketing practices are strictly prohibited.</li>
+                    <li><i class="fas fa-check"></i> <strong>Disclosure Requirements:</strong> You must clearly disclose your affiliate relationship with Photo Flare in accordance with FTC guidelines.</li>
+                    <li><i class="fas fa-check"></i> <strong>Content Usage:</strong> You may use official Photo Flare marketing materials but cannot modify them without prior written approval.</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h3>Need Clarification?</h3>
+                    <p>If you have any questions about these terms or need clarification on any aspect of our recurring commission structure, please contact our affiliate team at <a href="mailto:affiliates@photoflare.com" style="color: white; text-decoration: underline;">affiliates@photoflare.com</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Earning Recurring Commissions?</h2>
+                <p>Join thousands of successful affiliates who are earning lifetime recurring commissions with Photo Flare. Sign up today and start building your passive income stream.</p>
+                <a href="affiliate-signup.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;"><i class="fas fa-rocket"></i> Join Now - It's Free!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate-program.html">Affiliate Program</a>
+                    <a href="#press">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#help">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    
+                    if (target) {
+                        const headerHeight = document.querySelector('.desktop-header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active state for quick nav
+                        if (href.startsWith('#')) {
+                            document.querySelectorAll('.quick-nav-link').forEach(link => {
+                                link.classList.remove('active');
+                            });
+                            this.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add subtle animation to list items on hover
+        document.querySelectorAll('.terms-list li').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Toast notification function
+        function showToast(message) {
+            // Remove existing toast if any
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Create new toast
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('visible');
+            }, 10);
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('visible');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Section tracking for quick navigation
+        const sections = document.querySelectorAll('.terms-heading');
+        const navLinks = document.querySelectorAll('.quick-nav-link');
+        
+        function updateActiveNavLink() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', debounce(updateActiveNavLink, 100));
+
+        // Interactive section headings
+        document.querySelectorAll('.terms-heading').forEach(heading => {
+            heading.addEventListener('click', function() {
+                // Toggle active state
+                this.classList.toggle('active');
+                
+                // Scroll to section
+                const targetId = this.getAttribute('id');
+                if (targetId) {
+                    const targetPosition = this.getBoundingClientRect().top + window.pageYOffset - 100;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
+    </script>
+</body>
+</html>
