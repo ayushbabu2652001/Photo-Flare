@@ -1832,7 +1832,10 @@
         
         toolCards.forEach(card => {
             card.addEventListener('click', (e) => {
-                if (e.target.classList.contains('tool-btn')) return;
+                // Check if the click was on a button or inside a button
+                if (e.target.closest('.tool-btn')) {
+                    return;
+                }
                 
                 const toolName = card.querySelector('.tool-title').textContent;
                 alert(`This would open the ${toolName} tool in a real implementation.`);
