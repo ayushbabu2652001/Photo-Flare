@@ -1599,113 +1599,169 @@
     </footer>
 
     <script>
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar functionality
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
 
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-            });
-        }
-
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        // Update active nav link
-                        document.querySelectorAll('.privacy-nav a').forEach(link => {
-                            link.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                        
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
-
-        // Toggle sections
-        const toggleHeaders = document.querySelectorAll('.toggle-header');
-        
-        toggleHeaders.forEach(header => {
-            header.addEventListener('click', function() {
-                const section = this.parentElement;
-                section.classList.toggle('active');
-            });
-        });
-
-        // Update active nav link on scroll
-        const sections = document.querySelectorAll('.privacy-section');
-        const navLinks = document.querySelectorAll('.privacy-nav a');
-        
-        function updateActiveNavLink() {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', updateActiveNavLink);
-
-        // Print functionality
-        const printBtn = document.getElementById('printBtn');
-        if (printBtn) {
-            printBtn.addEventListener('click', function() {
-                window.print();
-            });
-        }
-
-        // Breadcrumb navigation
-        document.querySelector('.breadcrumb a[href="index.html"]').addEventListener('click', function(e) {
-            if (this.getAttribute('href') === 'index.html') {
-                e.preventDefault();
-                // In a real implementation, this would navigate to the home page
-                alert('This would navigate to the home page in a real implementation.');
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
             }
+
+            // Close sidebar
+            function closeSidebar() {
+                if (sidebar) sidebar.classList.remove('active');
+                if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href !== '') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            // Update active nav link
+                            document.querySelectorAll('.privacy-nav a').forEach(link => {
+                                link.classList.remove('active');
+                            });
+                            this.classList.add('active');
+                            
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Toggle sections
+            const toggleHeaders = document.querySelectorAll('.toggle-header');
+            
+            toggleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.parentElement;
+                    section.classList.toggle('active');
+                });
+            });
+
+            // Update active nav link on scroll
+            const sections = document.querySelectorAll('.privacy-section');
+            const navLinks = document.querySelectorAll('.privacy-nav a');
+            
+            function updateActiveNavLink() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNavLink);
+
+            // Print functionality
+            const printBtn = document.getElementById('printBtn');
+            if (printBtn) {
+                printBtn.addEventListener('click', function() {
+                    window.print();
+                });
+            }
+
+            // Header button functionality
+            const loginBtn = document.querySelector('a[href="login.html"]');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would redirect to login page in a real implementation.');
+                });
+            }
+
+            const upgradeBtn = document.querySelector('a[href="subscription.html"]');
+            if (upgradeBtn) {
+                upgradeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would redirect to subscription page in a real implementation.');
+                });
+            }
+
+            // Breadcrumb navigation
+            const breadcrumbHome = document.querySelector('.breadcrumb a[href="index.html"]');
+            if (breadcrumbHome) {
+                breadcrumbHome.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would navigate to the home page in a real implementation.');
+                });
+            }
+
+            // Footer link functionality
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#' && !href.startsWith('http')) {
+                        e.preventDefault();
+                        alert(`This would navigate to ${href} in a real implementation.`);
+                    }
+                });
+            });
+
+            // Animation on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Apply initial styles for animation
+            document.querySelectorAll('.privacy-nav, .privacy-content, .highlight-box, .data-table, .privacy-badge, .update-info, .contact-section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
         });
     </script>
 </body>
