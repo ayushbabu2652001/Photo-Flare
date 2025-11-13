@@ -428,6 +428,8 @@
             font-size: 0.9rem;
             flex-shrink: 0;
             min-height: 44px;
+            justify-content: center;
+            border: none;
         }
 
         .btn:active {
@@ -952,6 +954,22 @@
             color: var(--gray);
             margin-bottom: 1.5rem;
             line-height: 1.5;
+        }
+
+        .tool-cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, var(--warning), var(--accent));
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .encryption-demo {
@@ -2443,6 +2461,24 @@
         const advancedFeatureButtons = document.querySelectorAll('.feature-card .btn');
         
         advancedFeatureButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("This is a premium feature. Upgrade to Pro to access all advanced security tools.");
+            });
+        });
+
+        // Encryption demo button
+        const encryptionDemoButton = document.querySelector('.encryption-demo .btn');
+        if (encryptionDemoButton) {
+            encryptionDemoButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert("This is a premium feature. Upgrade to Pro to access advanced encryption tools.");
+            });
+        }
+
+        // Try buttons in feature cards
+        const tryButtons = document.querySelectorAll('.tool-cta .btn');
+        tryButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 alert("This is a premium feature. Upgrade to Pro to access all advanced security tools.");
