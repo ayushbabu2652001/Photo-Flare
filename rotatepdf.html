@@ -1698,8 +1698,8 @@
                     <a href="affiliate.html">Affiliate Program</a>
                     <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="Help.html">Help Center</a>
-                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
                     <a href="cookies.html">Cookie Policy</a>
                 </div>
@@ -1719,272 +1719,296 @@
     </footer>
 
     <script>
-        // Debounce function for performance
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sidebar functionality
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
 
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
 
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-            });
-        }
+            // Close sidebar
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-
-        // Tab functionality
-        const rotationModes = document.querySelectorAll('.rotation-mode');
-        const rotationContents = document.querySelectorAll('.rotation-content');
-        
-        rotationModes.forEach(mode => {
-            mode.addEventListener('click', () => {
-                const modeId = mode.getAttribute('data-mode');
-                
-                // Remove active class from all modes and contents
-                rotationModes.forEach(m => m.classList.remove('active'));
-                rotationContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to current mode and content
-                mode.classList.add('active');
-                document.getElementById(`${modeId}Tab`).classList.add('active');
-            });
-        });
-
-        // Upload area functionality
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInfo = document.getElementById('fileInfo');
-        
-        uploadArea.addEventListener('click', () => {
-            // Simulate file selection
-            uploadArea.classList.add('active');
-            fileInfo.classList.add('active');
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
             
-            // In a real implementation, this would trigger a file input dialog
-            // For demo purposes, we'll just show the file info
-            setTimeout(() => {
-                alert('In a real implementation, this would open a file selection dialog. For this demo, we\'re simulating a file upload.');
-            }, 300);
-        });
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
 
-        // Page selection functionality
-        const pageItems = document.querySelectorAll('.page-item');
-        
-        pageItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('active');
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
             });
-        });
 
-        // Select All functionality
-        document.getElementById('selectAllBtn').addEventListener('click', () => {
+            // Tab functionality
+            const rotationModes = document.querySelectorAll('.rotation-mode');
+            const rotationContents = document.querySelectorAll('.rotation-content');
+            
+            rotationModes.forEach(mode => {
+                mode.addEventListener('click', () => {
+                    const modeId = mode.getAttribute('data-mode');
+                    
+                    // Remove active class from all modes and contents
+                    rotationModes.forEach(m => m.classList.remove('active'));
+                    rotationContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current mode and content
+                    mode.classList.add('active');
+                    document.getElementById(`${modeId}Tab`).classList.add('active');
+                });
+            });
+
+            // Upload area functionality
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInfo = document.getElementById('fileInfo');
+            
+            uploadArea.addEventListener('click', () => {
+                // Simulate file selection
+                uploadArea.classList.add('active');
+                fileInfo.classList.add('active');
+                
+                // In a real implementation, this would trigger a file input dialog
+                setTimeout(() => {
+                    alert('In a real implementation, this would open a file selection dialog. For this demo, we\'re simulating a file upload.');
+                }, 300);
+            });
+
+            // Page selection functionality
+            const pageItems = document.querySelectorAll('.page-item');
+            
             pageItems.forEach(item => {
-                item.classList.add('active');
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
             });
-        });
 
-        // Clear Selection functionality
-        document.getElementById('clearSelectionBtn').addEventListener('click', () => {
-            pageItems.forEach(item => {
-                item.classList.remove('active');
+            // Select All functionality
+            document.getElementById('selectAllBtn').addEventListener('click', () => {
+                pageItems.forEach(item => {
+                    item.classList.add('active');
+                });
             });
-        });
 
-        // Rotation controls
-        const pdfPreview = document.getElementById('pdfPreview');
-        const currentRotationSpan = document.getElementById('currentRotation');
-        let currentRotation = 0;
-        
-        document.getElementById('rotateLeftBtn').addEventListener('click', () => {
-            rotatePages(-90);
-        });
-        
-        document.getElementById('rotateRightBtn').addEventListener('click', () => {
-            rotatePages(90);
-        });
-        
-        document.getElementById('rotate180Btn').addEventListener('click', () => {
-            rotatePages(180);
-        });
-        
-        function rotatePages(angle) {
-            // Get selected pages
-            const selectedPages = document.querySelectorAll('.page-item.active');
+            // Clear Selection functionality
+            document.getElementById('clearSelectionBtn').addEventListener('click', () => {
+                pageItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+            });
+
+            // Rotation controls
+            const pdfPreview = document.getElementById('pdfPreview');
+            const currentRotationSpan = document.getElementById('currentRotation');
+            let currentRotation = 0;
             
-            if (selectedPages.length === 0) {
-                alert('Please select at least one page to rotate.');
-                return;
-            }
-            
-            // Update rotation for selected pages
-            selectedPages.forEach(page => {
-                const rotationElement = page.querySelector('.page-rotation');
-                let currentPageRotation = parseInt(rotationElement.textContent);
-                currentPageRotation = (currentPageRotation + angle) % 360;
-                if (currentPageRotation < 0) currentPageRotation += 360;
-                rotationElement.textContent = `${currentPageRotation}°`;
+            document.getElementById('rotateLeftBtn').addEventListener('click', () => {
+                rotatePages(-90);
             });
             
-            // Update preview rotation
-            currentRotation = (currentRotation + angle) % 360;
-            if (currentRotation < 0) currentRotation += 360;
-            pdfPreview.style.transform = `rotate(${currentRotation}deg)`;
-            currentRotationSpan.textContent = `${currentRotation}°`;
-        }
-
-        // Apply rotation
-        document.getElementById('applyRotationBtn').addEventListener('click', () => {
-            alert('Rotation applied to selected pages!');
-        });
-
-        // Batch rotation options
-        const batchOptions = document.querySelectorAll('.batch-option');
-        batchOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                batchOptions.forEach(o => o.classList.remove('active'));
-                option.classList.add('active');
-            });
-        });
-
-        // Apply batch rotation
-        document.getElementById('applyBatchBtn').addEventListener('click', () => {
-            const selectedOption = document.querySelector('.batch-option.active');
-            if (!selectedOption) {
-                alert('Please select a batch rotation option.');
-                return;
-            }
-            
-            const rotationType = selectedOption.getAttribute('data-rotation');
-            alert(`Batch rotation (${rotationType}°) applied to all pages!`);
-        });
-
-        // AI rotation options
-        const aiOptions = document.querySelectorAll('.ai-option');
-        aiOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                aiOptions.forEach(o => o.classList.remove('active'));
-                option.classList.add('active');
-            });
-        });
-
-        // Apply AI rotation
-        document.getElementById('applyAiBtn').addEventListener('click', () => {
-            const selectedOption = document.querySelector('.ai-option.active');
-            if (!selectedOption) {
-                alert('Please select an AI rotation option.');
-                return;
-            }
-            
-            const aiType = selectedOption.getAttribute('data-ai');
-            alert(`AI rotation (${aiType}) applied! The AI has analyzed and corrected page orientations.`);
-        });
-
-        // Download button
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            alert('In a real implementation, this would download your rotated PDF document. For this demo, we\'re showing a success message.');
-        });
-
-        // Reset rotation
-        document.getElementById('resetRotationBtn').addEventListener('click', () => {
-            currentRotation = 0;
-            pdfPreview.style.transform = `rotate(${currentRotation}deg)`;
-            currentRotationSpan.textContent = `${currentRotation}°`;
-            
-            // Reset all page rotations
-            document.querySelectorAll('.page-rotation').forEach(el => {
-                el.textContent = '0°';
+            document.getElementById('rotateRightBtn').addEventListener('click', () => {
+                rotatePages(90);
             });
             
-            alert('All rotations have been reset.');
-        });
-
-        // New document
-        document.getElementById('newDocumentBtn').addEventListener('click', () => {
-            if (confirm('Are you sure you want to start a new document? All current changes will be lost.')) {
-                uploadArea.classList.remove('active');
-                fileInfo.classList.remove('active');
-                currentRotation = 0;
-                pdfPreview.style.transform = `rotate(${currentRotation}deg)`;
-                currentRotationSpan.textContent = `${currentRotation}°`;
+            document.getElementById('rotate180Btn').addEventListener('click', () => {
+                rotatePages(180);
+            });
+            
+            function rotatePages(angle) {
+                // Get selected pages
+                const selectedPages = document.querySelectorAll('.page-item.active');
                 
+                if (selectedPages.length === 0) {
+                    alert('Please select at least one page to rotate.');
+                    return;
+                }
+                
+                // Update rotation for selected pages
+                selectedPages.forEach(page => {
+                    const rotationElement = page.querySelector('.page-rotation');
+                    let currentPageRotation = parseInt(rotationElement.textContent.replace('°', ''));
+                    currentPageRotation = (currentPageRotation + angle) % 360;
+                    if (currentPageRotation < 0) currentPageRotation += 360;
+                    rotationElement.textContent = `${currentPageRotation}°`;
+                });
+                
+                // Update preview rotation (show first selected page's rotation)
+                const firstSelectedPage = document.querySelector('.page-item.active');
+                if (firstSelectedPage) {
+                    const firstPageRotation = parseInt(firstSelectedPage.querySelector('.page-rotation').textContent.replace('°', ''));
+                    pdfPreview.style.transform = `rotate(${firstPageRotation}deg)`;
+                    currentRotationSpan.textContent = `${firstPageRotation}°`;
+                }
+            }
+
+            // Apply rotation
+            document.getElementById('applyRotationBtn').addEventListener('click', () => {
+                const selectedPages = document.querySelectorAll('.page-item.active');
+                if (selectedPages.length === 0) {
+                    alert('Please select at least one page to apply rotation.');
+                    return;
+                }
+                alert(`Rotation applied to ${selectedPages.length} page(s)!`);
+            });
+
+            // Batch rotation options
+            const batchOptions = document.querySelectorAll('.batch-option');
+            batchOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    batchOptions.forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                });
+            });
+
+            // Apply batch rotation
+            document.getElementById('applyBatchBtn').addEventListener('click', () => {
+                const selectedOption = document.querySelector('.batch-option.active');
+                if (!selectedOption) {
+                    alert('Please select a batch rotation option.');
+                    return;
+                }
+                
+                const rotationType = selectedOption.getAttribute('data-rotation');
+                
+                // Apply rotation to all pages
+                pageItems.forEach(page => {
+                    const rotationElement = page.querySelector('.page-rotation');
+                    let currentRotation = 0;
+                    
+                    if (rotationType === '90') {
+                        currentRotation = 90;
+                    } else if (rotationType === '-90') {
+                        currentRotation = 270;
+                    } else if (rotationType === '180') {
+                        currentRotation = 180;
+                    }
+                    
+                    rotationElement.textContent = `${currentRotation}°`;
+                });
+                
+                // Update preview
+                pdfPreview.style.transform = `rotate(0deg)`;
+                currentRotationSpan.textContent = `0°`;
+                
+                alert(`Batch rotation applied to all pages!`);
+            });
+
+            // AI rotation options
+            const aiOptions = document.querySelectorAll('.ai-option');
+            aiOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    aiOptions.forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                });
+            });
+
+            // Apply AI rotation
+            document.getElementById('applyAiBtn').addEventListener('click', () => {
+                const selectedOption = document.querySelector('.ai-option.active');
+                if (!selectedOption) {
+                    alert('Please select an AI rotation option.');
+                    return;
+                }
+                
+                const aiType = selectedOption.getAttribute('data-ai');
+                
+                // Simulate AI rotation by randomly rotating some pages
+                pageItems.forEach((page, index) => {
+                    // Simulate AI detection - randomly rotate some pages
+                    if (Math.random() > 0.5) {
+                        const rotations = [0, 90, 180, 270];
+                        const randomRotation = rotations[Math.floor(Math.random() * rotations.length)];
+                        const rotationElement = page.querySelector('.page-rotation');
+                        rotationElement.textContent = `${randomRotation}°`;
+                    }
+                });
+                
+                alert(`AI rotation (${aiType}) applied! The AI has analyzed and corrected page orientations.`);
+            });
+
+            // Download button
+            document.getElementById('downloadBtn').addEventListener('click', () => {
+                alert('In a real implementation, this would download your rotated PDF document. For this demo, we\'re showing a success message.');
+            });
+
+            // Reset rotation
+            document.getElementById('resetRotationBtn').addEventListener('click', () => {
                 // Reset all page rotations
                 document.querySelectorAll('.page-rotation').forEach(el => {
                     el.textContent = '0°';
                 });
                 
-                // Clear selections
-                pageItems.forEach(item => {
-                    item.classList.remove('active');
-                });
-            }
-        });
+                // Reset preview
+                pdfPreview.style.transform = `rotate(0deg)`;
+                currentRotationSpan.textContent = `0°`;
+                
+                alert('All rotations have been reset.');
+            });
 
-        // FAQ functionality
-        document.addEventListener('DOMContentLoaded', function() {
+            // New document
+            document.getElementById('newDocumentBtn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to start a new document? All current changes will be lost.')) {
+                    uploadArea.classList.remove('active');
+                    fileInfo.classList.remove('active');
+                    
+                    // Reset all page rotations
+                    document.querySelectorAll('.page-rotation').forEach(el => {
+                        el.textContent = '0°';
+                    });
+                    
+                    // Reset preview
+                    pdfPreview.style.transform = `rotate(0deg)`;
+                    currentRotationSpan.textContent = `0°`;
+                    
+                    // Clear selections
+                    pageItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Reset batch and AI selections
+                    batchOptions.forEach(option => option.classList.remove('active'));
+                    aiOptions.forEach(option => option.classList.remove('active'));
+                }
+            });
+
+            // FAQ functionality
             const faqItems = document.querySelectorAll('.faq-item');
             
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
                 
                 question.addEventListener('click', () => {
-                    // Close all other FAQ items
+                    // Toggle current item
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all FAQ items
                     faqItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
+                        otherItem.classList.remove('active');
                     });
                     
-                    // Toggle current item
-                    item.classList.toggle('active');
+                    // Open clicked item if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
                 });
             });
         });
-
-        // Initialize page on load
-        function initializePage() {
-            // Any initialization code needed when the page loads
-        }
-
-        // Initialize on page load
-        initializePage();
-
-        // Reinitialize on window resize
-        window.addEventListener('resize', debounce(initializePage, 250));
     </script>
 </body>
 </html>
