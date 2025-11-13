@@ -1121,110 +1121,6 @@
             cursor: pointer;
         }
 
-        /* Ad Container */
-        .ad-container {
-            margin: 1.5rem 0;
-            text-align: center;
-            background: white;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .ad-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ad-space {
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--light);
-            border: 1px dashed var(--light-gray);
-            border-radius: 8px;
-            color: var(--gray);
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--dark), #1a1a2e);
-            color: white;
-            padding: 2rem 0 1rem;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo .logo-icon {
-            font-size: 1.8rem;
-        }
-
-        .footer-logo .logo-text {
-            font-size: 1.6rem;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: var(--transition);
-            padding: 0.3rem 0.5rem;
-            white-space: nowrap;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .copyright {
-            color: #6c757d;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            color: #adb5bd;
-            font-size: 1.3rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            color: white;
-            transform: translateY(-3px);
-        }
-
         /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
@@ -1385,97 +1281,8 @@
             }
         }
 
-        /* Special media query for when viewing desktop site on mobile */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .desktop-header {
-                padding: 0.8rem 0;
-            }
-            
-            .logo-text {
-                font-size: 1.3rem;
-            }
-            
-            nav ul {
-                gap: 0.7rem;
-            }
-            
-            nav a {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.9rem;
-            }
-            
-            .btn {
-                padding: 0.6rem 0.9rem;
-                font-size: 0.85rem;
-            }
-            
-            .header-content {
-                gap: 0.5rem;
-            }
-            
-            .header-actions {
-                flex-wrap: nowrap;
-                gap: 0.5rem;
-            }
-        }
-
-        /* For very small desktop screens */
-        @media (min-width: 768px) and (max-width: 900px) {
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
-            nav ul {
-                gap: 0.5rem;
-            }
-            
-            nav a {
-                padding: 0.3rem 0.5rem;
-                font-size: 0.85rem;
-            }
-            
-            .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
-            .header-actions {
-                gap: 0.3rem;
-            }
-        }
-
-        /* Special fix for buttons on very narrow desktop screens */
-        @media (min-width: 768px) and (max-width: 820px) {
-            .header-content {
-                flex-wrap: nowrap;
-            }
-            
-            nav {
-                order: 3;
-                flex-basis: 100%;
-                margin-top: 0.5rem;
-            }
-            
-            nav ul {
-                justify-content: center;
-            }
-            
-            .header-actions {
-                margin-left: auto;
-            }
-        }
-
         /* Better footer spacing on very small screens */
         @media (max-width: 360px) {
-            .footer-links {
-                gap: 0.5rem;
-            }
-            
-            .footer-links a {
-                padding: 0.3rem 0.3rem;
-                font-size: 0.85rem;
-            }
-            
             .result-stats {
                 grid-template-columns: 1fr;
             }
@@ -1563,17 +1370,6 @@
             <a href="subscription.html" class="sidebar-btn primary">
                 <i class="fas fa-crown"></i> Upgrade Now
             </a>
-        </div>
-    </div>
-
-    <!-- Ad Space -->
-    <div class="container">
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-space" id="ad-top">
-                <!-- Google AdSense code will be inserted here -->
-                <p>Ad Space (728x90)</p>
-            </div>
         </div>
     </div>
 
@@ -1857,17 +1653,6 @@
         </div>
     </div>
 
-    <!-- Ad Space -->
-    <div class="container">
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-space" id="ad-middle">
-                <!-- Google AdSense code will be inserted here -->
-                <p>Ad Space (728x90)</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Features Section -->
     <section class="features-section">
         <div class="container">
@@ -1946,40 +1731,42 @@
             };
         }
 
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
+        // Sidebar functionality - FIXED VERSION
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
 
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                });
+            }
+
+            // Close sidebar
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
             });
-        }
-
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
-        }
-        
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
         });
 
         // DOM Elements for Image Resizer
