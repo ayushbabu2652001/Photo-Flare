@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ready to boost your productivity? Join thousands of professionals who use Photo Flare Pro to save time and work more efficiently. Upgrade to Pro now!">
+    <meta name="keywords" content="Photo Flare Pro, PDF compression, upgrade to pro, productivity tools, batch processing">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Photo Flare Pro - Boost Your Productivity">
+    <meta property="og:description" content="Join thousands of professionals who use Photo Flare Pro to save time and work more efficiently.">
+    <meta property="og:type" content="website">
+    <title>Photo Flare Pro - Boost Your Productivity | Upgrade Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #4895ef;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --premium-gold: #ffd700;
+            --premium-purple: #9d4edd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-logo 6s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            animation: float-btn 4s ease-in-out infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            animation: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-purple));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+            animation: premium-glow 3s ease-in-out infinite;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(157, 78, 221, 0.6);
+            animation: none;
+        }
+
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: float-hero 8s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--gray);
+        }
+
+        .cta-large {
+            font-size: 1.5rem;
+            padding: 1.2rem 3rem;
+            margin-top: 2rem;
+        }
+
+        .stats-section {
+            padding: 4rem 0;
+            background: white;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .benefits-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.2rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+            animation: float-card 10s ease-in-out infinite;
+        }
+
+        .benefit-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .benefit-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            animation: none;
+        }
+
+        .benefit-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float-icon 7s ease-in-out infinite;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .benefit-description {
+            color: var(--gray);
+        }
+
+        .pricing-section {
+            padding: 4rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: float-card 10s ease-in-out infinite;
+        }
+
+        .pricing-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .pricing-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            animation: none;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--premium-gold), var(--premium-purple));
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .savings-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--success), #3a86ff);
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .plan-period {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .plan-features i {
+            color: var(--success);
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+        }
+
+        .plan-features .disabled {
+            color: var(--gray);
+        }
+
+        .plan-features .disabled i {
+            color: var(--gray);
+        }
+
+        .testimonials-section {
+            padding: 4rem 0;
+            background: white;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: float-testimonial 8s ease-in-out infinite;
+        }
+
+        .testimonial-card:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        .testimonial-card:nth-child(3) {
+            animation-delay: 4s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: var(--border-radius);
+            margin: 3rem 0;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ad-space {
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px dashed var(--light-gray);
+            border-radius: 8px;
+            color: var(--gray);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 2rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Floating Animations */
+        @keyframes float-logo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes float-hero {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-btn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        @keyframes premium-glow {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(157, 78, 221, 0.7);
+            }
+        }
+
+        @keyframes float-card {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes float-icon {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes float-testimonial {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .pricing-grid {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .pricing-card {
+                padding: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .pricing-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="#pricing" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-camera-retro logo-icon"></i>
+                    <span class="logo-text">Photo Flare</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html" class="active">Premium Tools</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="#pricing" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html" class="active"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="#pricing" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Ready to Boost Your Productivity?</h1>
+            <p>Join thousands of professionals who use Photo Flare Pro to save time and work more efficiently.</p>
+            <a href="#pricing" class="btn btn-premium cta-large">
+                <i class="fas fa-crown"></i> Upgrade to Pro Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Pro Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2.5M+</div>
+                    <div class="stat-label">Files Processed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3.2x</div>
+                    <div class="stat-label">Average Time Saved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">Why Professionals Choose Photo Flare Pro</h2>
+            <p class="section-subtitle">Discover how our premium features can transform your workflow</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-bolt benefit-icon"></i>
+                    <h3 class="benefit-title">Lightning Fast Processing</h3>
+                    <p class="benefit-description">Compress files up to 3x faster with our optimized processing engine. Save hours on large projects.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-layer-group benefit-icon"></i>
+                    <h3 class="benefit-title">Batch Processing</h3>
+                    <p class="benefit-description">Process multiple files simultaneously. Perfect for handling large volumes of documents efficiently.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-file-archive benefit-icon"></i>
+                    <h3 class="benefit-title">Large File Support</h3>
+                    <p class="benefit-description">Work with files up to 1GB in size. No more splitting large documents before processing.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-sliders-h benefit-icon"></i>
+                    <h3 class="benefit-title">Advanced Controls</h3>
+                    <p class="benefit-description">Fine-tune compression settings for optimal results. Get the perfect balance of quality and file size.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-headset benefit-icon"></i>
+                    <h3 class="benefit-title">Priority Support</h3>
+                    <p class="benefit-description">Get help when you need it with our dedicated priority support channel.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-infinity benefit-icon"></i>
+                    <h3 class="benefit-title">Unlimited Usage</h3>
+                    <p class="benefit-description">No restrictions, no limits. Process as many files as you need, whenever you need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-top">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Pro Plan</h2>
+            <p class="section-subtitle">All plans include our core features. Upgrade to Pro for unlimited access and advanced capabilities.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Free</h3>
+                    <div class="plan-price">$0</div>
+                    <div class="plan-period">Forever</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Basic PDF compression</li>
+                        <li><i class="fas fa-check"></i> 10MB file size limit</li>
+                        <li><i class="fas fa-check"></i> 5 compressions per day</li>
+                        <li><i class="fas fa-check"></i> Standard processing speed</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Batch processing</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Advanced compression options</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Watermark removal</li>
+                    </ul>
+                    <a href="index.html" class="btn btn-outline" style="width: 100%;">Continue with Free</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3 class="plan-name">Pro Monthly</h3>
+                    <div class="plan-price">$4</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Advanced PDF compression</li>
+                        <li><i class="fas fa-check"></i> 500MB file size limit</li>
+                        <li><i class="fas fa-check"></i> Unlimited compressions</li>
+                        <li><i class="fas fa-check"></i> 2x faster processing</li>
+                        <li><i class="fas fa-check"></i> Batch processing (up to 10 files)</li>
+                        <li><i class="fas fa-check"></i> Advanced compression options</li>
+                        <li><i class="fas fa-check"></i> Priority email support</li>
+                        <li><i class="fas fa-check"></i> Watermark removal</li>
+                    </ul>
+                    <a href="pro-monthly.html" class="btn btn-premium" style="width: 100%;">Get Started</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="savings-badge">Save 17%</div>
+                    <h3 class="plan-name">Pro Annual</h3>
+                    <div class="plan-price">$30</div>
+                    <div class="plan-period">per year (save 17%)</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Everything in Pro Monthly</li>
+                        <li><i class="fas fa-check"></i> 1GB file size limit</li>
+                        <li><i class="fas fa-check"></i> Unlimited compressions</li>
+                        <li><i class="fas fa-check"></i> 3x faster processing</li>
+                        <li><i class="fas fa-check"></i> Batch processing (unlimited files)</li>
+                        <li><i class="fas fa-check"></i> All advanced options</li>
+                        <li><i class="fas fa-check"></i> Priority chat & email support</li>
+                        <li><i class="fas fa-check"></i> No watermarks</li>
+                    </ul>
+                    <a href="pro-annual.html" class="btn btn-primary" style="width: 100%;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Join thousands of satisfied users who have upgraded to Photo Flare Pro</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "As a graphic designer, I work with large PDF files daily. Photo Flare Pro has saved me hours of waiting time with its faster processing speeds. The batch processing feature is a lifesaver!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Graphic Designer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The Pro Annual plan is perfect for my architecture firm. We process hundreds of large PDF files monthly, and the unlimited batch processing saves us countless hours."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Architecture Firm Owner</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "I was hesitant to upgrade at first, but the unlimited usage and larger file size limits have made my research workflow so much more efficient. The time saved is well worth the investment."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EP</div>
+                        <div class="author-info">
+                            <h4>Emily Parker</h4>
+                            <p>University Researcher</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Boost Your Productivity?</h2>
+            <p class="cta-subtitle">Join thousands of professionals who use Photo Flare Pro to save time and work more efficiently.</p>
+            <a href="#pricing" class="btn btn-premium" style="font-size: 1.5rem; padding: 1.2rem 2.5rem;">
+                <i class="fas fa-crown"></i> Upgrade to Pro Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Ad Space -->
+    <div class="container">
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <div class="ad-space" id="ad-middle">
+                <!-- Google AdSense code will be inserted here -->
+                <p>Ad Space (728x90)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-camera-retro logo-icon"></i>
+                        <span class="logo-text">Photo Flare</span>
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Handle pricing plan buttons
+        document.querySelectorAll('.pricing-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                // Check if it's a non-existing page
+                if (href && (href.includes('pro-monthly.html') || href.includes('pro-annual.html'))) {
+                    e.preventDefault();
+                    alert("This subscription page is under development. Please check back later or contact us for upgrade options.");
+                }
+            });
+        });
+
+        // Handle navigation links for pages that might not exist
+        document.querySelectorAll('nav a, .footer-links a, .sidebar-nav a').forEach(link => {
+            const href = link.getAttribute('href');
+            // Check if it's an internal link that might not exist
+            if (href && href.endsWith('.html') && !href.includes('index.html') && !href.includes('premium-tools.html') && !href.includes('pricing.html')) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert("This page is under development. Please check back later.");
+                });
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply initial styles for animation
+        document.querySelectorAll('.benefit-card, .pricing-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
