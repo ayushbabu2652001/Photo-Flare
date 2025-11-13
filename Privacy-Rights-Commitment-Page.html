@@ -123,12 +123,14 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -892,37 +894,47 @@
             }, observerOptions);
             
             // Apply initial styles for animation
-            document.querySelectorAll('.commitment-intro, .commitment-card, .rights-section, .process-section, .cta-section').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
+            const animatedElements = document.querySelectorAll('.commitment-intro, .commitment-card, .rights-section, .process-section, .cta-section');
+            if (animatedElements.length > 0) {
+                animatedElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    observer.observe(el);
+                });
+            }
             
             // Add staggered animation for commitment cards
             const cards = document.querySelectorAll('.commitment-card');
-            cards.forEach((card, index) => {
-                card.style.transitionDelay = `${index * 0.1}s`;
-            });
+            if (cards.length > 0) {
+                cards.forEach((card, index) => {
+                    card.style.transitionDelay = `${index * 0.1}s`;
+                });
+            }
             
             // Add staggered animation for rights items
             const rightsItems = document.querySelectorAll('.right-item');
-            rightsItems.forEach((item, index) => {
-                item.style.transitionDelay = `${index * 0.05}s`;
-            });
+            if (rightsItems.length > 0) {
+                rightsItems.forEach((item, index) => {
+                    item.style.transitionDelay = `${index * 0.05}s`;
+                });
+            }
             
             // Add staggered animation for process steps
             const processSteps = document.querySelectorAll('.process-step');
-            processSteps.forEach((step, index) => {
-                step.style.transitionDelay = `${index * 0.2}s`;
-            });
+            if (processSteps.length > 0) {
+                processSteps.forEach((step, index) => {
+                    step.style.transitionDelay = `${index * 0.2}s`;
+                });
+            }
             
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') !== '#') {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href !== '') {
                         e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
+                        const target = document.querySelector(href);
                         if (target) {
                             target.scrollIntoView({
                                 behavior: 'smooth',
@@ -932,6 +944,50 @@
                     }
                 });
             });
+
+            // Button click handlers for demonstration
+            const contactDpoBtn = document.querySelector('a[href="contact-dpo.html"]');
+            if (contactDpoBtn) {
+                contactDpoBtn.addEventListener('click', function(e) {
+                    // In a real application, this would navigate to the contact page
+                    // For demo purposes, we'll show an alert
+                    e.preventDefault();
+                    alert('Redirecting to Data Protection Officer contact form...');
+                    // Uncomment the next line for actual navigation
+                    // window.location.href = 'contact-dpo.html';
+                });
+            }
+
+            const privacyPolicyBtn = document.querySelector('a[href="privacy-policy.html"]');
+            if (privacyPolicyBtn) {
+                privacyPolicyBtn.addEventListener('click', function(e) {
+                    // In a real application, this would navigate to the privacy policy page
+                    // For demo purposes, we'll show an alert
+                    e.preventDefault();
+                    alert('Redirecting to Privacy Policy page...');
+                    // Uncomment the next line for actual navigation
+                    // window.location.href = 'privacy-policy.html';
+                });
+            }
+
+            // Header button functionality
+            const loginBtn = document.querySelector('a[href="login.html"]');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Redirecting to login page...');
+                    // window.location.href = 'login.html';
+                });
+            }
+
+            const upgradeBtn = document.querySelector('a[href="subscription.html"]');
+            if (upgradeBtn) {
+                upgradeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Redirecting to subscription page...');
+                    // window.location.href = 'subscription.html';
+                });
+            }
         });
     </script>
 </body>
