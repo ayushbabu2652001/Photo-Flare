@@ -1635,11 +1635,14 @@
         const pressCards = document.querySelectorAll('.press-card');
         pressCards.forEach(card => {
             card.addEventListener('click', function(e) {
-                if (e.target.tagName !== 'A') {
-                    const link = this.querySelector('a');
-                    if (link) {
-                        window.location.href = link.getAttribute('href');
-                    }
+                // Check if the click was on a button or inside a button
+                if (e.target.closest('.btn')) {
+                    return;
+                }
+                
+                const link = this.querySelector('a');
+                if (link) {
+                    window.location.href = link.getAttribute('href');
                 }
             });
         });
@@ -1666,6 +1669,30 @@
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             fadeObserver.observe(el);
+        });
+
+        // Add error handling for IntersectionObserver in older browsers
+        if (!('IntersectionObserver' in window)) {
+            document.querySelectorAll('.press-card, .coverage-card, .kit-card, .timeline-item, .contact-item').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+
+        // Ensure all buttons have proper cursor styling
+        document.querySelectorAll('button, .btn, .sidebar-btn, .mobile-header-btn, .mobile-nav-btn').forEach(btn => {
+            btn.style.cursor = 'pointer';
+        });
+
+        // Fix for press card click events on mobile
+        pressCards.forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
         });
     </script>
 </body>
