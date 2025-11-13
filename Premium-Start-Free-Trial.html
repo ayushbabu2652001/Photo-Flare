@@ -50,17 +50,303 @@
             padding: 0 20px;
         }
 
-        header {
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -68,6 +354,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -86,8 +373,45 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
+        }
+
         .btn {
-            padding: 0.7rem 1.5rem;
+            padding: 0.7rem 1rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -96,6 +420,36 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            min-height: 44px;
+            border: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
         }
 
         .btn-premium {
@@ -108,16 +462,6 @@
         .btn-premium:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: rgba(67, 97, 238, 0.1);
         }
 
         .main-content {
@@ -138,6 +482,7 @@
             box-shadow: var(--box-shadow);
             position: relative;
             overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .trial-hero::before {
@@ -204,6 +549,7 @@
             background: var(--light);
             border-radius: var(--border-radius);
             transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .trial-feature:hover {
@@ -244,6 +590,7 @@
             max-width: 500px;
             margin: 0 auto;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .form-group {
@@ -273,6 +620,22 @@
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
+        .form-group.error input {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
         .form-submit {
             width: 100%;
             padding: 1rem;
@@ -295,6 +658,13 @@
             box-shadow: 0 6px 15px rgba(255, 140, 0, 0.4);
         }
 
+        .form-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
         .trial-note {
             margin-top: 1.5rem;
             color: var(--gray);
@@ -315,6 +685,7 @@
             background: white;
             margin-top: 3rem;
             border-radius: var(--border-radius);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .benefits-grid {
@@ -330,6 +701,7 @@
             background: var(--light);
             border-radius: var(--border-radius);
             transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .benefit-card:hover {
@@ -355,55 +727,29 @@
             color: var(--gray);
         }
 
-        footer {
-            background: linear-gradient(135deg, var(--dark), #1a1a2e);
-            color: white;
-            padding: 2rem 0;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .footer-logo .logo-icon {
-            font-size: 1.8rem;
-        }
-
-        .footer-logo .logo-text {
-            font-size: 1.5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #adb5bd;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .copyright {
-            color: #6c757d;
-            font-size: 0.9rem;
+        .loading {
+            display: none;
             text-align: center;
+            padding: 1.5rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            border-top-color: #ff8c00;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Animations */
@@ -420,19 +766,143 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 1.6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.3rem 0.5rem;
+            white-space: nowrap;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: #adb5bd;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Media Queries - Mobile First Approach */
+
+        /* Small Devices (576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                padding: 0 20px;
             }
             
             .trial-title {
                 font-size: 2.2rem;
             }
+        }
+
+        /* Medium Devices (768px and up) */
+        @media (min-width: 768px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+            
+            .trial-title {
+                font-size: 2.5rem;
+            }
             
             .trial-subtitle {
                 font-size: 1.1rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Large Devices (992px and up) */
+        @media (min-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Extra Small Devices (400px and below) */
+        @media (max-width: 400px) {
+            .trial-title {
+                font-size: 1.8rem;
+            }
+            
+            .trial-form {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
             }
             
             .trial-features {
@@ -442,42 +912,184 @@
             .benefits-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Special media query for when viewing desktop site on mobile */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-header {
+                padding: 0.8rem 0;
+            }
             
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                gap: 0.7rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            
+            .header-content {
+                gap: 0.5rem;
+            }
+            
+            .header-actions {
+                flex-wrap: nowrap;
+                gap: 0.5rem;
             }
         }
 
-        @media (max-width: 576px) {
-            .trial-hero {
-                padding: 2rem 1rem;
+        /* For very small desktop screens */
+        @media (min-width: 768px) and (max-width: 900px) {
+            .logo-text {
+                font-size: 1.2rem;
             }
             
-            .trial-title {
-                font-size: 1.8rem;
+            nav ul {
+                gap: 0.5rem;
             }
             
-            .trial-form {
-                padding: 1.5rem;
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .header-actions {
+                gap: 0.3rem;
+            }
+        }
+
+        /* Special fix for buttons on very narrow desktop screens */
+        @media (min-width: 768px) and (max-width: 820px) {
+            .header-content {
+                flex-wrap: nowrap;
+            }
+            
+            nav {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .header-actions {
+                margin-left: auto;
+            }
+        }
+
+        /* Better footer spacing on very small screens */
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn btn-premium">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
                     <i class="fas fa-camera-retro logo-icon"></i>
                     <span class="logo-text">Photo Flare</span>
                 </a>
-                <a href="pricing.html" class="btn btn-outline">View Plans</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">All Tools</a></li>
+                        <li><a href="pdf-tools.html">PDF Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="conversion.html">Conversion</a></li>
+                        <li><a href="premium-tools.html">Premium Tools</a></li>
+                        <li><a href="pricing.html" class="active">Pricing</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="subscription.html" class="btn btn-premium">Upgrade Now</a>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html" class="active"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -524,17 +1136,24 @@
                     </div>
                     
                     <div class="trial-form">
-                        <div class="form-group">
+                        <div class="loading" id="loadingIndicator">
+                            <div class="spinner"></div>
+                            <p>Creating your account...</p>
+                        </div>
+                        
+                        <div class="form-group" id="emailGroup">
                             <label for="email">Email Address</label>
                             <input type="email" id="email" placeholder="Enter your email">
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="passwordGroup">
                             <label for="password">Create Password</label>
                             <input type="password" id="password" placeholder="Create a secure password">
+                            <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
                         </div>
                         
-                        <button class="form-submit">
+                        <button class="form-submit" type="button" id="submitBtn">
                             <i class="fas fa-crown"></i> Start Free Trial
                         </button>
                         
@@ -588,40 +1207,172 @@
                 </div>
                 
                 <div class="footer-links">
-                    <a href="about.html">About</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
                     <a href="blog.html">Blog</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="affiliate.html">Affiliate Program</a>
+                    <a href="press.html">Press</a>
                     <a href="contact.html">Contact</a>
-                    <a href="privacy.html">Privacy</a>
-                    <a href="#terms">Terms</a>
-                    <a href="#help">Help</a>
+                    <a href="Help.html">Help Center</a>
+                    <a href="Learn-More-privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
                 </div>
                 
-                <p class="copyright">© 2023 Photo Flare. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                
+                <p class="copyright">© 2023 Photo Flare. All rights reserved. | <a href="#sitemap" style="color: #6c757d; text-decoration: none;">Sitemap</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Form submission
-        document.querySelector('.form-submit').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (!email || !password) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // In a real implementation, this would submit the form
-            alert('Thank you for signing up! Your free trial has been activated.');
-            
-            // Reset form
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-        });
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
         
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // DOM Elements for Free Trial Form
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const emailGroup = document.getElementById('emailGroup');
+        const passwordGroup = document.getElementById('passwordGroup');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+
+        // Event Listeners
+        emailInput.addEventListener('input', debounce(validateEmail, 500));
+        passwordInput.addEventListener('input', debounce(validatePassword, 500));
+        submitBtn.addEventListener('click', handleFormSubmit);
+
+        // Functions
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!email) {
+                setError(emailGroup, emailError, 'Email is required');
+                return false;
+            } else if (!emailRegex.test(email)) {
+                setError(emailGroup, emailError, 'Please enter a valid email address');
+                return false;
+            } else {
+                removeError(emailGroup, emailError);
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            const password = passwordInput.value;
+            
+            if (!password) {
+                setError(passwordGroup, passwordError, 'Password is required');
+                return false;
+            } else if (password.length < 6) {
+                setError(passwordGroup, passwordError, 'Password must be at least 6 characters');
+                return false;
+            } else {
+                removeError(passwordGroup, passwordError);
+                return true;
+            }
+        }
+
+        function setError(group, errorElement, message) {
+            group.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.classList.add('active');
+        }
+
+        function removeError(group, errorElement) {
+            group.classList.remove('error');
+            errorElement.classList.remove('active');
+        }
+
+        function handleFormSubmit() {
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            
+            if (isEmailValid && isPasswordValid) {
+                // Show loading state
+                loadingIndicator.classList.add('active');
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In a real implementation, this would submit the form
+                    alert('Thank you for signing up! Your free trial has been activated.');
+                    
+                    // Reset form
+                    emailInput.value = '';
+                    passwordInput.value = '';
+                    
+                    // Hide loading state
+                    loadingIndicator.classList.remove('active');
+                    submitBtn.disabled = false;
+                }, 2000);
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.form-group.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
         // Animation for feature cards on scroll
         const observerOptions = {
             threshold: 0.1,
@@ -644,6 +1395,21 @@
             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(card);
         });
+        
+        // Make header sticky
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
