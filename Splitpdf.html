@@ -1805,16 +1805,30 @@
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
         
-        if (searchInput) {
-            searchInput.addEventListener('input', debounce(function() {
-                const searchTerm = this.value.toLowerCase();
-                
-                if (searchTerm.length > 2) {
+        if (searchInput && searchBtn) {
+            // Search on button click
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm.length > 0) {
                     // In a real implementation, this would search for tools
                     console.log(`Searching for: ${searchTerm}`);
+                    alert(`Searching for: ${searchTerm}`);
                 }
-            }, 300));
+            });
+            
+            // Search on Enter key
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = searchInput.value.trim();
+                    if (searchTerm.length > 0) {
+                        // In a real implementation, this would search for tools
+                        console.log(`Searching for: ${searchTerm}`);
+                        alert(`Searching for: ${searchTerm}`);
+                    }
+                }
+            });
         }
 
         // File handling functionality
@@ -1847,46 +1861,66 @@
         let selectedPages = [];
 
         // Event Listeners
-        browseBtn.addEventListener('click', () => fileInput.click());
+        if (browseBtn) {
+            browseBtn.addEventListener('click', () => fileInput.click());
+        }
         
-        fileInput.addEventListener('change', handleFileSelect);
+        if (fileInput) {
+            fileInput.addEventListener('change', handleFileSelect);
+        }
         
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('drag-over');
-        });
+        if (uploadArea) {
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                handleFileDrop(e.dataTransfer.files);
+            });
+            
+            // Also allow clicking on upload area to browse files
+            uploadArea.addEventListener('click', () => fileInput.click());
+        }
         
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('drag-over');
-        });
+        if (splitBtn) {
+            splitBtn.addEventListener('click', splitFile);
+        }
         
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('drag-over');
-            handleFileDrop(e.dataTransfer.files);
-        });
+        if (clearBtn) {
+            clearBtn.addEventListener('click', clearFile);
+        }
         
-        splitBtn.addEventListener('click', splitFile);
+        if (downloadAllBtn) {
+            downloadAllBtn.addEventListener('click', downloadAllFiles);
+        }
         
-        clearBtn.addEventListener('click', clearFile);
-        
-        downloadAllBtn.addEventListener('click', downloadAllFiles);
-        downloadZipBtn.addEventListener('click', downloadZipFile);
+        if (downloadZipBtn) {
+            downloadZipBtn.addEventListener('click', downloadZipFile);
+        }
 
         // Method selection
-        methodOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                methodOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                
-                const method = option.dataset.method;
-                rangeOptions.style.display = method === 'range' ? 'block' : 'none';
-                singleOptions.style.display = method === 'single' ? 'block' : 'none';
-                everyOptions.style.display = method === 'every' ? 'block' : 'none';
-                
-                updateSplitPreview();
+        if (methodOptions.length > 0) {
+            methodOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    methodOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                    
+                    const method = option.dataset.method;
+                    rangeOptions.style.display = method === 'range' ? 'block' : 'none';
+                    singleOptions.style.display = method === 'single' ? 'block' : 'none';
+                    everyOptions.style.display = method === 'every' ? 'block' : 'none';
+                    
+                    updateSplitPreview();
+                });
             });
-        });
+        }
 
         // Functions
         function handleFileSelect(e) {
@@ -1916,11 +1950,13 @@
         }
 
         function renderFileList() {
+            if (!fileList) return;
+            
             fileList.innerHTML = '';
             
             if (!currentFile) {
                 fileList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">No file selected</p>';
-                splitPreview.classList.remove('show');
+                if (splitPreview) splitPreview.classList.remove('show');
                 return;
             }
             
@@ -1947,10 +1983,12 @@
             // Add event listener to remove button
             fileItem.querySelector('.remove').addEventListener('click', clearFile);
             
-            splitPreview.classList.add('show');
+            if (splitPreview) splitPreview.classList.add('show');
         }
 
         function renderPagePreview() {
+            if (!pagePreview) return;
+            
             pagePreview.innerHTML = '';
             
             for (let i = 1; i <= totalPages; i++) {
@@ -1985,6 +2023,8 @@
         }
 
         function updateSplitPreview() {
+            if (!splitFilesList) return;
+            
             splitFilesList.innerHTML = '';
             
             if (!currentFile) return;
@@ -2078,6 +2118,8 @@
         }
 
         function updateSplitButton() {
+            if (!splitBtn) return;
+            
             splitBtn.disabled = !currentFile;
             if (!currentFile) {
                 splitBtn.innerHTML = '<i class="fas fa-cut"></i> Select a PDF file';
@@ -2099,14 +2141,16 @@
             // Simulate processing time
             setTimeout(() => {
                 // Show result
-                resultArea.classList.add('show');
+                if (resultArea) resultArea.classList.add('show');
                 
                 // Reset button
                 splitBtn.innerHTML = '<i class="fas fa-cut"></i> Split PDF';
                 splitBtn.disabled = false;
                 
                 // Scroll to result
-                resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (resultArea) {
+                    resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }, 2000);
         }
 
@@ -2114,11 +2158,11 @@
             currentFile = null;
             totalPages = 0;
             selectedPages = [];
-            fileInput.value = '';
+            if (fileInput) fileInput.value = '';
             renderFileList();
             updateSplitButton();
-            resultArea.classList.remove('show');
-            splitPreview.classList.remove('show');
+            if (resultArea) resultArea.classList.remove('show');
+            if (splitPreview) splitPreview.classList.remove('show');
         }
 
         function downloadAllFiles() {
@@ -2137,8 +2181,13 @@
         }
 
         // Add event listeners to update preview when inputs change
-        pageRanges.addEventListener('input', updateSplitPreview);
-        everyNPages.addEventListener('input', updateSplitPreview);
+        if (pageRanges) {
+            pageRanges.addEventListener('input', updateSplitPreview);
+        }
+        
+        if (everyNPages) {
+            everyNPages.addEventListener('input', updateSplitPreview);
+        }
 
         // Initialize
         updateSplitButton();
