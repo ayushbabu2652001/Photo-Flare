@@ -427,6 +427,8 @@
             border: none;
             font-size: 1rem;
             min-height: 44px;
+            justify-content: center;
+            text-align: center;
         }
 
         .btn:active {
@@ -1062,6 +1064,11 @@
             .cta-title {
                 font-size: 2rem;
             }
+            
+            .pricing-grid {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1377,7 +1384,7 @@
                         <li><i class="fas fa-check"></i> Priority email support</li>
                         <li><i class="fas fa-check"></i> Watermark removal</li>
                     </ul>
-                    <a href="#checkout" class="btn btn-premium" style="width: 100%;" id="pricing-cta-btn">Get Started</a>
+                    <a href="#checkout" class="btn btn-premium" style="width: 100%; text-align: center;" id="pricing-cta-btn">Get Started</a>
                 </div>
             </div>
         </div>
@@ -1612,7 +1619,7 @@
                     
                     <div class="checkout-footer">
                         <p>By completing your purchase, you agree to our <a href="terms.html" style="color: var(--primary);">Terms of Service</a> and <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a>.</p>
-                        <button type="submit" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;" id="submit-btn">
+                        <button type="submit" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem; width: 100%; text-align: center;" id="submit-btn">
                             <i class="fas fa-lock"></i> Complete Purchase - $4/month
                         </button>
                     </div>
@@ -1626,7 +1633,7 @@
         <div class="container">
             <h2 class="cta-title">Ready to Boost Your Productivity?</h2>
             <p class="cta-subtitle">Join thousands of professionals who use Photo Flare Pro Monthly to save time and work more efficiently.</p>
-            <a href="#checkout" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;" id="cta-btn">
+            <a href="#checkout" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem; text-align: center;" id="cta-btn">
                 <i class="fas fa-crown"></i> Upgrade to Pro Monthly Now
             </a>
         </div>
@@ -1764,6 +1771,24 @@
                 });
             }
 
+            // Show checkout section when navigating to #checkout
+            function showCheckoutSection() {
+                const checkoutSection = document.querySelector('.checkout-section');
+                if (checkoutSection) {
+                    checkoutSection.style.display = 'block';
+                    // Scroll to checkout section
+                    window.scrollTo({
+                        top: checkoutSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            // Check if URL has #checkout hash
+            if (window.location.hash === '#checkout') {
+                showCheckoutSection();
+            }
+
             // Smooth scrolling for anchor links
             const anchorLinks = document.querySelectorAll('a[href^="#"]');
             anchorLinks.forEach(anchor => {
@@ -1775,17 +1800,14 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                        
                         // Show checkout section if it's the target
                         if (targetId === '#checkout') {
-                            const checkoutSection = document.querySelector('.checkout-section');
-                            if (checkoutSection) {
-                                checkoutSection.style.display = 'block';
-                            }
+                            showCheckoutSection();
+                        } else {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
                         }
                     }
                 });
@@ -1955,10 +1977,7 @@
                     button.addEventListener('click', function(e) {
                         // The smooth scrolling is already handled by the anchor link
                         // We just need to ensure the checkout section is visible
-                        const checkoutSection = document.querySelector('.checkout-section');
-                        if (checkoutSection) {
-                            checkoutSection.style.display = 'block';
-                        }
+                        showCheckoutSection();
                     });
                 }
             });
