@@ -1444,20 +1444,27 @@
             });
         }, 10));
 
-        // Auto-expand TOC links when clicked on mobile
-        document.querySelectorAll('.toc-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth < 992) {
-                    const tocNav = document.querySelector('.toc-nav');
-                    tocNav.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
         // Reinitialize on window resize
         window.addEventListener('resize', debounce(() => {
             // Any responsive adjustments needed
         }, 250));
+
+        // Fix for mobile header buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure all buttons have proper event handlers
+            const buttons = document.querySelectorAll('button, .btn, .mobile-header-btn, .sidebar-btn');
+            buttons.forEach(button => {
+                // Prevent default behavior for buttons that don't have specific actions
+                if (!button.getAttribute('href') && !button.classList.contains('mobile-nav-btn') && 
+                    !button.classList.contains('sidebar-close')) {
+                    button.addEventListener('click', function(e) {
+                        if (!this.getAttribute('onclick') && !this.getAttribute('href')) {
+                            e.preventDefault();
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
