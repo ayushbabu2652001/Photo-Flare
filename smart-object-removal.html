@@ -53,6 +53,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Mobile Header - Sticky */
         .mobile-header {
             display: none;
@@ -951,11 +956,6 @@
             margin: 0 auto 1rem;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         .premium-badge {
             background: linear-gradient(135deg, var(--warning), var(--accent));
             color: white;
@@ -1160,12 +1160,6 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-top: 1rem;
-        }
-
-        #selectionCanvas {
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
             background-image: 
                 linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
                 linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
@@ -1173,6 +1167,13 @@
                 linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        #selectionCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
         }
 
         .selection-info {
@@ -1214,6 +1215,7 @@
             gap: 0.5rem;
             margin-top: 1rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .zoom-btn {
@@ -1223,6 +1225,9 @@
             border: 2px solid var(--light-gray);
             cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .zoom-btn:hover {
@@ -1236,12 +1241,16 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             color: white;
+        }
+
+        .processing-overlay.active {
+            display: flex;
         }
 
         .processing-spinner {
@@ -1978,7 +1987,7 @@
     </footer>
 
     <!-- Processing Overlay -->
-    <div class="processing-overlay" id="processingOverlay" style="display: none;">
+    <div class="processing-overlay" id="processingOverlay">
         <div class="processing-spinner"></div>
         <h2>Removing Objects</h2>
         <p>Our AI is analyzing your image and removing selected objects...</p>
@@ -2010,7 +2019,7 @@
             mobileNavBtn.addEventListener('click', function() {
                 sidebar.classList.add('active');
                 sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+                document.body.style.overflow = 'hidden';
             });
         }
 
@@ -2018,7 +2027,7 @@
         function closeSidebar() {
             sidebar.classList.remove('active');
             sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
         if (sidebarClose) {
@@ -2109,68 +2118,74 @@
         let objectsMarked = 0;
 
         // Event Listeners
-        browseBtn.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', handleDragOver);
-        uploadArea.addEventListener('drop', handleDrop);
-        fileInput.addEventListener('change', handleFileSelect);
-        brushSizeSlider.addEventListener('input', updateBrushSize);
-        brushHardnessSlider.addEventListener('input', updateBrushHardness);
-        precisionSlider.addEventListener('input', updatePrecisionDisplay);
-        removeObjectsBtn.addEventListener('click', removeObjects);
-        downloadPngBtn.addEventListener('click', downloadPNG);
-        downloadJpgBtn.addEventListener('click', downloadJPG);
-        processAnotherBtn.addEventListener('click', resetTool);
-        zoomInBtn.addEventListener('click', zoomIn);
-        zoomOutBtn.addEventListener('click', zoomOut);
-        zoomResetBtn.addEventListener('click', zoomReset);
-        clearSelectionBtn.addEventListener('click', clearSelection);
-        addBatchBtn.addEventListener('click', () => fileInput.click());
-        removeBatchBtn.addEventListener('click', removeBatchObjects);
-        downloadAllBtn.addEventListener('click', downloadBatch);
-        newBatchBtn.addEventListener('click', resetBatch);
+        if (browseBtn) browseBtn.addEventListener('click', () => fileInput.click());
+        if (uploadArea) uploadArea.addEventListener('click', () => fileInput.click());
+        if (uploadArea) {
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('drop', handleDrop);
+        }
+        if (fileInput) fileInput.addEventListener('change', handleFileSelect);
+        if (brushSizeSlider) brushSizeSlider.addEventListener('input', updateBrushSize);
+        if (brushHardnessSlider) brushHardnessSlider.addEventListener('input', updateBrushHardness);
+        if (precisionSlider) precisionSlider.addEventListener('input', updatePrecisionDisplay);
+        if (removeObjectsBtn) removeObjectsBtn.addEventListener('click', removeObjects);
+        if (downloadPngBtn) downloadPngBtn.addEventListener('click', downloadPNG);
+        if (downloadJpgBtn) downloadJpgBtn.addEventListener('click', downloadJPG);
+        if (processAnotherBtn) processAnotherBtn.addEventListener('click', resetTool);
+        if (zoomInBtn) zoomInBtn.addEventListener('click', zoomIn);
+        if (zoomOutBtn) zoomOutBtn.addEventListener('click', zoomOut);
+        if (zoomResetBtn) zoomResetBtn.addEventListener('click', zoomReset);
+        if (clearSelectionBtn) clearSelectionBtn.addEventListener('click', clearSelection);
+        if (addBatchBtn) addBatchBtn.addEventListener('click', () => fileInput.click());
+        if (removeBatchBtn) removeBatchBtn.addEventListener('click', removeBatchObjects);
+        if (downloadAllBtn) downloadAllBtn.addEventListener('click', downloadBatch);
+        if (newBatchBtn) newBatchBtn.addEventListener('click', resetBatch);
 
         // Tool selection
-        toolBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                toolBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentTool = btn.getAttribute('data-tool');
+        if (toolBtns.length > 0) {
+            toolBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toolBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentTool = btn.getAttribute('data-tool');
+                });
             });
-        });
+        }
 
         // Canvas event listeners
-        selectionCanvas.addEventListener('mousedown', startDrawing);
-        selectionCanvas.addEventListener('mousemove', draw);
-        selectionCanvas.addEventListener('mouseup', stopDrawing);
-        selectionCanvas.addEventListener('mouseout', stopDrawing);
+        if (selectionCanvas) {
+            selectionCanvas.addEventListener('mousedown', startDrawing);
+            selectionCanvas.addEventListener('mousemove', draw);
+            selectionCanvas.addEventListener('mouseup', stopDrawing);
+            selectionCanvas.addEventListener('mouseout', stopDrawing);
 
-        // Touch events for mobile
-        selectionCanvas.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
+            // Touch events for mobile
+            selectionCanvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                selectionCanvas.dispatchEvent(mouseEvent);
             });
-            selectionCanvas.dispatchEvent(mouseEvent);
-        });
 
-        selectionCanvas.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
+            selectionCanvas.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                selectionCanvas.dispatchEvent(mouseEvent);
             });
-            selectionCanvas.dispatchEvent(mouseEvent);
-        });
 
-        selectionCanvas.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            const mouseEvent = new MouseEvent('mouseup', {});
-            selectionCanvas.dispatchEvent(mouseEvent);
-        });
+            selectionCanvas.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                const mouseEvent = new MouseEvent('mouseup', {});
+                selectionCanvas.dispatchEvent(mouseEvent);
+            });
+        }
 
         // Initialize comparison slider
         initComparisonSlider();
@@ -2227,19 +2242,19 @@
                 img.onload = function() {
                     originalWidth = img.width;
                     originalHeight = img.height;
-                    fileDimensions.textContent = `${img.width} × ${img.height}`;
+                    if (fileDimensions) fileDimensions.textContent = `${img.width} × ${img.height}`;
                     
                     // Store original image data for processing
                     originalImageData = e.target.result;
                     
                     // Show preview
-                    beforeImage.src = e.target.result;
-                    afterImage.src = e.target.result;
+                    if (beforeImage) beforeImage.src = e.target.result;
+                    if (afterImage) afterImage.src = e.target.result;
                     
                     // Show canvas section and hide empty state
-                    emptyState.style.display = 'none';
-                    canvasSection.style.display = 'block';
-                    singlePreview.style.display = 'none';
+                    if (emptyState) emptyState.style.display = 'none';
+                    if (canvasSection) canvasSection.style.display = 'block';
+                    if (singlePreview) singlePreview.style.display = 'none';
                     
                     // Initialize canvas
                     initializeCanvas(img);
@@ -2285,7 +2300,7 @@
                     <div class="remove-file" data-filename="${file.name}">×</div>
                 `;
                 
-                batchFiles.appendChild(batchFileElement);
+                if (batchFiles) batchFiles.appendChild(batchFileElement);
                 
                 // Add remove event listener
                 batchFileElement.querySelector('.remove-file').addEventListener('click', function() {
@@ -2312,59 +2327,63 @@
 
         function updateBatchUI() {
             if (batchFilesList.length > 0) {
-                addBatchBtn.disabled = false;
-                removeBatchBtn.disabled = false;
+                if (addBatchBtn) addBatchBtn.disabled = false;
+                if (removeBatchBtn) removeBatchBtn.disabled = false;
                 isBatchMode = true;
                 
                 // Show batch preview and hide single preview
-                canvasSection.style.display = 'none';
-                singlePreview.style.display = 'none';
-                emptyState.style.display = 'none';
-                batchPreview.style.display = 'block';
+                if (canvasSection) canvasSection.style.display = 'none';
+                if (singlePreview) singlePreview.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'none';
+                if (batchPreview) batchPreview.style.display = 'block';
                 
-                totalFiles.textContent = batchFilesList.length;
+                if (totalFiles) totalFiles.textContent = batchFilesList.length;
             } else {
-                addBatchBtn.disabled = true;
-                removeBatchBtn.disabled = true;
+                if (addBatchBtn) addBatchBtn.disabled = true;
+                if (removeBatchBtn) removeBatchBtn.disabled = true;
                 isBatchMode = false;
                 
                 // Show empty state
-                batchPreview.style.display = 'none';
-                canvasSection.style.display = 'none';
-                singlePreview.style.display = 'none';
-                emptyState.style.display = 'block';
+                if (batchPreview) batchPreview.style.display = 'none';
+                if (canvasSection) canvasSection.style.display = 'none';
+                if (singlePreview) singlePreview.style.display = 'none';
+                if (emptyState) emptyState.style.display = 'block';
             }
         }
 
         function updateFileInfo(file) {
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileType.textContent = file.type.split('/')[1].toUpperCase();
-            fileInfo.classList.add('active');
+            if (fileName) fileName.textContent = file.name;
+            if (fileSize) fileSize.textContent = formatFileSize(file.size);
+            if (fileType) fileType.textContent = file.type.split('/')[1].toUpperCase();
+            if (fileInfo) fileInfo.classList.add('active');
         }
 
         function updateBrushSize() {
             const size = brushSizeSlider.value;
-            brushSizeDisplay.textContent = `${size}px`;
-            brushSizeValue.textContent = `${size}px`;
-            brushPreview.textContent = size;
-            brushPreview.style.width = `${size}px`;
-            brushPreview.style.height = `${size}px`;
+            if (brushSizeDisplay) brushSizeDisplay.textContent = `${size}px`;
+            if (brushSizeValue) brushSizeValue.textContent = `${size}px`;
+            if (brushPreview) {
+                brushPreview.textContent = size;
+                brushPreview.style.width = `${size}px`;
+                brushPreview.style.height = `${size}px`;
+            }
         }
 
         function updateBrushHardness() {
             const value = brushHardnessSlider.value;
-            brushHardnessValue.textContent = `${value}%`;
+            if (brushHardnessValue) brushHardnessValue.textContent = `${value}%`;
         }
 
         function updatePrecisionDisplay() {
             const value = parseInt(precisionSlider.value);
             const labels = ['Fast', 'Balanced', 'High Quality'];
-            precisionDisplay.textContent = labels[value - 1];
-            precisionValue.textContent = labels[value - 1];
+            if (precisionDisplay) precisionDisplay.textContent = labels[value - 1];
+            if (precisionValue) precisionValue.textContent = labels[value - 1];
         }
 
         function initializeCanvas(img) {
+            if (!selectionCanvas) return;
+            
             selectionCanvas.width = img.width;
             selectionCanvas.height = img.height;
             canvasContext = selectionCanvas.getContext('2d');
@@ -2513,9 +2532,9 @@
             const selectedPixels = selectionData.length * 100; // Simplified calculation
             const percentage = Math.min(100, Math.round((selectedPixels / totalPixels) * 100));
             
-            selectedArea.textContent = `${percentage}%`;
-            objectsCount.textContent = objectsMarked;
-            zoomLevel.textContent = `${Math.round(scale * 100)}%`;
+            if (selectedArea) selectedArea.textContent = `${percentage}%`;
+            if (objectsCount) objectsCount.textContent = objectsMarked;
+            if (zoomLevel) zoomLevel.textContent = `${Math.round(scale * 100)}%`;
         }
 
         function zoomIn() {
@@ -2551,8 +2570,8 @@
                 return;
             }
             
-            loadingIndicator.classList.add('active');
-            processingOverlay.style.display = 'flex';
+            if (loadingIndicator) loadingIndicator.classList.add('active');
+            if (processingOverlay) processingOverlay.classList.add('active');
             
             // Simulate AI processing with progress updates
             let progress = 0;
@@ -2563,7 +2582,7 @@
                     clearInterval(interval);
                     finishObjectRemoval();
                 }
-                processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
+                if (processingProgress) processingProgress.textContent = `Processing: ${Math.min(100, Math.round(progress))}%`;
             }, 300);
             
             // In a real implementation, this would be an API call to an AI service
@@ -2603,17 +2622,17 @@
                 
                 // Convert to data URL and set as processed image
                 processedFile = canvas.toDataURL('image/jpeg', 0.9);
-                afterImage.src = processedFile;
+                if (afterImage) afterImage.src = processedFile;
                 
                 // Show results
-                canvasSection.style.display = 'none';
-                singlePreview.style.display = 'block';
+                if (canvasSection) canvasSection.style.display = 'none';
+                if (singlePreview) singlePreview.style.display = 'block';
                 
                 // Calculate and display stats
                 calculateStats();
                 
-                loadingIndicator.classList.remove('active');
-                processingOverlay.style.display = 'none';
+                if (loadingIndicator) loadingIndicator.classList.remove('active');
+                if (processingOverlay) processingOverlay.classList.remove('active');
             };
             
             img.src = originalImageData;
@@ -2652,8 +2671,8 @@
                 return;
             }
             
-            loadingIndicator.classList.add('active');
-            processingOverlay.style.display = 'flex';
+            if (loadingIndicator) loadingIndicator.classList.add('active');
+            if (processingOverlay) processingOverlay.classList.add('active');
             
             // Simulate batch processing
             setTimeout(() => {
@@ -2663,21 +2682,21 @@
                 const totalTimeValue = (batchFilesList.length * 3.2).toFixed(1);
                 
                 // Update batch results
-                totalFiles.textContent = batchFilesList.length;
-                totalAccuracy.textContent = `${averageAccuracy}%`;
-                totalTime.textContent = `${totalTimeValue}s`;
+                if (totalFiles) totalFiles.textContent = batchFilesList.length;
+                if (totalAccuracy) totalAccuracy.textContent = `${averageAccuracy}%`;
+                if (totalTime) totalTime.textContent = `${totalTimeValue}s`;
                 
-                loadingIndicator.classList.remove('active');
-                processingOverlay.style.display = 'none';
+                if (loadingIndicator) loadingIndicator.classList.remove('active');
+                if (processingOverlay) processingOverlay.classList.remove('active');
             }, 2000);
         }
 
         function calculateStats() {
             // Simulated stats - in a real implementation these would come from the AI service
-            accuracyStat.textContent = `${95 + Math.floor(Math.random() * 4)}%`;
-            timeStat.textContent = `${(3 + Math.random()).toFixed(1)}s`;
-            objectsRemoved.textContent = objectsMarked;
-            seamlessnessStat.textContent = `${96 + Math.floor(Math.random() * 3)}%`;
+            if (accuracyStat) accuracyStat.textContent = `${95 + Math.floor(Math.random() * 4)}%`;
+            if (timeStat) timeStat.textContent = `${(3 + Math.random()).toFixed(1)}s`;
+            if (objectsRemoved) objectsRemoved.textContent = objectsMarked;
+            if (seamlessnessStat) seamlessnessStat.textContent = `${96 + Math.floor(Math.random() * 3)}%`;
         }
 
         function downloadPNG() {
@@ -2715,28 +2734,37 @@
         }
 
         function resetTool() {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            canvasSection.style.display = 'none';
-            singlePreview.style.display = 'none';
-            emptyState.style.display = 'block';
+            if (fileInput) fileInput.value = '';
+            if (fileInfo) fileInfo.classList.remove('active');
+            if (canvasSection) canvasSection.style.display = 'none';
+            if (singlePreview) singlePreview.style.display = 'none';
+            if (emptyState) emptyState.style.display = 'block';
             originalFile = null;
             processedFile = null;
-            brushSizeSlider.value = 20;
-            updateBrushSize();
-            brushHardnessSlider.value = 50;
-            updateBrushHardness();
-            precisionSlider.value = 2;
-            updatePrecisionDisplay();
+            if (brushSizeSlider) {
+                brushSizeSlider.value = 20;
+                updateBrushSize();
+            }
+            if (brushHardnessSlider) {
+                brushHardnessSlider.value = 50;
+                updateBrushHardness();
+            }
+            if (precisionSlider) {
+                precisionSlider.value = 2;
+                updatePrecisionDisplay();
+            }
             
             // Reset selection data
             selectionData = [];
             objectsMarked = 0;
             
             // Reset tools to brush
-            toolBtns.forEach(b => b.classList.remove('active'));
-            document.querySelector('.tool-btn[data-tool="brush"]').classList.add('active');
-            currentTool = 'brush';
+            if (toolBtns.length > 0) {
+                toolBtns.forEach(b => b.classList.remove('active'));
+                const brushBtn = document.querySelector('.tool-btn[data-tool="brush"]');
+                if (brushBtn) brushBtn.classList.add('active');
+                currentTool = 'brush';
+            }
             
             // Reset zoom
             zoomReset();
@@ -2744,11 +2772,13 @@
 
         function resetBatch() {
             batchFilesList = [];
-            batchFiles.innerHTML = '';
+            if (batchFiles) batchFiles.innerHTML = '';
             updateBatchUI();
         }
 
         function initComparisonSlider() {
+            if (!comparisonContainer) return;
+            
             const slider = comparisonContainer.querySelector('.comparison-slider');
             let isResizing = false;
             
