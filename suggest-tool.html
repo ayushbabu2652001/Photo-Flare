@@ -47,12 +47,6 @@
             padding: 0 15px;
         }
 
-        /* Loading Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* Mobile Header - Sticky */
         .mobile-header {
             display: none;
@@ -429,6 +423,8 @@
             flex-shrink: 0;
             min-height: 44px;
             border: none;
+            justify-content: center;
+            text-align: center;
         }
 
         .btn:active {
@@ -505,7 +501,7 @@
             animation: fadeIn 0.8s ease-out;
         }
 
-        .sidebar {
+        .content-sidebar {
             width: 100%;
             background: white;
             border-radius: var(--border-radius);
@@ -627,6 +623,9 @@
             padding: 0.8rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .tool-item:last-child {
@@ -646,6 +645,7 @@
             align-items: center;
             gap: 10px;
             transition: var(--transition);
+            flex: 1;
         }
 
         .tool-link:hover {
@@ -955,73 +955,6 @@
             }
         }
 
-        /* Form Validation */
-        .form-control.error {
-            border-color: var(--danger);
-        }
-
-        .error-message {
-            color: var(--danger);
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
-            display: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .loading.active {
-            display: block;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(67, 97, 238, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-            font-weight: normal;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
         /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
@@ -1036,6 +969,11 @@
             
             .featured-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                flex-direction: row;
+                gap: 1rem;
             }
         }
 
@@ -1065,17 +1003,12 @@
                 flex-direction: row;
             }
             
-            .sidebar {
+            .content-sidebar {
                 width: 300px;
             }
             
-            .main-content, .sidebar {
+            .main-content, .content-sidebar {
                 padding: 2rem;
-            }
-            
-            .form-row {
-                flex-direction: row;
-                gap: 1rem;
             }
             
             .featured-grid {
@@ -1248,7 +1181,6 @@
                         <li><a href="image-tools.html">Image Tools</a></li>
                         <li><a href="conversion.html">Conversion</a></li>
                         <li><a href="premium-tools.html">Premium Tools</a></li>
-                        <li><a href="suggest-tool.html" class="active">Suggest a Tool</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
@@ -1280,7 +1212,7 @@
                 <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
                 <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
                 <li><a href="premium-tools.html"><i class="fas fa-crown"></i> Premium Tools</a></li>
-                <li><a href="suggest-tool.html" class="active"><i class="fas fa-lightbulb"></i> Suggest a Tool</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
             </ul>
         </nav>
         <div class="sidebar-actions">
@@ -1342,18 +1274,10 @@
                     <strong>Thank you for your suggestion!</strong> We've received your tool idea and will review it soon.
                 </div>
                 
-                <div class="loading" id="loadingIndicator">
-                    <div class="spinner"></div>
-                    <p>Submitting your suggestion...</p>
-                </div>
-                
                 <form id="suggestion-form">
                     <div class="form-group">
-                        <label for="tool-name">Tool Name <span class="tooltip">(?)
-                            <span class="tooltiptext">Give your tool a clear, descriptive name</span>
-                        </span></label>
+                        <label for="tool-name">Tool Name</label>
                         <input type="text" id="tool-name" class="form-control" placeholder="e.g., PDF to Word Converter" required>
-                        <div class="error-message" id="tool-name-error">Please enter a tool name</div>
                     </div>
                     
                     <div class="form-group">
@@ -1367,13 +1291,11 @@
                             <option value="security">Security Tools</option>
                             <option value="other">Other</option>
                         </select>
-                        <div class="error-message" id="tool-category-error">Please select a category</div>
                     </div>
                     
                     <div class="form-group">
                         <label for="tool-description">Tool Description</label>
                         <textarea id="tool-description" class="form-control" placeholder="Please describe what the tool does and how it would work..." required></textarea>
-                        <div class="error-message" id="tool-description-error">Please provide a description</div>
                     </div>
                     
                     <div class="form-group">
@@ -1390,7 +1312,6 @@
                         <div class="form-group">
                             <label for="your-email">Your Email (Optional)</label>
                             <input type="email" id="your-email" class="form-control" placeholder="john@example.com">
-                            <div class="error-message" id="email-error">Please enter a valid email address</div>
                         </div>
                     </div>
                     
@@ -1401,13 +1322,13 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <i class="fas fa-paper-plane"></i> Submit Suggestion
                     </button>
                 </form>
             </div>
             
-            <div class="sidebar">
+            <div class="content-sidebar">
                 <div class="card">
                     <h3 class="card-title">
                         <i class="fas fa-lightbulb card-icon"></i> Popular Suggestions
@@ -1535,9 +1456,9 @@
                 </div>
                 
                 <div class="social-links">
-                    <a href="https://www.facebook.com/ayush.babu.163625" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://facebook.com" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/ayush74924/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
                     <a href="https://github.com" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
@@ -1598,176 +1519,65 @@
             link.addEventListener('click', closeSidebar);
         });
 
-        // Form validation and submission
-        const suggestionForm = document.getElementById('suggestion-form');
-        const successMessage = document.getElementById('success-message');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const submitBtn = document.getElementById('submit-btn');
-
-        // Form validation
-        function validateForm() {
-            let isValid = true;
-            
-            // Tool name validation
-            const toolName = document.getElementById('tool-name');
-            const toolNameError = document.getElementById('tool-name-error');
-            if (!toolName.value.trim()) {
-                toolName.classList.add('error');
-                toolNameError.style.display = 'block';
-                isValid = false;
-            } else {
-                toolName.classList.remove('error');
-                toolNameError.style.display = 'none';
-            }
-            
-            // Tool category validation
-            const toolCategory = document.getElementById('tool-category');
-            const toolCategoryError = document.getElementById('tool-category-error');
-            if (!toolCategory.value) {
-                toolCategory.classList.add('error');
-                toolCategoryError.style.display = 'block';
-                isValid = false;
-            } else {
-                toolCategory.classList.remove('error');
-                toolCategoryError.style.display = 'none';
-            }
-            
-            // Tool description validation
-            const toolDescription = document.getElementById('tool-description');
-            const toolDescriptionError = document.getElementById('tool-description-error');
-            if (!toolDescription.value.trim()) {
-                toolDescription.classList.add('error');
-                toolDescriptionError.style.display = 'block';
-                isValid = false;
-            } else {
-                toolDescription.classList.remove('error');
-                toolDescriptionError.style.display = 'none';
-            }
-            
-            // Email validation (if provided)
-            const email = document.getElementById('your-email');
-            const emailError = document.getElementById('email-error');
-            if (email.value && !isValidEmail(email.value)) {
-                email.classList.add('error');
-                emailError.style.display = 'block';
-                isValid = false;
-            } else {
-                email.classList.remove('error');
-                emailError.style.display = 'none';
-            }
-            
-            return isValid;
-        }
-
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
         // Form submission handler
-        suggestionForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!validateForm()) {
-                // Scroll to first error
-                const firstError = document.querySelector('.error');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                return;
-            }
-            
-            // Show loading indicator
-            loadingIndicator.classList.add('active');
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Hide loading indicator
-                loadingIndicator.classList.remove('active');
+        const suggestionForm = document.getElementById('suggestion-form');
+        if (suggestionForm) {
+            suggestionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // Show success message
-                successMessage.style.display = 'block';
+                // In a real implementation, you would send the form data to a server
+                // For this demo, we'll just show a success message
+                
+                const successMessage = document.getElementById('success-message');
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                }
                 
                 // Reset form
                 this.reset();
                 
-                // Re-enable submit button
-                submitBtn.disabled = false;
-                
                 // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }, 2000);
-        });
-
-        // Real-time validation
-        document.getElementById('tool-name').addEventListener('input', function() {
-            if (this.value.trim()) {
-                this.classList.remove('error');
-                document.getElementById('tool-name-error').style.display = 'none';
-            }
-        });
-        
-        document.getElementById('tool-category').addEventListener('change', function() {
-            if (this.value) {
-                this.classList.remove('error');
-                document.getElementById('tool-category-error').style.display = 'none';
-            }
-        });
-        
-        document.getElementById('tool-description').addEventListener('input', function() {
-            if (this.value.trim()) {
-                this.classList.remove('error');
-                document.getElementById('tool-description-error').style.display = 'none';
-            }
-        });
-        
-        document.getElementById('your-email').addEventListener('input', function() {
-            if (!this.value || isValidEmail(this.value)) {
-                this.classList.remove('error');
-                document.getElementById('email-error').style.display = 'none';
-            }
-        });
+                if (successMessage) {
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
 
         // Vote button handler
         document.querySelectorAll('.vote-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const countElement = this.querySelector('.vote-count');
-                let count = parseInt(countElement.textContent);
-                count++;
-                countElement.textContent = count;
-                
-                // Visual feedback
-                this.style.background = 'rgba(67, 97, 238, 0.2)';
-                this.style.color = 'var(--primary)';
-                this.style.borderColor = 'var(--primary)';
-                
-                // Disable button after voting
-                this.disabled = true;
+                if (countElement) {
+                    let count = parseInt(countElement.textContent);
+                    count++;
+                    countElement.textContent = count;
+                    
+                    // Visual feedback
+                    this.style.background = 'rgba(67, 97, 238, 0.2)';
+                    this.style.color = 'var(--primary)';
+                    this.style.borderColor = 'var(--primary)';
+                    
+                    // Disable button after voting
+                    this.disabled = true;
+                }
             });
         });
 
         // AI suggestion fill function
         function fillSuggestion(name, category, description) {
-            document.getElementById('tool-name').value = name;
-            document.getElementById('tool-category').value = category;
-            document.getElementById('tool-description').value = description;
+            const toolName = document.getElementById('tool-name');
+            const toolCategory = document.getElementById('tool-category');
+            const toolDescription = document.getElementById('tool-description');
             
-            // Clear any validation errors
-            document.getElementById('tool-name').classList.remove('error');
-            document.getElementById('tool-category').classList.remove('error');
-            document.getElementById('tool-description').classList.remove('error');
-            document.getElementById('tool-name-error').style.display = 'none';
-            document.getElementById('tool-category-error').style.display = 'none';
-            document.getElementById('tool-description-error').style.display = 'none';
+            if (toolName) toolName.value = name;
+            if (toolCategory) toolCategory.value = category;
+            if (toolDescription) toolDescription.value = description;
             
             // Scroll to form
-            document.getElementById('suggestion-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const form = document.getElementById('suggestion-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // Animation on scroll
@@ -1789,6 +1599,23 @@
         document.querySelectorAll('.form-group, .card, .featured-card, .ai-suggestion').forEach(el => {
             el.style.animationPlayState = 'paused';
             observer.observe(el);
+        });
+
+        // Ensure all buttons are properly styled and functional
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add proper button styling to all buttons
+            const buttons = document.querySelectorAll('.btn, .sidebar-btn, .vote-btn');
+            buttons.forEach(button => {
+                // Ensure buttons have proper cursor and display
+                button.style.cursor = 'pointer';
+                
+                // Prevent default behavior for buttons with # href
+                if (button.getAttribute('href') === '#') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                    });
+                }
+            });
         });
 
         // Reinitialize on window resize
