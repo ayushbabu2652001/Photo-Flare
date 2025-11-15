@@ -430,6 +430,8 @@
             flex-shrink: 0;
             min-height: 44px;
             border: none;
+            justify-content: center;
+            text-align: center;
         }
 
         .btn:active {
@@ -810,6 +812,7 @@
             text-decoration: none;
             text-align: center;
             border: none;
+            justify-content: center;
         }
 
         .plan-button-primary {
@@ -1303,6 +1306,10 @@
             .testimonial-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .pricing-plans {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* Medium Devices (768px and up) */
@@ -1633,11 +1640,11 @@
             <h1>Unlock Premium Power</h1>
             <p>Upgrade to Photo Flare Premium and get access to 100+ advanced tools, AI-powered features, and priority processing.</p>
             
-            <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="#plans" class="btn btn-premium" style="font-size: 1.1rem; padding: 0.9rem 1.5rem;">
+            <div class="cta-buttons" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#plans" class="btn btn-premium" style="font-size: 1.1rem; padding: 0.9rem 1.5rem; text-align: center;">
                     <i class="fas fa-crown"></i> View Premium Plans
                 </a>
-                <a href="#benefits" class="btn btn-outline" style="font-size: 1.1rem; padding: 0.9rem 1.5rem;">
+                <a href="#benefits" class="btn btn-outline" style="font-size: 1.1rem; padding: 0.9rem 1.5rem; text-align: center;">
                     <i class="fas fa-play-circle"></i> See Benefits
                 </a>
             </div>
@@ -2020,17 +2027,19 @@
         const monthlyPrices = document.querySelectorAll('.monthly-price');
         const yearlyPrices = document.querySelectorAll('.yearly-price');
         
-        billingToggle.addEventListener('change', function() {
-            if (this.checked) {
-                // Switch to yearly pricing
-                monthlyPrices.forEach(price => price.style.display = 'none');
-                yearlyPrices.forEach(price => price.style.display = 'inline');
-            } else {
-                // Switch to monthly pricing
-                monthlyPrices.forEach(price => price.style.display = 'inline');
-                yearlyPrices.forEach(price => price.style.display = 'none');
-            }
-        });
+        if (billingToggle) {
+            billingToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    // Switch to yearly pricing
+                    monthlyPrices.forEach(price => price.style.display = 'none');
+                    yearlyPrices.forEach(price => price.style.display = 'inline');
+                } else {
+                    // Switch to monthly pricing
+                    monthlyPrices.forEach(price => price.style.display = 'inline');
+                    yearlyPrices.forEach(price => price.style.display = 'none');
+                }
+            });
+        }
 
         // FAQ functionality
         const faqItems = document.querySelectorAll('.faq-item');
@@ -2038,17 +2047,19 @@
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+            if (question) {
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
                 });
-                
-                // Toggle current item
-                item.classList.toggle('active');
-            });
+            }
         });
 
         // Plan button interactions
@@ -2074,6 +2085,24 @@
                             block: 'start'
                         });
                     }
+                }
+            });
+        });
+
+        // Ensure all buttons are properly styled and functional
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add proper button styling to all buttons
+            const buttons = document.querySelectorAll('.btn, .plan-button, .sidebar-btn');
+            buttons.forEach(button => {
+                // Ensure buttons have proper cursor and display
+                button.style.cursor = 'pointer';
+                button.style.display = 'inline-flex';
+                
+                // Prevent default behavior for buttons with # href
+                if (button.getAttribute('href') === '#') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                    });
                 }
             });
         });
