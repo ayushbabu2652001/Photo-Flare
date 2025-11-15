@@ -1745,10 +1745,10 @@
                     </div>
                     
                     <div class="preview-content">
-                        <div class="pdf-preview preview-tab-content active" id="pdfPreview">
+                        <div class="preview-tab-content active" id="pdfPreview">
                             <iframe src="about:blank" class="pdf-preview" id="pdfIframe"></iframe>
                         </div>
-                        <div class="preview-tab-content" id="detailsPreview">
+                        <div class="preview-tab-content" id="detailsPreview" style="display: none;">
                             <h3>Watermark Summary</h3>
                             <ul style="list-style: none; padding: 0;">
                                 <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray);">
@@ -1927,6 +1927,26 @@
             link.addEventListener('click', closeSidebar);
         });
 
+        // Mobile header button functionality
+        const mobileLoginBtn = document.querySelector('.mobile-header-btn[href="login.html"]');
+        const mobileUpgradeBtn = document.querySelector('.mobile-header-btn.upgrade');
+        
+        if (mobileLoginBtn) {
+            mobileLoginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Redirecting to login page...');
+                // In a real implementation: window.location.href = 'login.html';
+            });
+        }
+        
+        if (mobileUpgradeBtn) {
+            mobileUpgradeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Redirecting to subscription page...');
+                // In a real implementation: window.location.href = 'subscription.html';
+            });
+        }
+
         // DOM Elements
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
@@ -1946,7 +1966,6 @@
         const emailPdfBtn = document.getElementById('emailPdfBtn');
         const newConversionBtn = document.getElementById('newConversionBtn');
         const previewTabs = document.querySelectorAll('.preview-tab');
-        const previewTabContents = document.querySelectorAll('.preview-tab-content');
         const pdfIframe = document.getElementById('pdfIframe');
         const typeOptions = document.querySelectorAll('.type-option');
         const textOptions = document.getElementById('textOptions');
@@ -1973,8 +1992,9 @@
         const imageUploadArea = document.getElementById('imageUploadArea');
         const imageUpload = document.getElementById('imageUpload');
 
-        // Current watermark type
+        // Current watermark type and uploaded image
         let currentWatermarkType = 'text';
+        let uploadedImageUrl = null;
 
         // File handling
         uploadArea.addEventListener('click', () => {
@@ -2018,19 +2038,27 @@
             imageUpload.click();
         });
 
+        imageUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.add('active');
+        });
+
+        imageUploadArea.addEventListener('dragleave', () => {
+            imageUploadArea.classList.remove('active');
+        });
+
+        imageUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageUploadArea.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                handleImageFile(e.dataTransfer.files[0]);
+            }
+        });
+
         imageUpload.addEventListener('change', (e) => {
             if (e.target.files.length) {
-                const file = e.target.files[0];
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // In a real implementation, this would be used to create the watermark
-                        console.log('Image uploaded:', file.name);
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert('Please select a valid image file.');
-                }
+                handleImageFile(e.target.files[0]);
             }
         });
 
@@ -2053,23 +2081,38 @@
 
         // Update preview when settings change
         function updatePreview() {
+            // Reset transform and position
+            previewWatermark.style.transform = '';
+            previewWatermark.style.top = '';
+            previewWatermark.style.left = '';
+            previewWatermark.style.right = '';
+            previewWatermark.style.bottom = '';
+            
             if (currentWatermarkType === 'text') {
                 previewWatermark.className = 'preview-watermark watermark-text';
                 previewWatermark.textContent = watermarkText.value || 'CONFIDENTIAL';
                 previewWatermark.style.fontSize = textSize.value + 'px';
                 previewWatermark.style.color = textColor.value;
                 previewWatermark.style.fontFamily = textFont.value;
+                previewWatermark.style.opacity = watermarkOpacity.value / 100;
+                previewWatermark.style.transform = `rotate(${watermarkRotation.value}deg)`;
             } else if (currentWatermarkType === 'image') {
                 previewWatermark.className = 'preview-watermark watermark-image';
-                // In a real implementation, this would show the uploaded image
-                previewWatermark.innerHTML = '<i class="fas fa-image" style="font-size: 48px;"></i>';
-                previewWatermark.style.opacity = (imageOpacity.value / 100);
-                previewWatermark.style.transform = `scale(${imageSize.value / 100})`;
+                if (uploadedImageUrl) {
+                    previewWatermark.innerHTML = '';
+                    previewWatermark.style.backgroundImage = `url(${uploadedImageUrl})`;
+                    previewWatermark.style.backgroundSize = 'contain';
+                    previewWatermark.style.backgroundRepeat = 'no-repeat';
+                    previewWatermark.style.backgroundPosition = 'center';
+                    previewWatermark.style.width = '100px';
+                    previewWatermark.style.height = '100px';
+                } else {
+                    previewWatermark.innerHTML = '<i class="fas fa-image" style="font-size: 48px;"></i>';
+                    previewWatermark.style.backgroundImage = 'none';
+                }
+                previewWatermark.style.opacity = imageOpacity.value / 100;
+                previewWatermark.style.transform = `rotate(${watermarkRotation.value}deg) scale(${imageSize.value / 100})`;
             }
-            
-            // Apply common settings
-            previewWatermark.style.opacity = (watermarkOpacity.value / 100);
-            previewWatermark.style.transform += ` rotate(${watermarkRotation.value}deg)`;
             
             // Position the watermark
             positionWatermark();
@@ -2087,26 +2130,22 @@
                 case 'top-left':
                     previewWatermark.style.top = '20%';
                     previewWatermark.style.left = '20%';
-                    previewWatermark.style.transform += '';
                     break;
                 case 'top-right':
                     previewWatermark.style.top = '20%';
                     previewWatermark.style.right = '20%';
                     previewWatermark.style.left = 'auto';
-                    previewWatermark.style.transform += '';
                     break;
                 case 'bottom-left':
                     previewWatermark.style.bottom = '20%';
                     previewWatermark.style.left = '20%';
                     previewWatermark.style.top = 'auto';
-                    previewWatermark.style.transform += '';
                     break;
                 case 'bottom-right':
                     previewWatermark.style.bottom = '20%';
                     previewWatermark.style.right = '20%';
                     previewWatermark.style.top = 'auto';
                     previewWatermark.style.left = 'auto';
-                    previewWatermark.style.transform += '';
                     break;
                 case 'tiled':
                     // In a real implementation, this would create multiple watermarks
@@ -2128,8 +2167,10 @@
             updatePreview();
         });
         textColorHex.addEventListener('input', function() {
-            textColor.value = this.value;
-            updatePreview();
+            if (this.value.match(/^#[0-9A-F]{6}$/i)) {
+                textColor.value = this.value;
+                updatePreview();
+            }
         });
         textFont.addEventListener('change', updatePreview);
         watermarkPosition.addEventListener('change', updatePreview);
@@ -2139,15 +2180,21 @@
         });
         watermarkOpacity.addEventListener('input', function() {
             watermarkOpacityValue.textContent = this.value + '%';
-            updatePreview();
+            if (currentWatermarkType === 'text') {
+                updatePreview();
+            }
         });
         imageSize.addEventListener('input', function() {
             imageSizeValue.textContent = this.value + '%';
-            updatePreview();
+            if (currentWatermarkType === 'image') {
+                updatePreview();
+            }
         });
         imageOpacity.addEventListener('input', function() {
             imageOpacityValue.textContent = this.value + '%';
-            updatePreview();
+            if (currentWatermarkType === 'image') {
+                updatePreview();
+            }
         });
         pageRange.addEventListener('change', function() {
             customPageRange.style.display = this.value === 'custom' ? 'block' : 'none';
@@ -2169,6 +2216,20 @@
             fileSize.textContent = formatFileSize(file.size);
             fileInfo.classList.add('active');
             applyWatermarkBtn.disabled = false;
+        }
+
+        function handleImageFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageUrl = e.target.result;
+                updatePreview();
+            };
+            reader.readAsDataURL(file);
         }
 
         function isValidPdfFile(file) {
@@ -2281,6 +2342,10 @@
             pageRange.value = 'all';
             customPageRange.style.display = 'none';
             
+            // Reset image upload
+            imageUpload.value = '';
+            uploadedImageUrl = null;
+            
             // Reset type to text
             typeOptions.forEach(opt => opt.classList.remove('active'));
             document.querySelector('.type-option[data-type="text"]').classList.add('active');
@@ -2302,12 +2367,14 @@
                 tab.classList.add('active');
                 
                 // Show corresponding content
-                previewTabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${tabName}Preview`) {
-                        content.classList.add('active');
-                    }
+                document.querySelectorAll('.preview-tab-content').forEach(content => {
+                    content.style.display = 'none';
                 });
+                
+                const activeContent = document.getElementById(`${tabName}Preview`);
+                if (activeContent) {
+                    activeContent.style.display = 'block';
+                }
             });
         });
 
