@@ -50,7 +50,288 @@
             padding: 0 20px;
         }
 
-        header {
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -58,12 +339,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -71,6 +354,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -90,10 +374,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
@@ -103,6 +395,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -112,8 +405,10 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .user-profile {
@@ -291,6 +586,11 @@
             align-items: center;
             gap: 8px;
             border: none;
+            min-height: 44px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
@@ -579,6 +879,7 @@
             display: flex;
             gap: 0.5rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .file-filter {
@@ -1071,6 +1372,14 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -1137,8 +1446,31 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -1207,6 +1539,40 @@
             </div>
         </div>
     </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="ai-tools.html"><i class="fas fa-robot"></i> AI Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
 
     <!-- Storage Hero -->
     <section class="storage-hero">
@@ -1576,7 +1942,7 @@
                         <option value="quarterly">Quarterly</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" style="width: 100%;">Save Settings</button>
+                <button class="btn btn-primary" id="save-settings-btn" style="width: 100%;">Save Settings</button>
             </div>
         </div>
     </div>
@@ -1671,7 +2037,7 @@
                     <i class="fas fa-cloud-upload-alt"></i>
                 </div>
                 <p style="margin-bottom: 1.5rem;">Drag and drop files here or click to browse</p>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="browse-files-btn">
                     <i class="fas fa-folder-open"></i> Browse Files
                 </button>
             </div>
@@ -1692,21 +2058,72 @@
     </div>
 
     <script>
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
         // Storage Management functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Profile dropdown functionality
             const userProfile = document.querySelector('.user-profile');
             const profileDropdown = document.querySelector('.profile-dropdown');
             
-            userProfile.addEventListener('click', function(e) {
-                e.stopPropagation();
-                profileDropdown.classList.toggle('active');
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                profileDropdown.classList.remove('active');
-            });
+            if (userProfile && profileDropdown) {
+                userProfile.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('active');
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function() {
+                    profileDropdown.classList.remove('active');
+                });
+            }
             
             // Toggle switches functionality
             const toggleSwitches = document.querySelectorAll('.toggle-switch');
@@ -1724,7 +2141,8 @@
                     this.classList.add('active');
                     
                     const filterType = this.textContent;
-                    alert(`Filtering files by: ${filterType}`);
+                    // In a real app, this would filter the file list
+                    console.log(`Filtering files by: ${filterType}`);
                 });
             });
             
@@ -1749,11 +2167,25 @@
                     const actionType = this.querySelector('i').className;
                     
                     if (actionType.includes('download')) {
-                        alert(`Downloading: ${fileName}`);
+                        // Add loading animation to the download button
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                            alert(`Downloading: ${fileName}`);
+                        }, 1000);
                     } else if (actionType.includes('trash')) {
                         if (confirm(`Are you sure you want to delete ${fileName}?`)) {
-                            fileItem.remove();
-                            alert(`${fileName} has been moved to trash.`);
+                            // Add fade out animation
+                            fileItem.style.opacity = '0';
+                            fileItem.style.transform = 'translateX(-20px)';
+                            
+                            setTimeout(() => {
+                                fileItem.remove();
+                                // Show success message
+                                showNotification(`${fileName} has been moved to trash.`, 'success');
+                            }, 300);
                         }
                     }
                 });
@@ -1765,17 +2197,19 @@
             const closeUpgradeModal = document.getElementById('close-upgrade-modal');
             const cancelUpgrade = document.getElementById('cancel-upgrade');
             
-            upgradeStorageBtn.addEventListener('click', function() {
-                upgradeStorageModal.classList.add('active');
-            });
-            
-            closeUpgradeModal.addEventListener('click', function() {
-                upgradeStorageModal.classList.remove('active');
-            });
-            
-            cancelUpgrade.addEventListener('click', function() {
-                upgradeStorageModal.classList.remove('active');
-            });
+            if (upgradeStorageBtn && upgradeStorageModal) {
+                upgradeStorageBtn.addEventListener('click', function() {
+                    upgradeStorageModal.classList.add('active');
+                });
+                
+                closeUpgradeModal.addEventListener('click', function() {
+                    upgradeStorageModal.classList.remove('active');
+                });
+                
+                cancelUpgrade.addEventListener('click', function() {
+                    upgradeStorageModal.classList.remove('active');
+                });
+            }
             
             // Upload file modal
             const uploadFileBtn = document.getElementById('upload-file-btn');
@@ -1783,23 +2217,47 @@
             const closeUploadModal = document.getElementById('close-upload-modal');
             const cancelUpload = document.getElementById('cancel-upload');
             const startUpload = document.getElementById('start-upload');
+            const browseFilesBtn = document.getElementById('browse-files-btn');
             
-            uploadFileBtn.addEventListener('click', function() {
-                uploadFileModal.classList.add('active');
-            });
-            
-            closeUploadModal.addEventListener('click', function() {
-                uploadFileModal.classList.remove('active');
-            });
-            
-            cancelUpload.addEventListener('click', function() {
-                uploadFileModal.classList.remove('active');
-            });
-            
-            startUpload.addEventListener('click', function() {
-                alert('Files uploaded successfully!');
-                uploadFileModal.classList.remove('active');
-            });
+            if (uploadFileBtn && uploadFileModal) {
+                uploadFileBtn.addEventListener('click', function() {
+                    uploadFileModal.classList.add('active');
+                });
+                
+                closeUploadModal.addEventListener('click', function() {
+                    uploadFileModal.classList.remove('active');
+                });
+                
+                cancelUpload.addEventListener('click', function() {
+                    uploadFileModal.classList.remove('active');
+                });
+                
+                if (startUpload) {
+                    startUpload.addEventListener('click', function() {
+                        // Show loading state
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+                        this.disabled = true;
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                            uploadFileModal.classList.remove('active');
+                            showNotification('Files uploaded successfully!', 'success');
+                        }, 2000);
+                    });
+                }
+                
+                if (browseFilesBtn) {
+                    browseFilesBtn.addEventListener('click', function() {
+                        // In a real app, this would trigger file input
+                        const fileInput = document.createElement('input');
+                        fileInput.type = 'file';
+                        fileInput.multiple = true;
+                        fileInput.click();
+                    });
+                }
+            }
             
             // Cloud service connections
             const cloudServices = document.querySelectorAll('.cloud-service .btn-outline');
@@ -1813,13 +2271,22 @@
                             this.closest('.cloud-service').classList.remove('connected');
                             this.closest('.cloud-service').querySelector('.cloud-status').textContent = 'Not Connected';
                             this.closest('.cloud-service').querySelector('.cloud-status').className = 'cloud-status disconnected';
-                            alert(`${cloudName} has been disconnected.`);
+                            showNotification(`${cloudName} has been disconnected.`, 'info');
                         }
                     } else {
-                        this.closest('.cloud-service').classList.add('connected');
-                        this.closest('.cloud-service').querySelector('.cloud-status').textContent = 'Connected';
-                        this.closest('.cloud-service').querySelector('.cloud-status').className = 'cloud-status connected';
-                        alert(`${cloudName} has been connected successfully!`);
+                        // Show connecting state
+                        const originalText = this.textContent;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+                        this.disabled = true;
+                        
+                        setTimeout(() => {
+                            this.closest('.cloud-service').classList.add('connected');
+                            this.closest('.cloud-service').querySelector('.cloud-status').textContent = 'Connected';
+                            this.closest('.cloud-service').querySelector('.cloud-status').className = 'cloud-status connected';
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                            showNotification(`${cloudName} has been connected successfully!`, 'success');
+                        }, 1500);
                     }
                 });
             });
@@ -1830,31 +2297,239 @@
                 action.addEventListener('click', function(e) {
                     e.preventDefault();
                     const actionName = this.querySelector('.quick-action-title').textContent;
-                    alert(`${actionName} action would be performed in a real implementation.`);
+                    
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                    
+                    // Show appropriate action
+                    if (actionName === 'Upload Files') {
+                        uploadFileModal.classList.add('active');
+                    } else if (actionName === 'Create Folder') {
+                        const folderName = prompt('Enter folder name:');
+                        if (folderName) {
+                            showNotification(`Folder "${folderName}" created successfully!`, 'success');
+                        }
+                    } else if (actionName === 'Empty Trash') {
+                        if (confirm('Are you sure you want to empty trash? This action cannot be undone.')) {
+                            showNotification('Trash has been emptied.', 'info');
+                        }
+                    } else if (actionName === 'Sync Now') {
+                        // Show syncing animation
+                        const originalHTML = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                            showNotification('Files synchronized successfully!', 'success');
+                        }, 2000);
+                    }
                 });
             });
             
             // Storage plan upgrades
-            const storagePlanButtons = document.querySelectorAll('.storage-plan .btn-primary');
+            const storagePlanButtons = document.querySelectorAll('.storage-plan .btn-primary, .storage-plan .btn-outline');
             storagePlanButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const planName = this.closest('.storage-plan').querySelector('.plan-name').textContent;
                     const planStorage = this.closest('.storage-plan').querySelector('.plan-storage').textContent;
-                    alert(`You've selected the ${planName} plan with ${planStorage} of storage. This would proceed to payment in a real implementation.`);
+                    
+                    if (this.textContent.includes('Current')) {
+                        showNotification(`You're already on the ${planName} plan.`, 'info');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const originalText = this.textContent;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        showNotification(`You've selected the ${planName} plan with ${planStorage} of storage.`, 'success');
+                    }, 2000);
                 });
             });
             
             // Search functionality
             const searchInput = document.querySelector('.file-search input');
-            searchInput.addEventListener('keyup', function(e) {
-                if (e.key === 'Enter') {
+            if (searchInput) {
+                // Use debounce to prevent too many searches while typing
+                const debouncedSearch = debounce(function(e) {
                     const searchTerm = this.value;
                     if (searchTerm) {
-                        alert(`Searching for: ${searchTerm}`);
+                        console.log(`Searching for: ${searchTerm}`);
+                        // In a real app, this would filter the file list
                     }
-                }
+                }, 300);
+                
+                searchInput.addEventListener('input', debouncedSearch);
+            }
+            
+            // Sort button functionality
+            const sortButton = document.querySelector('.file-actions .btn-outline');
+            if (sortButton) {
+                sortButton.addEventListener('click', function() {
+                    // In a real app, this would show sort options
+                    alert('Sort options would appear here in a real implementation.');
+                });
+            }
+            
+            // Save settings button
+            const saveSettingsBtn = document.getElementById('save-settings-btn');
+            if (saveSettingsBtn) {
+                saveSettingsBtn.addEventListener('click', function() {
+                    // Show loading state
+                    const originalText = this.textContent;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        showNotification('Settings saved successfully!', 'success');
+                    }, 1500);
+                });
+            }
+            
+            // Close modals when clicking outside
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Storage settings toggles
+            const storageToggles = document.querySelectorAll('#auto-backup-toggle, #versioning-toggle, #notifications-toggle');
+            storageToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
             });
         });
+
+        // Notification function
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close"><i class="fas fa-times"></i></button>
+            `;
+            
+            // Add styles for notification
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: white;
+                        border-radius: var(--border-radius);
+                        box-shadow: var(--box-shadow);
+                        padding: 1rem 1.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 1rem;
+                        max-width: 400px;
+                        z-index: 3000;
+                        transform: translateX(120%);
+                        transition: transform 0.3s ease;
+                    }
+                    .notification.success {
+                        border-left: 4px solid var(--success);
+                    }
+                    .notification.info {
+                        border-left: 4px solid var(--primary);
+                    }
+                    .notification.error {
+                        border-left: 4px solid var(--danger);
+                    }
+                    .notification.active {
+                        transform: translateX(0);
+                    }
+                    .notification-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.8rem;
+                    }
+                    .notification-content i {
+                        font-size: 1.2rem;
+                    }
+                    .notification.success .notification-content i {
+                        color: var(--success);
+                    }
+                    .notification.info .notification-content i {
+                        color: var(--primary);
+                    }
+                    .notification.error .notification-content i {
+                        color: var(--danger);
+                    }
+                    .notification-close {
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        color: var(--gray);
+                        font-size: 1rem;
+                    }
+                    @media (max-width: 768px) {
+                        .notification {
+                            right: 10px;
+                            left: 10px;
+                            max-width: none;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('active');
+            }, 10);
+            
+            // Close notification
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            });
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.classList.remove('active');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
