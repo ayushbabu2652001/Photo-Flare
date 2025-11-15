@@ -53,7 +53,288 @@
             padding: 0 20px;
         }
 
-        header {
+        /* Mobile Header - Sticky */
+        .mobile-header {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mobile-header-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .mobile-header-btn:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .mobile-header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-header-btn.upgrade {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        /* Slide-out Sidebar */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .sidebar-logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .sidebar-close:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--dark);
+        }
+
+        .sidebar-close:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            font-weight: 500;
+            min-height: 44px;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-nav a:active {
+            background: rgba(67, 97, 238, 0.15);
+        }
+
+        .sidebar-nav i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-actions {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 1rem;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .sidebar-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-btn:active {
+            transform: scale(0.98);
+        }
+
+        .sidebar-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Header */
+        .desktop-header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -61,12 +342,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -74,6 +357,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -93,10 +377,18 @@
             -webkit-text-fill-color: transparent;
         }
 
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         nav a {
@@ -106,6 +398,7 @@
             transition: var(--transition);
             padding: 0.5rem 0.8rem;
             border-radius: 8px;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
@@ -115,8 +408,10 @@
 
         .header-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-shrink: 0;
+            flex-wrap: nowrap;
         }
 
         .btn {
@@ -129,12 +424,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            border: none;
+            font-size: 1rem;
+            min-height: 44px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
             animation: float-btn 4s ease-in-out infinite;
         }
@@ -713,6 +1014,14 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -866,6 +1175,17 @@
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
+        .form-control.error {
+            border-color: var(--danger);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
         .payment-methods {
             display: flex;
             gap: 1rem;
@@ -912,11 +1232,60 @@
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
+
+        /* Loading spinner */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(67, 97, 238, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header-content">
+                <button class="mobile-nav-btn" id="mobileNavBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a href="index.html" class="mobile-logo">
+                    <i class="fas fa-camera-retro mobile-logo-icon"></i>
+                    <span class="mobile-logo-text">Photo Flare</span>
+                </a>
+                <div class="mobile-header-actions">
+                    <a href="login.html" class="mobile-header-btn">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="subscription.html" class="mobile-header-btn upgrade">
+                        <i class="fas fa-crown"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
         <div class="container">
             <div class="header-content">
                 <a href="index.html" class="logo">
@@ -941,12 +1310,46 @@
         </div>
     </header>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="fas fa-camera-retro sidebar-logo-icon"></i>
+                <span class="sidebar-logo-text">Photo Flare</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-tools"></i> All Tools</a></li>
+                <li><a href="pdf-tools.html"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                <li><a href="image-tools.html"><i class="fas fa-image"></i> Image Tools</a></li>
+                <li><a href="conversion.html"><i class="fas fa-exchange-alt"></i> Conversion</a></li>
+                <li><a href="premium-tools.html" class="active"><i class="fas fa-crown"></i> Premium Tools</a></li>
+                <li><a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-actions">
+            <a href="login.html" class="sidebar-btn outline">
+                <i class="fas fa-user"></i> Log In
+            </a>
+            <a href="subscription.html" class="sidebar-btn primary">
+                <i class="fas fa-crown"></i> Upgrade Now
+            </a>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Photo Flare Pro Monthly</h1>
             <p>Get unlimited access to all our advanced PDF tools, faster processing, and priority support for just $4 per month.</p>
-            <a href="#checkout" class="btn btn-premium">
+            <a href="#checkout" class="btn btn-premium" id="hero-cta-btn">
                 <i class="fas fa-crown"></i> Get Started Now
             </a>
         </div>
@@ -974,7 +1377,7 @@
                         <li><i class="fas fa-check"></i> Priority email support</li>
                         <li><i class="fas fa-check"></i> Watermark removal</li>
                     </ul>
-                    <a href="#checkout" class="btn btn-premium" style="width: 100%;">Get Started</a>
+                    <a href="#checkout" class="btn btn-premium" style="width: 100%;" id="pricing-cta-btn">Get Started</a>
                 </div>
             </div>
         </div>
@@ -1152,11 +1555,13 @@
                         <div class="form-group">
                             <label class="form-label" for="email">Email Address</label>
                             <input type="email" class="form-control" id="email" required placeholder="your@email.com">
+                            <div class="error-message" id="email-error">Please enter a valid email address</div>
                         </div>
                         
                         <div class="form-group">
                             <label class="form-label" for="name">Full Name</label>
                             <input type="text" class="form-control" id="name" required placeholder="John Doe">
+                            <div class="error-message" id="name-error">Please enter your full name</div>
                         </div>
                         
                         <div class="form-group full-width">
@@ -1182,24 +1587,32 @@
                                 <div class="form-group">
                                     <label class="form-label" for="card-number">Card Number</label>
                                     <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
+                                    <div class="error-message" id="card-error">Please enter a valid card number</div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="form-label" for="expiry">Expiry Date</label>
                                     <input type="text" class="form-control" id="expiry" placeholder="MM/YY">
+                                    <div class="error-message" id="expiry-error">Please enter a valid expiry date</div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="form-label" for="cvc">CVC</label>
                                     <input type="text" class="form-control" id="cvc" placeholder="123">
+                                    <div class="error-message" id="cvc-error">Please enter a valid CVC</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
+                    <div class="loading" id="checkout-loading">
+                        <div class="spinner"></div>
+                        <p>Processing your payment...</p>
+                    </div>
+                    
                     <div class="checkout-footer">
                         <p>By completing your purchase, you agree to our <a href="terms.html" style="color: var(--primary);">Terms of Service</a> and <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a>.</p>
-                        <button type="submit" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                        <button type="submit" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;" id="submit-btn">
                             <i class="fas fa-lock"></i> Complete Purchase - $4/month
                         </button>
                     </div>
@@ -1213,7 +1626,7 @@
         <div class="container">
             <h2 class="cta-title">Ready to Boost Your Productivity?</h2>
             <p class="cta-subtitle">Join thousands of professionals who use Photo Flare Pro Monthly to save time and work more efficiently.</p>
-            <a href="#checkout" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;">
+            <a href="#checkout" class="btn btn-premium" style="font-size: 1.2rem; padding: 1rem 2rem;" id="cta-btn">
                 <i class="fas fa-crown"></i> Upgrade to Pro Monthly Now
             </a>
         </div>
@@ -1270,90 +1683,479 @@
     </footer>
 
     <script>
-        // FAQ Toggle
-        const faqQuestions = document.querySelectorAll('.faq-question');
+        // Debounce function for performance
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Sidebar functionality
+        const mobileNavBtn = document.getElementById('mobileNavBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        // Open sidebar
+        if (mobileNavBtn) {
+            mobileNavBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
+            });
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
         
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const toggle = question.querySelector('.faq-toggle');
-                
-                // Toggle current FAQ item
-                answer.classList.toggle('show');
-                toggle.classList.toggle('rotate');
-                
-                // Close other FAQ items
-                faqQuestions.forEach(otherQuestion => {
-                    if (otherQuestion !== question) {
-                        const otherAnswer = otherQuestion.nextElementSibling;
-                        const otherToggle = otherQuestion.querySelector('.faq-toggle');
-                        otherAnswer.classList.remove('show');
-                        otherToggle.classList.remove('rotate');
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking on a link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // Premium subscription functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            if (faqQuestions.length > 0) {
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', () => {
+                        const answer = question.nextElementSibling;
+                        const toggle = question.querySelector('.faq-toggle');
+                        
+                        // Toggle current FAQ item
+                        if (answer && toggle) {
+                            answer.classList.toggle('show');
+                            toggle.classList.toggle('rotate');
+                            
+                            // Close other FAQ items
+                            faqQuestions.forEach(otherQuestion => {
+                                if (otherQuestion !== question) {
+                                    const otherAnswer = otherQuestion.nextElementSibling;
+                                    const otherToggle = otherQuestion.querySelector('.faq-toggle');
+                                    if (otherAnswer && otherToggle) {
+                                        otherAnswer.classList.remove('show');
+                                        otherToggle.classList.remove('rotate');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+            anchorLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Show checkout section if it's the target
+                        if (targetId === '#checkout') {
+                            const checkoutSection = document.querySelector('.checkout-section');
+                            if (checkoutSection) {
+                                checkoutSection.style.display = 'block';
+                            }
+                        }
                     }
                 });
             });
-        });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const cardDetails = document.getElementById('card-details');
+            
+            if (paymentMethods.length > 0 && cardDetails) {
+                paymentMethods.forEach(method => {
+                    method.addEventListener('click', () => {
+                        // Remove active class from all methods
+                        paymentMethods.forEach(m => m.classList.remove('active'));
+                        
+                        // Add active class to clicked method
+                        method.classList.add('active');
+                        
+                        // Show/hide card details based on selection
+                        const selectedMethod = method.getAttribute('data-method');
+                        if (selectedMethod === 'card') {
+                            cardDetails.style.display = 'block';
+                        } else {
+                            cardDetails.style.display = 'none';
+                        }
                     });
-                    
-                    // Show checkout section if it's the target
-                    if (targetId === '#checkout') {
-                        document.querySelector('.checkout-section').style.display = 'block';
-                    }
-                }
-            });
-        });
+                });
+            }
 
-        // Payment method selection
-        const paymentMethods = document.querySelectorAll('.payment-method');
-        const cardDetails = document.getElementById('card-details');
-        
-        paymentMethods.forEach(method => {
-            method.addEventListener('click', () => {
-                // Remove active class from all methods
-                paymentMethods.forEach(m => m.classList.remove('active'));
-                
-                // Add active class to clicked method
-                method.classList.add('active');
-                
-                // Show/hide card details based on selection
-                const selectedMethod = method.getAttribute('data-method');
-                if (selectedMethod === 'card') {
-                    cardDetails.style.display = 'block';
-                } else {
+            // Form validation
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validateCardNumber(number) {
+                // Simple validation - in a real app, you'd use a library
+                const cleanNumber = number.replace(/\s+/g, '');
+                return /^\d{13,19}$/.test(cleanNumber);
+            }
+
+            function validateExpiry(expiry) {
+                return /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry);
+            }
+
+            function validateCVC(cvc) {
+                return /^\d{3,4}$/.test(cvc);
+            }
+
+            // Form submission
+            const checkoutForm = document.getElementById('checkout-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Reset error states
+                    const errorMessages = document.querySelectorAll('.error-message');
+                    const formControls = document.querySelectorAll('.form-control');
+                    
+                    errorMessages.forEach(msg => msg.style.display = 'none');
+                    formControls.forEach(control => control.classList.remove('error'));
+                    
+                    // Get form data
+                    const email = document.getElementById('email');
+                    const name = document.getElementById('name');
+                    const activePayment = document.querySelector('.payment-method.active');
+                    const cardNumber = document.getElementById('card-number');
+                    const expiry = document.getElementById('expiry');
+                    const cvc = document.getElementById('cvc');
+                    
+                    let isValid = true;
+                    
+                    // Validate email
+                    if (!email.value || !validateEmail(email.value)) {
+                        document.getElementById('email-error').style.display = 'block';
+                        email.classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    // Validate name
+                    if (!name.value) {
+                        document.getElementById('name-error').style.display = 'block';
+                        name.classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    // Validate card details if card is selected
+                    const selectedMethod = activePayment.getAttribute('data-method');
+                    if (selectedMethod === 'card') {
+                        if (!cardNumber.value || !validateCardNumber(cardNumber.value)) {
+                            document.getElementById('card-error').style.display = 'block';
+                            cardNumber.classList.add('error');
+                            isValid = false;
+                        }
+                        
+                        if (!expiry.value || !validateExpiry(expiry.value)) {
+                            document.getElementById('expiry-error').style.display = 'block';
+                            expiry.classList.add('error');
+                            isValid = false;
+                        }
+                        
+                        if (!cvc.value || !validateCVC(cvc.value)) {
+                            document.getElementById('cvc-error').style.display = 'block';
+                            cvc.classList.add('error');
+                            isValid = false;
+                        }
+                    }
+                    
+                    if (!isValid) {
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const loadingIndicator = document.getElementById('checkout-loading');
+                    const submitBtn = document.getElementById('submit-btn');
+                    
+                    if (loadingIndicator && submitBtn) {
+                        loadingIndicator.classList.add('active');
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                    }
+                    
+                    // Simulate payment processing
+                    setTimeout(() => {
+                        if (loadingIndicator && submitBtn) {
+                            loadingIndicator.classList.remove('active');
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-lock"></i> Complete Purchase - $4/month';
+                        }
+                        
+                        // Show success notification
+                        showNotification(`Thank you ${name.value}! Your Pro Monthly subscription has been activated. A confirmation has been sent to ${email.value}.`, 'success');
+                        
+                        // Reset form
+                        this.reset();
+                        
+                        // Reset payment method to card
+                        if (paymentMethods.length > 0) {
+                            paymentMethods.forEach(m => m.classList.remove('active'));
+                            paymentMethods[0].classList.add('active');
+                        }
+                        
+                        if (cardDetails) {
+                            cardDetails.style.display = 'block';
+                        }
+                    }, 2000);
+                });
+            }
+
+            // Initialize card details visibility
+            if (cardDetails) {
+                const activePayment = document.querySelector('.payment-method.active');
+                if (activePayment && activePayment.getAttribute('data-method') !== 'card') {
                     cardDetails.style.display = 'none';
                 }
+            }
+
+            // Add event listeners to all CTA buttons
+            const ctaButtons = [
+                document.getElementById('hero-cta-btn'),
+                document.getElementById('pricing-cta-btn'),
+                document.getElementById('cta-btn')
+            ];
+            
+            ctaButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', function(e) {
+                        // The smooth scrolling is already handled by the anchor link
+                        // We just need to ensure the checkout section is visible
+                        const checkoutSection = document.querySelector('.checkout-section');
+                        if (checkoutSection) {
+                            checkoutSection.style.display = 'block';
+                        }
+                    });
+                }
             });
+
+            // Prevent form submission on Enter key in inputs
+            const formInputs = document.querySelectorAll('#checkout-form input');
+            formInputs.forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Real-time validation for inputs
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.addEventListener('blur', function() {
+                    if (this.value && !validateEmail(this.value)) {
+                        document.getElementById('email-error').style.display = 'block';
+                        this.classList.add('error');
+                    } else {
+                        document.getElementById('email-error').style.display = 'none';
+                        this.classList.remove('error');
+                    }
+                });
+            }
+
+            const nameInput = document.getElementById('name');
+            if (nameInput) {
+                nameInput.addEventListener('blur', function() {
+                    if (!this.value) {
+                        document.getElementById('name-error').style.display = 'block';
+                        this.classList.add('error');
+                    } else {
+                        document.getElementById('name-error').style.display = 'none';
+                        this.classList.remove('error');
+                    }
+                });
+            }
+
+            const cardNumberInput = document.getElementById('card-number');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('blur', function() {
+                    if (this.value && !validateCardNumber(this.value)) {
+                        document.getElementById('card-error').style.display = 'block';
+                        this.classList.add('error');
+                    } else {
+                        document.getElementById('card-error').style.display = 'none';
+                        this.classList.remove('error');
+                    }
+                });
+            }
+
+            const expiryInput = document.getElementById('expiry');
+            if (expiryInput) {
+                expiryInput.addEventListener('blur', function() {
+                    if (this.value && !validateExpiry(this.value)) {
+                        document.getElementById('expiry-error').style.display = 'block';
+                        this.classList.add('error');
+                    } else {
+                        document.getElementById('expiry-error').style.display = 'none';
+                        this.classList.remove('error');
+                    }
+                });
+            }
+
+            const cvcInput = document.getElementById('cvc');
+            if (cvcInput) {
+                cvcInput.addEventListener('blur', function() {
+                    if (this.value && !validateCVC(this.value)) {
+                        document.getElementById('cvc-error').style.display = 'block';
+                        this.classList.add('error');
+                    } else {
+                        document.getElementById('cvc-error').style.display = 'none';
+                        this.classList.remove('error');
+                    }
+                });
+            }
         });
 
-        // Form submission
-        document.getElementById('checkout-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Notification function
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close"><i class="fas fa-times"></i></button>
+            `;
             
-            // Get form data
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value;
-            const selectedPayment = document.querySelector('.payment-method.active').getAttribute('data-method');
+            // Add styles for notification
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: white;
+                        border-radius: var(--border-radius);
+                        box-shadow: var(--box-shadow);
+                        padding: 1rem 1.5rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 1rem;
+                        max-width: 400px;
+                        z-index: 3000;
+                        transform: translateX(120%);
+                        transition: transform 0.3s ease;
+                    }
+                    .notification.success {
+                        border-left: 4px solid var(--success);
+                    }
+                    .notification.info {
+                        border-left: 4px solid var(--primary);
+                    }
+                    .notification.error {
+                        border-left: 4px solid var(--danger);
+                    }
+                    .notification.active {
+                        transform: translateX(0);
+                    }
+                    .notification-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.8rem;
+                    }
+                    .notification-content i {
+                        font-size: 1.2rem;
+                    }
+                    .notification.success .notification-content i {
+                        color: var(--success);
+                    }
+                    .notification.info .notification-content i {
+                        color: var(--primary);
+                    }
+                    .notification.error .notification-content i {
+                        color: var(--danger);
+                    }
+                    .notification-close {
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        color: var(--gray);
+                        font-size: 1rem;
+                    }
+                    @media (max-width: 768px) {
+                        .notification {
+                            right: 10px;
+                            left: 10px;
+                            max-width: none;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
             
-            // In a real implementation, you would process the payment here
-            alert(`Thank you ${name}! Your Pro Monthly subscription has been activated. A confirmation has been sent to ${email}.`);
+            // Add to page
+            document.body.appendChild(notification);
             
-            // Reset form
-            this.reset();
-        });
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('active');
+            }, 10);
+            
+            // Close notification
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.classList.remove('active');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            });
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.classList.remove('active');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', debounce(() => {
+            // Any responsive adjustments needed
+        }, 250));
     </script>
 </body>
 </html>
