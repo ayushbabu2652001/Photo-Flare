@@ -1531,10 +1531,10 @@
                     </div>
                     
                     <div class="preview-content">
-                        <div class="pdf-preview preview-tab-content active" id="pdfPreview">
+                        <div class="preview-tab-content active" id="pdfPreview">
                             <iframe src="about:blank" class="pdf-preview" id="pdfIframe"></iframe>
                         </div>
-                        <div class="preview-tab-content" id="detailsPreview">
+                        <div class="preview-tab-content" id="detailsPreview" style="display: none;">
                             <h3>Conversion Summary</h3>
                             <ul style="list-style: none; padding: 0;">
                                 <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray);">
@@ -1713,6 +1713,26 @@
             link.addEventListener('click', closeSidebar);
         });
 
+        // Mobile header button functionality
+        const mobileLoginBtn = document.querySelector('.mobile-header-btn[href="login.html"]');
+        const mobileUpgradeBtn = document.querySelector('.mobile-header-btn.upgrade');
+        
+        if (mobileLoginBtn) {
+            mobileLoginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Redirecting to login page...');
+                // In a real implementation: window.location.href = 'login.html';
+            });
+        }
+        
+        if (mobileUpgradeBtn) {
+            mobileUpgradeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Redirecting to subscription page...');
+                // In a real implementation: window.location.href = 'subscription.html';
+            });
+        }
+
         // DOM Elements
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
@@ -1736,7 +1756,6 @@
         const emailPdfBtn = document.getElementById('emailPdfBtn');
         const newConversionBtn = document.getElementById('newConversionBtn');
         const previewTabs = document.querySelectorAll('.preview-tab');
-        const previewTabContents = document.querySelectorAll('.preview-tab-content');
         const pdfIframe = document.getElementById('pdfIframe');
 
         // State variables
@@ -2011,12 +2030,14 @@
                 tab.classList.add('active');
                 
                 // Show corresponding content
-                previewTabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${tabName}Preview`) {
-                        content.classList.add('active');
-                    }
+                document.querySelectorAll('.preview-tab-content').forEach(content => {
+                    content.style.display = 'none';
                 });
+                
+                const activeContent = document.getElementById(`${tabName}Preview`);
+                if (activeContent) {
+                    activeContent.style.display = 'block';
+                }
             });
         });
 
