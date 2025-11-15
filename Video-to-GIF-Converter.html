@@ -81,8 +81,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -132,8 +132,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
             text-decoration: none;
@@ -230,8 +230,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             transition: var(--transition);
         }
@@ -1139,95 +1139,7 @@
             transform: translateY(-3px);
         }
 
-        /* Mobile-specific fixes */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
-            }
-            
-            .desktop-header {
-                display: none;
-            }
-            
-            .tool-content {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .upload-section {
-                border-right: none;
-                border-bottom: 1px solid var(--light-gray);
-                padding: 1rem 0;
-            }
-            
-            .preview-section {
-                padding: 1rem 0;
-            }
-            
-            .upload-area {
-                padding: 1.5rem 1rem;
-            }
-            
-            .settings-panel {
-                padding: 1rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-buttons .btn {
-                min-width: 100%;
-            }
-            
-            .trim-controls {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
-            }
-            
-            .result-stats {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.8rem;
-            }
-            
-            .stat-card {
-                padding: 0.8rem;
-            }
-            
-            .tool-header {
-                padding: 1.5rem 1rem;
-            }
-            
-            .tool-header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .range-container {
-                flex-wrap: wrap;
-            }
-            
-            .range-container input[type="number"] {
-                width: 70px;
-            }
-            
-            .premium-feature {
-                margin-bottom: 1rem;
-            }
-            
-            .premium-overlay {
-                padding: 0.8rem;
-            }
-            
-            .premium-overlay i {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .sidebar {
-                width: 85%;
-            }
-        }
+        /* Media Queries - Mobile First Approach */
 
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
@@ -1340,6 +1252,30 @@
             .trim-controls {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+        }
+
+        /* Show mobile header on small screens */
+        @media (max-width: 767px) {
+            .mobile-header {
+                display: block;
+            }
+            
+            .desktop-header {
+                display: none;
+            }
+            
+            .tool-content {
+                flex-direction: column;
+            }
+            
+            .upload-section {
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -1927,6 +1863,7 @@
         let isPremiumUser = false; // This would be set based on user authentication
         let videoDuration = 0;
         let convertedGifBlob = null;
+        let currentVideoUrl = null;
 
         // Initialize the tool
         function init() {
@@ -1953,53 +1890,64 @@
         // Set up event listeners
         function setupEventListeners() {
             // Upload area events
-            uploadArea.addEventListener('click', () => fileInput.click());
-            browseBtn.addEventListener('click', () => fileInput.click());
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('drop', handleDrop);
+            if (uploadArea) {
+                uploadArea.addEventListener('click', () => fileInput.click());
+                uploadArea.addEventListener('dragover', handleDragOver);
+                uploadArea.addEventListener('drop', handleDrop);
+            }
+            
+            if (browseBtn) {
+                browseBtn.addEventListener('click', () => fileInput.click());
+            }
             
             // File input change
-            fileInput.addEventListener('change', handleFileSelect);
+            if (fileInput) {
+                fileInput.addEventListener('change', handleFileSelect);
+            }
             
             // Control synchronization
-            fpsRange.addEventListener('input', updateFPSValue);
-            fpsInput.addEventListener('input', updateFPSFromInput);
-            qualityRange.addEventListener('input', updateQualityValue);
-            qualitySelect.addEventListener('change', updateQualityFromSelect);
-            durationRange.addEventListener('input', updateDurationValue);
-            durationInput.addEventListener('input', updateDurationFromInput);
-            sizeRange.addEventListener('input', updateSizeValue);
-            sizeInput.addEventListener('input', updateSizeFromInput);
+            if (fpsRange) fpsRange.addEventListener('input', updateFPSValue);
+            if (fpsInput) fpsInput.addEventListener('input', updateFPSFromInput);
+            if (qualityRange) qualityRange.addEventListener('input', updateQualityValue);
+            if (qualitySelect) qualitySelect.addEventListener('change', updateQualityFromSelect);
+            if (durationRange) durationRange.addEventListener('input', updateDurationValue);
+            if (durationInput) durationInput.addEventListener('input', updateDurationFromInput);
+            if (sizeRange) sizeRange.addEventListener('input', updateSizeValue);
+            if (sizeInput) sizeInput.addEventListener('input', updateSizeFromInput);
             
             // Trim controls
-            trimCheckbox.addEventListener('change', toggleTrimControls);
-            previewTrim.addEventListener('click', previewTrimmedVideo);
+            if (trimCheckbox) trimCheckbox.addEventListener('change', toggleTrimControls);
+            if (previewTrim) previewTrim.addEventListener('click', previewTrimmedVideo);
             
             // Action buttons
-            convertBtn.addEventListener('click', convertToGif);
-            resetBtn.addEventListener('click', resetTool);
-            downloadBtn.addEventListener('click', downloadGif);
-            shareBtn.addEventListener('click', shareGif);
-            newConversionBtn.addEventListener('click', resetTool);
+            if (convertBtn) convertBtn.addEventListener('click', convertToGif);
+            if (resetBtn) resetBtn.addEventListener('click', resetTool);
+            if (downloadBtn) downloadBtn.addEventListener('click', downloadGif);
+            if (shareBtn) shareBtn.addEventListener('click', shareGif);
+            if (newConversionBtn) newConversionBtn.addEventListener('click', resetTool);
             
             // Premium features
-            fetchVideo.addEventListener('click', fetchVideoFromUrl);
+            if (fetchVideo) fetchVideo.addEventListener('click', fetchVideoFromUrl);
         }
         
         // Handle drag over event
         function handleDragOver(e) {
             e.preventDefault();
             e.stopPropagation();
-            uploadArea.style.borderColor = 'var(--primary)';
-            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+            if (uploadArea) {
+                uploadArea.style.borderColor = 'var(--primary)';
+                uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+            }
         }
         
         // Handle file drop
         function handleDrop(e) {
             e.preventDefault();
             e.stopPropagation();
-            uploadArea.style.borderColor = 'var(--primary)';
-            uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            if (uploadArea) {
+                uploadArea.style.borderColor = 'var(--primary)';
+                uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            }
             
             const files = e.dataTransfer.files;
             if (files.length > 0) {
@@ -2045,9 +1993,14 @@
                 // Upload complete
                 progressText.textContent = 'Upload complete!';
                 
+                // Revoke previous object URL if exists
+                if (currentVideoUrl) {
+                    URL.revokeObjectURL(currentVideoUrl);
+                }
+                
                 // Create object URL for the video
-                const videoUrl = URL.createObjectURL(file);
-                previewVideo.src = videoUrl;
+                currentVideoUrl = URL.createObjectURL(file);
+                previewVideo.src = currentVideoUrl;
                 
                 // Show video and hide placeholder
                 previewPlaceholder.style.display = 'none';
@@ -2057,12 +2010,18 @@
                 previewVideo.onloadedmetadata = function() {
                     videoDuration = Math.floor(previewVideo.duration);
                     fileDuration.textContent = formatDuration(videoDuration);
-                    durationRange.max = Math.min(videoDuration, 15);
-                    durationInput.max = Math.min(videoDuration, 15);
-                    trimEnd.max = videoDuration;
-                    trimEnd.value = Math.min(videoDuration, 5);
-                    durationRange.value = Math.min(videoDuration, 5);
-                    durationInput.value = Math.min(videoDuration, 5);
+                    if (durationRange) {
+                        durationRange.max = Math.min(videoDuration, 15);
+                        durationInput.max = Math.min(videoDuration, 15);
+                    }
+                    if (trimEnd) {
+                        trimEnd.max = videoDuration;
+                        trimEnd.value = Math.min(videoDuration, 5);
+                    }
+                    if (durationRange) {
+                        durationRange.value = Math.min(videoDuration, 5);
+                        durationInput.value = Math.min(videoDuration, 5);
+                    }
                     updateDurationValue();
                 };
             });
@@ -2086,6 +2045,7 @@
         
         // Update FPS value display
         function updateFPSValue() {
+            if (!fpsRange || !fpsInput || !fpsValue) return;
             const value = fpsRange.value;
             fpsInput.value = value;
             fpsValue.textContent = `${value} fps`;
@@ -2093,6 +2053,7 @@
         
         // Update FPS from input
         function updateFPSFromInput() {
+            if (!fpsInput || !fpsRange || !fpsValue) return;
             let value = parseInt(fpsInput.value);
             if (value < 5) value = 5;
             if (value > 30) value = 30;
@@ -2103,6 +2064,7 @@
         
         // Update quality value display
         function updateQualityValue() {
+            if (!qualityRange || !qualitySelect || !qualityValue) return;
             const value = qualityRange.value;
             qualitySelect.value = value;
             
@@ -2112,6 +2074,7 @@
         
         // Update quality from select
         function updateQualityFromSelect() {
+            if (!qualitySelect || !qualityRange) return;
             const value = qualitySelect.value;
             qualityRange.value = value;
             updateQualityValue();
@@ -2119,6 +2082,7 @@
         
         // Update duration value display
         function updateDurationValue() {
+            if (!durationRange || !durationInput || !durationValue) return;
             const value = durationRange.value;
             durationInput.value = value;
             durationValue.textContent = `${value}s`;
@@ -2126,6 +2090,7 @@
         
         // Update duration from input
         function updateDurationFromInput() {
+            if (!durationInput || !durationRange || !durationValue) return;
             let value = parseInt(durationInput.value);
             const maxDuration = parseInt(durationRange.max);
             if (value < 1) value = 1;
@@ -2137,6 +2102,7 @@
         
         // Update size value display
         function updateSizeValue() {
+            if (!sizeRange || !sizeInput || !sizeValue) return;
             const value = sizeRange.value;
             sizeInput.value = value;
             
@@ -2147,6 +2113,7 @@
         
         // Update size from input
         function updateSizeFromInput() {
+            if (!sizeInput || !sizeRange) return;
             let value = parseInt(sizeInput.value);
             if (value < 320) value = 320;
             if (value > 1280) value = 1280;
@@ -2157,6 +2124,7 @@
         
         // Toggle trim controls visibility
         function toggleTrimControls() {
+            if (!trimControls) return;
             if (trimCheckbox.checked) {
                 trimControls.style.display = 'flex';
             } else {
@@ -2166,7 +2134,7 @@
         
         // Preview trimmed video
         function previewTrimmedVideo() {
-            if (!previewVideo.src) return;
+            if (!previewVideo || !previewVideo.src) return;
             
             const start = parseFloat(trimStart.value);
             const end = parseFloat(trimEnd.value);
@@ -2295,6 +2263,12 @@
             currentVideoFile = null;
             convertedGifBlob = null;
             
+            // Revoke object URL if exists
+            if (currentVideoUrl) {
+                URL.revokeObjectURL(currentVideoUrl);
+                currentVideoUrl = null;
+            }
+            
             // Reset UI elements
             fileInfo.classList.remove('active');
             previewPlaceholder.style.display = 'flex';
@@ -2302,33 +2276,55 @@
             previewGif.classList.remove('active');
             resultsSection.classList.remove('active');
             
+            // Reset video element
+            previewVideo.pause();
+            previewVideo.src = '';
+            previewVideo.load();
+            
+            // Reset GIF preview
+            previewGif.src = '';
+            previewGif.alt = '';
+            
+            // Reset result GIF
+            resultGif.src = '';
+            
             // Reset controls to default values
-            fpsRange.value = 10;
-            fpsInput.value = 10;
-            updateFPSValue();
+            if (fpsRange) {
+                fpsRange.value = 10;
+                fpsInput.value = 10;
+                updateFPSValue();
+            }
             
-            qualityRange.value = 2;
-            qualitySelect.value = 2;
-            updateQualityValue();
+            if (qualityRange) {
+                qualityRange.value = 2;
+                qualitySelect.value = 2;
+                updateQualityValue();
+            }
             
-            durationRange.value = 5;
-            durationInput.value = 5;
-            updateDurationValue();
+            if (durationRange) {
+                durationRange.value = 5;
+                durationInput.value = 5;
+                updateDurationValue();
+            }
             
-            sizeRange.value = 640;
-            sizeInput.value = 640;
-            updateSizeValue();
+            if (sizeRange) {
+                sizeRange.value = 640;
+                sizeInput.value = 640;
+                updateSizeValue();
+            }
             
-            loopCheckbox.checked = true;
-            reverseCheckbox.checked = false;
-            trimCheckbox.checked = false;
-            toggleTrimControls();
+            if (loopCheckbox) loopCheckbox.checked = true;
+            if (reverseCheckbox) reverseCheckbox.checked = false;
+            if (trimCheckbox) {
+                trimCheckbox.checked = false;
+                toggleTrimControls();
+            }
             
-            trimStart.value = 0;
-            trimEnd.value = 5;
+            if (trimStart) trimStart.value = 0;
+            if (trimEnd) trimEnd.value = 5;
             
             // Clear video URL
-            videoUrl.value = '';
+            if (videoUrl) videoUrl.value = '';
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
