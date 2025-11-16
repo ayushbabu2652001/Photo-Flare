@@ -34,8 +34,8 @@
         }
 
         html, body {
+            overflow-x: hidden;
             width: 100%;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         body {
@@ -43,6 +43,7 @@
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            position: relative;
         }
 
         .container {
@@ -433,7 +434,6 @@
             flex-shrink: 0;
             min-height: 44px;
             justify-content: center;
-            border: none;
         }
 
         .btn:active {
@@ -443,6 +443,7 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
+            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -492,13 +493,13 @@
             font-size: 1rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
-            max-width: 700px;
+            max-width: 800px;
         }
 
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
-            max-width: 500px;
+            max-width: 600px;
         }
 
         .search-input {
@@ -517,13 +518,13 @@
         }
 
         .search-btn {
-            position: absolute;
-            right: 5px;
-            top: 5px;
+            position: relative;
+            margin-top: 0.5rem;
+            width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.7rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -555,6 +556,7 @@
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
+            overflow: hidden;
         }
 
         .tool-card:hover {
@@ -595,6 +597,7 @@
             margin-bottom: 1.5rem;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
         }
 
         .upload-area:hover, .upload-area.drag-over {
@@ -617,6 +620,7 @@
             margin-top: 1.5rem;
             max-height: 300px;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .file-item {
@@ -628,6 +632,7 @@
             border-radius: 8px;
             margin-bottom: 0.8rem;
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .file-item:hover {
@@ -638,15 +643,21 @@
         .file-icon {
             font-size: 1.5rem;
             color: var(--primary);
+            flex-shrink: 0;
         }
 
         .file-info {
             flex-grow: 1;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .file-name {
             font-weight: 600;
             margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .file-size {
@@ -657,6 +668,7 @@
         .file-actions {
             display: flex;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
 
         .file-action {
@@ -971,6 +983,18 @@
                 font-size: 2.2rem;
             }
             
+            .search-box {
+                max-width: 500px;
+            }
+            
+            .search-btn {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                width: auto;
+                margin-top: 0;
+            }
+            
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1100,6 +1124,16 @@
             .tool-actions {
                 flex-direction: column;
             }
+            
+            .file-item {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .file-actions {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         /* Show mobile header on small screens */
@@ -1127,11 +1161,9 @@
                 flex-shrink: 0;
             }
             
-            /* Fix for search button on mobile */
-            .search-btn {
-                position: relative;
-                width: 100%;
-                margin-top: 0.5rem;
+            /* Fix for file actions on mobile */
+            .file-actions {
+                flex-wrap: nowrap;
             }
         }
 
@@ -1218,6 +1250,15 @@
             }
         }
 
+        /* Fix for search button on mobile */
+        @media (max-width: 575px) {
+            .search-btn {
+                width: 100%;
+                position: relative;
+                margin-top: 0.5rem;
+            }
+        }
+
         /* Better footer spacing on very small screens */
         @media (max-width: 360px) {
             .footer-links {
@@ -1228,6 +1269,15 @@
                 padding: 0.3rem 0.3rem;
                 font-size: 0.85rem;
             }
+            
+            .file-item {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Fix for file input overflow */
+        input[type="file"] {
+            width: 100%;
         }
     </style>
 </head>
