@@ -701,6 +701,8 @@
         .file-input-container {
             margin-bottom: 2rem;
             text-align: center;
+            width: 100%;
+            overflow: hidden; /* Prevent overflow */
         }
 
         .file-input-area {
@@ -718,6 +720,8 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            width: 100%;
+            box-sizing: border-box; /* Ensure padding doesn't add to width */
         }
 
         .file-input-area:hover {
@@ -754,6 +758,8 @@
             margin-top: 1rem;
             display: none;
             width: 100%;
+            box-sizing: border-box; /* Ensure padding doesn't add to width */
+            overflow: hidden; /* Prevent overflow */
         }
 
         .file-info.active {
@@ -770,6 +776,10 @@
             gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
+            text-align: center;
+            width: 100%;
+            overflow-wrap: break-word; /* Break long words */
+            word-break: break-word; /* Break words if needed */
         }
 
         .file-details i {
@@ -1485,6 +1495,37 @@
                 justify-content: center;
                 width: 100%;
             }
+            
+            /* FIX FOR FILE UPLOAD CONTAINER ON MOBILE */
+            .file-input-container {
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 0;
+                padding-right: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .file-input-area {
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                width: 100%;
+            }
+            
+            .file-info {
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                width: 100%;
+            }
+            
+            .file-details {
+                padding: 0 0.5rem;
+                width: 100%;
+            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1579,6 +1620,20 @@
             .footer-links a {
                 padding: 0.3rem 0.3rem;
                 font-size: 0.85rem;
+            }
+            
+            /* Additional fixes for very small screens */
+            .file-input-area h3 {
+                font-size: 1.1rem;
+            }
+            
+            .file-input-area p {
+                font-size: 0.9rem;
+            }
+            
+            .file-details {
+                flex-direction: column;
+                gap: 5px;
             }
         }
     </style>
