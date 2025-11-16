@@ -33,6 +33,12 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
@@ -486,11 +492,13 @@
             font-size: 1rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
+            max-width: 700px;
         }
 
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
+            max-width: 500px;
         }
 
         .search-input {
@@ -509,13 +517,14 @@
         }
 
         .search-btn {
-            position: relative;
-            margin-top: 0.5rem;
-            width: 100%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: auto;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -547,6 +556,7 @@
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
+            overflow: hidden; /* Prevent content overflow */
         }
 
         .tool-card:hover {
@@ -587,6 +597,7 @@
             margin-bottom: 1.5rem;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
         }
 
         .upload-area:hover, .upload-area.drag-over {
@@ -605,6 +616,12 @@
             color: var(--gray);
         }
 
+        .file-input-hidden {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
         .file-list {
             margin-top: 1.5rem;
         }
@@ -618,6 +635,7 @@
             border-radius: 8px;
             margin-bottom: 0.8rem;
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .file-item:hover {
@@ -628,15 +646,21 @@
         .file-icon {
             font-size: 1.5rem;
             color: var(--primary);
+            flex-shrink: 0;
         }
 
         .file-info {
             flex-grow: 1;
+            min-width: 0; /* Allow text truncation */
+            overflow: hidden;
         }
 
         .file-name {
             font-weight: 600;
             margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .file-size {
@@ -647,6 +671,7 @@
         .file-actions {
             display: flex;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
 
         .file-action {
@@ -1010,14 +1035,6 @@
                 max-width: 500px;
             }
             
-            .search-btn {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                width: auto;
-                margin-top: 0;
-            }
-            
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1167,6 +1184,15 @@
                 display: none;
             }
             
+            /* Fix for search button on mobile */
+            .search-btn {
+                position: relative;
+                width: 100%;
+                margin-top: 0.5rem;
+                right: auto;
+                top: auto;
+            }
+            
             /* Ensure footer links are horizontal on mobile */
             .footer-links {
                 flex-direction: row;
@@ -1263,15 +1289,6 @@
             
             .header-actions {
                 margin-left: auto; /* Push buttons to the right */
-            }
-        }
-
-        /* Fix for search button on mobile */
-        @media (max-width: 575px) {
-            .search-btn {
-                width: 100%;
-                position: relative;
-                margin-top: 0.5rem;
             }
         }
 
@@ -1403,7 +1420,7 @@
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                         <h3>Drag & Drop PDF File Here</h3>
                         <p class="upload-text">or click to browse your computer</p>
-                        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                        <input type="file" id="fileInput" accept=".pdf" class="file-input-hidden">
                         <button class="btn btn-outline" id="browseBtn">
                             <i class="fas fa-folder-open"></i> Browse Files
                         </button>
