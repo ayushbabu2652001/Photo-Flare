@@ -33,6 +33,11 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
@@ -1022,6 +1027,11 @@
             .cta-title {
                 font-size: 1.7rem;
             }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
 
         /* Show mobile header on small screens */
@@ -1042,6 +1052,11 @@
             .cta-buttons .btn {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
             }
         }
 
