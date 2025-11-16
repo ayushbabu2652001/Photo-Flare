@@ -698,11 +698,12 @@
             justify-content: center;
         }
 
+        /* FIXED: File input container without extra margins */
         .file-input-container {
             margin-bottom: 2rem;
             text-align: center;
             width: 100%;
-            overflow: hidden; /* Prevent overflow */
+            overflow: hidden;
         }
 
         .file-input-area {
@@ -721,7 +722,7 @@
             align-items: center;
             overflow: hidden;
             width: 100%;
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
+            box-sizing: border-box;
         }
 
         .file-input-area:hover {
@@ -758,8 +759,8 @@
             margin-top: 1rem;
             display: none;
             width: 100%;
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
-            overflow: hidden; /* Prevent overflow */
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .file-info.active {
@@ -778,8 +779,8 @@
             justify-content: center;
             text-align: center;
             width: 100%;
-            overflow-wrap: break-word; /* Break long words */
-            word-break: break-word; /* Break words if needed */
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .file-details i {
@@ -1496,7 +1497,7 @@
                 width: 100%;
             }
             
-            /* FIX FOR FILE UPLOAD CONTAINER ON MOBILE */
+            /* FIXED: File input container for mobile */
             .file-input-container {
                 margin-left: 0;
                 margin-right: 0;
@@ -1754,6 +1755,7 @@
                     </div>
                 </div>
 
+                <!-- FIXED: File input container without extra margins -->
                 <div class="file-input-container">
                     <div class="file-input-area" id="file-drop-area">
                         <i class="fas fa-file-upload"></i>
