@@ -698,12 +698,9 @@
             justify-content: center;
         }
 
-        /* FIXED: File input container without extra margins */
         .file-input-container {
             margin-bottom: 2rem;
             text-align: center;
-            width: 100%;
-            overflow: hidden;
         }
 
         .file-input-area {
@@ -721,8 +718,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            width: 100%;
-            box-sizing: border-box;
+            position: relative;
         }
 
         .file-input-area:hover {
@@ -759,8 +755,6 @@
             margin-top: 1rem;
             display: none;
             width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
         }
 
         .file-info.active {
@@ -777,97 +771,10 @@
             gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
-            text-align: center;
-            width: 100%;
-            overflow-wrap: break-word;
-            word-break: break-word;
         }
 
         .file-details i {
             color: var(--primary);
-        }
-
-        /* NEW: Improved PDF preview for mobile */
-        .pdf-preview-content {
-            width: 100%;
-            max-width: 100%;
-            padding: 1.5rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pdf-preview-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        .pdf-preview-message {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            color: var(--gray);
-            line-height: 1.5;
-        }
-
-        .pdf-file-info {
-            background: var(--light);
-            border-radius: 8px;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .pdf-file-detail {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .pdf-file-detail:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .pdf-file-label {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .pdf-file-value {
-            color: var(--gray);
-            text-align: right;
-            max-width: 60%;
-            word-break: break-word;
-        }
-
-        .pdf-controls-mobile {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        .pdf-page-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        .pdf-page-info {
-            font-weight: 600;
-            color: var(--dark);
         }
 
         .advanced-features {
@@ -1579,87 +1486,6 @@
                 justify-content: center;
                 width: 100%;
             }
-            
-            /* FIXED: File input container for mobile */
-            .file-input-container {
-                margin-left: 0;
-                margin-right: 0;
-                padding-left: 0;
-                padding-right: 0;
-                width: 100%;
-                max-width: 100%;
-            }
-            
-            .file-input-area {
-                margin-left: 0;
-                margin-right: 0;
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-                width: 100%;
-            }
-            
-            .file-info {
-                margin-left: 0;
-                margin-right: 0;
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-                width: 100%;
-            }
-            
-            .file-details {
-                padding: 0 0.5rem;
-                width: 100%;
-            }
-            
-            /* NEW: Improved PDF preview for mobile */
-            .pdf-preview {
-                padding: 1rem;
-            }
-            
-            .pdf-preview-content {
-                padding: 1rem;
-            }
-            
-            .pdf-preview-title {
-                font-size: 1.3rem;
-            }
-            
-            .pdf-preview-message {
-                font-size: 0.9rem;
-            }
-            
-            .pdf-file-info {
-                padding: 1rem;
-                max-width: 100%;
-            }
-            
-            .pdf-file-detail {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.3rem;
-            }
-            
-            .pdf-file-value {
-                max-width: 100%;
-                text-align: left;
-            }
-            
-            .pdf-controls-mobile {
-                max-width: 100%;
-            }
-            
-            .pdf-page-nav {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            
-            .editor-controls {
-                gap: 1.5rem;
-            }
-            
-            .action-controls .btn {
-                width: 100%;
-            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1754,20 +1580,6 @@
             .footer-links a {
                 padding: 0.3rem 0.3rem;
                 font-size: 0.85rem;
-            }
-            
-            /* Additional fixes for very small screens */
-            .file-input-area h3 {
-                font-size: 1.1rem;
-            }
-            
-            .file-input-area p {
-                font-size: 0.9rem;
-            }
-            
-            .file-details {
-                flex-direction: column;
-                gap: 5px;
             }
         }
     </style>
@@ -1888,7 +1700,6 @@
                     </div>
                 </div>
 
-                <!-- FIXED: File input container without extra margins -->
                 <div class="file-input-container">
                     <div class="file-input-area" id="file-drop-area">
                         <i class="fas fa-file-upload"></i>
@@ -1987,11 +1798,9 @@
                     <div class="editor-main">
                         <div class="editor-canvas">
                             <div class="pdf-preview">
-                                <div class="pdf-preview-content" id="pdf-preview-content">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <h3 class="pdf-preview-title">PDF Editor Ready</h3>
-                                    <p class="pdf-preview-message">Upload a PDF file to start editing</p>
-                                </div>
+                                <i class="fas fa-file-pdf"></i>
+                                <h3>PDF Editor Ready</h3>
+                                <p>Upload a PDF file to start editing</p>
                             </div>
                         </div>
                         
@@ -2255,412 +2064,470 @@
     </footer>
 
     <script>
-        // Debounce function for performance
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Sidebar functionality
-        const mobileNavBtn = document.getElementById('mobileNavBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const sidebarClose = document.getElementById('sidebarClose');
-
-        // Open sidebar
-        if (mobileNavBtn) {
-            mobileNavBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when sidebar is open
-            });
-        }
-
-        // Close sidebar
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        if (sidebarClose) {
-            sidebarClose.addEventListener('click', closeSidebar);
+        // Cross-device file upload functionality
+        function initializeFileUpload() {
+            const fileInput = document.getElementById('file-input');
+            const fileDropArea = document.getElementById('file-drop-area');
+            const browseBtn = document.getElementById('browse-btn');
+            const fileInfo = document.getElementById('file-info');
+            const fileName = document.getElementById('file-name');
+            const fileSize = document.getElementById('file-size');
+            const removeFileBtn = document.getElementById('remove-file');
+            
+            // Enhanced browse button functionality
+            if (browseBtn && fileInput) {
+                browseBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    fileInput.click();
+                });
+            }
+            
+            // File input change handler
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    if (e.target.files && e.target.files.length > 0) {
+                        handleFileSelection(e.target.files[0]);
+                    }
+                });
+            }
+            
+            // Enhanced drag and drop for all devices
+            if (fileDropArea) {
+                // Prevent default drag behaviors
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    fileDropArea.addEventListener(eventName, preventDefaults, false);
+                });
+                
+                function preventDefaults(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                
+                // Highlight drop area when item is dragged over it
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    fileDropArea.addEventListener(eventName, highlight, false);
+                });
+                
+                ['dragleave', 'drop'].forEach(eventName => {
+                    fileDropArea.addEventListener(eventName, unhighlight, false);
+                });
+                
+                function highlight() {
+                    fileDropArea.style.borderColor = 'var(--primary)';
+                    fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+                }
+                
+                function unhighlight() {
+                    fileDropArea.style.borderColor = 'var(--light-gray)';
+                    fileDropArea.style.backgroundColor = 'var(--light)';
+                }
+                
+                // Handle dropped files
+                fileDropArea.addEventListener('drop', handleDrop, false);
+                
+                function handleDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    
+                    if (files.length > 0) {
+                        handleFileSelection(files[0]);
+                    }
+                }
+                
+                // Mobile-friendly: make entire drop area clickable on touch devices
+                fileDropArea.addEventListener('click', function(e) {
+                    // Only trigger on mobile devices when not clicking the browse button
+                    if (isTouchDevice() && !e.target.closest('#browse-btn')) {
+                        fileInput.click();
+                    }
+                });
+                
+                // Add touch feedback for mobile
+                fileDropArea.addEventListener('touchstart', function() {
+                    this.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
+                    this.style.borderColor = 'var(--primary)';
+                }, { passive: true });
+                
+                fileDropArea.addEventListener('touchend', function() {
+                    this.style.backgroundColor = '';
+                    this.style.borderColor = '';
+                }, { passive: true });
+            }
+            
+            // Remove file functionality
+            if (removeFileBtn) {
+                removeFileBtn.addEventListener('click', function() {
+                    fileInput.value = '';
+                    fileInfo.classList.remove('active');
+                    
+                    // Reset PDF preview
+                    const pdfPreview = document.querySelector('.pdf-preview');
+                    pdfPreview.innerHTML = `
+                        <i class="fas fa-file-pdf"></i>
+                        <h3>PDF Editor Ready</h3>
+                        <p>Upload a PDF file to start editing</p>
+                    `;
+                });
+            }
         }
         
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', closeSidebar);
-        }
-
-        // Close sidebar when clicking on a link
-        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', closeSidebar);
-        });
-
-        // File upload functionality
-        const fileInput = document.getElementById('file-input');
-        const fileDropArea = document.getElementById('file-drop-area');
-        const fileInfo = document.getElementById('file-info');
-        const fileName = document.getElementById('file-name');
-        const fileSize = document.getElementById('file-size');
-        const removeFileBtn = document.getElementById('remove-file');
-        const browseBtn = document.getElementById('browse-btn');
-        const saveBtn = document.getElementById('save-btn');
-        const downloadBtn = document.getElementById('download-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const prevPageBtn = document.getElementById('prev-page');
-        const nextPageBtn = document.getElementById('next-page');
-        const pdfPreviewContent = document.getElementById('pdf-preview-content');
-
-        // Tool buttons
-        const toolButtons = document.querySelectorAll('.tool-btn');
-
-        // Browse button click
-        if (browseBtn) {
-            browseBtn.addEventListener('click', () => {
-                fileInput.click();
-            });
-        }
-
-        // File input change
-        if (fileInput) {
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files.length > 0) {
-                    handleFileSelection(e.target.files[0]);
-                }
-            });
-        }
-
-        // Drag and drop functionality
-        if (fileDropArea) {
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                fileDropArea.addEventListener(eventName, preventDefaults, false);
-            });
-
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            ['dragenter', 'dragover'].forEach(eventName => {
-                fileDropArea.addEventListener(eventName, highlight, false);
-            });
-
-            ['dragleave', 'drop'].forEach(eventName => {
-                fileDropArea.addEventListener(eventName, unhighlight, false);
-            });
-
-            function highlight() {
-                fileDropArea.style.borderColor = 'var(--primary)';
-                fileDropArea.style.backgroundColor = 'rgba(67, 97, 238, 0.1)';
-            }
-
-            function unhighlight() {
-                fileDropArea.style.borderColor = 'var(--light-gray)';
-                fileDropArea.style.backgroundColor = 'var(--light)';
-            }
-
-            fileDropArea.addEventListener('drop', handleDrop, false);
-
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                
-                if (files.length > 0) {
-                    handleFileSelection(files[0]);
-                }
-            }
-        }
-
+        // Handle file selection
         function handleFileSelection(file) {
             // Check if file is PDF
             if (file.type !== 'application/pdf') {
-                alert('Please select a PDF file.');
+                showNotification('Please select a PDF file.', 'error');
                 return;
             }
-
+            
             // Update file info
-            fileName.textContent = file.name;
+            const fileName = document.getElementById('file-name');
+            const fileSize = document.getElementById('file-size');
+            const fileInfo = document.getElementById('file-info');
             
-            // Format file size
-            const fileSizeBytes = file.size;
-            const fileSizeMB = (fileSizeBytes / (1024 * 1024)).toFixed(2);
-            fileSize.textContent = `(${fileSizeMB} MB)`;
+            if (fileName && fileSize && fileInfo) {
+                fileName.textContent = file.name;
+                
+                // Format file size
+                const fileSizeBytes = file.size;
+                let sizeText;
+                if (fileSizeBytes < 1024 * 1024) {
+                    sizeText = `(${(fileSizeBytes / 1024).toFixed(1)} KB)`;
+                } else {
+                    sizeText = `(${(fileSizeBytes / (1024 * 1024)).toFixed(1)} MB)`;
+                }
+                fileSize.textContent = sizeText;
+                
+                // Show file info
+                fileInfo.classList.add('active');
+                
+                // Update PDF preview
+                updatePdfPreview(file);
+                
+                showNotification('PDF loaded successfully!', 'success');
+            }
+        }
+        
+        // Update PDF preview after file upload
+        function updatePdfPreview(file) {
+            const pdfPreview = document.querySelector('.pdf-preview');
+            if (!pdfPreview) return;
             
-            // Show file info
-            fileInfo.classList.add('active');
-            
-            // Update PDF preview with mobile-friendly layout
-            pdfPreviewContent.innerHTML = `
-                <h3 class="pdf-preview-title">PDF Loaded Successfully</h3>
-                <p class="pdf-preview-message">Now you can use the editing tools on the left to modify your document.</p>
-                <div class="pdf-file-info">
-                    <div class="pdf-file-detail">
-                        <span class="pdf-file-label">File:</span>
-                        <span class="pdf-file-value">${file.name}</span>
+            pdfPreview.innerHTML = `
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; margin: 0 auto;">
+                    <div style="text-align: center; color: var(--success); margin-bottom: 1rem;">
+                        <i class="fas fa-check-circle" style="font-size: 3rem;"></i>
                     </div>
-                    <div class="pdf-file-detail">
-                        <span class="pdf-file-label">Size:</span>
-                        <span class="pdf-file-value">${fileSizeMB} MB</span>
-                    </div>
-                </div>
-                <div class="pdf-controls-mobile">
-                    <div class="pdf-page-nav">
-                        <button class="btn btn-outline" id="mobile-prev-page">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </button>
-                        <span class="pdf-page-info">Page 1 of 1</span>
-                        <button class="btn btn-outline" id="mobile-next-page">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    <div class="action-controls">
-                        <button class="btn btn-outline" id="mobile-reset-btn">
-                            <i class="fas fa-undo"></i> Reset
-                        </button>
-                        <button class="btn btn-warning" id="mobile-save-btn">
-                            <i class="fas fa-save"></i> Save Changes
-                        </button>
-                        <button class="btn btn-success" id="mobile-download-btn">
-                            <i class="fas fa-download"></i> Download PDF
-                        </button>
+                    <h3 style="margin-bottom: 0.5rem;">PDF Loaded Successfully</h3>
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">Now you can use the editing tools on the left to modify your document.</p>
+                    <div style="padding: 1rem; background: var(--light); border-radius: 8px;">
+                        <p><strong>File:</strong> ${file.name}</p>
+                        <p><strong>Size:</strong> ${fileSize.textContent}</p>
                     </div>
                 </div>
             `;
-            
-            // Add event listeners for mobile buttons
-            document.getElementById('mobile-prev-page').addEventListener('click', () => {
-                alert('Previous page functionality would be implemented here');
-            });
-            
-            document.getElementById('mobile-next-page').addEventListener('click', () => {
-                alert('Next page functionality would be implemented here');
-            });
-            
-            document.getElementById('mobile-reset-btn').addEventListener('click', () => {
-                if (confirm('Are you sure you want to reset all changes?')) {
-                    resetFile();
-                }
-            });
-            
-            document.getElementById('mobile-save-btn').addEventListener('click', () => {
-                saveFile();
-            });
-            
-            document.getElementById('mobile-download-btn').addEventListener('click', () => {
-                downloadFile();
-            });
         }
-
-        // Remove file
-        if (removeFileBtn) {
-            removeFileBtn.addEventListener('click', resetFile);
+        
+        // Check if device is touch-enabled
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         }
-
-        function resetFile() {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
+        
+        // Show notification
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '1rem 1.5rem';
+            notification.style.borderRadius = '8px';
+            notification.style.color = 'white';
+            notification.style.fontWeight = '500';
+            notification.style.zIndex = '10000';
+            notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            notification.style.maxWidth = '300px';
+            notification.style.transform = 'translateX(100%)';
+            notification.style.transition = 'transform 0.3s ease';
             
-            // Reset PDF preview
-            pdfPreviewContent.innerHTML = `
-                <i class="fas fa-file-pdf"></i>
-                <h3 class="pdf-preview-title">PDF Editor Ready</h3>
-                <p class="pdf-preview-message">Upload a PDF file to start editing</p>
-            `;
-        }
-
-        // Tool button selection
-        toolButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                toolButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                const toolName = this.getAttribute('data-tool');
-                
-                // Show tool-specific message
-                const pdfPreview = document.querySelector('.pdf-preview');
-                if (pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
-                    const toolMessages = {
-                        'text-edit': 'Click on any text to edit it directly',
-                        'text-add': 'Click anywhere on the document to add new text',
-                        'image-add': 'Select an image file to add to your PDF',
-                        'highlight': 'Select text to highlight it',
-                        'signature': 'Draw or upload your signature to add to the document'
-                    };
-                    
-                    if (toolMessages[toolName]) {
-                        // Create message element
-                        const messageElement = document.createElement('div');
-                        messageElement.style.marginTop = '1rem';
-                        messageElement.style.padding = '1rem';
-                        messageElement.style.background = 'rgba(67, 97, 238, 0.1)';
-                        messageElement.style.borderRadius = '8px';
-                        messageElement.style.borderLeft = '3px solid var(--primary)';
-                        messageElement.innerHTML = `<p><strong>${toolMessages[toolName]}</strong></p>`;
-                        
-                        // Add message to preview
-                        pdfPreview.appendChild(messageElement);
-                        
-                        // Remove message after 3 seconds
-                        setTimeout(() => {
-                            if (pdfPreview.contains(messageElement)) {
-                                pdfPreview.removeChild(messageElement);
-                            }
-                        }, 3000);
-                    }
-                    
-                    // For premium tools, show upgrade prompt
-                    if (this.querySelector('.premium-badge')) {
-                        alert(`"${this.textContent.trim()}" is a premium feature. Please upgrade to access this tool.`);
-                    }
-                }
-            });
-        });
-
-        // Save button click
-        function saveFile() {
-            if (!fileInput.files.length) {
-                alert('Please upload a PDF file first.');
-                return;
+            if (type === 'error') {
+                notification.style.background = 'var(--danger)';
+            } else {
+                notification.style.background = 'var(--success)';
             }
             
-            // Show saving animation
-            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-            saveBtn.disabled = true;
+            notification.textContent = message;
+            document.body.appendChild(notification);
             
-            // Simulate saving process
+            // Animate in
             setTimeout(() => {
-                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                saveBtn.classList.remove('btn-warning');
-                saveBtn.classList.add('btn-success');
-                
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
-                    saveBtn.classList.remove('btn-success');
-                    saveBtn.classList.add('btn-warning');
-                    saveBtn.disabled = false;
-                }, 3000);
-            }, 1500);
-        }
-
-        if (saveBtn) {
-            saveBtn.addEventListener('click', saveFile);
-        }
-
-        // Download button click
-        function downloadFile() {
-            if (!fileInput.files.length) {
-                alert('Please upload and edit a PDF file first.');
-                return;
-            }
+                notification.style.transform = 'translateX(0)';
+            }, 100);
             
-            // Show downloading animation
-            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
-            downloadBtn.disabled = true;
-            
-            // Simulate download process
+            // Remove after 3 seconds
             setTimeout(() => {
-                downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
-                
-                // Create download link
-                const downloadLink = document.createElement('a');
-                downloadLink.href = '#';
-                downloadLink.className = 'btn btn-primary';
-                downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
-                downloadLink.style.marginLeft = '1rem';
-                
-                // Add download link after button
-                downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
-                
-                // Reset button after 5 seconds
+                notification.style.transform = 'translateX(100%)';
                 setTimeout(() => {
-                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
-                    downloadBtn.disabled = false;
-                    
-                    // Remove download link
-                    if (downloadLink.parentNode) {
-                        downloadLink.parentNode.removeChild(downloadLink);
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
                     }
-                }, 5000);
-            }, 2000);
+                }, 300);
+            }, 3000);
         }
-
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', downloadFile);
-        }
-
-        // Reset button click
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                if (confirm('Are you sure you want to reset all changes?')) {
-                    resetFile();
-                }
-            });
-        }
-
-        // Page navigation buttons
-        if (prevPageBtn) {
-            prevPageBtn.addEventListener('click', () => {
-                alert('Previous page functionality would be implemented here');
-            });
-        }
-
-        if (nextPageBtn) {
-            nextPageBtn.addEventListener('click', () => {
-                alert('Next page functionality would be implemented here');
-            });
-        }
-
-        // FAQ toggle functionality
-        const faqQuestions = document.querySelectorAll('.faq-question');
         
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const toggle = question.querySelector('.faq-toggle');
-                
-                // Toggle active class
-                answer.classList.toggle('active');
-                toggle.classList.toggle('active');
-            });
-        });
-
-        // Advanced feature buttons
-        const advancedFeatureButtons = [
-            document.getElementById('ai-ocr-btn'),
-            document.getElementById('batch-edit-btn'),
-            document.getElementById('formatting-btn'),
-            document.getElementById('ai-editing-btn')
-        ];
-        
-        advancedFeatureButtons.forEach(button => {
-            if (button) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert("This is a premium feature. Upgrade to Pro to access all advanced editing tools.");
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFileUpload();
+            
+            // Rest of your existing JavaScript code
+            const mobileNavBtn = document.getElementById('mobileNavBtn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebarClose = document.getElementById('sidebarClose');
+            
+            // Open sidebar
+            if (mobileNavBtn) {
+                mobileNavBtn.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
             }
-        });
-
-        // Tool link cards
-        const toolLinkCards = document.querySelectorAll('.tool-link-card');
-        toolLinkCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
-                    e.preventDefault();
-                    alert(`This tool would navigate to: ${this.querySelector('.tool-link-title').textContent}`);
+            
+            // Close sidebar
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            if (sidebarClose) {
+                sidebarClose.addEventListener('click', closeSidebar);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebar);
+            }
+            
+            // Close sidebar when clicking on a link
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+            
+            // Tool buttons
+            const toolButtons = document.querySelectorAll('.tool-btn');
+            
+            // Tool button selection
+            toolButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    toolButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const toolName = this.getAttribute('data-tool');
+                    
+                    // Show tool-specific message
+                    const pdfPreview = document.querySelector('.pdf-preview');
+                    if (pdfPreview.querySelector('h3') && pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
+                        const toolMessages = {
+                            'text-edit': 'Click on any text to edit it directly',
+                            'text-add': 'Click anywhere on the document to add new text',
+                            'image-add': 'Select an image file to add to your PDF',
+                            'highlight': 'Select text to highlight it',
+                            'signature': 'Draw or upload your signature to add to the document'
+                        };
+                        
+                        if (toolMessages[toolName]) {
+                            // Create message element
+                            const messageElement = document.createElement('div');
+                            messageElement.style.marginTop = '1rem';
+                            messageElement.style.padding = '1rem';
+                            messageElement.style.background = 'rgba(67, 97, 238, 0.1)';
+                            messageElement.style.borderRadius = '8px';
+                            messageElement.style.borderLeft = '3px solid var(--primary)';
+                            messageElement.innerHTML = `<p><strong>${toolMessages[toolName]}</strong></p>`;
+                            
+                            // Add message to preview
+                            pdfPreview.appendChild(messageElement);
+                            
+                            // Remove message after 3 seconds
+                            setTimeout(() => {
+                                if (pdfPreview.contains(messageElement)) {
+                                    pdfPreview.removeChild(messageElement);
+                                }
+                            }, 3000);
+                        }
+                        
+                        // For premium tools, show upgrade prompt
+                        if (this.querySelector('.premium-badge')) {
+                            showNotification('This is a premium feature. Please upgrade to access this tool.', 'error');
+                        }
+                    }
+                });
+            });
+            
+            // Save button click
+            const saveBtn = document.getElementById('save-btn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function() {
+                    const fileInput = document.getElementById('file-input');
+                    if (!fileInput.files.length) {
+                        showNotification('Please upload a PDF file first.', 'error');
+                        return;
+                    }
+                    
+                    // Show saving animation
+                    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    saveBtn.disabled = true;
+                    
+                    // Simulate saving process
+                    setTimeout(() => {
+                        saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                        saveBtn.classList.remove('btn-warning');
+                        saveBtn.classList.add('btn-success');
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                            saveBtn.classList.remove('btn-success');
+                            saveBtn.classList.add('btn-warning');
+                            saveBtn.disabled = false;
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+            
+            // Download button click
+            const downloadBtn = document.getElementById('download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    const fileInput = document.getElementById('file-input');
+                    if (!fileInput.files.length) {
+                        showNotification('Please upload and edit a PDF file first.', 'error');
+                        return;
+                    }
+                    
+                    // Show downloading animation
+                    downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+                    downloadBtn.disabled = true;
+                    
+                    // Simulate download process
+                    setTimeout(() => {
+                        downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
+                        
+                        // Create download link
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = '#';
+                        downloadLink.className = 'btn btn-primary';
+                        downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
+                        downloadLink.style.marginLeft = '1rem';
+                        
+                        // Add download link after button
+                        downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
+                        
+                        // Reset button after 5 seconds
+                        setTimeout(() => {
+                            downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                            downloadBtn.disabled = false;
+                            
+                            // Remove download link
+                            if (downloadLink.parentNode) {
+                                downloadLink.parentNode.removeChild(downloadLink);
+                            }
+                        }, 5000);
+                    }, 2000);
+                });
+            }
+            
+            // Reset button click
+            const resetBtn = document.getElementById('reset-btn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to reset all changes?')) {
+                        // Reset UI
+                        toolButtons.forEach(btn => btn.classList.remove('active'));
+                        document.querySelector('[data-tool="text-edit"]').classList.add('active');
+                        
+                        // Show reset message
+                        const pdfPreview = document.querySelector('.pdf-preview');
+                        if (pdfPreview.querySelector('h3') && pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
+                            const fileName = document.getElementById('file-name');
+                            const fileSize = document.getElementById('file-size');
+                            
+                            pdfPreview.innerHTML = `
+                                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; margin: 0 auto;">
+                                    <h3>Changes Reset</h3>
+                                    <p>All edits have been reset. Your original file is unchanged.</p>
+                                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
+                                        <p><strong>File:</strong> ${fileName.textContent}</p>
+                                        <p><strong>Size:</strong> ${fileSize.textContent}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                });
+            }
+            
+            // Page navigation buttons
+            const prevPageBtn = document.getElementById('prev-page');
+            const nextPageBtn = document.getElementById('next-page');
+            
+            if (prevPageBtn) {
+                prevPageBtn.addEventListener('click', function() {
+                    showNotification('Previous page functionality would be implemented here', 'error');
+                });
+            }
+            
+            if (nextPageBtn) {
+                nextPageBtn.addEventListener('click', function() {
+                    showNotification('Next page functionality would be implemented here', 'error');
+                });
+            }
+            
+            // FAQ toggle functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = question.nextElementSibling;
+                    const toggle = question.querySelector('.faq-toggle');
+                    
+                    // Toggle active class
+                    answer.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            });
+            
+            // Advanced feature buttons
+            const advancedFeatureButtons = [
+                document.getElementById('ai-ocr-btn'),
+                document.getElementById('batch-edit-btn'),
+                document.getElementById('formatting-btn'),
+                document.getElementById('ai-editing-btn')
+            ];
+            
+            advancedFeatureButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showNotification("This is a premium feature. Upgrade to Pro to access all advanced editing tools.", 'error');
+                    });
                 }
+            });
+            
+            // Tool link cards
+            const toolLinkCards = document.querySelectorAll('.tool-link-card');
+            toolLinkCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        showNotification(`This tool would navigate to: ${this.querySelector('.tool-link-title').textContent}`, 'error');
+                    }
+                });
             });
         });
     </script>
