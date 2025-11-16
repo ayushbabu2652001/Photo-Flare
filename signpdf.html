@@ -514,13 +514,15 @@
             }
         }
 
-        /* Upload Section */
+        /* Upload Section - FIXED */
         .upload-section {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
+            width: 100%;
+            margin: 0;
         }
 
         .section-title {
@@ -539,12 +541,15 @@
         .upload-area {
             border: 2px dashed var(--light-gray);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1rem;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
             margin-bottom: 1.5rem;
             position: relative;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .upload-area:hover {
@@ -610,6 +615,10 @@
             border-radius: var(--border-radius);
             margin-top: 1rem;
             display: none;
+            text-align: center;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .file-info.active {
@@ -652,8 +661,10 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
+            width: 100%;
+            margin: 0;
         }
 
         .option-tabs {
@@ -833,9 +844,11 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
             margin-bottom: 2rem;
+            width: 100%;
+            margin: 0 0 2rem 0;
         }
 
         .preview-container {
@@ -1385,7 +1398,7 @@
             
             <!-- Tool Container -->
             <div class="tool-container">
-                <!-- Upload Section -->
+                <!-- Upload Section - FIXED -->
                 <div class="upload-section">
                     <h2 class="section-title"><i class="fas fa-file-upload"></i> Upload Your PDF</h2>
                     <div class="upload-area" id="uploadArea">
