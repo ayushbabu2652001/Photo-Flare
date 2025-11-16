@@ -544,6 +544,7 @@
             transition: var(--transition);
             cursor: pointer;
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .upload-area:hover {
@@ -554,6 +555,12 @@
         .upload-area.active {
             border-color: var(--primary);
             background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            transform: scale(1.02);
         }
 
         .upload-icon {
@@ -587,6 +594,16 @@
             transform: translateY(-2px);
         }
 
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
         .file-info {
             background: var(--light);
             padding: 1rem;
@@ -607,6 +624,27 @@
         .file-size {
             color: var(--gray);
             font-size: 0.9rem;
+        }
+
+        .upload-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .upload-progress.active {
+            display: block;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
         /* Signature Options */
@@ -1354,10 +1392,14 @@
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                         <p class="upload-text">Drag & drop your PDF file here or click to browse</p>
                         <button class="upload-btn"><i class="fas fa-folder-open"></i> Choose File</button>
+                        <input type="file" class="file-input" id="fileInput" accept=".pdf" />
                     </div>
                     <div class="file-info" id="fileInfo">
                         <div class="file-name" id="fileName">document.pdf</div>
                         <div class="file-size" id="fileSize">2.4 MB</div>
+                    </div>
+                    <div class="upload-progress" id="uploadProgress">
+                        <div class="upload-progress-bar" id="uploadProgressBar"></div>
                     </div>
                     <div class="upload-options">
                         <p><strong>Supported formats:</strong> PDF (Max 50MB)</p>
@@ -1696,20 +1738,118 @@
             });
         });
 
-        // Upload area functionality
+        // Enhanced File Upload Functionality
         const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
         const fileInfo = document.getElementById('fileInfo');
-        
-        uploadArea.addEventListener('click', () => {
-            // Simulate file selection
-            uploadArea.classList.add('active');
-            fileInfo.classList.add('active');
-            
-            // In a real implementation, this would trigger a file input dialog
-            // For demo purposes, we'll just show the file info
-            setTimeout(() => {
-                alert('In a real implementation, this would open a file selection dialog. For this demo, we\'re simulating a file upload.');
-            }, 300);
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const uploadProgressBar = document.getElementById('uploadProgressBar');
+        const uploadBtn = document.querySelector('.upload-btn');
+
+        // Function to format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Function to handle file selection
+        function handleFileSelect(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                
+                // Check if file is a PDF
+                if (file.type !== 'application/pdf') {
+                    alert('Please select a PDF file.');
+                    return;
+                }
+                
+                // Check file size (max 50MB)
+                const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+                if (file.size > maxSize) {
+                    alert('File size exceeds the 50MB limit. Please choose a smaller file.');
+                    return;
+                }
+                
+                // Update file info
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                
+                // Show file info and progress
+                fileInfo.classList.add('active');
+                uploadProgress.classList.add('active');
+                
+                // Simulate upload progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // Show success state
+                        uploadArea.classList.add('active');
+                        setTimeout(() => {
+                            uploadProgress.classList.remove('active');
+                        }, 1000);
+                    }
+                    uploadProgressBar.style.width = `${progress}%`;
+                }, 200);
+            }
+        }
+
+        // Click to upload
+        uploadArea.addEventListener('click', (e) => {
+            // Prevent triggering the file input if clicking the button
+            if (e.target !== uploadBtn && !uploadBtn.contains(e.target)) {
+                fileInput.click();
+            }
+        });
+
+        uploadBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent triggering the upload area click
+            fileInput.click();
+        });
+
+        // File input change event
+        fileInput.addEventListener('change', (e) => {
+            handleFileSelect(e.target.files);
+        });
+
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            uploadArea.classList.add('drag-over');
+        }
+
+        function unhighlight() {
+            uploadArea.classList.remove('drag-over');
+        }
+
+        uploadArea.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFileSelect(files);
         });
 
         // Draw signature functionality
