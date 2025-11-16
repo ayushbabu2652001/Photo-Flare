@@ -514,13 +514,18 @@
             }
         }
 
-        /* Upload Section */
+        /* Upload Section - FIXED */
         .upload-section {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .section-title {
@@ -530,6 +535,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
         }
 
         .section-title i {
@@ -539,11 +547,18 @@
         .upload-area {
             border: 2px dashed var(--light-gray);
             border-radius: var(--border-radius);
-            padding: 3rem 2rem;
+            padding: 2rem 1rem;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
             margin-bottom: 1.5rem;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
         }
 
         .upload-area:hover {
@@ -565,6 +580,7 @@
         .upload-text {
             margin-bottom: 1rem;
             color: var(--gray);
+            text-align: center;
         }
 
         .upload-btn {
@@ -587,12 +603,24 @@
             transform: translateY(-2px);
         }
 
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
         .file-info {
             background: var(--light);
             padding: 1rem;
             border-radius: var(--border-radius);
             margin-top: 1rem;
             display: none;
+            width: 100%;
+            text-align: center;
         }
 
         .file-info.active {
@@ -609,13 +637,20 @@
             font-size: 0.9rem;
         }
 
+        .upload-options {
+            width: 100%;
+            text-align: center;
+        }
+
         /* Rotation Options */
         .rotation-options {
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
+            width: 100%;
+            margin: 0;
         }
 
         .rotation-modes {
@@ -725,6 +760,7 @@
             gap: 0.5rem;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .rotation-control-btn {
@@ -752,6 +788,13 @@
 
         .rotation-control-btn.primary:hover {
             background: var(--primary-dark);
+        }
+
+        .selection-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* Batch Rotation */
@@ -853,9 +896,11 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            padding: 1.5rem;
             animation: fadeIn 0.5s ease-out;
             margin-bottom: 2rem;
+            width: 100%;
+            margin: 0 0 2rem 0;
         }
 
         .preview-container {
@@ -885,6 +930,7 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         /* AI Features Section */
@@ -1396,13 +1442,14 @@
             
             <!-- Tool Container -->
             <div class="tool-container">
-                <!-- Upload Section -->
+                <!-- Upload Section - FIXED -->
                 <div class="upload-section">
                     <h2 class="section-title"><i class="fas fa-file-upload"></i> Upload Your PDF</h2>
                     <div class="upload-area" id="uploadArea">
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                         <p class="upload-text">Drag & drop your PDF file here or click to browse</p>
                         <button class="upload-btn"><i class="fas fa-folder-open"></i> Choose File</button>
+                        <input type="file" class="file-input" id="fileInput" accept=".pdf" />
                     </div>
                     <div class="file-info" id="fileInfo">
                         <div class="file-name" id="fileName">document.pdf</div>
@@ -1778,16 +1825,98 @@
             // Upload area functionality
             const uploadArea = document.getElementById('uploadArea');
             const fileInfo = document.getElementById('fileInfo');
-            
-            uploadArea.addEventListener('click', () => {
-                // Simulate file selection
-                uploadArea.classList.add('active');
-                fileInfo.classList.add('active');
-                
-                // In a real implementation, this would trigger a file input dialog
-                setTimeout(() => {
-                    alert('In a real implementation, this would open a file selection dialog. For this demo, we\'re simulating a file upload.');
-                }, 300);
+            const fileInput = document.getElementById('fileInput');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const uploadBtn = document.querySelector('.upload-btn');
+
+            // Function to format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            // Function to handle file selection
+            function handleFileSelect(files) {
+                if (files.length > 0) {
+                    const file = files[0];
+                    
+                    // Check if file is a PDF
+                    if (file.type !== 'application/pdf') {
+                        alert('Please select a PDF file.');
+                        return;
+                    }
+                    
+                    // Check file size (max 50MB)
+                    const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+                    if (file.size > maxSize) {
+                        alert('File size exceeds the 50MB limit. Please choose a smaller file.');
+                        return;
+                    }
+                    
+                    // Update file info
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    
+                    // Show file info and progress
+                    fileInfo.classList.add('active');
+                    uploadArea.classList.add('active');
+                    
+                    alert('PDF uploaded successfully! You can now rotate pages.');
+                }
+            }
+
+            // Click to upload
+            uploadArea.addEventListener('click', (e) => {
+                // Prevent triggering the file input if clicking the button
+                if (e.target !== uploadBtn && !uploadBtn.contains(e.target)) {
+                    fileInput.click();
+                }
+            });
+
+            uploadBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent triggering the upload area click
+                fileInput.click();
+            });
+
+            // File input change event
+            fileInput.addEventListener('change', (e) => {
+                handleFileSelect(e.target.files);
+            });
+
+            // Drag and drop functionality
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                uploadArea.classList.add('drag-over');
+            }
+
+            function unhighlight() {
+                uploadArea.classList.remove('drag-over');
+            }
+
+            uploadArea.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFileSelect(files);
             });
 
             // Page selection functionality
@@ -1984,6 +2113,9 @@
                     // Reset batch and AI selections
                     batchOptions.forEach(option => option.classList.remove('active'));
                     aiOptions.forEach(option => option.classList.remove('active'));
+                    
+                    // Reset file input
+                    fileInput.value = '';
                 }
             });
 
