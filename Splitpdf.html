@@ -33,6 +33,12 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
@@ -53,17 +59,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobile Header - Sticky */
+        /* Mobile Header - Fixed */
         .mobile-header {
             display: none;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             padding: 0.8rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 1000;
+            left: 0;
             width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
         }
 
         .mobile-header-content {
@@ -333,16 +341,18 @@
             transform: translateY(-2px);
         }
 
-        /* Desktop Header */
+        /* Desktop Header - Fixed */
         .desktop-header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
             width: 100%;
+            z-index: 100;
+            transition: var(--transition);
         }
 
         .header-content {
@@ -467,9 +477,9 @@
             box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
         }
 
-        /* Hero Section */
+        /* Hero Section - Adjusted for fixed header */
         .hero {
-            padding: 2rem 0 1rem;
+            padding: 6rem 0 1rem;
             text-align: center;
         }
 
@@ -486,11 +496,13 @@
             font-size: 1rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
+            max-width: 700px;
         }
 
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
+            max-width: 500px;
         }
 
         .search-input {
@@ -509,13 +521,14 @@
         }
 
         .search-btn {
-            position: relative;
-            margin-top: 0.5rem;
-            width: 100%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: auto;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -547,6 +560,7 @@
             box-shadow: var(--box-shadow);
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
+            overflow: hidden; /* Prevent content overflow */
         }
 
         .tool-card:hover {
@@ -587,6 +601,7 @@
             margin-bottom: 1.5rem;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
         }
 
         .upload-area:hover, .upload-area.drag-over {
@@ -605,6 +620,12 @@
             color: var(--gray);
         }
 
+        .file-input-hidden {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
         .file-list {
             margin-top: 1.5rem;
         }
@@ -618,6 +639,7 @@
             border-radius: 8px;
             margin-bottom: 0.8rem;
             transition: var(--transition);
+            overflow: hidden;
         }
 
         .file-item:hover {
@@ -628,15 +650,21 @@
         .file-icon {
             font-size: 1.5rem;
             color: var(--primary);
+            flex-shrink: 0;
         }
 
         .file-info {
             flex-grow: 1;
+            min-width: 0; /* Allow text truncation */
+            overflow: hidden;
         }
 
         .file-name {
             font-weight: 600;
             margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .file-size {
@@ -647,6 +675,7 @@
         .file-actions {
             display: flex;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
 
         .file-action {
@@ -1109,14 +1138,6 @@
                 max-width: 500px;
             }
             
-            .search-btn {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                width: auto;
-                margin-top: 0;
-            }
-            
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1141,7 +1162,7 @@
             }
             
             .hero {
-                padding: 3rem 0 1.5rem;
+                padding: 7rem 0 1.5rem;
             }
             
             .hero h1 {
@@ -1225,6 +1246,10 @@
 
         /* Extra Small Devices (400px and below) */
         @media (max-width: 400px) {
+            .hero {
+                padding: 5rem 0 1rem;
+            }
+            
             .hero h1 {
                 font-size: 1.6rem;
             }
@@ -1269,6 +1294,15 @@
             
             .desktop-header {
                 display: none;
+            }
+            
+            /* Fix for search button on mobile */
+            .search-btn {
+                position: relative;
+                width: 100%;
+                margin-top: 0.5rem;
+                right: auto;
+                top: auto;
             }
             
             /* Ensure footer links are horizontal on mobile */
@@ -1367,15 +1401,6 @@
             
             .header-actions {
                 margin-left: auto; /* Push buttons to the right */
-            }
-        }
-
-        /* Fix for search button on mobile */
-        @media (max-width: 575px) {
-            .search-btn {
-                width: 100%;
-                position: relative;
-                margin-top: 0.5rem;
             }
         }
 
@@ -1507,7 +1532,7 @@
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                         <h3>Drag & Drop PDF File Here</h3>
                         <p class="upload-text">or click to browse your computer</p>
-                        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                        <input type="file" id="fileInput" accept=".pdf" class="file-input-hidden">
                         <button class="btn btn-outline" id="browseBtn">
                             <i class="fas fa-folder-open"></i> Browse Files
                         </button>
@@ -1805,30 +1830,16 @@
 
         // Search functionality
         const searchInput = document.querySelector('.search-input');
-        const searchBtn = document.querySelector('.search-btn');
         
-        if (searchInput && searchBtn) {
-            // Search on button click
-            searchBtn.addEventListener('click', function() {
-                const searchTerm = searchInput.value.trim();
-                if (searchTerm.length > 0) {
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                if (searchTerm.length > 2) {
                     // In a real implementation, this would search for tools
                     console.log(`Searching for: ${searchTerm}`);
-                    alert(`Searching for: ${searchTerm}`);
                 }
-            });
-            
-            // Search on Enter key
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    const searchTerm = searchInput.value.trim();
-                    if (searchTerm.length > 0) {
-                        // In a real implementation, this would search for tools
-                        console.log(`Searching for: ${searchTerm}`);
-                        alert(`Searching for: ${searchTerm}`);
-                    }
-                }
-            });
+            }, 300));
         }
 
         // File handling functionality
@@ -1884,9 +1895,6 @@
                 uploadArea.classList.remove('drag-over');
                 handleFileDrop(e.dataTransfer.files);
             });
-            
-            // Also allow clicking on upload area to browse files
-            uploadArea.addEventListener('click', () => fileInput.click());
         }
         
         if (splitBtn) {
