@@ -526,7 +526,7 @@
             box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
         }
 
-        /* Tools Grid */
+        /* Tools Grid - RESPONSIVE COLUMN STRATEGY */
         .tools-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -640,7 +640,7 @@
             margin-left: auto;
         }
 
-        /* Featured Tools */
+        /* Featured Tools - RESPONSIVE COLUMN STRATEGY */
         .featured-tools {
             margin: 2rem 0;
         }
@@ -735,7 +735,7 @@
             color: var(--gray);
         }
 
-        /* Features Section */
+        /* Features Section - RESPONSIVE COLUMN STRATEGY */
         .features {
             padding: 2rem 0;
             background: white;
@@ -861,261 +861,343 @@
             grid-column: 1 / -1;
         }
 
-        /* Media Queries - Mobile First Approach */
+        /* =============================================== */
+        /* RESPONSIVE COLUMN STRATEGY - MOBILE & TABLET */
+        /* =============================================== */
 
-        /* Small Devices (576px and up) */
-        @media (min-width: 576px) {
-            .container {
-                padding: 0 20px;
+        /* Mobile: 1 column (≤480px) */
+        @media (max-width: 480px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
             }
             
+            .featured-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            /* Mobile Header Adjustments */
+            .mobile-header {
+                padding: 0.6rem 0;
+            }
+            
+            .mobile-logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-nav-btn,
+            .mobile-header-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+            
+            /* Hero Section */
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
             }
             
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* Category & Tool Adjustments */
+            .tool-category {
+                padding: 0.8rem;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .category-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .category-title {
+                font-size: 1.1rem;
+            }
+            
+            .tool-item {
+                padding: 0.6rem 0;
+            }
+            
+            .tool-link {
+                font-size: 0.9rem;
+            }
+            
+            /* Featured Cards */
+            .featured-card {
+                padding: 1rem;
+            }
+            
+            .featured-icon {
+                font-size: 2rem;
+            }
+            
+            .featured-title {
+                font-size: 1.1rem;
+            }
+            
+            /* Feature Cards */
+            .feature-card {
+                padding: 1rem;
+            }
+            
+            .feature-icon {
+                font-size: 2rem;
+            }
+            
+            .feature-title {
+                font-size: 1.1rem;
+            }
+            
+            /* Search Box Adjustments */
             .search-box {
-                max-width: 500px;
+                margin: 0 auto 0.8rem;
+            }
+            
+            .search-input {
+                padding: 0.7rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .search-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Footer Adjustments */
+            .footer-links {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .footer-links a {
+                padding: 0.4rem 0.3rem;
+                font-size: 0.85rem;
+            }
+            
+            .social-links {
+                gap: 0.8rem;
+            }
+            
+            .social-link {
+                font-size: 1.1rem;
+            }
+            
+            /* Ad Container */
+            .ad-container {
+                padding: 0.8rem;
+                margin: 1rem 0;
+            }
+            
+            .ad-space {
+                min-height: 70px;
+                font-size: 0.9rem;
+            }
+            
+            /* Better Text Readability */
+            body {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .hero p,
+            .tool-link,
+            .featured-card p,
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Tablet: 2 columns (481px - 834px) */
+        @media (min-width: 481px) and (max-width: 834px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
             }
             
             .featured-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
             }
             
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
             }
             
-            /* FIXED: Tools grid for small screens */
-            .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Medium Devices (768px and up) */
-        @media (min-width: 768px) {
-            .mobile-header {
-                display: none;
-            }
-            
-            .desktop-header {
-                display: block;
+            /* Container & Layout Adjustments */
+            .container {
+                padding: 0 15px;
             }
             
             .hero {
-                padding: 3rem 0 1.5rem;
+                padding: 2rem 0 1rem;
             }
             
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
-                margin-bottom: 2rem;
+                font-size: 1rem;
             }
             
-            /* FIXED: Tools grid for tablets */
-            .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-                margin: 2rem 0;
+            .section-title {
+                font-size: 1.6rem;
             }
             
+            /* Category & Tool Adjustments */
             .tool-category {
-                padding: 1.5rem;
+                padding: 1.2rem;
             }
             
             .category-header {
                 flex-direction: row;
                 text-align: left;
-                gap: 12px;
+                gap: 0.8rem;
             }
             
-            .tool-count {
-                margin-top: 0;
-                margin-left: 10px;
-            }
-            
-            .featured-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-            
-            .featured-card {
-                padding: 2rem;
-            }
-            
-            .featured-icon {
-                font-size: 3rem;
-            }
-            
-            .features {
-                padding: 3rem 0;
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-            
-            .feature-card {
-                padding: 2rem;
-            }
-            
-            /* For larger screens, we can keep the footer links in a row */
-            .footer-links {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1.5rem;
-            }
-        }
-
-        /* Large Devices (992px and up) */
-        @media (min-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            /* FIXED: Tools grid for desktop */
-            .tools-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .featured-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .features-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            /* Desktop header adjustments for larger screens */
-            nav ul {
-                gap: 1.5rem; /* More space between nav items */
-            }
-            
-            .header-actions {
-                gap: 1rem; /* More space between buttons */
-            }
-            
-            .btn {
-                padding: 0.7rem 1.5rem; /* Original padding for larger screens */
-                font-size: 1rem; /* Original font size */
-            }
-        }
-
-        /* Extra Small Devices (400px and below) */
-        @media (max-width: 400px) {
-            .hero h1 {
+            .category-icon {
+                width: 45px;
+                height: 45px;
                 font-size: 1.6rem;
             }
             
-            .section-title {
-                font-size: 1.5rem;
+            .category-title {
+                font-size: 1.2rem;
             }
             
-            .tool-category {
-                padding: 0.8rem;
-            }
-            
+            /* Featured Cards */
             .featured-card {
-                padding: 1rem;
+                padding: 1.5rem;
             }
             
-            /* For very small screens, adjust the footer links spacing */
-            .footer-links {
-                gap: 0.7rem;
+            /* Feature Cards */
+            .feature-card {
+                padding: 1.5rem;
             }
             
-            .footer-links a {
-                font-size: 0.9rem;
-                padding: 0.2rem 0.4rem;
-            }
-        }
-
-        /* Show mobile header on small screens */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
-            }
-            
+            /* Ensure desktop header is hidden on tablet */
             .desktop-header {
                 display: none;
             }
             
-            /* Search Box Adjustments for Mobile View - FIXED */
-            .search-box {
+            .mobile-header {
+                display: block;
+            }
+            
+            /* Sidebar for Tablet */
+            .sidebar {
+                width: 70%;
+                max-width: 280px;
+            }
+            
+            /* Footer Adjustments */
+            .footer-links {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                width: 100%;
-                max-width: 100%;
-            }
-            
-            .search-input {
-                width: 100%;
-                max-width: 100%;
-                text-align: center;
-                padding: 0.8rem 1rem;
-                font-size: 1rem;
-                border-radius: 50px;
-                border: 2px solid var(--light-gray);
-                margin-bottom: 0.5rem;
-                transition: var(--transition);
-            }
-            
-            .search-input:focus {
-                outline: none;
-                border-color: var(--primary);
-                box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-            }
-            
-            .search-btn {
-                position: relative;
-                right: auto;
-                top: auto;
-                width: 100%;
-                max-width: 100%;
-                display: flex;
-                align-items: center;
+                flex-wrap: wrap;
                 justify-content: center;
-                gap: 8px;
-                background: linear-gradient(135deg, var(--primary), var(--primary-light));
-                color: white;
-                border: none;
-                padding: 0.8rem 1.5rem;
-                border-radius: 50px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: var(--transition);
-                min-height: 44px;
-                margin: 0 auto;
+                gap: 1rem;
+            }
+        }
+
+        /* Desktop: 4 columns (≥835px) */
+        @media (min-width: 835px) {
+            .tools-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
             }
             
-            .search-btn:active {
+            .featured-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+            
+            /* Show desktop header and hide mobile header */
+            .mobile-header {
+                display: none;
+            }
+            
+            .desktop-header {
+                display: block;
+            }
+        }
+
+        /* Small Desktop: 2 columns (835px - 1024px) */
+        @media (min-width: 835px) and (max-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* Enhanced Touch Targets for Mobile & Tablet */
+        @media (max-width: 834px) {
+            .tool-link,
+            .featured-card,
+            .btn,
+            .search-btn,
+            .mobile-header-btn,
+            .mobile-nav-btn,
+            .sidebar-nav a,
+            .sidebar-btn {
+                min-height: 44px;
+            }
+            
+            .tool-link,
+            .sidebar-nav a {
+                display: flex;
+                align-items: center;
+            }
+            
+            /* Enhanced Grid Item Hover Effects for Touch */
+            .tool-category:hover,
+            .featured-card:hover,
+            .feature-card:hover {
+                transform: none;
+                box-shadow: var(--box-shadow);
+            }
+            
+            .tool-item:hover {
+                padding-left: 0;
+            }
+            
+            /* Add active states for touch feedback */
+            .tool-category:active,
+            .featured-card:active,
+            .feature-card:active {
                 transform: scale(0.98);
             }
             
-            .search-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-            }
-            
-            /* Ensure footer links are horizontal on mobile */
-            .footer-links {
-                flex-direction: row;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding-bottom: 10px;
-                -webkit-overflow-scrolling: touch;
-                gap: 0.8rem;
-            }
-            
-            .footer-links a {
-                white-space: nowrap;
-                flex-shrink: 0;
+            .tool-item:active {
+                background: rgba(67, 97, 238, 0.1);
             }
         }
 
@@ -1140,12 +1222,12 @@
             }
             
             .btn {
-                padding: 0.6rem 0.9rem; /* Adjusted to keep buttons on same line */
+                padding: 0.6rem 0.9rem;
                 font-size: 0.85rem;
             }
             
             .header-content {
-                gap: 0.5rem; /* Add gap between header elements */
+                gap: 0.5rem;
             }
             
             /* Ensure buttons stay on the same line */
@@ -1175,7 +1257,6 @@
                 font-size: 0.8rem;
             }
             
-            /* Further adjustments to ensure buttons stay on same line */
             .header-actions {
                 gap: 0.3rem;
             }
@@ -1184,12 +1265,12 @@
         /* Special fix for buttons on very narrow desktop screens */
         @media (min-width: 768px) and (max-width: 820px) {
             .header-content {
-                flex-wrap: nowrap; /* Prevent wrapping of entire header */
+                flex-wrap: nowrap;
             }
             
             nav {
-                order: 3; /* Move nav to bottom on very narrow screens */
-                flex-basis: 100%; /* Take full width */
+                order: 3;
+                flex-basis: 100%;
                 margin-top: 0.5rem;
             }
             
@@ -1198,7 +1279,7 @@
             }
             
             .header-actions {
-                margin-left: auto; /* Push buttons to the right */
+                margin-left: auto;
             }
         }
 
