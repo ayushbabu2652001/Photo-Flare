@@ -787,6 +787,89 @@
             color: var(--primary);
         }
 
+        /* NEW: Improved PDF preview for mobile */
+        .pdf-preview-content {
+            width: 100%;
+            max-width: 100%;
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pdf-preview-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .pdf-preview-message {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            line-height: 1.5;
+        }
+
+        .pdf-file-info {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .pdf-file-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .pdf-file-detail:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .pdf-file-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .pdf-file-value {
+            color: var(--gray);
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+
+        .pdf-controls-mobile {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .pdf-page-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .pdf-page-info {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
         .advanced-features {
             margin: 3rem 0;
         }
@@ -1527,6 +1610,56 @@
                 padding: 0 0.5rem;
                 width: 100%;
             }
+            
+            /* NEW: Improved PDF preview for mobile */
+            .pdf-preview {
+                padding: 1rem;
+            }
+            
+            .pdf-preview-content {
+                padding: 1rem;
+            }
+            
+            .pdf-preview-title {
+                font-size: 1.3rem;
+            }
+            
+            .pdf-preview-message {
+                font-size: 0.9rem;
+            }
+            
+            .pdf-file-info {
+                padding: 1rem;
+                max-width: 100%;
+            }
+            
+            .pdf-file-detail {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+            
+            .pdf-file-value {
+                max-width: 100%;
+                text-align: left;
+            }
+            
+            .pdf-controls-mobile {
+                max-width: 100%;
+            }
+            
+            .pdf-page-nav {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .editor-controls {
+                gap: 1.5rem;
+            }
+            
+            .action-controls .btn {
+                width: 100%;
+            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1854,9 +1987,11 @@
                     <div class="editor-main">
                         <div class="editor-canvas">
                             <div class="pdf-preview">
-                                <i class="fas fa-file-pdf"></i>
-                                <h3>PDF Editor Ready</h3>
-                                <p>Upload a PDF file to start editing</p>
+                                <div class="pdf-preview-content" id="pdf-preview-content">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <h3 class="pdf-preview-title">PDF Editor Ready</h3>
+                                    <p class="pdf-preview-message">Upload a PDF file to start editing</p>
+                                </div>
                             </div>
                         </div>
                         
@@ -2182,6 +2317,7 @@
         const resetBtn = document.getElementById('reset-btn');
         const prevPageBtn = document.getElementById('prev-page');
         const nextPageBtn = document.getElementById('next-page');
+        const pdfPreviewContent = document.getElementById('pdf-preview-content');
 
         // Tool buttons
         const toolButtons = document.querySelectorAll('.tool-btn');
@@ -2261,34 +2397,83 @@
             // Show file info
             fileInfo.classList.add('active');
             
-            // Update PDF preview
-            const pdfPreview = document.querySelector('.pdf-preview');
-            pdfPreview.innerHTML = `
-                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <h3>PDF Loaded Successfully</h3>
-                    <p>Now you can use the editing tools on the left to modify your document.</p>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
-                        <p><strong>File:</strong> ${file.name}</p>
-                        <p><strong>Size:</strong> ${fileSizeMB} MB</p>
+            // Update PDF preview with mobile-friendly layout
+            pdfPreviewContent.innerHTML = `
+                <h3 class="pdf-preview-title">PDF Loaded Successfully</h3>
+                <p class="pdf-preview-message">Now you can use the editing tools on the left to modify your document.</p>
+                <div class="pdf-file-info">
+                    <div class="pdf-file-detail">
+                        <span class="pdf-file-label">File:</span>
+                        <span class="pdf-file-value">${file.name}</span>
+                    </div>
+                    <div class="pdf-file-detail">
+                        <span class="pdf-file-label">Size:</span>
+                        <span class="pdf-file-value">${fileSizeMB} MB</span>
+                    </div>
+                </div>
+                <div class="pdf-controls-mobile">
+                    <div class="pdf-page-nav">
+                        <button class="btn btn-outline" id="mobile-prev-page">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <span class="pdf-page-info">Page 1 of 1</span>
+                        <button class="btn btn-outline" id="mobile-next-page">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="action-controls">
+                        <button class="btn btn-outline" id="mobile-reset-btn">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                        <button class="btn btn-warning" id="mobile-save-btn">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button class="btn btn-success" id="mobile-download-btn">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
                     </div>
                 </div>
             `;
+            
+            // Add event listeners for mobile buttons
+            document.getElementById('mobile-prev-page').addEventListener('click', () => {
+                alert('Previous page functionality would be implemented here');
+            });
+            
+            document.getElementById('mobile-next-page').addEventListener('click', () => {
+                alert('Next page functionality would be implemented here');
+            });
+            
+            document.getElementById('mobile-reset-btn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset all changes?')) {
+                    resetFile();
+                }
+            });
+            
+            document.getElementById('mobile-save-btn').addEventListener('click', () => {
+                saveFile();
+            });
+            
+            document.getElementById('mobile-download-btn').addEventListener('click', () => {
+                downloadFile();
+            });
         }
 
         // Remove file
         if (removeFileBtn) {
-            removeFileBtn.addEventListener('click', () => {
-                fileInput.value = '';
-                fileInfo.classList.remove('active');
-                
-                // Reset PDF preview
-                const pdfPreview = document.querySelector('.pdf-preview');
-                pdfPreview.innerHTML = `
-                    <i class="fas fa-file-pdf"></i>
-                    <h3>PDF Editor Ready</h3>
-                    <p>Upload a PDF file to start editing</p>
-                `;
-            });
+            removeFileBtn.addEventListener('click', resetFile);
+        }
+
+        function resetFile() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            
+            // Reset PDF preview
+            pdfPreviewContent.innerHTML = `
+                <i class="fas fa-file-pdf"></i>
+                <h3 class="pdf-preview-title">PDF Editor Ready</h3>
+                <p class="pdf-preview-message">Upload a PDF file to start editing</p>
+            `;
         }
 
         // Tool button selection
@@ -2343,96 +2528,83 @@
         });
 
         // Save button click
-        if (saveBtn) {
-            saveBtn.addEventListener('click', () => {
-                if (!fileInput.files.length) {
-                    alert('Please upload a PDF file first.');
-                    return;
-                }
+        function saveFile() {
+            if (!fileInput.files.length) {
+                alert('Please upload a PDF file first.');
+                return;
+            }
+            
+            // Show saving animation
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            saveBtn.disabled = true;
+            
+            // Simulate saving process
+            setTimeout(() => {
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+                saveBtn.classList.remove('btn-warning');
+                saveBtn.classList.add('btn-success');
                 
-                // Show saving animation
-                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-                saveBtn.disabled = true;
-                
-                // Simulate saving process
+                // Reset button after 3 seconds
                 setTimeout(() => {
-                    saveBtn.innerHTML = '<i class="fas fa-check"></i> Saved!';
-                    saveBtn.classList.remove('btn-warning');
-                    saveBtn.classList.add('btn-success');
-                    
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
-                        saveBtn.classList.remove('btn-success');
-                        saveBtn.classList.add('btn-warning');
-                        saveBtn.disabled = false;
-                    }, 3000);
-                }, 1500);
-            });
+                    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+                    saveBtn.classList.remove('btn-success');
+                    saveBtn.classList.add('btn-warning');
+                    saveBtn.disabled = false;
+                }, 3000);
+            }, 1500);
+        }
+
+        if (saveBtn) {
+            saveBtn.addEventListener('click', saveFile);
         }
 
         // Download button click
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', () => {
-                if (!fileInput.files.length) {
-                    alert('Please upload and edit a PDF file first.');
-                    return;
-                }
+        function downloadFile() {
+            if (!fileInput.files.length) {
+                alert('Please upload and edit a PDF file first.');
+                return;
+            }
+            
+            // Show downloading animation
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+            downloadBtn.disabled = true;
+            
+            // Simulate download process
+            setTimeout(() => {
+                downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
                 
-                // Show downloading animation
-                downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
-                downloadBtn.disabled = true;
+                // Create download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = '#';
+                downloadLink.className = 'btn btn-primary';
+                downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
+                downloadLink.style.marginLeft = '1rem';
                 
-                // Simulate download process
+                // Add download link after button
+                downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
+                
+                // Reset button after 5 seconds
                 setTimeout(() => {
-                    downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Ready!';
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                    downloadBtn.disabled = false;
                     
-                    // Create download link
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = '#';
-                    downloadLink.className = 'btn btn-primary';
-                    downloadLink.innerHTML = '<i class="fas fa-download"></i> Click to Download';
-                    downloadLink.style.marginLeft = '1rem';
-                    
-                    // Add download link after button
-                    downloadBtn.parentNode.insertBefore(downloadLink, downloadBtn.nextSibling);
-                    
-                    // Reset button after 5 seconds
-                    setTimeout(() => {
-                        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
-                        downloadBtn.disabled = false;
-                        
-                        // Remove download link
-                        if (downloadLink.parentNode) {
-                            downloadLink.parentNode.removeChild(downloadLink);
-                        }
-                    }, 5000);
-                }, 2000);
-            });
+                    // Remove download link
+                    if (downloadLink.parentNode) {
+                        downloadLink.parentNode.removeChild(downloadLink);
+                    }
+                }, 5000);
+            }, 2000);
+        }
+
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', downloadFile);
         }
 
         // Reset button click
         if (resetBtn) {
             resetBtn.addEventListener('click', () => {
                 if (confirm('Are you sure you want to reset all changes?')) {
-                    // Reset UI
-                    toolButtons.forEach(btn => btn.classList.remove('active'));
-                    document.querySelector('[data-tool="text-edit"]').classList.add('active');
-                    
-                    // Show reset message
-                    const pdfPreview = document.querySelector('.pdf-preview');
-                    if (pdfPreview.querySelector('h3').textContent !== 'PDF Editor Ready') {
-                        pdfPreview.innerHTML = `
-                            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <h3>Changes Reset</h3>
-                                <p>All edits have been reset. Your original file is unchanged.</p>
-                                <div style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: 8px;">
-                                    <p><strong>File:</strong> ${fileName.textContent}</p>
-                                    <p><strong>Size:</strong> ${fileSize.textContent}</p>
-                                </div>
-                            </div>
-                        `;
-                    }
+                    resetFile();
                 }
             });
         }
