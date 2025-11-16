@@ -36,11 +36,17 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         .container {
@@ -1277,6 +1283,10 @@
             .dashboard-hero h1 {
                 font-size: 2rem;
             }
+            
+            .settings-sidebar {
+                flex: 0 0 250px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1315,6 +1325,18 @@
             .avatar-options {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .settings-sidebar {
+                flex: 1;
+            }
+            
+            .settings-content {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1344,16 +1366,46 @@
                 width: 100%;
                 justify-content: center;
             }
-        }
-
-        /* Show mobile header on small screens */
-        @media (max-width: 767px) {
-            .mobile-header {
-                display: block;
+            
+            .avatar-preview {
+                width: 100px;
+                height: 100px;
             }
             
-            .desktop-header {
-                display: none;
+            .avatar-initials-large {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .settings-sidebar {
+                padding: 1rem;
+            }
+            
+            .settings-content {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .footer-links {
+                gap: 0.5rem;
+            }
+            
+            .footer-links a {
+                padding: 0.3rem 0.3rem;
+                font-size: 0.85rem;
+            }
+            
+            .avatar-preview {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .avatar-initials-large {
+                font-size: 1.8rem;
             }
         }
 
@@ -1388,6 +1440,10 @@
             .header-actions {
                 flex-wrap: nowrap;
                 gap: 0.5rem;
+            }
+            
+            .settings-sidebar {
+                flex: 0 0 250px;
             }
         }
 
@@ -1434,18 +1490,6 @@
             
             .header-actions {
                 margin-left: auto;
-            }
-        }
-
-        /* Better footer spacing on very small screens */
-        @media (max-width: 360px) {
-            .footer-links {
-                gap: 0.5rem;
-            }
-            
-            .footer-links a {
-                padding: 0.3rem 0.3rem;
-                font-size: 0.85rem;
             }
         }
     </style>
