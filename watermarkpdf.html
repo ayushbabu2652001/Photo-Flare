@@ -547,6 +547,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .upload-area:hover {
@@ -557,6 +558,12 @@
         .upload-area.active {
             border-color: var(--primary);
             background: rgba(67, 97, 238, 0.05);
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            transform: scale(1.02);
         }
 
         .upload-icon {
@@ -577,7 +584,13 @@
         }
 
         .file-input {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
         }
 
         .file-info {
@@ -628,6 +641,27 @@
             flex: 1;
             max-width: 150px;
             justify-content: center;
+        }
+
+        .upload-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+            display: none;
+        }
+
+        .upload-progress.active {
+            display: block;
+        }
+
+        .upload-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
         .watermark-options {
@@ -1545,6 +1579,10 @@
                     <input type="file" id="fileInput" class="file-input" accept=".pdf,application/pdf">
                 </div>
                 
+                <div class="upload-progress" id="uploadProgress">
+                    <div class="upload-progress-bar" id="uploadProgressBar"></div>
+                </div>
+                
                 <div class="file-info" id="fileInfo">
                     <div class="file-details">
                         <i class="fas fa-file-pdf file-icon"></i>
@@ -1991,10 +2029,74 @@
         const previewWatermark = document.getElementById('previewWatermark');
         const imageUploadArea = document.getElementById('imageUploadArea');
         const imageUpload = document.getElementById('imageUpload');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const uploadProgressBar = document.getElementById('uploadProgressBar');
 
         // Current watermark type and uploaded image
         let currentWatermarkType = 'text';
         let uploadedImageUrl = null;
+
+        // Enhanced File Upload Functionality
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function isValidPdfFile(file) {
+            const validTypes = ['application/pdf'];
+            const validExtensions = ['.pdf'];
+            
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+            
+            return validTypes.includes(file.type) || validExtensions.includes(fileExtension);
+        }
+
+        function handleFileSelect(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                
+                // Check if file is a PDF
+                if (!isValidPdfFile(file)) {
+                    alert('Please select a PDF document.');
+                    return;
+                }
+                
+                // Check file size (max 50MB)
+                const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+                if (file.size > maxSize) {
+                    alert('File size exceeds the 50MB limit. Please choose a smaller file.');
+                    return;
+                }
+                
+                // Show upload progress
+                uploadProgress.classList.add('active');
+                
+                // Simulate upload progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // Update file info
+                        fileName.textContent = file.name;
+                        fileSize.textContent = formatFileSize(file.size);
+                        fileInfo.classList.add('active');
+                        applyWatermarkBtn.disabled = false;
+                        
+                        // Hide progress after a delay
+                        setTimeout(() => {
+                            uploadProgress.classList.remove('active');
+                        }, 500);
+                    }
+                    uploadProgressBar.style.width = `${progress}%`;
+                }, 200);
+            }
+        }
 
         // File handling
         uploadArea.addEventListener('click', () => {
@@ -2003,25 +2105,25 @@
 
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.classList.add('active');
+            uploadArea.classList.add('drag-over');
         });
 
         uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('active');
+            uploadArea.classList.remove('drag-over');
         });
 
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.classList.remove('active');
+            uploadArea.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
-                handleFile(e.dataTransfer.files[0]);
+                handleFileSelect(e.dataTransfer.files);
             }
         });
 
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length) {
-                handleFile(e.target.files[0]);
+                handleFileSelect(e.target.files);
             }
         });
 
@@ -2033,6 +2135,14 @@
             resetFile();
         });
 
+        function resetFile() {
+            fileInput.value = '';
+            fileInfo.classList.remove('active');
+            applyWatermarkBtn.disabled = true;
+            previewSection.classList.remove('active');
+            downloadSection.classList.remove('active');
+        }
+
         // Image upload handling
         imageUploadArea.addEventListener('click', () => {
             imageUpload.click();
@@ -2040,16 +2150,16 @@
 
         imageUploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            imageUploadArea.classList.add('active');
+            imageUploadArea.classList.add('drag-over');
         });
 
         imageUploadArea.addEventListener('dragleave', () => {
-            imageUploadArea.classList.remove('active');
+            imageUploadArea.classList.remove('drag-over');
         });
 
         imageUploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            imageUploadArea.classList.remove('active');
+            imageUploadArea.classList.remove('drag-over');
             
             if (e.dataTransfer.files.length) {
                 handleImageFile(e.dataTransfer.files[0]);
@@ -2061,6 +2171,20 @@
                 handleImageFile(e.target.files[0]);
             }
         });
+
+        function handleImageFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageUrl = e.target.result;
+                updatePreview();
+            };
+            reader.readAsDataURL(file);
+        }
 
         // Watermark type selection
         typeOptions.forEach(option => {
@@ -2199,63 +2323,6 @@
         pageRange.addEventListener('change', function() {
             customPageRange.style.display = this.value === 'custom' ? 'block' : 'none';
         });
-
-        // File handling functions
-        function handleFile(file) {
-            if (!isValidPdfFile(file)) {
-                alert('Please select a PDF document.');
-                return;
-            }
-            
-            if (file.size > 50 * 1024 * 1024) {
-                alert('File size exceeds the 50MB limit. Please choose a smaller file.');
-                return;
-            }
-            
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileInfo.classList.add('active');
-            applyWatermarkBtn.disabled = false;
-        }
-
-        function handleImageFile(file) {
-            if (!file.type.startsWith('image/')) {
-                alert('Please select a valid image file.');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                uploadedImageUrl = e.target.result;
-                updatePreview();
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function isValidPdfFile(file) {
-            const validTypes = ['application/pdf'];
-            const validExtensions = ['.pdf'];
-            
-            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
-            
-            return validTypes.includes(file.type) || validExtensions.includes(fileExtension);
-        }
-
-        function resetFile() {
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            applyWatermarkBtn.disabled = true;
-            previewSection.classList.remove('active');
-            downloadSection.classList.remove('active');
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
 
         // Watermark application process
         applyWatermarkBtn.addEventListener('click', () => {
