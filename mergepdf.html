@@ -33,6 +33,11 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
@@ -428,6 +433,7 @@
             flex-shrink: 0;
             min-height: 44px;
             justify-content: center;
+            border: none;
         }
 
         .btn:active {
@@ -437,7 +443,6 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            border: none;
             box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
         }
 
@@ -487,11 +492,13 @@
             font-size: 1rem;
             margin: 0 auto 1.5rem;
             color: var(--gray);
+            max-width: 700px;
         }
 
         .search-box {
             margin: 0 auto 1rem;
             position: relative;
+            max-width: 500px;
         }
 
         .search-input {
@@ -510,13 +517,13 @@
         }
 
         .search-btn {
-            position: relative;
-            margin-top: 0.5rem;
-            width: 100%;
+            position: absolute;
+            right: 5px;
+            top: 5px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -964,18 +971,6 @@
                 font-size: 2.2rem;
             }
             
-            .search-box {
-                max-width: 500px;
-            }
-            
-            .search-btn {
-                position: absolute;
-                right: 5px;
-                top: 5px;
-                width: auto;
-                margin-top: 0;
-            }
-            
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1131,6 +1126,13 @@
                 white-space: nowrap;
                 flex-shrink: 0;
             }
+            
+            /* Fix for search button on mobile */
+            .search-btn {
+                position: relative;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
         }
 
         /* Special media query for when viewing desktop site on mobile */
@@ -1213,15 +1215,6 @@
             
             .header-actions {
                 margin-left: auto; /* Push buttons to the right */
-            }
-        }
-
-        /* Fix for search button on mobile */
-        @media (max-width: 575px) {
-            .search-btn {
-                width: 100%;
-                position: relative;
-                margin-top: 0.5rem;
             }
         }
 
