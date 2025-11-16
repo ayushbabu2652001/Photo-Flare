@@ -33,18 +33,24 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         .container {
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         /* Loading Animation */
@@ -1175,7 +1181,7 @@
         /* Small Devices (576px and up) */
         @media (min-width: 576px) {
             .container {
-                padding: 0 20px;
+                padding: 0 15px;
             }
             
             .tool-header h1 {
@@ -1547,6 +1553,18 @@
             .editor-sidebar {
                 max-height: 350px;
             }
+        }
+
+        /* NEW: Fix for container padding on small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+        }
+
+        /* NEW: Fix for horizontal overflow */
+        .editor-container, .editor-content, .editor-main, .canvas-container {
+            max-width: 100%;
         }
     </style>
 </head>
